@@ -14,11 +14,11 @@ expose the email in runtime output or generated artifacts.
 
 ## Layout
 - `src/scroll_anchor/` - package (tifxyz I/O, volume ROI, normals, sampling,
-  diagnostics, report, CLI, synthetic benchmark)
-- `nrrd_io.py`, `realcube.py`, `previews.py` - real-cube benchmark modules
-- `scripts/run_real_cube_benchmark.py` - real-cube workflow entry point
-- `tests/` - unit tests (no large real data)
-- `results/` - small metadata/metrics/previews only; arrays and NRRD are gitignored
+  diagnostics, report, CLI, synthetic benchmark).
+- `nrrd_io.py`, `realcube.py`, `previews.py` - real-cube benchmark modules.
+- `scripts/run_real_cube_benchmark.py` - real-cube workflow entry point.
+- `tests/` - unit tests (no large real data).
+- `results/` - small metadata/metrics/previews only; arrays and NRRD are gitignored.
 
 ## Reference material: villa
 A local checkout of `ScrollPrize/villa` sits alongside the repo at
