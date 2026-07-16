@@ -1,0 +1,1373 @@
+{
+  "n_regions": 72,
+  "regions": [
+    {
+      "id": 133,
+      "reason": "sheet_switch",
+      "priority": 3.7964,
+      "size_vertices": 15,
+      "bbox_rowcol": [
+        68,
+        55,
+        73,
+        59
+      ],
+      "centroid_rowcol": [
+        70.8,
+        56.666666666666664
+      ],
+      "mean_confidence": 0.4809,
+      "mean_drift_voxels": 2.3,
+      "has_switch": true
+    },
+    {
+      "id": 100,
+      "reason": "sheet_switch",
+      "priority": 3.7708,
+      "size_vertices": 27,
+      "bbox_rowcol": [
+        53,
+        32,
+        58,
+        42
+      ],
+      "centroid_rowcol": [
+        55.44444444444444,
+        36.81481481481482
+      ],
+      "mean_confidence": 0.5624,
+      "mean_drift_voxels": 3.0926,
+      "has_switch": true
+    },
+    {
+      "id": 81,
+      "reason": "sheet_switch",
+      "priority": 3.7634,
+      "size_vertices": 14,
+      "bbox_rowcol": [
+        44,
+        77,
+        48,
+        82
+      ],
+      "centroid_rowcol": [
+        46.285714285714285,
+        79.35714285714286
+      ],
+      "mean_confidence": 0.5074,
+      "mean_drift_voxels": 0.5,
+      "has_switch": true
+    },
+    {
+      "id": 149,
+      "reason": "sheet_switch",
+      "priority": 3.7619,
+      "size_vertices": 15,
+      "bbox_rowcol": [
+        77,
+        37,
+        83,
+        41
+      ],
+      "centroid_rowcol": [
+        80.13333333333334,
+        39.0
+      ],
+      "mean_confidence": 0.5154,
+      "mean_drift_voxels": 2.1667,
+      "has_switch": true
+    },
+    {
+      "id": 51,
+      "reason": "sheet_switch",
+      "priority": 3.7449,
+      "size_vertices": 34,
+      "bbox_rowcol": [
+        21,
+        60,
+        27,
+        73
+      ],
+      "centroid_rowcol": [
+        25.38235294117647,
+        65.67647058823529
+      ],
+      "mean_confidence": 0.6106,
+      "mean_drift_voxels": 1.3382,
+      "has_switch": true
+    },
+    {
+      "id": 64,
+      "reason": "sheet_switch",
+      "priority": 3.7448,
+      "size_vertices": 100,
+      "bbox_rowcol": [
+        31,
+        55,
+        44,
+        73
+      ],
+      "centroid_rowcol": [
+        37.51,
+        62.01
+      ],
+      "mean_confidence": 0.7167,
+      "mean_drift_voxels": 1.225,
+      "has_switch": true
+    },
+    {
+      "id": 147,
+      "reason": "sheet_switch",
+      "priority": 3.7423,
+      "size_vertices": 36,
+      "bbox_rowcol": [
+        76,
+        10,
+        85,
+        20
+      ],
+      "centroid_rowcol": [
+        80.0,
+        15.944444444444445
+      ],
+      "mean_confidence": 0.6188,
+      "mean_drift_voxels": 1.9028,
+      "has_switch": true
+    },
+    {
+      "id": 76,
+      "reason": "sheet_switch",
+      "priority": 3.7143,
+      "size_vertices": 64,
+      "bbox_rowcol": [
+        41,
+        30,
+        49,
+        48
+      ],
+      "centroid_rowcol": [
+        44.140625,
+        37.59375
+      ],
+      "mean_confidence": 0.7031,
+      "mean_drift_voxels": 0.3672,
+      "has_switch": true
+    },
+    {
+      "id": 40,
+      "reason": "sheet_switch",
+      "priority": 3.6833,
+      "size_vertices": 25,
+      "bbox_rowcol": [
+        15,
+        54,
+        19,
+        62
+      ],
+      "centroid_rowcol": [
+        16.72,
+        58.08
+      ],
+      "mean_confidence": 0.6425,
+      "mean_drift_voxels": 2.2,
+      "has_switch": true
+    },
+    {
+      "id": 67,
+      "reason": "sheet_switch",
+      "priority": 3.68,
+      "size_vertices": 102,
+      "bbox_rowcol": [
+        34,
+        25,
+        39,
+        53
+      ],
+      "centroid_rowcol": [
+        36.3235294117647,
+        38.872549019607845
+      ],
+      "mean_confidence": 0.7835,
+      "mean_drift_voxels": 1.8039,
+      "has_switch": true
+    },
+    {
+      "id": 110,
+      "reason": "sheet_switch",
+      "priority": 3.626,
+      "size_vertices": 37,
+      "bbox_rowcol": [
+        57,
+        82,
+        63,
+        90
+      ],
+      "centroid_rowcol": [
+        59.810810810810814,
+        85.5945945945946
+      ],
+      "mean_confidence": 0.7378,
+      "mean_drift_voxels": 2.2568,
+      "has_switch": true
+    },
+    {
+      "id": 63,
+      "reason": "sheet_switch",
+      "priority": 3.5936,
+      "size_vertices": 5,
+      "bbox_rowcol": [
+        30,
+        74,
+        31,
+        76
+      ],
+      "centroid_rowcol": [
+        30.4,
+        74.8
+      ],
+      "mean_confidence": 0.5856,
+      "mean_drift_voxels": 1.1,
+      "has_switch": true
+    },
+    {
+      "id": 168,
+      "reason": "sheet_switch",
+      "priority": 3.5526,
+      "size_vertices": 22,
+      "bbox_rowcol": [
+        88,
+        11,
+        92,
+        17
+      ],
+      "centroid_rowcol": [
+        89.45454545454545,
+        13.681818181818182
+      ],
+      "mean_confidence": 0.761,
+      "mean_drift_voxels": 0.7045,
+      "has_switch": true
+    },
+    {
+      "id": 150,
+      "reason": "sheet_switch",
+      "priority": 3.5515,
+      "size_vertices": 18,
+      "bbox_rowcol": [
+        77,
+        67,
+        80,
+        73
+      ],
+      "centroid_rowcol": [
+        78.27777777777777,
+        70.05555555555556
+      ],
+      "mean_confidence": 0.7429,
+      "mean_drift_voxels": 0.2778,
+      "has_switch": true
+    },
+    {
+      "id": 146,
+      "reason": "sheet_switch",
+      "priority": 3.5403,
+      "size_vertices": 36,
+      "bbox_rowcol": [
+        75,
+        79,
+        82,
+        89
+      ],
+      "centroid_rowcol": [
+        79.0,
+        84.38888888888889
+      ],
+      "mean_confidence": 0.8208,
+      "mean_drift_voxels": 1.6806,
+      "has_switch": true
+    },
+    {
+      "id": 44,
+      "reason": "sheet_switch",
+      "priority": 3.5348,
+      "size_vertices": 104,
+      "bbox_rowcol": [
+        17,
+        15,
+        28,
+        34
+      ],
+      "centroid_rowcol": [
+        22.951923076923077,
+        25.634615384615383
+      ],
+      "mean_confidence": 0.9306,
+      "mean_drift_voxels": 9.9856,
+      "has_switch": true
+    },
+    {
+      "id": 121,
+      "reason": "sheet_switch",
+      "priority": 3.5168,
+      "size_vertices": 21,
+      "bbox_rowcol": [
+        64,
+        65,
+        68,
+        71
+      ],
+      "centroid_rowcol": [
+        65.57142857142857,
+        67.38095238095238
+      ],
+      "mean_confidence": 0.7923,
+      "mean_drift_voxels": 0.6429,
+      "has_switch": true
+    },
+    {
+      "id": 79,
+      "reason": "sheet_switch",
+      "priority": 3.5081,
+      "size_vertices": 24,
+      "bbox_rowcol": [
+        43,
+        86,
+        48,
+        92
+      ],
+      "centroid_rowcol": [
+        45.75,
+        88.70833333333333
+      ],
+      "mean_confidence": 0.8138,
+      "mean_drift_voxels": 3.6458,
+      "has_switch": true
+    },
+    {
+      "id": 66,
+      "reason": "sheet_switch",
+      "priority": 3.5067,
+      "size_vertices": 42,
+      "bbox_rowcol": [
+        32,
+        9,
+        38,
+        21
+      ],
+      "centroid_rowcol": [
+        34.57142857142857,
+        15.5
+      ],
+      "mean_confidence": 0.8695,
+      "mean_drift_voxels": 2.0476,
+      "has_switch": true
+    },
+    {
+      "id": 116,
+      "reason": "sheet_switch",
+      "priority": 3.489,
+      "size_vertices": 35,
+      "bbox_rowcol": [
+        61,
+        2,
+        72,
+        7
+      ],
+      "centroid_rowcol": [
+        66.45714285714286,
+        4.514285714285714
+      ],
+      "mean_confidence": 0.8693,
+      "mean_drift_voxels": 1.4714,
+      "has_switch": true
+    },
+    {
+      "id": 176,
+      "reason": "sheet_switch",
+      "priority": 3.4827,
+      "size_vertices": 46,
+      "bbox_rowcol": [
+        91,
+        32,
+        95,
+        51
+      ],
+      "centroid_rowcol": [
+        93.97826086956522,
+        41.78260869565217
+      ],
+      "mean_confidence": 0.9024,
+      "mean_drift_voxels": 2.3696,
+      "has_switch": true
+    },
+    {
+      "id": 7,
+      "reason": "sheet_switch",
+      "priority": 3.477,
+      "size_vertices": 78,
+      "bbox_rowcol": [
+        1,
+        0,
+        9,
+        17
+      ],
+      "centroid_rowcol": [
+        5.948717948717949,
+        7.871794871794871
+      ],
+      "mean_confidence": 0.9599,
+      "mean_drift_voxels": 1.1026,
+      "has_switch": true
+    },
+    {
+      "id": 9,
+      "reason": "sheet_switch",
+      "priority": 3.4747,
+      "size_vertices": 31,
+      "bbox_rowcol": [
+        1,
+        52,
+        10,
+        60
+      ],
+      "centroid_rowcol": [
+        6.096774193548387,
+        56.064516129032256
+      ],
+      "mean_confidence": 0.8719,
+      "mean_drift_voxels": 1.9355,
+      "has_switch": true
+    },
+    {
+      "id": 107,
+      "reason": "sheet_switch",
+      "priority": 3.3945,
+      "size_vertices": 5,
+      "bbox_rowcol": [
+        56,
+        5,
+        58,
+        7
+      ],
+      "centroid_rowcol": [
+        57.2,
+        6.2
+      ],
+      "mean_confidence": 0.7846,
+      "mean_drift_voxels": 0.2,
+      "has_switch": true
+    },
+    {
+      "id": 152,
+      "reason": "sheet_switch",
+      "priority": 3.3943,
+      "size_vertices": 15,
+      "bbox_rowcol": [
+        78,
+        0,
+        82,
+        3
+      ],
+      "centroid_rowcol": [
+        79.53333333333333,
+        1.6666666666666667
+      ],
+      "mean_confidence": 0.8829,
+      "mean_drift_voxels": 1.6667,
+      "has_switch": true
+    },
+    {
+      "id": 157,
+      "reason": "sheet_switch",
+      "priority": 3.3674,
+      "size_vertices": 4,
+      "bbox_rowcol": [
+        80,
+        76,
+        82,
+        77
+      ],
+      "centroid_rowcol": [
+        81.0,
+        76.5
+      ],
+      "mean_confidence": 0.7935,
+      "mean_drift_voxels": 3.5,
+      "has_switch": true
+    },
+    {
+      "id": 55,
+      "reason": "sheet_switch",
+      "priority": 3.3307,
+      "size_vertices": 12,
+      "bbox_rowcol": [
+        24,
+        43,
+        25,
+        52
+      ],
+      "centroid_rowcol": [
+        24.666666666666668,
+        47.75
+      ],
+      "mean_confidence": 0.9258,
+      "mean_drift_voxels": 0.25,
+      "has_switch": true
+    },
+    {
+      "id": 14,
+      "reason": "sheet_switch",
+      "priority": 3.3158,
+      "size_vertices": 10,
+      "bbox_rowcol": [
+        4,
+        93,
+        8,
+        95
+      ],
+      "centroid_rowcol": [
+        6.3,
+        94.0
+      ],
+      "mean_confidence": 0.924,
+      "mean_drift_voxels": 0.4,
+      "has_switch": true
+    },
+    {
+      "id": 170,
+      "reason": "sheet_switch",
+      "priority": 3.2203,
+      "size_vertices": 5,
+      "bbox_rowcol": [
+        89,
+        18,
+        90,
+        21
+      ],
+      "centroid_rowcol": [
+        89.6,
+        19.4
+      ],
+      "mean_confidence": 0.9589,
+      "mean_drift_voxels": 0.6,
+      "has_switch": true
+    },
+    {
+      "id": 70,
+      "reason": "drift",
+      "priority": 2.9473,
+      "size_vertices": 35,
+      "bbox_rowcol": [
+        35,
+        80,
+        44,
+        85
+      ],
+      "centroid_rowcol": [
+        38.857142857142854,
+        82.74285714285715
+      ],
+      "mean_confidence": 0.411,
+      "mean_drift_voxels": 4.0714,
+      "has_switch": false
+    },
+    {
+      "id": 13,
+      "reason": "drift",
+      "priority": 2.9236,
+      "size_vertices": 35,
+      "bbox_rowcol": [
+        4,
+        80,
+        12,
+        88
+      ],
+      "centroid_rowcol": [
+        7.542857142857143,
+        83.62857142857143
+      ],
+      "mean_confidence": 0.4348,
+      "mean_drift_voxels": 3.3143,
+      "has_switch": false
+    },
+    {
+      "id": 34,
+      "reason": "drift",
+      "priority": 2.8931,
+      "size_vertices": 26,
+      "bbox_rowcol": [
+        13,
+        78,
+        18,
+        84
+      ],
+      "centroid_rowcol": [
+        15.884615384615385,
+        81.92307692307692
+      ],
+      "mean_confidence": 0.4365,
+      "mean_drift_voxels": 3.9231,
+      "has_switch": false
+    },
+    {
+      "id": 24,
+      "reason": "drift",
+      "priority": 2.8161,
+      "size_vertices": 7,
+      "bbox_rowcol": [
+        10,
+        85,
+        13,
+        88
+      ],
+      "centroid_rowcol": [
+        11.285714285714286,
+        86.28571428571429
+      ],
+      "mean_confidence": 0.3918,
+      "mean_drift_voxels": 3.7143,
+      "has_switch": false
+    },
+    {
+      "id": 161,
+      "reason": "drift",
+      "priority": 2.8066,
+      "size_vertices": 5,
+      "bbox_rowcol": [
+        82,
+        31,
+        84,
+        33
+      ],
+      "centroid_rowcol": [
+        83.0,
+        32.0
+      ],
+      "mean_confidence": 0.3726,
+      "mean_drift_voxels": 3.7,
+      "has_switch": false
+    },
+    {
+      "id": 17,
+      "reason": "drift",
+      "priority": 2.8044,
+      "size_vertices": 20,
+      "bbox_rowcol": [
+        7,
+        70,
+        11,
+        78
+      ],
+      "centroid_rowcol": [
+        9.0,
+        74.0
+      ],
+      "mean_confidence": 0.5,
+      "mean_drift_voxels": 3.425,
+      "has_switch": false
+    },
+    {
+      "id": 148,
+      "reason": "drift",
+      "priority": 2.7811,
+      "size_vertices": 8,
+      "bbox_rowcol": [
+        76,
+        63,
+        80,
+        66
+      ],
+      "centroid_rowcol": [
+        77.625,
+        64.5
+      ],
+      "mean_confidence": 0.4386,
+      "mean_drift_voxels": 4.6875,
+      "has_switch": false
+    },
+    {
+      "id": 113,
+      "reason": "drift",
+      "priority": 2.6764,
+      "size_vertices": 7,
+      "bbox_rowcol": [
+        59,
+        22,
+        62,
+        23
+      ],
+      "centroid_rowcol": [
+        60.285714285714285,
+        22.571428571428573
+      ],
+      "mean_confidence": 0.5316,
+      "mean_drift_voxels": 3.2143,
+      "has_switch": false
+    },
+    {
+      "id": 1,
+      "reason": "drift",
+      "priority": 2.6234,
+      "size_vertices": 7,
+      "bbox_rowcol": [
+        0,
+        65,
+        3,
+        67
+      ],
+      "centroid_rowcol": [
+        1.5714285714285714,
+        66.28571428571429
+      ],
+      "mean_confidence": 0.5846,
+      "mean_drift_voxels": 6.5714,
+      "has_switch": false
+    },
+    {
+      "id": 124,
+      "reason": "drift",
+      "priority": 2.6188,
+      "size_vertices": 20,
+      "bbox_rowcol": [
+        65,
+        78,
+        71,
+        81
+      ],
+      "centroid_rowcol": [
+        68.0,
+        79.55
+      ],
+      "mean_confidence": 0.6856,
+      "mean_drift_voxels": 4.3,
+      "has_switch": false
+    },
+    {
+      "id": 142,
+      "reason": "drift",
+      "priority": 2.6086,
+      "size_vertices": 48,
+      "bbox_rowcol": [
+        74,
+        22,
+        80,
+        32
+      ],
+      "centroid_rowcol": [
+        76.95833333333333,
+        26.1875
+      ],
+      "mean_confidence": 0.7806,
+      "mean_drift_voxels": 5.1875,
+      "has_switch": false
+    },
+    {
+      "id": 163,
+      "reason": "drift",
+      "priority": 2.5777,
+      "size_vertices": 23,
+      "bbox_rowcol": [
+        84,
+        38,
+        90,
+        44
+      ],
+      "centroid_rowcol": [
+        86.91304347826087,
+        40.69565217391305
+      ],
+      "mean_confidence": 0.7401,
+      "mean_drift_voxels": 4.0652,
+      "has_switch": false
+    },
+    {
+      "id": 101,
+      "reason": "drift",
+      "priority": 2.5761,
+      "size_vertices": 7,
+      "bbox_rowcol": [
+        53,
+        52,
+        55,
+        54
+      ],
+      "centroid_rowcol": [
+        53.714285714285715,
+        53.0
+      ],
+      "mean_confidence": 0.6318,
+      "mean_drift_voxels": 3.5,
+      "has_switch": false
+    },
+    {
+      "id": 54,
+      "reason": "drift",
+      "priority": 2.5687,
+      "size_vertices": 5,
+      "bbox_rowcol": [
+        23,
+        89,
+        24,
+        91
+      ],
+      "centroid_rowcol": [
+        23.6,
+        89.8
+      ],
+      "mean_confidence": 0.6105,
+      "mean_drift_voxels": 4.0,
+      "has_switch": false
+    },
+    {
+      "id": 62,
+      "reason": "drift",
+      "priority": 2.4865,
+      "size_vertices": 17,
+      "bbox_rowcol": [
+        28,
+        89,
+        32,
+        95
+      ],
+      "centroid_rowcol": [
+        30.0,
+        91.82352941176471
+      ],
+      "mean_confidence": 0.8026,
+      "mean_drift_voxels": 5.5588,
+      "has_switch": false
+    },
+    {
+      "id": 106,
+      "reason": "drift",
+      "priority": 2.4582,
+      "size_vertices": 13,
+      "bbox_rowcol": [
+        55,
+        55,
+        57,
+        60
+      ],
+      "centroid_rowcol": [
+        56.07692307692308,
+        57.15384615384615
+      ],
+      "mean_confidence": 0.8057,
+      "mean_drift_voxels": 4.0,
+      "has_switch": false
+    },
+    {
+      "id": 95,
+      "reason": "drift",
+      "priority": 2.4023,
+      "size_vertices": 14,
+      "bbox_rowcol": [
+        50,
+        92,
+        54,
+        95
+      ],
+      "centroid_rowcol": [
+        52.07142857142857,
+        93.78571428571429
+      ],
+      "mean_confidence": 0.8685,
+      "mean_drift_voxels": 7.2857,
+      "has_switch": false
+    },
+    {
+      "id": 164,
+      "reason": "drift",
+      "priority": 2.386,
+      "size_vertices": 10,
+      "bbox_rowcol": [
+        85,
+        33,
+        87,
+        36
+      ],
+      "centroid_rowcol": [
+        86.2,
+        34.7
+      ],
+      "mean_confidence": 0.8538,
+      "mean_drift_voxels": 4.05,
+      "has_switch": false
+    },
+    {
+      "id": 82,
+      "reason": "drift",
+      "priority": 2.3515,
+      "size_vertices": 11,
+      "bbox_rowcol": [
+        45,
+        8,
+        49,
+        13
+      ],
+      "centroid_rowcol": [
+        47.54545454545455,
+        11.272727272727273
+      ],
+      "mean_confidence": 0.897,
+      "mean_drift_voxels": 3.7273,
+      "has_switch": false
+    },
+    {
+      "id": 141,
+      "reason": "drift",
+      "priority": 2.338,
+      "size_vertices": 4,
+      "bbox_rowcol": [
+        73,
+        74,
+        74,
+        75
+      ],
+      "centroid_rowcol": [
+        73.5,
+        74.5
+      ],
+      "mean_confidence": 0.823,
+      "mean_drift_voxels": 3.625,
+      "has_switch": false
+    },
+    {
+      "id": 3,
+      "reason": "drift",
+      "priority": 2.3366,
+      "size_vertices": 15,
+      "bbox_rowcol": [
+        0,
+        71,
+        2,
+        78
+      ],
+      "centroid_rowcol": [
+        0.7333333333333333,
+        74.13333333333334
+      ],
+      "mean_confidence": 0.9406,
+      "mean_drift_voxels": 3.9,
+      "has_switch": false
+    },
+    {
+      "id": 45,
+      "reason": "drift",
+      "priority": 2.3251,
+      "size_vertices": 6,
+      "bbox_rowcol": [
+        18,
+        35,
+        20,
+        37
+      ],
+      "centroid_rowcol": [
+        19.0,
+        35.833333333333336
+      ],
+      "mean_confidence": 0.8695,
+      "mean_drift_voxels": 10.0,
+      "has_switch": false
+    },
+    {
+      "id": 35,
+      "reason": "drift",
+      "priority": 2.3149,
+      "size_vertices": 6,
+      "bbox_rowcol": [
+        13,
+        91,
+        15,
+        93
+      ],
+      "centroid_rowcol": [
+        13.833333333333334,
+        92.0
+      ],
+      "mean_confidence": 0.8797,
+      "mean_drift_voxels": 5.9167,
+      "has_switch": false
+    },
+    {
+      "id": 89,
+      "reason": "drift",
+      "priority": 2.3071,
+      "size_vertices": 12,
+      "bbox_rowcol": [
+        49,
+        56,
+        52,
+        59
+      ],
+      "centroid_rowcol": [
+        50.25,
+        57.5
+      ],
+      "mean_confidence": 0.9494,
+      "mean_drift_voxels": 4.0417,
+      "has_switch": false
+    },
+    {
+      "id": 2,
+      "reason": "drift",
+      "priority": 2.2792,
+      "size_vertices": 4,
+      "bbox_rowcol": [
+        0,
+        69,
+        1,
+        70
+      ],
+      "centroid_rowcol": [
+        0.5,
+        69.5
+      ],
+      "mean_confidence": 0.8817,
+      "mean_drift_voxels": 6.0,
+      "has_switch": false
+    },
+    {
+      "id": 125,
+      "reason": "drift",
+      "priority": 2.2504,
+      "size_vertices": 5,
+      "bbox_rowcol": [
+        66,
+        13,
+        68,
+        15
+      ],
+      "centroid_rowcol": [
+        67.0,
+        14.0
+      ],
+      "mean_confidence": 0.9288,
+      "mean_drift_voxels": 3.7,
+      "has_switch": false
+    },
+    {
+      "id": 80,
+      "reason": "drift",
+      "priority": 2.2347,
+      "size_vertices": 4,
+      "bbox_rowcol": [
+        43,
+        92,
+        45,
+        93
+      ],
+      "centroid_rowcol": [
+        43.75,
+        92.75
+      ],
+      "mean_confidence": 0.9262,
+      "mean_drift_voxels": 6.75,
+      "has_switch": false
+    },
+    {
+      "id": 8,
+      "reason": "drift",
+      "priority": 2.2278,
+      "size_vertices": 7,
+      "bbox_rowcol": [
+        1,
+        25,
+        4,
+        26
+      ],
+      "centroid_rowcol": [
+        2.7142857142857144,
+        25.571428571428573
+      ],
+      "mean_confidence": 0.9801,
+      "mean_drift_voxels": 3.6429,
+      "has_switch": false
+    },
+    {
+      "id": 77,
+      "reason": "drift",
+      "priority": 2.2198,
+      "size_vertices": 4,
+      "bbox_rowcol": [
+        41,
+        91,
+        42,
+        93
+      ],
+      "centroid_rowcol": [
+        41.25,
+        91.75
+      ],
+      "mean_confidence": 0.9412,
+      "mean_drift_voxels": 7.0,
+      "has_switch": false
+    },
+    {
+      "id": 99,
+      "reason": "drift",
+      "priority": 2.1919,
+      "size_vertices": 4,
+      "bbox_rowcol": [
+        53,
+        32,
+        54,
+        33
+      ],
+      "centroid_rowcol": [
+        53.5,
+        32.5
+      ],
+      "mean_confidence": 0.9691,
+      "mean_drift_voxels": 4.0,
+      "has_switch": false
+    },
+    {
+      "id": 122,
+      "reason": "low_confidence",
+      "priority": 2.0035,
+      "size_vertices": 88,
+      "bbox_rowcol": [
+        65,
+        42,
+        84,
+        54
+      ],
+      "centroid_rowcol": [
+        75.5,
+        48.72727272727273
+      ],
+      "mean_confidence": 0.4454,
+      "mean_drift_voxels": 3.0568,
+      "has_switch": false
+    },
+    {
+      "id": 131,
+      "reason": "low_confidence",
+      "priority": 1.9756,
+      "size_vertices": 47,
+      "bbox_rowcol": [
+        68,
+        32,
+        77,
+        41
+      ],
+      "centroid_rowcol": [
+        72.04255319148936,
+        35.829787234042556
+      ],
+      "mean_confidence": 0.4115,
+      "mean_drift_voxels": 2.8936,
+      "has_switch": false
+    },
+    {
+      "id": 19,
+      "reason": "low_confidence",
+      "priority": 1.8934,
+      "size_vertices": 44,
+      "bbox_rowcol": [
+        8,
+        42,
+        18,
+        52
+      ],
+      "centroid_rowcol": [
+        14.568181818181818,
+        47.25
+      ],
+      "mean_confidence": 0.4873,
+      "mean_drift_voxels": 1.3636,
+      "has_switch": false
+    },
+    {
+      "id": 57,
+      "reason": "low_confidence",
+      "priority": 1.8808,
+      "size_vertices": 20,
+      "bbox_rowcol": [
+        25,
+        76,
+        32,
+        82
+      ],
+      "centroid_rowcol": [
+        27.9,
+        79.3
+      ],
+      "mean_confidence": 0.4236,
+      "mean_drift_voxels": 2.55,
+      "has_switch": false
+    },
+    {
+      "id": 118,
+      "reason": "low_confidence",
+      "priority": 1.8383,
+      "size_vertices": 17,
+      "bbox_rowcol": [
+        62,
+        74,
+        65,
+        80
+      ],
+      "centroid_rowcol": [
+        63.411764705882355,
+        77.17647058823529
+      ],
+      "mean_confidence": 0.4507,
+      "mean_drift_voxels": 1.4118,
+      "has_switch": false
+    },
+    {
+      "id": 49,
+      "reason": "low_confidence",
+      "priority": 1.8264,
+      "size_vertices": 10,
+      "bbox_rowcol": [
+        20,
+        85,
+        23,
+        88
+      ],
+      "centroid_rowcol": [
+        21.9,
+        86.5
+      ],
+      "mean_confidence": 0.4134,
+      "mean_drift_voxels": 2.5,
+      "has_switch": false
+    },
+    {
+      "id": 25,
+      "reason": "low_confidence",
+      "priority": 1.8109,
+      "size_vertices": 9,
+      "bbox_rowcol": [
+        11,
+        25,
+        14,
+        29
+      ],
+      "centroid_rowcol": [
+        12.222222222222221,
+        26.88888888888889
+      ],
+      "mean_confidence": 0.4193,
+      "mean_drift_voxels": 0.1667,
+      "has_switch": false
+    },
+    {
+      "id": 71,
+      "reason": "low_confidence",
+      "priority": 1.8074,
+      "size_vertices": 4,
+      "bbox_rowcol": [
+        36,
+        88,
+        38,
+        89
+      ],
+      "centroid_rowcol": [
+        37.0,
+        88.25
+      ],
+      "mean_confidence": 0.3536,
+      "mean_drift_voxels": 2.25,
+      "has_switch": false
+    },
+    {
+      "id": 132,
+      "reason": "low_confidence",
+      "priority": 1.743,
+      "size_vertices": 5,
+      "bbox_rowcol": [
+        68,
+        41,
+        70,
+        43
+      ],
+      "centroid_rowcol": [
+        69.0,
+        42.0
+      ],
+      "mean_confidence": 0.4362,
+      "mean_drift_voxels": 2.6,
+      "has_switch": false
+    },
+    {
+      "id": 166,
+      "reason": "low_confidence",
+      "priority": 1.7425,
+      "size_vertices": 4,
+      "bbox_rowcol": [
+        87,
+        6,
+        88,
+        7
+      ],
+      "centroid_rowcol": [
+        87.5,
+        6.5
+      ],
+      "mean_confidence": 0.4185,
+      "mean_drift_voxels": 0.0,
+      "has_switch": false
+    },
+    {
+      "id": 31,
+      "reason": "low_confidence",
+      "priority": 1.7408,
+      "size_vertices": 5,
+      "bbox_rowcol": [
+        13,
+        31,
+        13,
+        35
+      ],
+      "centroid_rowcol": [
+        13.0,
+        33.0
+      ],
+      "mean_confidence": 0.4384,
+      "mean_drift_voxels": 0.0,
+      "has_switch": false
+    },
+    {
+      "id": 154,
+      "reason": "low_confidence",
+      "priority": 1.6537,
+      "size_vertices": 6,
+      "bbox_rowcol": [
+        78,
+        52,
+        79,
+        55
+      ],
+      "centroid_rowcol": [
+        78.66666666666667,
+        53.833333333333336
+      ],
+      "mean_confidence": 0.5409,
+      "mean_drift_voxels": 2.5833,
+      "has_switch": false
+    },
+    {
+      "id": 143,
+      "reason": "low_confidence",
+      "priority": 1.624,
+      "size_vertices": 4,
+      "bbox_rowcol": [
+        74,
+        83,
+        75,
+        85
+      ],
+      "centroid_rowcol": [
+        74.25,
+        84.25
+      ],
+      "mean_confidence": 0.5369,
+      "mean_drift_voxels": 1.125,
+      "has_switch": false
+    }
+  ]
+}

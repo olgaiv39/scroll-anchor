@@ -110,11 +110,39 @@ See `docs/method.md` for details and `docs/coordinate_conventions.md` for the
 coordinate/normal conventions (verified against `villa/lasagna/tifxyz_format.md`
 and the `vesuvius` tifxyz API).
 
+## Real-cube benchmark (real CT + real geometry, controlled corruptions)
+
+`scripts/run_real_cube_benchmark.py` runs the diagnostics on a real Scroll 1
+instance-label cube (`02256_02512_04816`): a medial surface is extracted from one
+labelled sheet, then **controlled** drift and a **real neighbouring-sheet** switch
+are injected. This is *not* validation on naturally occurring annotation errors.
+
+```bash
+pip install -e ".[benchmark]"
+python scripts/run_real_cube_benchmark.py --output results/real_cube_02256_02512_04816
+```
+
+Findings on this cube (source sheet 328, neighbour 329, 96³ ROI):
+
+- **Safety property transfers.** ScrollAnchor's harmful acceptance (accepting a
+  vertex that sits on the wrong sheet) is **0.00** vs **~0.15** for naive
+  snap-to-brightest; switch review-recall is **1.00** (the injected switch is
+  always surfaced).
+- **Precision does not transfer.** Thresholds calibrated on flat synthetic sheets
+  over-fire on real papyrus curvature: switch precision ~0.19, drift detection
+  effectively fails (F1 ~0.01), and ~27% of the *clean* surface is flagged for
+  review. On real curved geometry the tool behaves as a very conservative
+  "flag-for-review" filter, not a precise localizer.
+
+Conclusion: **not yet ready** to be presented as a precise real-data detector. The
+conservative principle holds, but the curvature/roughness model and thresholds
+need work before a community-validation request.
+
 ## Honest limitations
 
-- Validated on **synthetic** corruptions of a controlled multi-sheet volume. Real
-  CT (haze in compressed regions, anisotropy, realistic sheet contrast) is not yet
-  tested — see the community ask below.
+- The precise-detection results above are from **synthetic** corruptions of a
+  controlled, gently curved multi-sheet volume. On real CT the drift/switch
+  thresholds over-fire on sheet curvature (see the real-cube benchmark).
 - `switch_smooth_window` **must exceed** the switched-patch diameter; too small a
   window silently lowers switch recall.
 - Drift detection precision is diluted by genuinely ambiguous zones (which are, by

@@ -1,0 +1,94 @@
+{
+  "experiment": "real CT intensities + real sheet geometry with controlled corruptions",
+  "cube": "02256_02512_04816",
+  "source_id": 328,
+  "target_id": 329,
+  "roi_origin_zyx": [
+    154,
+    160,
+    90
+  ],
+  "roi_size": 96,
+  "clean": {
+    "review_fraction": 0.2699573430834857,
+    "switch_positive_fraction": 0.12736136502132847,
+    "drift_flagged_fraction": 0.5755636806825106,
+    "confidence_mean": 0.8179518580436707,
+    "confidence_p10": 0.5440218329429627,
+    "clean_stability": 0.7300426569165143,
+    "estimated_spacing": 9.0
+  },
+  "drift": {
+    "precision": 0.005536757920639803,
+    "recall": 0.1836734693877551,
+    "f1": 0.010749477455957002,
+    "tp": 18,
+    "fp": 3233,
+    "fn": 80,
+    "displacement_mae": 4.06632661819458,
+    "sign_accuracy": 0.7755102040816326,
+    "fp_rate_outside": 0.5,
+    "injected": {
+      "type": "drift",
+      "offset_voxels": 3.0,
+      "n_vertices": 98,
+      "drift_magnitude_mean": 3.0
+    }
+  },
+  "switch": {
+    "precision": 0.1880952380952381,
+    "recall": 1.0,
+    "f1": 0.3166332665330661,
+    "tp": 158,
+    "fp": 682,
+    "fn": 0,
+    "review_recall": 1.0,
+    "fp_rate_outside": 0.10646269122697471,
+    "harmful_acceptance_rate": 0.0,
+    "accepted_on_wrong_instance": 0,
+    "accepted_total": 4758,
+    "injected": {
+      "type": "switch",
+      "source_id": 328,
+      "target_id": 329,
+      "n_vertices": 204,
+      "n_rejected": 0,
+      "true_displacement_mean": 22.566177368164062
+    },
+    "harmful_rates": {
+      "label_as_is": 0.024070688604509446,
+      "naive_snap": 0.1528031687995125,
+      "scroll_anchor": 0.0
+    }
+  },
+  "combined_switch": {
+    "precision": 0.19676214196762143,
+    "recall": 1.0,
+    "f1": 0.3288241415192508,
+    "tp": 158,
+    "fp": 645,
+    "fn": 0,
+    "review_recall": 1.0,
+    "fp_rate_outside": 0.1006868560724321,
+    "harmful_acceptance_rate": 0.0,
+    "accepted_on_wrong_instance": 0,
+    "accepted_total": 4770
+  },
+  "resources": {
+    "runtime_seconds": 48.64,
+    "peak_rss_mb": 668.8,
+    "roi_shape_zyx": [
+      96,
+      96,
+      96
+    ],
+    "valid_surface_vertices": 6564,
+    "estimated_spacing_voxels": 9.0,
+    "measured_sep_median_voxels": 7.55,
+    "downloaded_bytes": {
+      "volume_nrrd": 14799078,
+      "mask_nrrd": 1173145
+    },
+    "artifact_bytes": 1965609
+  }
+}

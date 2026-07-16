@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/
+.DS_Store
+
+# Real-cube benchmark: raw NRRD downloads and large generated artifacts
+/data/
+results/real_cube_*/**/arrays/
+results/real_cube_*/**/*.npy
+results/real_cube_*/**/surface/
+*.nrrd

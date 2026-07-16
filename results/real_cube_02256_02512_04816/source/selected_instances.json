@@ -1,0 +1,14 @@
+{
+  "source_id": 328,
+  "target_id": 329,
+  "roi_origin_zyx": [
+    154,
+    160,
+    90
+  ],
+  "roi_size": 96,
+  "source_voxels": 88272,
+  "target_voxels": 64800,
+  "sep_median": 7.54983443527075,
+  "sep_p10": 3.0
+}

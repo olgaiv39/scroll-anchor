@@ -20,6 +20,8 @@ dependencies = [
 [project.optional-dependencies]
 # Real-data readiness: streaming CT ROIs and tifxyz surfaces from the ecosystem.
 remote = ["zarr>=2.12", "fsspec>=2022.1"]
+# Real-cube benchmark: NRRD ingestion and PNG previews.
+benchmark = ["pynrrd>=0.4", "matplotlib>=3.3"]
 dev = ["pytest>=7.0"]
 
 [project.scripts]
