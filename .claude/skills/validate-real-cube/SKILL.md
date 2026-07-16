@@ -58,5 +58,6 @@ python scripts/run_real_cube_benchmark.py --output results/real_cube_<CUBE> [--o
 ## Interpreting output
 - Safety = harmful acceptance near 0 and switch review-recall near 1.
 - Precision = clean review fraction low and switch/drift precision high.
-- On tightly curved real sheets, expect strong safety but weak precision; do not
-  tune thresholds to force a positive result.
+- Evaluate safety and precision independently. Do not assume that synthetic results,
+  or results from a previous cube, transfer to a new cube — measure both afresh.
+- Do not tune thresholds to force a positive result.

@@ -15,6 +15,7 @@ import argparse
 import json
 import os
 import resource
+import sys
 import time
 import urllib.request
 
@@ -31,6 +32,13 @@ BASE_URL = (
     "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/"
     "volumetric-instance-labels/instance-labels-harmonized/" + CUBE
 )
+
+
+def _peak_rss_mib() -> float:
+    """Peak resident memory in MiB. ru_maxrss is bytes on macOS, KiB on Linux."""
+    rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    scale = 1024 * 1024 if sys.platform == "darwin" else 1024
+    return round(rss / scale, 1)
 
 
 def _download(url: str, dest: str) -> None:
@@ -208,7 +216,7 @@ def main() -> int:
             & (rc.sample_instance_at(combined_sw.surface, mask_vol) > 0)),
         "resources": {
             "runtime_seconds": round(time.time() - t0, 2),
-            "peak_rss_mb": round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / (1024 * 1024), 1),
+            "peak_rss_mb": _peak_rss_mib(),
             "roi_shape_zyx": list(ct_roi.shape),
             "valid_surface_vertices": int(valid.sum()),
             "estimated_spacing_voxels": round(float(res_clean.diagnostics.estimated_spacing), 3),

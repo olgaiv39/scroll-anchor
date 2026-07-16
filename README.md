@@ -69,6 +69,14 @@ pip install -e .            # CPU-only: numpy, scipy, tifffile, pyyaml
 pip install -e ".[remote]"  # + zarr/fsspec to stream real CT ROIs over HTTP/S3
 ```
 
+To run the full test suite, install the dev and benchmark extras — the NRRD-related
+tests require the benchmark dependencies (pynrrd) and are skipped otherwise:
+
+```bash
+pip install -e ".[dev,benchmark]"
+python -m pytest -q
+```
+
 ## Analyze a real surface
 
 ```bash
@@ -134,9 +142,12 @@ Findings on this cube (source sheet 328, neighbour 329, 96³ ROI):
   review. On real curved geometry the tool behaves as a very conservative
   "flag-for-review" filter, not a precise localizer.
 
-Conclusion: **not yet ready** to be presented as a precise real-data detector. The
-conservative principle holds, but the curvature/roughness model and thresholds
-need work before a community-validation request.
+Conclusion: this is **ready for an honest technical update and a community-validation
+request**, but **not** ready as a precise real-data localizer or a mature Progress
+Prize submission. The conservative safety principle transfers, but the curvature and
+roughness model requires further work before ScrollAnchor can be presented as a
+precise real-data localizer or a mature Progress Prize submission. Real-data
+precision has **not** been established.
 
 ## Honest limitations
 
@@ -150,6 +161,10 @@ need work before a community-validation request.
 - Normal estimation degrades at surface discontinuities; switch detection uses a
   3D positional residual (not the normal projection) specifically to be robust to
   this.
+- The real-cube surface is exported in a **cube-index coordinate frame** (ROI-local
+  indices offset by the cube origin), and NRRD metadata validation / axis resolution
+  is enforced. Direct visual alignment with VC3D has **not** yet been checked, so no
+  claim of full VC3D coordinate compatibility is made until that is verified.
 
 ## What I'm asking the Scroll Prize community for
 

@@ -10,6 +10,6 @@ dist/
 # Real-cube benchmark: raw NRRD downloads and large generated artifacts
 /data/
 results/real_cube_*/**/arrays/
-results/real_cube_*/**/*.npy
 results/real_cube_*/**/surface/
 *.nrrd
+*.npy
