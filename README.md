@@ -13,10 +13,13 @@ It emits per-vertex confidence, confidence-ranked **review regions**, and
 machine-readable reports. It is **diagnostics-first**: it flags, it does not move
 labels. Conservative correction proposals are available but **off by default**.
 
-This is a prototype built for the Vesuvius Challenge 2026 open problems around
-label quality, mesh-tracing errors, and sheet-switches (see
-`scrollprize.org/2026_open_problems`, problems on *Surface Prediction & Topology*,
-*Mesh Tracing Failures*, and *Label Quality & Imprecision*).
+ScrollAnchor is an early open-source research tool developed for the Vesuvius
+Challenge 2026 open problems around surface-label quality, mesh-tracing errors, and
+neighboring-sheet switches (see `scrollprize.org/2026_open_problems`, problems on
+*Surface Prediction & Topology*, *Mesh Tracing Failures*, and *Label Quality &
+Imprecision*). It is functional, reproducible research software with a clear
+validation roadmap, useful today for expert-assisted surface review, controlled
+benchmark construction, and identifying potentially high-risk surface regions.
 
 ## Why this, and how it relates to the existing ecosystem
 
@@ -132,47 +135,92 @@ python scripts/run_real_cube_benchmark.py --output results/real_cube_02256_02512
 
 Findings on this cube (source sheet 328, neighbour 329, 96³ ROI):
 
-- **Safety property transfers.** ScrollAnchor's harmful acceptance (accepting a
-  vertex that sits on the wrong sheet) is **0.00** vs **~0.15** for naive
-  snap-to-brightest; switch review-recall is **1.00** (the injected switch is
-  always surfaced).
-- **Precision does not transfer.** Thresholds calibrated on flat synthetic sheets
-  over-fire on real papyrus curvature: switch precision ~0.19, drift detection
-  effectively fails (F1 ~0.01), and ~27% of the *clean* surface is flagged for
-  review. On real curved geometry the tool behaves as a very conservative
-  "flag-for-review" filter, not a precise localizer.
+- **Conservative safety behaviour transferred to the tested cube.** ScrollAnchor's
+  harmful acceptance (confidently accepting a vertex that sits on the wrong sheet) is
+  **0.00** vs **~0.15** for naive snap-to-brightest; switch review-recall is **1.00**
+  — the injected neighboring-sheet switch is always surfaced for review, and no
+  wrong-sheet vertex is confidently accepted.
+- **Precision is currently limited on the tested strongly curved real geometry.**
+  Thresholds calibrated on flat synthetic sheets over-fire on real papyrus curvature:
+  switch precision ~0.19, drift localization remains weak (F1 ~0.01), and ~27% of the
+  *clean* surface is flagged for review. On strongly curved real geometry the tool
+  currently behaves as a very conservative "flag-for-review" filter rather than a
+  precise localizer.
 
-Conclusion: this is **ready for an honest technical update and a community-validation
-request**, but **not** ready as a precise real-data localizer or a mature Progress
-Prize submission. The conservative safety principle transfers, but the curvature and
-roughness model requires further work before ScrollAnchor can be presented as a
-precise real-data localizer or a mature Progress Prize submission. Real-data
-precision has **not** been established.
+On the tested cube this experiment is a **successful validation of the conservative
+safety concept** and a viable expert-in-the-loop workflow — the injected switch is
+always surfaced and nothing wrong-sheet is confidently accepted. It also usefully
+identifies the next research bottleneck: real curvature increases false positives, so
+**curvature-aware residual modelling and improved calibration** are the next
+development priorities. This single controlled-corruption cube does not, on its own,
+establish general real-scroll precision.
 
-## Honest limitations
+Conclusion: ScrollAnchor is ready for technical community review as an experimental
+diagnostic and validation framework. The current real-cube benchmark supports its
+conservative safety principle and demonstrates a viable expert-in-the-loop workflow,
+while also identifying precision on strongly curved surfaces as the main development
+priority. The current release is most useful for assisted review, controlled
+benchmark construction, failure analysis, and collaborative method development.
+Additional validation with known real annotation failures is needed before
+recommending broader or unattended use.
 
-- The precise-detection results above are from **synthetic** corruptions of a
-  controlled, gently curved multi-sheet volume. On real CT the drift/switch
-  thresholds over-fire on sheet curvature (see the real-cube benchmark).
-- `switch_smooth_window` **must exceed** the switched-patch diameter; too small a
+## Current scope and development priorities
+
+These are the current boundaries of what has been demonstrated, and the research
+priorities that follow from them:
+
+- **Precise detection is established only for the synthetic benchmark.** Those
+  results come from **controlled synthetic** corruptions of a gently curved
+  multi-sheet volume, not from real annotation failures.
+- **The real-cube experiment uses real CT and real sheet geometry with injected
+  corruptions.** It validates the conservative safety concept; it is *not* validation
+  on naturally occurring annotation errors, which have **not yet been evaluated**.
+- **Real curvature currently increases false positives.** Thresholds tuned on flat
+  synthetic sheets over-fire on strongly curved real papyrus (~27% of the clean
+  surface flagged on the tested cube); curvature-aware residuals are a priority.
+- **Drift localization requires improvement** on real geometry (F1 ~0.01 on the
+  tested cube), where genuinely ambiguous zones are surfaced through review rather
+  than corrected.
+- **Switch detection should become less dependent on a predefined smoothing window.**
+  `switch_smooth_window` **must exceed** the switched-patch diameter; too small a
   window silently lowers switch recall.
-- Drift detection precision is diluted by genuinely ambiguous zones (which are, by
-  design, surfaced through review rather than corrected).
-- Normal estimation degrades at surface discontinuities; switch detection uses a
-  3D positional residual (not the normal projection) specifically to be robust to
-  this.
-- The real-cube surface is exported in a **cube-index coordinate frame** (ROI-local
-  indices offset by the cube origin), and NRRD metadata validation / axis resolution
-  is enforced. Direct visual alignment with VC3D has **not** yet been checked, so no
-  claim of full VC3D coordinate compatibility is made until that is verified.
+- **Confidence calibration requires validation on additional cubes.** Normal
+  estimation degrades at surface discontinuities; switch detection uses a 3D
+  positional residual (not the normal projection) to stay robust to this.
+- **Direct VC3D coordinate alignment remains to be verified.** The real-cube surface
+  is exported in a **cube-index coordinate frame** (ROI-local indices offset by the
+  cube origin) with NRRD metadata validation / axis resolution enforced; full VC3D
+  coordinate compatibility is not claimed until visual alignment is checked.
 
-## What I'm asking the Scroll Prize community for
+## Development roadmap
 
-The prototype works and is reproducible. To validate on real data I'm looking for
-(in order): (1) a few **known problematic tifxyz ROIs** with drift/sheet-switch,
-(2) an **expert to inspect** ScrollAnchor's `review_regions.json` on those ROIs,
-(3) optionally a **winding/sheet-id volume** to sharpen switch confirmation. If
-data can't be shared, I can provide a Docker image and a single run command.
+Research and engineering directions (priorities, not delivery commitments):
+
+1. Curvature-detrended local residuals.
+2. Multi-scale neighboring-sheet-switch detection.
+3. Improved confidence calibration on real surfaces.
+4. Validation on known naturally occurring failure regions.
+5. Direct VC3D coordinate-alignment verification.
+6. Integration feedback from annotation and proof-reading workflows.
+
+## Community review and validation
+
+ScrollAnchor is currently seeking technical review from participants familiar with
+Vesuvius Challenge surface extraction, annotation, proof-reading, and volumetric
+papyrus CT data.
+
+The most useful feedback would include:
+
+- whether the targeted drift and neighboring-sheet-switch failure modes match real
+  annotation or tracing problems;
+- known small regions containing naturally occurring failures;
+- review of the real-cube benchmark construction and coordinate assumptions;
+- inspection of generated confidence, drift, switch, and review fields;
+- advice on integration with existing VC3D, proof-reading, or segmentation workflows;
+- comparison with existing tools that may already address part of the problem.
+
+The current repository should be treated as a working research contribution open to
+validation and refinement, not as a community-endorsed solution.
 
 ## License
 
