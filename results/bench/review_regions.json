@@ -1,0 +1,62 @@
+{
+  "n_regions": 3,
+  "regions": [
+    {
+      "id": 8,
+      "reason": "sheet_switch",
+      "priority": 3.8169,
+      "size_vertices": 260,
+      "bbox_rowcol": [
+        40,
+        32,
+        59,
+        47
+      ],
+      "centroid_rowcol": [
+        49.5,
+        39.5
+      ],
+      "mean_confidence": 0.7396,
+      "mean_drift_voxels": 0.2038,
+      "has_switch": true
+    },
+    {
+      "id": 2,
+      "reason": "drift",
+      "priority": 3.3206,
+      "size_vertices": 320,
+      "bbox_rowcol": [
+        13,
+        48,
+        32,
+        63
+      ],
+      "centroid_rowcol": [
+        22.5,
+        55.5
+      ],
+      "mean_confidence": 0.2565,
+      "mean_drift_voxels": 5.5969,
+      "has_switch": false
+    },
+    {
+      "id": 1,
+      "reason": "drift",
+      "priority": 2.5409,
+      "size_vertices": 80,
+      "bbox_rowcol": [
+        13,
+        16,
+        32,
+        31
+      ],
+      "centroid_rowcol": [
+        22.725,
+        24.35
+      ],
+      "mean_confidence": 0.8986,
+      "mean_drift_voxels": 5.15,
+      "has_switch": false
+    }
+  ]
+}

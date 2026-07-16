@@ -1,0 +1,44 @@
+{
+  "format": "scroll-anchor.diagnostics/v0",
+  "config": {
+    "seed": 0,
+    "chunk_rows": 128,
+    "sampling": {
+      "radius": 12.0,
+      "step": 0.5,
+      "order": 1,
+      "cval": 0.0
+    },
+    "diagnostics": {
+      "peak_min_prominence_frac": 0.15,
+      "peak_min_separation": 2.0,
+      "drift_min": 1.0,
+      "sheet_spacing": null,
+      "switch_frac_of_spacing": 0.5,
+      "smooth_window": 9,
+      "switch_smooth_window": 31,
+      "margin_soft": 0.25
+    },
+    "review": {
+      "confidence_review_below": 0.5,
+      "min_region_vertices": 4,
+      "max_regions": 200
+    },
+    "correction": {
+      "enabled": true,
+      "min_confidence": 0.85,
+      "max_offset": 6.0,
+      "require_margin": 0.4
+    }
+  },
+  "summary": {
+    "n_vertices": 6400,
+    "n_valid": 6284,
+    "estimated_sheet_spacing_voxels": 10.0,
+    "frac_review": 0.1153723742838956,
+    "frac_switch": 0.050922978994271166,
+    "frac_drift_flagged": 0.11616804583068109,
+    "mean_confidence": 0.9054319262504578,
+    "n_correction_proposals": 64
+  }
+}

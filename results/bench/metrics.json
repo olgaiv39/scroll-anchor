@@ -1,0 +1,25 @@
+{
+  "switch_detection": {
+    "precision": 1.0,
+    "recall": 0.8125,
+    "f1": 0.896551724137931,
+    "tp": 260,
+    "fp": 0,
+    "fn": 60
+  },
+  "drift_detection": {
+    "precision": 0.4610951008645533,
+    "recall": 1.0,
+    "f1": 0.6311637080867849,
+    "tp": 320,
+    "fp": 374,
+    "fn": 0
+  },
+  "drift_displacement_mae": 0.5625,
+  "harmful_rate_label_as_is": 0.050922978994271166,
+  "harmful_rate_naive_snap": 0.6024824952259707,
+  "harmful_rate_scroll_anchor": 0.010678056593699947,
+  "accepted_frac_scroll_anchor": 0.8941756842775302,
+  "clean_stability": 1.0,
+  "review_frac": 0.10582431572246977
+}

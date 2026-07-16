@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scroll-anchor"
+version = "0.1.0"
+description = "Conservative, read-only surface-label diagnostics for volumetric papyrus CT (drift + sheet-switch detection)."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "Olga Ivanova", email = "ivolga.vak@gmail.com" }]
+dependencies = [
+    "numpy>=1.21",
+    "scipy>=1.7",
+    "tifffile>=2021.7",
+    "PyYAML>=5.4",
+]
+
+[project.optional-dependencies]
+# Real-data readiness: streaming CT ROIs and tifxyz surfaces from the ecosystem.
+remote = ["zarr>=2.12", "fsspec>=2022.1"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+scroll-anchor = "scroll_anchor.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: ScrollAnchor
+message: "If you use ScrollAnchor, please cite this software."
+type: software
+authors:
+  - family-names: Ivanova
+    given-names: Olga
+    email: ivolga.vak@gmail.com
+version: 0.1.0
+date-released: 2026-07-15
+license: MIT

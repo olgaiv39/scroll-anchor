@@ -1,0 +1,32 @@
+# ScrollAnchor default configuration.
+# All values are in voxels unless noted. See src/scroll_anchor/config.py for docs.
+seed: 0
+chunk_rows: 128
+
+sampling:
+  radius: 12.0      # half-length of the normal ray
+  step: 0.5         # sample spacing
+  order: 1          # trilinear
+  cval: 0.0
+
+diagnostics:
+  peak_min_prominence_frac: 0.15
+  peak_min_separation: 2.0
+  drift_min: 1.0
+  sheet_spacing: null   # null => estimate from data
+  switch_frac_of_spacing: 0.5
+  smooth_window: 9
+  switch_smooth_window: 31
+  margin_soft: 0.25
+
+review:
+  confidence_review_below: 0.5
+  min_region_vertices: 4
+  max_regions: 200
+
+# Conservative corrections are OFF by default (diagnostics-first).
+correction:
+  enabled: false
+  min_confidence: 0.85
+  max_offset: 6.0
+  require_margin: 0.4

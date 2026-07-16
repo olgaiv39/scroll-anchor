@@ -1,0 +1,8 @@
+{
+  "type": "seg",
+  "format": "tifxyz",
+  "scale": [
+    1.0,
+    1.0
+  ]
+}
