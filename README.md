@@ -1,13 +1,13 @@
 # ScrollAnchor
 
-**Conservative, read-only surface-label diagnostics for volumetric papyrus CT.**
+**Conservative, read-only surface-label diagnostics for volumetric papyrus CT**
 
 ScrollAnchor takes an *approximate* papyrus surface (Volume Cartographer
 `tifxyz`) and a CT volume/ROI, and localizes two high-value failure modes:
 
-1. **Normal-direction drift** — the surface sits off the physical sheet.
-2. **Sheet-switch jumps** — a patch has jumped onto a neighboring sheet (the most
-   harmful error: it *looks* fine because it sits on a real sheet).
+1. **Normal-direction drift** - the surface sits off the physical sheet
+2. **Sheet-switch jumps** - a patch has jumped onto a neighboring sheet (the most
+   harmful error: it *looks* fine because it sits on a real sheet)
 
 It emits per-vertex confidence, confidence-ranked **review regions**, and
 machine-readable reports. It is **diagnostics-first**: it flags, it does not move
@@ -46,15 +46,15 @@ sheet-switch, an ambiguous low-contrast+drift zone, and a hole. Mean over 5 seed
 |---|---|
 | Sheet-switch detection precision / recall | **1.00 / 1.00** |
 | Drift displacement recovery MAE | **~0.56 voxels** |
-| **Harmful acceptance — trust labels as-is** | 0.051 |
-| **Harmful acceptance — naive snap-to-brightest** | ~0.60 |
-| **Harmful acceptance — ScrollAnchor** | **0.00** |
+| **Harmful acceptance - trust labels as-is** | 0.051 |
+| **Harmful acceptance - naive snap-to-brightest** | ~0.60 |
+| **Harmful acceptance - ScrollAnchor** | **0.00** |
 | Clean-region stability (not needlessly flagged) | **1.00** |
 | Review fraction | ~0.12 |
 
 **Harmful acceptance** = fraction of vertices a method confidently accepts (keeps
 or moves) that end up on the *wrong sheet*. This is the primary metric and
-encodes the core safety principle: when evidence is ambiguous, flag for review —
+encodes the core safety principle: when evidence is ambiguous, flag for review -
 never emit a confident label on the wrong sheet.
 
 Reproduce:
@@ -72,7 +72,7 @@ pip install -e .            # CPU-only: numpy, scipy, tifffile, pyyaml
 pip install -e ".[remote]"  # + zarr/fsspec to stream real CT ROIs over HTTP/S3
 ```
 
-To run the full test suite, install the dev and benchmark extras — the NRRD-related
+To run the full test suite, install the dev and benchmark extras - the NRRD-related
 tests require the benchmark dependencies (pynrrd) and are skipped otherwise:
 
 ```bash
@@ -110,12 +110,12 @@ results/run/
 For each surface vertex: estimate the world-space normal, sample the CT intensity
 profile along ±`radius` voxels (trilinear, CPU), then:
 
-- **Drift** = signed offset to the distance-weighted nearest sheet peak.
+- **Drift** = signed offset to the distance-weighted nearest sheet peak
 - **Sheet-switch** = a robust (median-consensus) ~one-spacing positional jump,
-  confirmed by strong on-sheet evidence, grown by hysteresis over the patch.
+  confirmed by strong on-sheet evidence, grown by hysteresis over the patch
 - **Confidence** = product of contrast, peak margin, geometric continuity, and
-  evidence — so any single weakness drives confidence toward 0.
-- **Review** = switch, or low confidence, or large drift.
+  evidence - so any single weakness drives confidence toward 0
+- **Review** = switch, or low confidence, or large drift
 
 See `docs/method.md` for details and `docs/coordinate_conventions.md` for the
 coordinate/normal conventions (verified against `villa/lasagna/tifxyz_format.md`
@@ -137,8 +137,8 @@ Findings on this cube (source sheet 328, neighbour 329, 96³ ROI):
 
 - **Conservative safety behaviour transferred to the tested cube.** ScrollAnchor's
   harmful acceptance (confidently accepting a vertex that sits on the wrong sheet) is
-  **0.00** vs **~0.15** for naive snap-to-brightest; switch review-recall is **1.00**
-  — the injected neighboring-sheet switch is always surfaced for review, and no
+  **0.00** vs **~0.15** for naive snap-to-brightest; switch review-recall is **1.00** -
+  the injected neighboring-sheet switch is always surfaced for review, and no
   wrong-sheet vertex is confidently accepted.
 - **Precision is currently limited on the tested strongly curved real geometry.**
   Thresholds calibrated on flat synthetic sheets over-fire on real papyrus curvature:
@@ -148,7 +148,7 @@ Findings on this cube (source sheet 328, neighbour 329, 96³ ROI):
   precise localizer.
 
 On the tested cube this experiment is a **successful validation of the conservative
-safety concept** and a viable expert-in-the-loop workflow — the injected switch is
+safety concept** and a viable expert-in-the-loop workflow - the injected switch is
 always surfaced and nothing wrong-sheet is confidently accepted. It also usefully
 identifies the next research bottleneck: real curvature increases false positives, so
 **curvature-aware residual modelling and improved calibration** are the next
@@ -196,12 +196,12 @@ priorities that follow from them:
 
 Research and engineering directions (priorities, not delivery commitments):
 
-1. Curvature-detrended local residuals.
-2. Multi-scale neighboring-sheet-switch detection.
-3. Improved confidence calibration on real surfaces.
-4. Validation on known naturally occurring failure regions.
-5. Direct VC3D coordinate-alignment verification.
-6. Integration feedback from annotation and proof-reading workflows.
+1. Curvature-detrended local residuals
+2. Multi-scale neighboring-sheet-switch detection
+3. Improved confidence calibration on real surfaces
+4. Validation on known naturally occurring failure regions
+5. Direct VC3D coordinate-alignment verification
+6. Integration feedback from annotation and proof-reading workflows
 
 ## Community review and validation
 
@@ -229,4 +229,4 @@ MIT. Interoperates with the Volume Cartographer `tifxyz` format; see
 
 ## Author
 
-Olga Ivanova — ivolga.vak@gmail.com
+Olga Ivanova - ivolga.vak@gmail.com

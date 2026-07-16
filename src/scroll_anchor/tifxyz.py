@@ -1,4 +1,4 @@
-"""Dependency-light tifxyz surface I/O."""
+"""Dependency-light tifxyz surface I/O"""
 from __future__ import annotations
 
 import json
@@ -12,7 +12,7 @@ import tifffile
 
 @dataclass
 class Surface:
-    """Quad-grid world coordinates and validity mask."""
+    """Quad-grid world coordinates and validity mask"""
 
     x: np.ndarray  # (H, W) float32, world X
     y: np.ndarray  # (H, W) float32, world Y
@@ -26,7 +26,7 @@ class Surface:
         return self.x.shape  # type: ignore[return-value]
 
     def points(self) -> np.ndarray:
-        """Return stacked world coordinates in ``(X, Y, Z)`` order."""
+        """Return stacked world coordinates in ``(X, Y, Z)`` order"""
         return np.stack([self.x, self.y, self.z], axis=-1).astype(np.float32)
 
     def copy(self) -> "Surface":
@@ -48,7 +48,7 @@ def _read_coord(path: str) -> np.ndarray:
 
 
 def read_tifxyz(directory: str, use_mask: bool = True) -> Surface:
-    """Read a tifxyz directory and apply its validity rules."""
+    """Read a tifxyz directory and apply its validity rules"""
     meta_path = os.path.join(directory, "meta.json")
     if not os.path.isfile(meta_path):
         raise FileNotFoundError(f"missing meta.json in {directory}")
@@ -86,7 +86,7 @@ def write_tifxyz(
     extra_channels: Optional[Dict[str, np.ndarray]] = None,
     overwrite: bool = False,
 ) -> None:
-    """Write a tifxyz directory with optional per-vertex channels."""
+    """Write a tifxyz directory with optional per-vertex channels"""
     if os.path.exists(directory) and not overwrite and os.listdir(directory):
         raise FileExistsError(f"{directory} exists and is not empty (use overwrite=True)")
     os.makedirs(directory, exist_ok=True)
@@ -116,7 +116,7 @@ def write_tifxyz(
 
 
 def list_extra_channels(directory: str) -> List[str]:
-    """List optional per-vertex channel names."""
+    """List optional per-vertex channel names"""
     core = {"x", "y", "z", "mask", "generations"}
     out = []
     for fn in sorted(os.listdir(directory)):

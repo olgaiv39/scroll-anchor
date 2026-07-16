@@ -1,4 +1,4 @@
-"""Synthetic multi-sheet scenes and controlled corruptions."""
+"""Synthetic multi-sheet scenes and controlled corruptions"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -15,7 +15,7 @@ CLEAN, DRIFT, SWITCH, HOLE, AMBIGUOUS = 0, 1, 2, 3, 4
 
 @dataclass
 class SheetModel:
-    """Curved Gaussian sheets in a ``[z, y, x]`` volume."""
+    """Curved Gaussian sheets in a ``[z, y, x]`` volume"""
 
     H: int
     W: int
@@ -28,12 +28,12 @@ class SheetModel:
     k0: int
 
     def center(self, x: np.ndarray, y: np.ndarray, k: int) -> np.ndarray:
-        """Return the Z coordinate of sheet ``k``."""
+        """Return the Z coordinate of sheet ``k``"""
         curv = self.curv_amp * np.sin(2 * np.pi * x / max(self.W, 1))
         return self.z_base + k * self.spacing + curv
 
     def sheet_id_at(self, pts_xyz: np.ndarray) -> np.ndarray:
-        """Return the nearest sheet index for world points."""
+        """Return the nearest sheet index for world points"""
         x = pts_xyz[..., 0]
         y = pts_xyz[..., 1]
         z = pts_xyz[..., 2]
@@ -42,7 +42,7 @@ class SheetModel:
         return k.astype(np.int64)
 
     def render(self, amplitude: np.ndarray, noise: float, rng: np.random.Generator) -> np.ndarray:
-        """Render the synthetic CT volume."""
+        """Render the synthetic CT volume"""
         zz = np.arange(self.Dz)[:, None, None]
         yy = np.arange(self.H)[None, :, None]
         xx = np.arange(self.W)[None, None, :]
@@ -88,7 +88,7 @@ def make_scene(
     ambiguous_contrast: float = 0.18,
     ambiguous_drift: float = 4.0,
 ) -> SyntheticScene:
-    """Build a scene with localized, labeled surface corruptions."""
+    """Build a scene with localized, labeled surface corruptions"""
     rng = np.random.default_rng(seed)
     z_base = 15.0
     n_sheets = 5

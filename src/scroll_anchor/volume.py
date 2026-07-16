@@ -1,4 +1,4 @@
-"""Bounded CT volume access and interpolation."""
+"""Bounded CT volume access and interpolation"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -10,7 +10,7 @@ from scipy.ndimage import map_coordinates
 
 @dataclass
 class VolumeROI:
-    """A bounded ``[z, y, x]`` volume with a world-space origin."""
+    """A bounded ``[z, y, x]`` volume with a world-space origin"""
 
     data: np.ndarray
     origin: Tuple[int, int, int] = (0, 0, 0)
@@ -31,7 +31,7 @@ class VolumeROI:
         order: int = 1,
         cval: float = 0.0,
     ) -> np.ndarray:
-        """Sample world points in ``(X, Y, Z)`` order."""
+        """Sample world points in ``(X, Y, Z)`` order"""
         pts = np.asarray(pts_xyz, dtype=np.float64)
         if pts.shape[-1] != 3:
             raise ValueError("pts_xyz last dim must be 3 (X, Y, Z)")
@@ -53,7 +53,7 @@ def load_zarr_roi(
     bbox_xyz: Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int]],
     margin: int = 0,
 ) -> VolumeROI:
-    """Load a bounded ROI from a chunked ``[z, y, x]`` array."""
+    """Load a bounded ROI from a chunked ``[z, y, x]`` array"""
     (xmin, xmax), (ymin, ymax), (zmin, zmax) = bbox_xyz
     Dz, Dy, Dx = array.shape
     z0 = max(0, int(np.floor(zmin)) - margin)
@@ -67,7 +67,7 @@ def load_zarr_roi(
 
 
 def open_zarr(path: str):
-    """Open a local or remote zarr array."""
+    """Open a local or remote zarr array"""
     try:
         import zarr  # noqa: F401
     except Exception as exc:  # pragma: no cover - optional path

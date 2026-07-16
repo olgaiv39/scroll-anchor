@@ -1,4 +1,4 @@
-"""Structured, deterministic logging."""
+"""Structured, deterministic logging"""
 from __future__ import annotations
 
 import logging
@@ -12,7 +12,7 @@ def get_logger(name: str = "scroll_anchor") -> logging.Logger:
 
 
 def configure(level: str = "INFO") -> None:
-    """Configure a single stderr handler with a compact structured format."""
+    """Configure a single stderr handler with a compact structured format"""
     global _CONFIGURED
     root = logging.getLogger("scroll_anchor")
     root.setLevel(level.upper())

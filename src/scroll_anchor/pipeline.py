@@ -1,4 +1,4 @@
-"""End-to-end analysis pipeline: surface + volume -> diagnostics."""
+"""End-to-end analysis pipeline: surface + volume -> diagnostics"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -26,7 +26,7 @@ class AnalysisResult:
 
 
 def analyze_surface(surface: Surface, volume: VolumeROI, config: RunConfig) -> AnalysisResult:
-    """Run normal estimation, profile sampling and diagnostics for one surface."""
+    """Run normal estimation, profile sampling and diagnostics for one surface"""
     normals, normal_valid = compute_normals(surface)
     valid = surface.valid & normal_valid
     points = surface.points()

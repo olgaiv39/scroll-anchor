@@ -6,7 +6,7 @@ description: Run the ScrollAnchor real-cube benchmark on a Scroll instance-label
 # validate-real-cube
 
 Runs and verifies the repeatable real-cube diagnostic workflow. Real CT intensities
-and real papyrus sheet geometry with **controlled, injected** corruptions — never
+and real papyrus sheet geometry with **controlled, injected** corruptions - never
 describe results as validation on naturally occurring annotation errors.
 
 ## Procedure
@@ -34,17 +34,17 @@ describe results as validation on naturally occurring annotation errors.
    - Switch: `make_switch` replaces a patch with the neighbour's medial surface and
      verifies each target coordinate lands on the target instance.
 
-6. **Inference** — correction disabled (primary diagnostic). Run clean, drift,
+6. **Inference** - correction disabled (primary diagnostic). Run clean, drift,
    switch, combined surfaces through `analyze_surface`.
 
-7. **Metrics** (`metrics.json`) — clean review/stability, drift P/R/F1 + MAE + sign,
+7. **Metrics** (`metrics.json`) - clean review/stability, drift P/R/F1 + MAE + sign,
    switch P/R/F1 + review-recall + harmful acceptance, resources.
 
-8. **Previews** (`previews/*.png`) — CT slices with instance contours, reference
+8. **Previews** (`previews/*.png`) - CT slices with instance contours, reference
    surface, corruption patches, confidence/drift/switch/review, TP/FP/FN. The
    construction must be visually inspectable.
 
-9. **Stop-condition check** — report honestly (a negative result is acceptable) if:
+9. **Stop-condition check** - report honestly (a negative result is acceptable) if:
    axis order unresolved; CT/mask misaligned; no reliable surface/neighbour;
    clean surface broadly flagged; intensity assumptions do not transfer; success
    would require redesigning the algorithm; construction not visually verifiable.
@@ -59,5 +59,5 @@ python scripts/run_real_cube_benchmark.py --output results/real_cube_<CUBE> [--o
 - Safety = harmful acceptance near 0 and switch review-recall near 1.
 - Precision = clean review fraction low and switch/drift precision high.
 - Evaluate safety and precision independently. Do not assume that synthetic results,
-  or results from a previous cube, transfer to a new cube — measure both afresh.
+  or results from a previous cube, transfer to a new cube - measure both afresh.
 - Do not tune thresholds to force a positive result.

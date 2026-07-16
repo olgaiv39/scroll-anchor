@@ -26,7 +26,7 @@ def _require_nrrd():
 
 @dataclass
 class NrrdVolume:
-    """A cube resolved to internal ``[z, y, x]`` order with recorded geometry."""
+    """A cube resolved to internal ``[z, y, x]`` order with recorded geometry"""
 
     data: np.ndarray
     spacing: Tuple[float, float, float]   # (z, y, x) world units per voxel
@@ -40,7 +40,7 @@ class NrrdVolume:
 
 
 def header_summary(header: Dict[str, object]) -> Dict[str, object]:
-    """JSON-serialisable view of an NRRD header (arrays -> lists)."""
+    """JSON-serialisable view of an NRRD header (arrays -> lists)"""
     out: Dict[str, object] = {}
     for k, v in header.items():
         if isinstance(v, np.ndarray):
@@ -83,13 +83,13 @@ def _resolve_perm(header: Dict[str, object]) -> Tuple[int, int, int]:
 
 
 def read_nrrd(path: str) -> NrrdVolume:
-    """Read one NRRD file and return it in internal ``[z, y, x]`` order."""
+    """Read one NRRD file and return it in internal ``[z, y, x]`` order"""
     nrrd = _require_nrrd()
     data, header = nrrd.read(path)
     data = np.ascontiguousarray(data)
     perm = _resolve_perm(header)
 
-    # order[i] = the stored axis that carries internal axis i.
+    # order[i] = the stored axis that carries internal axis i
     order = [perm.index(i) for i in range(3)]
     data_internal = np.ascontiguousarray(np.transpose(data, axes=order))
 
@@ -101,7 +101,7 @@ def read_nrrd(path: str) -> NrrdVolume:
         if origin_raw is not None
         else [0.0, 0.0, 0.0]
     )
-    # Internal axis i carries world component i (stored order is z, y, x).
+    # Internal axis i carries world component i (stored order is z, y, x)
     spacing = tuple(stored_spacing[order[i]] for i in range(3))
     origin = tuple(stored_origin[i] for i in range(3))
 
@@ -115,7 +115,7 @@ def read_nrrd(path: str) -> NrrdVolume:
 
 
 def load_cube(volume_path: str, mask_path: str) -> Tuple[NrrdVolume, NrrdVolume]:
-    """Load CT + instance mask and verify they share the same voxel grid."""
+    """Load CT + instance mask and verify they share the same voxel grid"""
     vol = read_nrrd(volume_path)
     mask = read_nrrd(mask_path)
     if vol.shape != mask.shape:

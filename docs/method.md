@@ -35,6 +35,6 @@ non-neural and needs no training or ground truth at inference.
 
 The worst outcome is a confident label on the **wrong sheet**. We therefore score
 each method by the fraction of vertices it *accepts* (keeps or moves) that land on
-the wrong sheet. A tool that flags ambiguous regions for review — rather than
-guessing — drives this toward zero even at the cost of leaving some regions
+the wrong sheet. A tool that flags ambiguous regions for review - rather than
+guessing - drives this toward zero even at the cost of leaving some regions
 unresolved. That trade-off is the entire point.

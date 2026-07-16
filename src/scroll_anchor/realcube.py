@@ -21,7 +21,7 @@ from .volume import VolumeROI
 # Instance inspection and ROI selection
 # --------------------------------------------------------------------------- #
 def instance_report(mask: np.ndarray, min_voxels: int = 2000) -> Dict[str, object]:
-    """Summarise nonzero instances and their pairwise adjacency."""
+    """Summarise nonzero instances and their pairwise adjacency"""
     ids, counts = np.unique(mask[mask > 0], return_counts=True)
     instances = []
     for idv, cnt in zip(ids.tolist(), counts.tolist()):
@@ -182,7 +182,7 @@ def extract_medial_surface(
     roi_origin: Tuple[int, int, int],
     proj_axis: Optional[int] = None,
 ) -> MedialSurface:
-    """Extract a single-valued medial surface; choose projection axis from geometry."""
+    """Extract a single-valued medial surface; choose projection axis from geometry"""
     if proj_axis is None:
         best_axis, best_valid, best_size = 0, None, -1
         for p in range(3):
@@ -200,7 +200,7 @@ def extract_medial_surface(
 
 
 def medial_depth_on_grid(instance_roi: np.ndarray, proj_axis: int) -> Tuple[np.ndarray, np.ndarray]:
-    """Medial depth + single-run validity for a fixed projection axis (no CC filter)."""
+    """Medial depth + single-run validity for a fixed projection axis (no CC filter)"""
     return _medial_along(instance_roi, proj_axis)
 
 
@@ -223,7 +223,7 @@ def _grid_to_cube_coords(depth, proj_axis, roi_origin):
 
 
 def medial_to_surface(ms: MedialSurface) -> Surface:
-    """Build a tifxyz Surface (cube-index world frame) from a medial surface."""
+    """Build a tifxyz Surface (cube-index world frame) from a medial surface"""
     x, y, z = _grid_to_cube_coords(ms.depth, ms.proj_axis, ms.roi_origin)
     valid = ms.valid.copy()
     meta = {
@@ -236,7 +236,7 @@ def medial_to_surface(ms: MedialSurface) -> Surface:
 
 
 def roi_volume(ct_roi: np.ndarray, roi_origin: Tuple[int, int, int]) -> VolumeROI:
-    """Wrap a cropped CT ROI so its cube-index frame matches the surface."""
+    """Wrap a cropped CT ROI so its cube-index frame matches the surface"""
     return VolumeROI.from_array(ct_roi.astype(np.float32), origin=tuple(int(v) for v in roi_origin))
 
 
@@ -252,7 +252,7 @@ class Corruption:
 
 
 def _compact_patch(valid: np.ndarray, center_frac, half, rng=None) -> np.ndarray:
-    """A square patch of valid vertices around a fractional grid centre."""
+    """A square patch of valid vertices around a fractional grid centre"""
     H, W = valid.shape
     cr = int(center_frac[0] * H)
     cc = int(center_frac[1] * W)
@@ -263,7 +263,7 @@ def _compact_patch(valid: np.ndarray, center_frac, half, rng=None) -> np.ndarray
 
 def make_drift(surface: Surface, offset: float, half: int = 8,
                center_frac=(0.35, 0.35)) -> Corruption:
-    """Move a compact patch along real local normals by a known signed offset."""
+    """Move a compact patch along real local normals by a known signed offset"""
     normals, nvalid = compute_normals(surface)
     region = _compact_patch(surface.valid & nvalid, center_frac, half)
     inj = np.zeros(surface.shape, dtype=np.float32)
@@ -344,7 +344,7 @@ def _prf(pred, true, mask):
 
 
 def sample_instance_at(surface: Surface, mask_vol: VolumeROI) -> np.ndarray:
-    """Nearest-neighbour instance id under each surface vertex."""
+    """Nearest-neighbour instance id under each surface vertex"""
     ids = mask_vol.sample_world(surface.points(), order=0, cval=0.0)
     return np.rint(ids).astype(np.int64)
 

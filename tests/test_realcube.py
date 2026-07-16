@@ -8,7 +8,7 @@ from scroll_anchor import realcube as rc
 
 
 def _sheet(shape, zc, ids=1):
-    """A single-run sheet at depth zc along axis 0."""
+    """A single-run sheet at depth zc along axis 0"""
     vol = np.zeros(shape, dtype=np.int64)
     vol[zc] = ids
     vol[zc + 1] = ids
@@ -36,7 +36,7 @@ def test_grid_to_cube_coords_roundtrip():
     inst = _sheet((10, 5, 5), zc=4) > 0
     ms = rc.extract_medial_surface(inst, roi_origin=(100, 20, 30))
     surf = rc.medial_to_surface(ms)
-    # Y, X follow grid rows/cols offset by origin; Z is medial depth + origin.
+    # Y, X follow grid rows/cols offset by origin; Z is medial depth + origin
     assert surf.y[2, 3] == 20 + 2
     assert surf.x[2, 3] == 30 + 3
     np.testing.assert_allclose(surf.z[surf.valid], 100 + 4.5, atol=1e-6)
@@ -82,7 +82,7 @@ def test_switch_rejects_when_target_absent():
     surf = rc.medial_to_surface(src)
     dt, vt = rc.medial_depth_on_grid(mask == tgt_id, src.proj_axis)
     tgt = rc.MedialSurface(depth=dt, valid=vt, proj_axis=src.proj_axis, roi_origin=(0, 0, 0))
-    # Erase the target labels: correspondences must all be rejected.
+    # Erase the target labels: correspondences must all be rejected
     mask_no_target = np.where(mask == tgt_id, 0, mask)
     corr = rc.make_switch(surf, tgt, mask_no_target, tgt_id, src_id, half=4)
     assert corr.info["n_vertices"] == 0

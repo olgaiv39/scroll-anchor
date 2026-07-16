@@ -1,4 +1,4 @@
-"""Typed configuration for ScrollAnchor."""
+"""Typed configuration for ScrollAnchor"""
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
@@ -9,7 +9,7 @@ import yaml
 
 @dataclass
 class SamplingConfig:
-    """Normal-profile sampling settings."""
+    """Normal-profile sampling settings"""
 
     radius: float = 12.0
     step: float = 0.5
@@ -19,7 +19,7 @@ class SamplingConfig:
 
 @dataclass
 class DiagnosticsConfig:
-    """Drift and sheet-switch scoring settings."""
+    """Drift and sheet-switch scoring settings"""
 
     peak_min_prominence_frac: float = 0.15
     peak_min_separation: float = 2.0
@@ -27,14 +27,14 @@ class DiagnosticsConfig:
     sheet_spacing: Optional[float] = None
     switch_frac_of_spacing: float = 0.5
     smooth_window: int = 9
-    # Must exceed the expected switched-patch diameter.
+    # Must exceed the expected switched-patch diameter
     switch_smooth_window: int = 31
     margin_soft: float = 0.25
 
 
 @dataclass
 class ReviewConfig:
-    """Review-region extraction settings."""
+    """Review-region extraction settings"""
 
     confidence_review_below: float = 0.5
     min_region_vertices: int = 4
@@ -43,7 +43,7 @@ class ReviewConfig:
 
 @dataclass
 class CorrectionConfig:
-    """Conservative correction proposals, disabled by default."""
+    """Conservative correction proposals, disabled by default"""
 
     enabled: bool = False
     min_confidence: float = 0.85
@@ -53,7 +53,7 @@ class CorrectionConfig:
 
 @dataclass
 class RunConfig:
-    """Top-level run configuration."""
+    """Top-level run configuration"""
 
     seed: int = 0
     chunk_rows: int = 128

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the synthetic benchmark through the package CLI."""
+"""Run the synthetic benchmark through the package CLI"""
 from __future__ import annotations
 
 import sys

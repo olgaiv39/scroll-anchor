@@ -1,4 +1,4 @@
-"""Surface-normal estimation for tifxyz grids."""
+"""Surface-normal estimation for tifxyz grids"""
 from __future__ import annotations
 
 from typing import Tuple
@@ -9,7 +9,7 @@ from .tifxyz import Surface
 
 
 def compute_normals(surface: Surface, consistent_sign: bool = True) -> Tuple[np.ndarray, np.ndarray]:
-    """Estimate unit normals and a validity mask in world coordinates."""
+    """Estimate unit normals and a validity mask in world coordinates"""
     pts = surface.points().astype(np.float64)
     valid = surface.valid
 

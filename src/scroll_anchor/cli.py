@@ -1,4 +1,4 @@
-"""ScrollAnchor command-line interface."""
+"""ScrollAnchor command-line interface"""
 from __future__ import annotations
 
 import argparse
@@ -105,7 +105,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--log-level", default="INFO")
     sub = p.add_subparsers(dest="command", required=True)
 
-    a = sub.add_parser("analyze", help="Analyze a tifxyz surface against a CT volume/ROI.")
+    a = sub.add_parser("analyze", help="Analyze a tifxyz surface against a CT volume/ROI")
     a.add_argument("--surface", required=True, help="tifxyz surface directory")
     a.add_argument("--volume", required=True, help=".npy volume or zarr path/URL [z,y,x]")
     a.add_argument("--config", default=None, help="YAML config (defaults if omitted)")
@@ -114,7 +114,7 @@ def build_parser() -> argparse.ArgumentParser:
     a.add_argument("--no-channels", action="store_true", help="skip writing tifxyz channels")
     a.set_defaults(func=cmd_analyze)
 
-    b = sub.add_parser("benchmark", help="Run the synthetic corruption benchmark.")
+    b = sub.add_parser("benchmark", help="Run the synthetic corruption benchmark")
     b.add_argument("--output", required=True)
     b.add_argument("--config", default=None)
     b.add_argument("--seed", type=int, default=0)

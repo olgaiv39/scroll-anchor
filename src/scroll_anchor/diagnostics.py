@@ -1,4 +1,4 @@
-"""Drift and sheet-switch diagnostics from normal CT profiles."""
+"""Drift and sheet-switch diagnostics from normal CT profiles"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -25,7 +25,7 @@ class Diagnostics:
 
 
 def _grid_normal_residual(points_xyz, normals, valid, window):
-    """Return signed normal residuals from a local mean surface."""
+    """Return signed normal residuals from a local mean surface"""
     H, W, _ = points_xyz.shape
     w = max(3, int(window) | 1)
     m = valid.astype(np.float32)
@@ -42,7 +42,7 @@ def _grid_normal_residual(points_xyz, normals, valid, window):
 
 
 def _robust_residual_magnitude(points_xyz, valid, window):
-    """Return distance from a large-window median surface."""
+    """Return distance from a large-window median surface"""
     w = max(5, int(window) | 1)
     ref = np.empty_like(points_xyz)
     for c in range(3):
@@ -53,7 +53,7 @@ def _robust_residual_magnitude(points_xyz, valid, window):
 
 
 def _hysteresis(raw: np.ndarray, high: float, low: float) -> np.ndarray:
-    """Keep weak connected regions containing at least one strong vertex."""
+    """Keep weak connected regions containing at least one strong vertex"""
     from scipy.ndimage import label as cc_label
 
     weak = raw >= low
@@ -91,7 +91,7 @@ def compute_diagnostics(
     cfg: DiagnosticsConfig,
     correction=None,
 ) -> Diagnostics:
-    """Compute per-vertex drift, switch, confidence, and correction signals."""
+    """Compute per-vertex drift, switch, confidence, and correction signals"""
     H, W, T = profiles.shape
     step = float(offsets[1] - offsets[0]) if T > 1 else 1.0
     min_dist = max(1, int(round(cfg.peak_min_separation / step)))
@@ -110,7 +110,7 @@ def compute_diagnostics(
     margin = np.ones((H, W), dtype=np.float32)
     peak_offsets_grid = np.empty((H, W), dtype=object)
 
-    # Detect profile peaks and estimate inter-sheet spacing.
+    # Detect profile peaks and estimate inter-sheet spacing
     for i in range(H):
         for j in range(W):
             if not valid[i, j]:
@@ -125,7 +125,7 @@ def compute_diagnostics(
                 norm_prof, prominence=cfg.peak_min_prominence_frac, distance=min_dist
             )
             if peaks.size == 0:
-                # Fall back to the global maximum of the profile.
+                # Fall back to the global maximum of the profile
                 peaks = np.array([int(np.argmax(norm_prof))])
             offs = offsets[peaks]
             heights = norm_prof[peaks]
@@ -136,7 +136,7 @@ def compute_diagnostics(
     )
     tau = max(spacing, 1e-3)
 
-    # Prefer strong peaks near the current surface.
+    # Prefer strong peaks near the current surface
     for i in range(H):
         for j in range(W):
             entry = peak_offsets_grid[i, j]
@@ -155,7 +155,7 @@ def compute_diagnostics(
             else:
                 margin[i, j] = 1.0
 
-    # A switch is a spacing-scale geometric jump with strong sheet evidence.
+    # A switch is a spacing-scale geometric jump with strong sheet evidence
     switch_ratio = switch_mag / max(spacing, 1e-6)
     on_a_sheet = evidence >= 0.4
     switch_raw = np.where(valid & on_a_sheet, switch_ratio, 0.0).astype(np.float32)

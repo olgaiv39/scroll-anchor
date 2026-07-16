@@ -1,6 +1,6 @@
 # Coordinate & normal conventions
 
-Verified against `villa/lasagna/tifxyz_format.md` and the `vesuvius` tifxyz API.
+Verified against `villa/lasagna/tifxyz_format.md` and the `vesuvius` tifxyz API
 
 ## tifxyz surface
 
@@ -24,11 +24,11 @@ Verified against `villa/lasagna/tifxyz_format.md` and the `vesuvius` tifxyz API.
 
 ## Normals
 
-- Per-vertex normal `= normalize(cross(dP/dcol, dP/drow))` in world (X, Y, Z).
+- Per-vertex normal `= normalize(cross(dP/dcol, dP/drow))` in world (X, Y, Z)
 - Signs are made consistent within a surface (flipped into a single hemisphere by
-  the mean normal) so signed drift offsets are comparable across the grid.
+  the mean normal) so signed drift offsets are comparable across the grid
 - All offsets, radii, spacings, and windows are in **voxels** (grid vertices for
-  window sizes).
+  window sizes)
 
 ## Units summary
 

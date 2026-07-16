@@ -1,4 +1,4 @@
-"""Metrics for the synthetic corruption benchmark."""
+"""Metrics for the synthetic corruption benchmark"""
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict

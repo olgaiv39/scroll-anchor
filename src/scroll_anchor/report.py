@@ -1,4 +1,4 @@
-"""Machine-readable reports and per-vertex output channels."""
+"""Machine-readable reports and per-vertex output channels"""
 from __future__ import annotations
 
 import json
@@ -14,7 +14,7 @@ from .tifxyz import Surface, write_tifxyz
 
 
 def apply_review(diag: Diagnostics, cfg: ReviewConfig) -> np.ndarray:
-    """(Re)compute the review mask from confidence, switch and drift signals."""
+    """(Re)compute the review mask from confidence, switch and drift signals"""
     spacing = diag.estimated_spacing
     big_drift = diag.drift_score >= 0.35 * spacing
     review = diag.valid & (
@@ -27,7 +27,7 @@ def apply_review(diag: Diagnostics, cfg: ReviewConfig) -> np.ndarray:
 
 
 def build_review_regions(diag: Diagnostics, cfg: ReviewConfig) -> List[Dict[str, object]]:
-    """Cluster the review mask into prioritised regions."""
+    """Cluster the review mask into prioritised regions"""
     labels, n = cc_label(diag.review)
     regions: List[Dict[str, object]] = []
     for lab in range(1, n + 1):

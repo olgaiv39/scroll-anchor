@@ -1,4 +1,4 @@
-"""Compact PNG previews for the real-cube benchmark (matplotlib, optional)."""
+"""Compact PNG previews for the real-cube benchmark (matplotlib, optional)"""
 from __future__ import annotations
 
 import os

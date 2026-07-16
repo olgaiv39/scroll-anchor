@@ -79,7 +79,7 @@ def _run_inference(surface, vol_roi, config):
 
 
 def _harmful_rates(diag, surface, mask_vol, profiles, offsets, source_id):
-    """label-as-is / naive-snap / ScrollAnchor harmful acceptance on wrong instance."""
+    """label-as-is / naive-snap / ScrollAnchor harmful acceptance on wrong instance"""
     valid = diag.valid
     pts = surface.points()
     ids_here = np.rint(mask_vol.sample_world(pts, order=0)).astype(np.int64)

@@ -1,4 +1,4 @@
-"""ScrollAnchor: conservative surface-label diagnostics for volumetric papyrus CT."""
+"""ScrollAnchor: conservative surface-label diagnostics for volumetric papyrus CT"""
 from __future__ import annotations
 
 from .config import RunConfig

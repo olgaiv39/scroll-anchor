@@ -1,4 +1,4 @@
-"""Normal-profile sampling for CT volumes."""
+"""Normal-profile sampling for CT volumes"""
 from __future__ import annotations
 
 from typing import Tuple
@@ -13,7 +13,7 @@ log = get_logger(__name__)
 
 
 def offset_axis(cfg: SamplingConfig) -> np.ndarray:
-    """Return signed offsets along a normal ray."""
+    """Return signed offsets along a normal ray"""
     n = int(np.floor(cfg.radius / cfg.step))
     return np.arange(-n, n + 1, dtype=np.float32) * cfg.step
 
@@ -25,7 +25,7 @@ def sample_profiles(
     cfg: SamplingConfig,
     chunk_rows: int = 128,
 ) -> Tuple[np.ndarray, np.ndarray]:
-    """Sample chunked intensity profiles along per-vertex normals."""
+    """Sample chunked intensity profiles along per-vertex normals"""
     H, W, _ = points_xyz.shape
     offsets = offset_axis(cfg)
     T = offsets.shape[0]
