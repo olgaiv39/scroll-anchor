@@ -105,6 +105,51 @@ results/run/
 └── surface/                # tifxyz copy + sa_confidence/sa_drift/sa_switch/sa_review channels
 ```
 
+## Exploratory 2D render analysis (separate workflow)
+
+The `analyze` command above is the primary 3D pipeline: it needs a `tifxyz` surface
+and a CT volume/ROI, and reports drift and sheet-switch diagnostics with
+through-thickness CT evidence and surface-normal geometry.
+
+`analyze-render` is a **separate, exploratory** workflow for the case where all you
+have is a single downsampled 2D surface **render** (a JPG), with no surface geometry
+and no CT volume. It runs a CPU-only, classical image-processing detector that flags
+**candidate visual discontinuities** - places where the render texture appears to
+shift laterally, which *may* correspond to a sheet skip or a local render shift.
+
+```bash
+pip install -e ".[render]"   # + Pillow for JPG decode and overlay drawing
+scroll-anchor analyze-render \
+  --render path/to/surface_render_ds8.jpg \
+  --output results/render-run/ \
+  --working-downsample 2
+```
+
+- Memory policy: the JPG is never decoded at full resolution. Pillow `draft()`
+  downscales at the decoder, then `--working-downsample` reduces it further; a
+  `--max-pixels` budget aborts before an unsafe allocation
+- Coordinates: every region carries JPG row/col plus a *mapped* full-render row/col
+  (JPG coordinates multiplied by the documented `--full-render-factor`, default 8).
+  The mapped coordinates are not verified VC3D coordinates
+
+Outputs:
+
+```
+results/render-run/
+├── overlay.png        # ranked, ID-labelled boxes over a readable copy of the render
+├── regions.json       # candidate regions with scores, directions, coordinates
+├── diagnostics.npz    # compact processed-resolution seam/anomaly/texture arrays
+└── metadata.json      # shapes, scales, params, runtime, peak RSS, limitations
+```
+
+What this workflow **cannot** report, by construction: confirmed sheet switches,
+true 3D drift, signed error along a surface normal, voxel displacement, or corrected
+surface coordinates. A flat render has no through-thickness CT evidence and no
+normal geometry, so its output is a set of 2D candidates for manual community
+review, not a validated correction. If nothing passes the conservative texture,
+border, multi-scale, and coherence gates, it returns an empty region list rather
+than forcing a positive.
+
 ## How it works (brief)
 
 For each surface vertex: estimate the world-space normal, sample the CT intensity

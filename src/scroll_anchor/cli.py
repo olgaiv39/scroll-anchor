@@ -59,6 +59,26 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_analyze_render(args: argparse.Namespace) -> int:
+    # Exploratory 2D render analysis. Separate from the 3D analyze pipeline: it uses
+    # only a downsampled 2D JPG and reports candidate visual discontinuities, NOT
+    # confirmed sheet switches, 3D drift, or voxel displacement.
+    from .render2d import RenderParams, analyze_render
+
+    params = RenderParams(
+        working_downsample=args.working_downsample,
+        max_working_pixels=args.max_pixels,
+        jpg_to_full_factor=args.full_render_factor,
+    )
+    summary = analyze_render(args.render, args.output, params)
+    log.info(
+        "render analysis: %d candidate region(s), processed %s, %.1fs -> %s",
+        summary["n_regions"], summary["processed_shape_rowcol"],
+        summary["runtime_seconds"], args.output,
+    )
+    return 0
+
+
 def cmd_benchmark(args: argparse.Namespace) -> int:
     from .synth import make_scene
     from .metrics import evaluate
@@ -113,6 +133,21 @@ def build_parser() -> argparse.ArgumentParser:
     a.add_argument("--enable-correction", action="store_true", help="propose conservative moves")
     a.add_argument("--no-channels", action="store_true", help="skip writing tifxyz channels")
     a.set_defaults(func=cmd_analyze)
+
+    r = sub.add_parser(
+        "analyze-render",
+        help="Exploratory 2D analysis of a downsampled surface render (JPG); flags "
+             "candidate visual discontinuities only, not confirmed sheet switches",
+    )
+    r.add_argument("--render", required=True, help="downsampled 2D grayscale render (JPG)")
+    r.add_argument("--output", required=True, help="output directory")
+    r.add_argument("--working-downsample", type=int, default=2,
+                   help="additional downsample applied to the JPG before analysis")
+    r.add_argument("--max-pixels", type=int, default=60_000_000,
+                   help="safety cap on processed pixel count")
+    r.add_argument("--full-render-factor", type=int, default=8,
+                   help="documented JPG->full-render coordinate factor (mapped, not verified)")
+    r.set_defaults(func=cmd_analyze_render)
 
     b = sub.add_parser("benchmark", help="Run the synthetic corruption benchmark")
     b.add_argument("--output", required=True)

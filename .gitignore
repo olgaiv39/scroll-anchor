@@ -13,3 +13,7 @@ results/real_cube_*/**/arrays/
 results/real_cube_*/**/surface/
 *.nrrd
 *.npy
+
+# Exploratory render-analysis outputs and source renders
+results/*-render/
+*.jpg
