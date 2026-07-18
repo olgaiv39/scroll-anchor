@@ -164,6 +164,9 @@ scroll-anchor render-report \
 - Without `--render`, the existing `top_candidates.png` is reused and the PDF notes
   that the source render was unavailable
 
+A published example run (PHercParis4 segment w110-112) is recorded in
+[`results/pherc-render/`](results/pherc-render/README.md)
+
 What this workflow **cannot** report, by construction: confirmed sheet switches,
 true 3D drift, signed error along a surface normal, voxel displacement, or corrected
 surface coordinates. A flat render has no through-thickness CT evidence and no

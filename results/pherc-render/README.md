@@ -22,18 +22,18 @@ a whole-render pass and not a partial crop.
 - Mapped full-render coordinates use the documented factor of 8, and are not
   verified VC3D coordinates
 
-The source JPG and TIFF are not stored in this repository.
+The source JPG and TIFF are not stored in this repository
 
 ## Regenerate the report
+
+Report-only regeneration for this run (see the [main README](../../README.md) for
+how the tool works):
 
 ```bash
 scroll-anchor render-report \
   --results results/pherc-render \
   --render path/to/PHercParis4-20260623163339-2.4um-0.22m-78keV-volume-20260411134726-alpha-overlay-combined-ds8.jpg
 ```
-
-This is report-only: it reads the existing artifacts and overwrites only
-`report.pdf` and `top_candidates.png`. It does not rerun the detector.
 
 ## Attribution
 

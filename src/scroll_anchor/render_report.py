@@ -153,7 +153,7 @@ def _wrap(text: str, width: int = 96) -> str:
 # --------------------------------------------------------------------------- #
 # Pages                                                                        #
 # --------------------------------------------------------------------------- #
-def _page_summary(pdf, metadata, summary, counts, run_date) -> None:
+def _page_summary(pdf, metadata, counts, run_date) -> None:
     import matplotlib.pyplot as plt
 
     fig = plt.figure(figsize=A4_PORTRAIT)
@@ -180,7 +180,6 @@ def _page_summary(pdf, metadata, summary, counts, run_date) -> None:
     )
     fig.text(_LEFT, y - 0.225, _wrap(purpose, 96), fontsize=10, va="top")
 
-    # Prominent notice band.
     ax = fig.add_axes([_LEFT, 0.60, 1 - 2 * _LEFT, 0.045])
     ax.axis("off")
     ax.add_patch(plt.Rectangle((0, 0), 1, 1, transform=ax.transAxes,
@@ -300,7 +299,6 @@ def _page_overview(pdf, overlay_path, page_num) -> None:
     fig.text(_LEFT, 0.065,
              "Numbered boxes mark the top-ranked exported candidates over the whole "
              "downsampled render.", fontsize=9)
-    # Legend for the direction colours.
     fig.text(_LEFT, 0.045, "Legend:", fontsize=9, weight="bold")
     fig.text(_LEFT + 0.06, 0.045, "red = horizontal seam candidate", fontsize=9,
              color=_EDGE["horizontal"])
@@ -534,7 +532,7 @@ def build_report(results_dir: str, render_path: Optional[str] = None) -> Dict[st
     _require_matplotlib()
     from matplotlib.backends.backend_pdf import PdfPages
 
-    metadata, summary, regions, counts = load_results(results_dir)
+    metadata, _summary, regions, counts = load_results(results_dir)
     run_date = _run_date(results_dir, metadata)
     overlay_path = os.path.join(results_dir, "overlay.png")
     crops_path = os.path.join(results_dir, "top_candidates.png")
@@ -548,10 +546,10 @@ def build_report(results_dir: str, render_path: Optional[str] = None) -> Dict[st
     if used_render:
         _write_contact_sheet(crops_path, f, regions)
 
-    # Page plan: 1 summary, 2 method, 3 overview, crops (2 pages if render else 1),
-    # table, score overview, checklist.
     crop_pages = 2 if used_render else 1
-    TOTAL_PAGES = 6 + crop_pages  # 6 fixed pages + crop pages
+    # Six fixed pages (summary, method, overview, table, score overview, checklist)
+    # plus one or two crop pages.
+    TOTAL_PAGES = 6 + crop_pages
 
     pdf_metadata = {
         "Title": "ScrollAnchor Exploratory 2D Render-Anomaly Review",
@@ -565,7 +563,7 @@ def build_report(results_dir: str, render_path: Optional[str] = None) -> Dict[st
 
     with PdfPages(report_path, metadata=pdf_metadata) as pdf:
         page = 1
-        _page_summary(pdf, metadata, summary, counts, run_date); page += 1
+        _page_summary(pdf, metadata, counts, run_date); page += 1
         _page_method(pdf, metadata, counts, page); page += 1
         _page_overview(pdf, overlay_path, page); page += 1
         if used_render:
