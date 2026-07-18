@@ -58,7 +58,11 @@ class RenderParams:
     # continuous texture and broad illumination changes stay well below this.
     anomaly_thr: float = 0.15
     min_region_pixels: int = 40
-    max_regions: int = 60
+    # Export/reporting cap on the number of ranked candidates written out. This is
+    # NOT a detector threshold: it only bounds how many top-ranked regions are
+    # exported. Raised from 60 to make the export clearly a ranked subset (with the
+    # full response counts reported separately) rather than a fixed-size list.
+    max_regions: int = 200
     # Fraction of each border to suppress.
     border_frac: float = 0.02
     # Coarse scale used for multi-scale agreement.
@@ -268,13 +272,24 @@ def _region_displacement(
     return abs(med)
 
 
-def extract_regions(
+def extract_regions_with_stats(
     diag: RenderDiagnostics,
     scale_row: float,
     scale_col: float,
     params: Optional[RenderParams] = None,
-) -> List[Dict[str, object]]:
-    """Threshold, cluster and score candidate discontinuity regions"""
+) -> Tuple[List[Dict[str, object]], Dict[str, int]]:
+    """Threshold, cluster and score candidates; return (exported, counts)
+
+    ``counts`` separates the full detector response from the exported subset:
+
+    - ``n_regions_total``           connected components above ``anomaly_thr``
+    - ``n_regions_above_threshold`` those also passing ``min_region_pixels``
+    - ``n_regions_exported``        top-ranked subset kept after ``max_regions``
+    - ``n_regions_suppressed``      above-threshold minus exported (cap overflow)
+    - ``max_regions_cap``           the export cap in effect
+
+    The exported list is therefore a RANKED SUBSET, not necessarily every response.
+    """
     p = params or RenderParams()
     binary = diag.anomaly > p.anomaly_thr
     labels, n = cc_label(binary)
@@ -335,7 +350,26 @@ def extract_regions(
 
     # Deterministic ranking: score desc, then id asc for stable tie-breaks.
     regions.sort(key=lambda r: (-float(r["score"]), int(r["id"])))
-    return regions[: p.max_regions]
+    exported = regions[: p.max_regions]
+    counts = {
+        "n_regions_total": int(n),
+        "n_regions_above_threshold": len(regions),
+        "n_regions_exported": len(exported),
+        "n_regions_suppressed": len(regions) - len(exported),
+        "max_regions_cap": int(p.max_regions),
+    }
+    return exported, counts
+
+
+def extract_regions(
+    diag: RenderDiagnostics,
+    scale_row: float,
+    scale_col: float,
+    params: Optional[RenderParams] = None,
+) -> List[Dict[str, object]]:
+    """Threshold, cluster and score candidate discontinuity regions (ranked subset)"""
+    regions, _ = extract_regions_with_stats(diag, scale_row, scale_col, params)
+    return regions
 
 
 # --------------------------------------------------------------------------- #
@@ -437,15 +471,197 @@ def _diag_downsample_factor(shape: Tuple[int, int], budget: int) -> int:
     return f
 
 
+def _require_matplotlib():
+    try:
+        import matplotlib
+    except Exception as exc:  # pragma: no cover - optional dependency
+        raise RuntimeError(
+            "matplotlib is required for the crop grid and PDF report; install the "
+            "'render' extra: pip install -e \".[render]\""
+        ) from exc
+    matplotlib.use("Agg")
+    return matplotlib
+
+
+def _crop_context(f: np.ndarray, reg: Dict[str, object], half: int = 160):
+    """Local context crop around a region centroid, with the bbox in crop coords"""
+    r0, c0, r1, c1 = reg["bbox_rowcol_processed"]  # type: ignore[misc]
+    cr, cc = (r0 + r1) // 2, (c0 + c1) // 2
+    h, w = f.shape
+    tr, br = max(0, cr - half), min(h, cr + half)
+    lc, rc = max(0, cc - half), min(w, cc + half)
+    crop = f[tr:br, lc:rc]
+    box = (r0 - tr, c0 - lc, r1 - tr, c1 - lc)  # bbox relative to the crop
+    return crop, box
+
+
+def _write_crop_grid(
+    path: str, f: np.ndarray, regions: List[Dict[str, object]], p: RenderParams,
+    top: int = 16, ncol: int = 4,
+) -> None:
+    """Contact sheet of the top-ranked candidates (needs matplotlib)"""
+    _require_matplotlib()
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Rectangle
+
+    sel = regions[:top]
+    if not sel:
+        # Still emit a placeholder so downstream reporting has a figure.
+        fig = plt.figure(figsize=(8, 2))
+        fig.text(0.5, 0.5, "No candidates passed the export filters.", ha="center")
+        fig.savefig(path, dpi=110, bbox_inches="tight")
+        plt.close(fig)
+        return
+
+    nrow = int(np.ceil(len(sel) / ncol))
+    fig, axes = plt.subplots(nrow, ncol, figsize=(ncol * 3.1, nrow * 3.4))
+    axes = np.atleast_1d(axes).ravel()
+    edge = {"horizontal": "#ff3c3c", "vertical": "#3ca0ff"}
+    for ax, reg in zip(axes, sel):
+        crop, (br0, bc0, br1, bc1) = _crop_context(f, reg)
+        ax.imshow(crop, cmap="gray", vmin=0, vmax=1, interpolation="nearest")
+        col = edge.get(str(reg["direction"]), "#ffd000")
+        ax.add_patch(Rectangle((bc0, br0), max(1, bc1 - bc0), max(1, br1 - br0),
+                               fill=False, edgecolor=col, linewidth=1.6))
+        jr, jc = reg["centroid_rowcol_jpg"]  # type: ignore[misc]
+        fr, fc = reg["mapped_full_render_rowcol"]  # type: ignore[misc]
+        disp = reg["displacement_jpg_pixels"]
+        disp_s = "n/a" if disp is None else f"{disp:g}px"
+        ax.set_title(
+            f"id {reg['id']}  score {reg['score']:.3f}\n"
+            f"{reg['direction']}  disp {disp_s}\n"
+            f"jpg r{jr:.0f} c{jc:.0f}  full r{fr:.0f} c{fc:.0f}",
+            fontsize=7,
+        )
+        ax.set_xticks([])
+        ax.set_yticks([])
+    for ax in axes[len(sel):]:
+        ax.axis("off")
+    fig.suptitle("Top render-anomaly candidates (exploratory, not confirmed sheet skips)",
+                 fontsize=10)
+    fig.tight_layout(rect=(0, 0, 1, 0.97))
+    fig.savefig(path, dpi=110)
+    plt.close(fig)
+
+
+def _write_report(
+    path: str, overlay_path: str, crops_path: str,
+    regions: List[Dict[str, object]], counts: Dict[str, int],
+    metadata: Dict[str, object], p: RenderParams,
+) -> None:
+    """Compact multi-page PDF review packet (needs matplotlib)"""
+    _require_matplotlib()
+    import matplotlib.image as mpimg
+    import matplotlib.pyplot as plt
+    from matplotlib.backends.backend_pdf import PdfPages
+
+    with PdfPages(path) as pdf:
+        # Page 1: title, context, params, limitations, counts.
+        fig = plt.figure(figsize=(8.27, 11.69))  # A4 portrait
+        fig.text(0.5, 0.95, "ScrollAnchor exploratory render-anomaly review",
+                 ha="center", fontsize=15, weight="bold")
+        pr = metadata["processed_shape_rowcol"]
+        jr = metadata["jpg_shape_rowcol"]
+        sr = metadata["exported_score_range"]
+        lines = [
+            "Context",
+            "  Exploratory 2D analysis of a single downsampled surface render (JPG).",
+            "  It flags candidate visual discontinuities that MAY correspond to sheet",
+            "  skips or local render shifts. It is not the 3D analyze pipeline.",
+            "",
+            "Source and run parameters",
+            f"  file: {metadata['source_filename']}",
+            f"  jpg shape (row, col): {jr[0]} x {jr[1]}",
+            f"  processed shape (row, col): {pr[0]} x {pr[1]}",
+            f"  working_downsample: {p.working_downsample}   "
+            f"jpg->full factor: x{p.jpg_to_full_factor}",
+            f"  anomaly_thr: {p.anomaly_thr}   min_region_pixels: {p.min_region_pixels}   "
+            f"max_regions: {p.max_regions}",
+            f"  runtime: {metadata['runtime_seconds']} s   "
+            f"peak RSS: {metadata['peak_rss_mb']} MB",
+            "",
+            "Summary counts (a funnel, not a fixed issue count)",
+            f"  n_regions_total (above anomaly threshold): {counts['n_regions_total']}",
+            f"  n_regions_above_threshold (+ min size):    {counts['n_regions_above_threshold']}",
+            f"  n_regions_exported (ranked subset):        {counts['n_regions_exported']}",
+            f"  n_regions_suppressed (over the cap):       {counts['n_regions_suppressed']}",
+            f"  max_regions_cap:                           {counts['max_regions_cap']}",
+            f"  exported score range: {sr[0]:.3f} .. {sr[1]:.3f}",
+            "",
+            "Important limitations",
+            "  Candidates are exploratory visual anomalies on a flat render. They are",
+            "  NOT confirmed sheet skips. 2D displacement is in render (JPG) pixels",
+            "  only. Full-render coordinates are a documented x{0} mapping, not verified"
+            .format(p.jpg_to_full_factor),
+            "  VC3D coordinates. No 3D voxel displacement or surface-normal error is",
+            "  claimed. The exported set is a ranked subset; scores cluster just above",
+            "  threshold, so many candidates are likely texture or illumination effects.",
+        ]
+        fig.text(0.08, 0.90, "\n".join(lines), ha="left", va="top",
+                 fontsize=9.5, family="monospace")
+        pdf.savefig(fig)
+        plt.close(fig)
+
+        # Page 2: full overlay.
+        fig = plt.figure(figsize=(11.69, 8.27))  # A4 landscape
+        ax = fig.add_axes([0.02, 0.06, 0.96, 0.88])
+        ax.imshow(mpimg.imread(overlay_path))
+        ax.set_title("Overlay: ranked candidate boxes over the render "
+                     "(red=horizontal, blue=vertical)", fontsize=10)
+        ax.axis("off")
+        fig.text(0.5, 0.02, "Boxes are the top-ranked exported candidates. "
+                 "Not confirmed sheet skips.", ha="center", fontsize=8)
+        pdf.savefig(fig)
+        plt.close(fig)
+
+        # Page 3: score table for the top rows.
+        fig = plt.figure(figsize=(8.27, 11.69))
+        fig.text(0.5, 0.96, "Top candidates (score-ranked)", ha="center",
+                 fontsize=13, weight="bold")
+        rows = regions[:20]
+        col_labels = ["id", "score", "dir", "size", "jpg r,c", "full r,c", "disp(px)"]
+        table = []
+        for r in rows:
+            jr2, jc2 = r["centroid_rowcol_jpg"]  # type: ignore[misc]
+            fr2, fc2 = r["mapped_full_render_rowcol"]  # type: ignore[misc]
+            disp = r["displacement_jpg_pixels"]
+            table.append([
+                r["id"], f"{r['score']:.3f}", str(r["direction"])[:4],
+                r["size_pixels_processed"], f"{jr2:.0f},{jc2:.0f}",
+                f"{fr2:.0f},{fc2:.0f}", "n/a" if disp is None else f"{disp:g}",
+            ])
+        ax = fig.add_axes([0.04, 0.05, 0.92, 0.86])
+        ax.axis("off")
+        if table:
+            t = ax.table(cellText=table, colLabels=col_labels, loc="upper center",
+                         cellLoc="center")
+            t.auto_set_font_size(False)
+            t.set_fontsize(8)
+            t.scale(1, 1.3)
+        else:
+            ax.text(0.5, 0.9, "No candidates exported.", ha="center")
+        pdf.savefig(fig)
+        plt.close(fig)
+
+        # Page 4: crop grid image.
+        fig = plt.figure(figsize=(8.27, 11.69))
+        ax = fig.add_axes([0.02, 0.03, 0.96, 0.92])
+        ax.imshow(mpimg.imread(crops_path))
+        ax.axis("off")
+        pdf.savefig(fig)
+        plt.close(fig)
+
+
 def write_outputs(
     outdir: str,
     f: np.ndarray,
     diag: RenderDiagnostics,
     regions: List[Dict[str, object]],
     metadata: Dict[str, object],
+    counts: Dict[str, int],
     params: RenderParams,
 ) -> Dict[str, str]:
-    """Write overlay.png, regions.json, diagnostics.npz, metadata.json"""
+    """Write overlay, regions, diagnostics, metadata, summary, crops and PDF report"""
     import json
 
     os.makedirs(outdir, exist_ok=True)
@@ -454,6 +670,9 @@ def write_outputs(
         "regions": os.path.join(outdir, "regions.json"),
         "diagnostics": os.path.join(outdir, "diagnostics.npz"),
         "metadata": os.path.join(outdir, "metadata.json"),
+        "summary": os.path.join(outdir, "summary.json"),
+        "top_candidates": os.path.join(outdir, "top_candidates.png"),
+        "report": os.path.join(outdir, "report.pdf"),
     }
 
     _write_overlay(paths["overlay"], f, regions, params)
@@ -463,11 +682,30 @@ def write_outputs(
             {
                 "format": "scroll-anchor.render-candidates/v0",
                 "note": (
-                    "Candidate 2D visual discontinuities only. Not confirmed sheet "
-                    "switches, 3D drift, or voxel displacement."
+                    "Ranked SUBSET of candidate 2D visual discontinuities. Exploratory "
+                    "render anomalies, not confirmed sheet switches, 3D drift, or voxel "
+                    "displacement. See region_counts for the full response."
                 ),
-                "n_regions": len(regions),
+                "region_counts": counts,
                 "regions": regions,
+            },
+            fh,
+            indent=2,
+        )
+
+    # summary.json: the count funnel, front and centre, so the export reads as a
+    # ranked subset rather than a definitive issue count.
+    with open(paths["summary"], "w", encoding="utf-8") as fh:
+        json.dump(
+            {
+                "source_filename": metadata.get("source_filename"),
+                "region_counts": counts,
+                "exported_is_ranked_subset": bool(counts["n_regions_suppressed"] > 0),
+                "exported_score_range": metadata.get("exported_score_range"),
+                "runtime_seconds": metadata.get("runtime_seconds"),
+                "peak_rss_mb": metadata.get("peak_rss_mb"),
+                "processed_shape_rowcol": metadata.get("processed_shape_rowcol"),
+                "limitations": metadata.get("limitations"),
             },
             fh,
             indent=2,
@@ -488,6 +726,16 @@ def write_outputs(
     with open(paths["metadata"], "w", encoding="utf-8") as fh:
         json.dump(metadata, fh, indent=2)
 
+    # Crop grid + PDF are best-effort: they need matplotlib. If it is missing the
+    # core artifacts above are still complete.
+    try:
+        _write_crop_grid(paths["top_candidates"], f, regions, params)
+        _write_report(paths["report"], paths["overlay"], paths["top_candidates"],
+                      regions, counts, metadata, params)
+    except RuntimeError:
+        paths.pop("top_candidates", None)
+        paths.pop("report", None)
+
     return paths
 
 
@@ -500,10 +748,13 @@ def analyze_render(
 
     f, jpg_shape, proc_shape, scale_row, scale_col = load_render(render_path, p)
     diag = analyze_array(f, p)
-    regions = extract_regions(diag, scale_row, scale_col, p)
+    regions, counts = extract_regions_with_stats(diag, scale_row, scale_col, p)
 
     runtime = time.perf_counter() - t0
     peak_mb = _peak_rss_mb()
+
+    scores = [float(r["score"]) for r in regions]
+    score_range = [round(min(scores), 6), round(max(scores), 6)] if scores else [0.0, 0.0]
 
     metadata = {
         "format": "scroll-anchor.render-metadata/v0",
@@ -517,20 +768,25 @@ def analyze_render(
         "params": asdict(p),
         "runtime_seconds": round(runtime, 3),
         "peak_rss_mb": peak_mb,
-        "n_candidate_regions": len(regions),
+        "region_counts": counts,
+        "exported_score_range": score_range,
         "limitations": (
             "Render-only 2D analysis. No surface-normal geometry or CT evidence. "
-            "Candidates are visual discontinuities for manual review, not confirmed "
-            "sheet switches, 3D drift, or voxel displacement. Full-render coordinates "
+            "Candidates are exploratory visual anomalies on a render for manual "
+            "review, not confirmed sheet switches, 3D drift, or voxel displacement. "
+            "2D displacement is in render (JPG) pixels only. Full-render coordinates "
             "are a documented x{f} mapping, not verified VC3D coordinates.".format(
                 f=p.jpg_to_full_factor
             )
         ),
     }
 
-    paths = write_outputs(output_dir, f, diag, regions, metadata, p)
+    paths = write_outputs(output_dir, f, diag, regions, metadata, counts, p)
     return {
-        "n_regions": len(regions),
+        "n_regions_exported": counts["n_regions_exported"],
+        "n_regions_above_threshold": counts["n_regions_above_threshold"],
+        "n_regions_total": counts["n_regions_total"],
+        "exported_score_range": score_range,
         "runtime_seconds": metadata["runtime_seconds"],
         "peak_rss_mb": peak_mb,
         "processed_shape_rowcol": metadata["processed_shape_rowcol"],

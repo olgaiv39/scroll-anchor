@@ -136,11 +136,33 @@ Outputs:
 
 ```
 results/render-run/
-├── overlay.png        # ranked, ID-labelled boxes over a readable copy of the render
-├── regions.json       # candidate regions with scores, directions, coordinates
-├── diagnostics.npz    # compact processed-resolution seam/anomaly/texture arrays
-└── metadata.json      # shapes, scales, params, runtime, peak RSS, limitations
+├── overlay.png         # ranked, ID-labelled boxes over a readable copy of the render
+├── regions.json        # candidate regions with scores, directions, coordinates
+├── diagnostics.npz     # compact processed-resolution seam/anomaly/texture arrays
+├── metadata.json       # shapes, scales, params, runtime, peak RSS, limitations
+├── summary.json        # count funnel and exported score range (ranked subset)
+├── top_candidates.png  # contact sheet of the top-ranked candidate crops
+└── report.pdf          # multi-page review packet for manual inspection
 ```
+
+### Regenerate the review PDF from an existing result directory
+
+`render-report` rebuilds `report.pdf` (and `top_candidates.png` when the source
+render is available) from artifacts that already exist. It is report-only: it reads
+`metadata.json`, `summary.json`, `regions.json` and `overlay.png`, does **not** run
+the detector, does **not** read `diagnostics.npz`, and overwrites only the report
+files. Numerical results are unchanged.
+
+```bash
+scroll-anchor render-report \
+  --results results/render-run/ \
+  --render path/to/surface_render_ds8.jpg   # optional, for larger crop pages
+```
+
+- With `--render`, crop pages are decoded fresh from the source JPG at the recorded
+  working resolution and `top_candidates.png` is regenerated
+- Without `--render`, the existing `top_candidates.png` is reused and the PDF notes
+  that the source render was unavailable
 
 What this workflow **cannot** report, by construction: confirmed sheet switches,
 true 3D drift, signed error along a surface normal, voxel displacement, or corrected

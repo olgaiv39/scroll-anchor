@@ -72,10 +72,32 @@ def cmd_analyze_render(args: argparse.Namespace) -> int:
     )
     summary = analyze_render(args.render, args.output, params)
     log.info(
-        "render analysis: %d candidate region(s), processed %s, %.1fs -> %s",
-        summary["n_regions"], summary["processed_shape_rowcol"],
+        "render analysis: %d exported / %d above-threshold / %d total response(s), "
+        "score %.3f-%.3f, processed %s, %.1fs -> %s",
+        summary["n_regions_exported"], summary["n_regions_above_threshold"],
+        summary["n_regions_total"], summary["exported_score_range"][0],
+        summary["exported_score_range"][1], summary["processed_shape_rowcol"],
         summary["runtime_seconds"], args.output,
     )
+    return 0
+
+
+def cmd_render_report(args: argparse.Namespace) -> int:
+    # Report-only: rebuild report.pdf (and top_candidates.png if the render is
+    # available) from an existing results directory. Does NOT run the detector,
+    # read diagnostics.npz, or modify the JSON/NPZ/overlay artifacts.
+    from .render_report import build_report
+
+    info = build_report(args.results, args.render)
+    counts = info["counts"]
+    log.info(
+        "render report: %d-page PDF, %d ranked candidates, crops from render=%s -> %s",
+        info["n_pages"], info["n_regions"], info["used_render"], info["report"],
+    )
+    if not info["used_render"]:
+        log.info("source render unavailable; reused existing top_candidates.png "
+                 "(counts: exported=%s of %s passing)",
+                 counts.get("n_regions_exported"), counts.get("n_regions_above_threshold"))
     return 0
 
 
@@ -148,6 +170,17 @@ def build_parser() -> argparse.ArgumentParser:
     r.add_argument("--full-render-factor", type=int, default=8,
                    help="documented JPG->full-render coordinate factor (mapped, not verified)")
     r.set_defaults(func=cmd_analyze_render)
+
+    rr = sub.add_parser(
+        "render-report",
+        help="Rebuild the review PDF from an existing render-analysis results "
+             "directory (report-only; does not run the detector)",
+    )
+    rr.add_argument("--results", required=True,
+                    help="results directory holding metadata/summary/regions/overlay")
+    rr.add_argument("--render", default=None,
+                    help="optional source JPG for higher-quality crop pages")
+    rr.set_defaults(func=cmd_render_report)
 
     b = sub.add_parser("benchmark", help="Run the synthetic corruption benchmark")
     b.add_argument("--output", required=True)
