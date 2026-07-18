@@ -1,0 +1,52 @@
+{
+  "format": "scroll-anchor.render-metadata/v0",
+  "source_filename": "PHercParis4-20260623163339-2.4um-0.22m-78keV-volume-20260411134726-alpha-overlay-combined-ds8.jpg",
+  "jpg_shape_rowcol": [
+    6270,
+    24030
+  ],
+  "processed_shape_rowcol": [
+    3135,
+    12015
+  ],
+  "working_downsample": 2,
+  "scale_processed_to_jpg_rowcol": [
+    2.0,
+    2.0
+  ],
+  "jpg_to_full_render_factor": 8,
+  "orientation": "no rotation, flip, or axis swap; rows=Y, cols=X throughout",
+  "params": {
+    "working_downsample": 2,
+    "max_working_pixels": 60000000,
+    "lc_window": 15,
+    "seam_long": 81,
+    "seam_thin": 3,
+    "seam_shift": 1,
+    "max_lag": 8,
+    "tex_lo": 0.02,
+    "tex_hi": 0.06,
+    "anomaly_thr": 0.15,
+    "min_region_pixels": 40,
+    "max_regions": 200,
+    "border_frac": 0.02,
+    "multiscale_factor": 2,
+    "lag_consistency": 0.6,
+    "max_diag_pixels": 2000000,
+    "jpg_to_full_factor": 8
+  },
+  "runtime_seconds": 318.727,
+  "peak_rss_mb": 2967.6,
+  "region_counts": {
+    "n_regions_total": 1152,
+    "n_regions_above_threshold": 428,
+    "n_regions_exported": 200,
+    "n_regions_suppressed": 228,
+    "max_regions_cap": 200
+  },
+  "exported_score_range": [
+    0.133379,
+    0.200628
+  ],
+  "limitations": "Render-only 2D analysis. No surface-normal geometry or CT evidence. Candidates are exploratory visual anomalies on a render for manual review, not confirmed sheet switches, 3D drift, or voxel displacement. 2D displacement is in render (JPG) pixels only. Full-render coordinates are a documented x8 mapping, not verified VC3D coordinates."
+}
