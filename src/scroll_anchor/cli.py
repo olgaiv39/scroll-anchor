@@ -70,7 +70,7 @@ def cmd_analyze_render(args: argparse.Namespace) -> int:
         max_working_pixels=args.max_pixels,
         jpg_to_full_factor=args.full_render_factor,
     )
-    summary = analyze_render(args.render, args.output, params)
+    summary = analyze_render(args.render, args.output, params, tifxyz_dir=args.tifxyz_dir)
     log.info(
         "render analysis: %d exported / %d above-threshold / %d total response(s), "
         "score %.3f-%.3f, processed %s, %.1fs -> %s",
@@ -79,6 +79,9 @@ def cmd_analyze_render(args: argparse.Namespace) -> int:
         summary["exported_score_range"][1], summary["processed_shape_rowcol"],
         summary["runtime_seconds"], args.output,
     )
+    if summary["tifxyz_valid_mask_used"]:
+        log.info("tifxyz valid-surface mask applied as diagnostics only; "
+                 "scores and ranking are unchanged")
     return 0
 
 
@@ -169,6 +172,10 @@ def build_parser() -> argparse.ArgumentParser:
                    help="safety cap on processed pixel count")
     r.add_argument("--full-render-factor", type=int, default=8,
                    help="documented JPG->full-render coordinate factor (mapped, not verified)")
+    r.add_argument("--tifxyz-dir", default=None,
+                   help="optional tifxyz directory (x.tif/y.tif/z.tif) matching the render; "
+                        "derives a valid-surface mask and adds mesh-boundary diagnostics to "
+                        "each candidate. Does not change scores or ranking")
     r.set_defaults(func=cmd_analyze_render)
 
     rr = sub.add_parser(

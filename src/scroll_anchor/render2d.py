@@ -27,11 +27,15 @@ from dataclasses import asdict, dataclass, field
 from typing import Dict, List, Optional, Tuple
 
 import numpy as np
+from scipy.ndimage import distance_transform_edt
 from scipy.ndimage import label as cc_label
 from scipy.ndimage import uniform_filter, zoom
 
 # JPG pixel coordinates -> full-render pixel coordinates (exact 8x downsample).
 JPG_TO_FULL_FACTOR = 8
+
+# tifxyz stores "no surface here" as the -1 sentinel in x/y/z.
+TIFXYZ_INVALID_SENTINEL = -1.0
 
 
 @dataclass
@@ -121,6 +125,130 @@ def _upsample_to(a: np.ndarray, shape: Tuple[int, int]) -> np.ndarray:
     if a.shape == shape:
         return a
     return zoom(a, (shape[0] / a.shape[0], shape[1] / a.shape[1]), order=1)
+
+
+# --------------------------------------------------------------------------- #
+# Optional tifxyz-derived valid-surface mask (mesh boundaries)                 #
+# --------------------------------------------------------------------------- #
+def _read_coord_tif(path: str) -> np.ndarray:
+    """Decode one single-channel 2D floating-point coordinate raster
+
+    tifffile is tried first. The published rasters are LZW-compressed, and tifffile
+    delegates LZW to the heavy optional ``imagecodecs`` package, so environments
+    without it fail with "<COMPRESSION.LZW: 5> requires the 'imagecodecs' package".
+    Pillow - already required by this module - decodes LZW natively, so it is used
+    as a narrow fallback.
+
+    Values are kept in their native floating-point range and are never rescaled or
+    quantised to 8-bit, so the exact ``-1`` sentinel and any non-finite entries
+    survive decoding unchanged.
+    """
+    try:
+        import tifffile
+
+        arr = tifffile.imread(path)
+    except Exception as exc:  # LZW without imagecodecs, or tifffile unavailable
+        Image = _require_pillow()
+        try:
+            with Image.open(path) as im:
+                im.load()
+                # mode "F" (or "I;16"/"I") decodes to its native dtype; asarray
+                # copies out of the buffer before the handle is closed.
+                arr = np.asarray(im)
+        except Exception as pil_exc:
+            raise ValueError(
+                f"cannot decode tifxyz raster {path}: tifffile failed ({exc}); "
+                f"Pillow fallback failed ({pil_exc})"
+            ) from pil_exc
+
+    arr = np.asarray(arr)
+    if arr.ndim != 2:
+        raise ValueError(f"{path}: expected a single-channel 2D TIFF, got shape {arr.shape}")
+    return arr.astype(np.float32, copy=False)
+
+
+def load_tifxyz_valid_mask(directory: str) -> np.ndarray:
+    """Derive a boolean valid-surface mask from a tifxyz ``x/y/z.tif`` triple
+
+    A pixel is valid only where all three world coordinates are finite and none of
+    them is the ``-1`` invalid sentinel. ``mask.tif`` is deliberately NOT consulted:
+    the matching render dataset has none, so validity must come from the coordinate
+    rasters themselves. ``meta.json`` is not read either.
+    """
+    coords = []
+    for name in ("x.tif", "y.tif", "z.tif"):
+        path = os.path.join(directory, name)
+        if not os.path.isfile(path):
+            raise FileNotFoundError(f"tifxyz directory is missing {name}: {directory}")
+        coords.append(_read_coord_tif(path))
+
+    x, y, z = coords
+    if not (x.shape == y.shape == z.shape):
+        raise ValueError(
+            f"tifxyz x/y/z.tif shapes differ in {directory}: "
+            f"x={x.shape}, y={y.shape}, z={z.shape}"
+        )
+
+    finite = np.isfinite(x) & np.isfinite(y) & np.isfinite(z)
+    sentinel = (
+        (x == TIFXYZ_INVALID_SENTINEL)
+        | (y == TIFXYZ_INVALID_SENTINEL)
+        | (z == TIFXYZ_INVALID_SENTINEL)
+    )
+    return finite & ~sentinel
+
+
+def project_valid_mask(
+    valid: np.ndarray,
+    render_shape: Tuple[int, int],
+    proc_shape: Tuple[int, int],
+) -> np.ndarray:
+    """Project a tifxyz valid mask onto the working analysis raster
+
+    Compatibility is exact in this revision: the source render must be an integer
+    multiple of the tifxyz raster in BOTH axes, with the SAME factor in each
+    (factor 1, i.e. identity, is allowed). A near-miss raster - for example a
+    flattened tifxyz differing by a couple of rows and columns - is rejected rather
+    than stretched onto the render, because stretching would silently misplace every
+    mesh boundary. There is deliberately no tolerance, override, crop, offset, flip,
+    transpose, or per-axis rescale.
+
+    Resampling after the gate is centre-aligned nearest-neighbour only. The mask is
+    categorical, so interpolation would invent partially-valid surface along every
+    boundary.
+    """
+    th, tw = int(valid.shape[0]), int(valid.shape[1])
+    rh, rw = int(render_shape[0]), int(render_shape[1])
+    if min(th, tw, rh, rw) < 1:
+        raise ValueError(f"degenerate raster shapes: tifxyz={th}x{tw}, render={rh}x{rw}")
+
+    row_exact, col_exact = (rh % th == 0), (rw % tw == 0)
+    sr, sc = rh // th, rw // tw
+    if not (row_exact and col_exact and sr == sc):
+        raise ValueError(
+            f"tifxyz raster {th}x{tw} is incompatible with the source render {rh}x{rw}: "
+            f"row scale {rh}/{th}={rh / th:.6f} (exact integer: {row_exact}, floor {sr}), "
+            f"column scale {rw}/{tw}={rw / tw:.6f} (exact integer: {col_exact}, floor {sc}); "
+            "this commit requires one exact shared integer raster scale in both axes "
+            "(no tolerance, crop, offset, flip, transpose, or per-axis rescale)"
+        )
+
+    ph, pw = int(proc_shape[0]), int(proc_shape[1])
+    ri = np.minimum(((np.arange(ph) + 0.5) * (th / ph)).astype(np.intp), th - 1)
+    ci = np.minimum(((np.arange(pw) + 0.5) * (tw / pw)).astype(np.intp), tw - 1)
+    return np.asarray(valid, dtype=bool)[ri][:, ci]
+
+
+def boundary_distance(valid: np.ndarray) -> np.ndarray:
+    """Euclidean distance (working pixels) from each pixel to the nearest invalid one
+
+    Invalid pixels are outside-surface area and get distance 0. The raster is padded
+    with an invalid ring so the render edge counts as a mesh boundary too, rather
+    than as unbounded valid surface.
+    """
+    padded = np.zeros((valid.shape[0] + 2, valid.shape[1] + 2), dtype=bool)
+    padded[1:-1, 1:-1] = np.asarray(valid, dtype=bool)
+    return distance_transform_edt(padded)[1:-1, 1:-1].astype(np.float32)
 
 
 # --------------------------------------------------------------------------- #
@@ -277,6 +405,7 @@ def extract_regions_with_stats(
     scale_row: float,
     scale_col: float,
     params: Optional[RenderParams] = None,
+    valid_mask: Optional[np.ndarray] = None,
 ) -> Tuple[List[Dict[str, object]], Dict[str, int]]:
     """Threshold, cluster and score candidates; return (exported, counts)
 
@@ -289,8 +418,21 @@ def extract_regions_with_stats(
     - ``max_regions_cap``           the export cap in effect
 
     The exported list is therefore a RANKED SUBSET, not necessarily every response.
+
+    An optional working-resolution ``valid_mask`` adds purely descriptive
+    mesh-boundary fields to each exported region. It does NOT affect the score,
+    the threshold, the region set, or the ranking.
     """
     p = params or RenderParams()
+    bdist = None
+    if valid_mask is not None:
+        valid_mask = np.asarray(valid_mask, dtype=bool)
+        if valid_mask.shape != diag.anomaly.shape:
+            raise ValueError(
+                f"valid mask shape {valid_mask.shape} does not match the working "
+                f"analysis shape {diag.anomaly.shape}"
+            )
+        bdist = boundary_distance(valid_mask)
     binary = diag.anomaly > p.anomaly_thr
     labels, n = cc_label(binary)
     regions: List[Dict[str, object]] = []
@@ -329,24 +471,31 @@ def extract_regions_with_stats(
         )
 
         score = round(mean_anom * (0.25 + 0.75 * reliability), 6)
-        regions.append(
-            {
-                "id": int(lab),
-                "score": score,
-                "anomaly_mean": round(mean_anom, 6),
-                "reliability": round(reliability, 4),
-                "direction": direction,
-                "size_pixels_processed": size,
-                "bbox_rowcol_processed": [r0, c0, r1, c1],
-                "bbox_rowcol_jpg": [round(jr0, 2), round(jc0, 2), round(jr1, 2), round(jc1, 2)],
-                "centroid_rowcol_jpg": [round(jcr, 2), round(jcc, 2)],
-                "mapped_full_render_rowcol": [round(fr, 2), round(fc, 2)],
-                "displacement_jpg_pixels": disp_jpg,
-                "displacement_note": (
-                    "insufficient evidence" if disp_jpg is None else "local 2D estimate only"
-                ),
-            }
-        )
+        reg: Dict[str, object] = {
+            "id": int(lab),
+            "score": score,
+            "anomaly_mean": round(mean_anom, 6),
+            "reliability": round(reliability, 4),
+            "direction": direction,
+            "size_pixels_processed": size,
+            "bbox_rowcol_processed": [r0, c0, r1, c1],
+            "bbox_rowcol_jpg": [round(jr0, 2), round(jc0, 2), round(jr1, 2), round(jc1, 2)],
+            "centroid_rowcol_jpg": [round(jcr, 2), round(jcc, 2)],
+            "mapped_full_render_rowcol": [round(fr, 2), round(fc, 2)],
+            "displacement_jpg_pixels": disp_jpg,
+            "displacement_note": (
+                "insufficient evidence" if disp_jpg is None else "local 2D estimate only"
+            ),
+        }
+        if bdist is not None:
+            # Descriptive only: how much of the candidate sits off-surface and how
+            # close it comes to a mesh boundary, in processed (working) pixels.
+            d_min = float(bdist[m].min())
+            reg["boundary_distance_px"] = round(d_min, 3)
+            reg["invalid_overlap_fraction"] = round(float(np.mean(~valid_mask[m])), 6)
+            # <= 1 px means the region contains, or directly abuts, invalid area.
+            reg["touches_invalid_boundary"] = bool(d_min <= 1.0)
+        regions.append(reg)
 
     # Deterministic ranking: score desc, then id asc for stable tie-breaks.
     regions.sort(key=lambda r: (-float(r["score"]), int(r["id"])))
@@ -677,39 +826,41 @@ def write_outputs(
 
     _write_overlay(paths["overlay"], f, regions, params)
 
+    # Additive only when the tifxyz option was used; otherwise the payload keys are
+    # exactly the pre-existing schema.
+    used_tifxyz = bool(metadata.get("tifxyz_valid_mask_used", False))
+
+    regions_payload: Dict[str, object] = {
+        "format": "scroll-anchor.render-candidates/v0",
+        "note": (
+            "Ranked SUBSET of candidate 2D visual discontinuities. Exploratory "
+            "render anomalies, not confirmed sheet switches, 3D drift, or voxel "
+            "displacement. See region_counts for the full response."
+        ),
+        "region_counts": counts,
+    }
+    if used_tifxyz:
+        regions_payload["tifxyz_valid_mask_used"] = True
+    regions_payload["regions"] = regions
     with open(paths["regions"], "w", encoding="utf-8") as fh:
-        json.dump(
-            {
-                "format": "scroll-anchor.render-candidates/v0",
-                "note": (
-                    "Ranked SUBSET of candidate 2D visual discontinuities. Exploratory "
-                    "render anomalies, not confirmed sheet switches, 3D drift, or voxel "
-                    "displacement. See region_counts for the full response."
-                ),
-                "region_counts": counts,
-                "regions": regions,
-            },
-            fh,
-            indent=2,
-        )
+        json.dump(regions_payload, fh, indent=2)
 
     # summary.json: the count funnel, front and centre, so the export reads as a
     # ranked subset rather than a definitive issue count.
+    summary_payload: Dict[str, object] = {
+        "source_filename": metadata.get("source_filename"),
+        "region_counts": counts,
+        "exported_is_ranked_subset": bool(counts["n_regions_suppressed"] > 0),
+        "exported_score_range": metadata.get("exported_score_range"),
+        "runtime_seconds": metadata.get("runtime_seconds"),
+        "peak_rss_mb": metadata.get("peak_rss_mb"),
+        "processed_shape_rowcol": metadata.get("processed_shape_rowcol"),
+    }
+    if used_tifxyz:
+        summary_payload["tifxyz_valid_mask_used"] = True
+    summary_payload["limitations"] = metadata.get("limitations")
     with open(paths["summary"], "w", encoding="utf-8") as fh:
-        json.dump(
-            {
-                "source_filename": metadata.get("source_filename"),
-                "region_counts": counts,
-                "exported_is_ranked_subset": bool(counts["n_regions_suppressed"] > 0),
-                "exported_score_range": metadata.get("exported_score_range"),
-                "runtime_seconds": metadata.get("runtime_seconds"),
-                "peak_rss_mb": metadata.get("peak_rss_mb"),
-                "processed_shape_rowcol": metadata.get("processed_shape_rowcol"),
-                "limitations": metadata.get("limitations"),
-            },
-            fh,
-            indent=2,
-        )
+        json.dump(summary_payload, fh, indent=2)
 
     # Compact diagnostics: downsample below the pixel budget.
     df = _diag_downsample_factor(diag.proc_shape, params.max_diag_pixels)
@@ -740,15 +891,58 @@ def write_outputs(
 
 
 def analyze_render(
-    render_path: str, output_dir: str, params: Optional[RenderParams] = None
+    render_path: str,
+    output_dir: str,
+    params: Optional[RenderParams] = None,
+    tifxyz_dir: Optional[str] = None,
 ) -> Dict[str, object]:
-    """Full workflow: decode -> detect -> write outputs. Returns a summary dict"""
+    """Full workflow: decode -> detect -> write outputs. Returns a summary dict
+
+    ``tifxyz_dir`` optionally supplies the matching ``x/y/z.tif`` rasters. When
+    given, a valid-surface mask is derived from them and each exported candidate
+    gains descriptive mesh-boundary fields. Detection, scoring and ranking are
+    unchanged either way.
+    """
     p = params or RenderParams()
     t0 = time.perf_counter()
 
     f, jpg_shape, proc_shape, scale_row, scale_col = load_render(render_path, p)
+
+    valid_mask = None
+    tifxyz_info: Optional[Dict[str, object]] = None
+    if tifxyz_dir is not None:
+        raw_valid = load_tifxyz_valid_mask(tifxyz_dir)
+        valid_mask = project_valid_mask(raw_valid, jpg_shape, proc_shape)
+        tifxyz_info = {
+            "raster_shape_rowcol": [int(raw_valid.shape[0]), int(raw_valid.shape[1])],
+            "valid_fraction_tifxyz": round(float(raw_valid.mean()), 6),
+            "valid_fraction_processed": round(float(valid_mask.mean()), 6),
+            "validity_rule": "x, y and z all finite and none equal to -1 (no mask.tif used)",
+            "projection": "centre-aligned nearest-neighbour to the working analysis raster",
+            "boundary_distance_units": "processed (working-resolution) pixels",
+            "effect_on_scoring": "none; diagnostics only in this revision",
+            # Stated as ASSUMPTIONS, not findings: only the exact integer raster
+            # scale is actually checked. Nothing here is derived from meta.json.
+            "alignment_assumptions": {
+                "same_raster_origin": True,
+                "same_row_column_orientation": True,
+                "same_spatial_extent": True,
+                "axis_swap": False,
+                "horizontal_flip": False,
+                "vertical_flip": False,
+                "crop_or_offset": False,
+                "independently_verified": False,
+                "note": (
+                    "Assumed, not proven. Only an exact shared integer raster scale is "
+                    "verified; the origin, orientation and extent correspondence between "
+                    "the tifxyz grid and the render has NOT been independently confirmed "
+                    "from dataset metadata."
+                ),
+            },
+        }
+
     diag = analyze_array(f, p)
-    regions, counts = extract_regions_with_stats(diag, scale_row, scale_col, p)
+    regions, counts = extract_regions_with_stats(diag, scale_row, scale_col, p, valid_mask)
 
     runtime = time.perf_counter() - t0
     peak_mb = _peak_rss_mb()
@@ -780,6 +974,11 @@ def analyze_render(
             )
         ),
     }
+    # Only present when the option was used: a run without --tifxyz-dir must write
+    # byte-for-byte the previous artifact schema, with no null/false placeholders.
+    if tifxyz_info is not None:
+        metadata["tifxyz_valid_mask_used"] = True
+        metadata["tifxyz_valid_mask"] = tifxyz_info
 
     paths = write_outputs(output_dir, f, diag, regions, metadata, counts, p)
     return {
@@ -790,6 +989,7 @@ def analyze_render(
         "runtime_seconds": metadata["runtime_seconds"],
         "peak_rss_mb": peak_mb,
         "processed_shape_rowcol": metadata["processed_shape_rowcol"],
+        "tifxyz_valid_mask_used": bool(valid_mask is not None),
         "paths": paths,
     }
 
