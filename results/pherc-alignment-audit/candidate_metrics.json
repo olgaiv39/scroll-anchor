@@ -1,0 +1,785 @@
+{
+  "note": "Candidate footprint is approximated by its bounding box: regions.json stores bbox and size but not the component pixel mask, and diagnostics.npz is block-mean downsampled. The audited regions are thin seams, so the bbox is a tight proxy. Detector scores and ranking are reused unchanged.",
+  "touch_rule_px": 1.0,
+  "near_px": 5.0,
+  "interior_px": 50.0,
+  "representative_threshold": 32,
+  "candidates": [
+    {
+      "rank": 5,
+      "component_id": 215,
+      "group": "suspected_black_edge",
+      "score": 0.181901,
+      "direction": "vertical",
+      "size_pixels_processed": 155,
+      "bbox_rowcol_processed": [
+        718,
+        8539,
+        790,
+        8541
+      ],
+      "centroid_rowcol_jpg": [
+        1509.14,
+        17079.43
+      ],
+      "tifxyz_boundary_distance_px": 206.342,
+      "tifxyz_invalid_overlap_fraction": 0.0,
+      "tifxyz_touches_invalid_boundary": false,
+      "tifxyz_bbox_min_distance_px": 206.194,
+      "per_threshold": {
+        "1": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.894977,
+          "bbox_near_black_fraction": 0.90411,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "4": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.913242,
+          "bbox_near_black_fraction": 0.922374,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "8": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.931507,
+          "bbox_near_black_fraction": 0.931507,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "12": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.931507,
+          "bbox_near_black_fraction": 0.931507,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "16": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.940639,
+          "bbox_near_black_fraction": 0.940639,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "24": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.945205,
+          "bbox_near_black_fraction": 0.945205,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "32": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.949772,
+          "bbox_near_black_fraction": 0.949772,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        }
+      },
+      "touches_render_bg_by_threshold": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "render_bg_min_distance_by_threshold": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "stable_across_thresholds": true,
+      "n_thresholds_touching": 7,
+      "min_distance_range_px": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "rank": 6,
+      "component_id": 1064,
+      "group": "suspected_black_edge",
+      "score": 0.180722,
+      "direction": "vertical",
+      "size_pixels_processed": 384,
+      "bbox_rowcol_processed": [
+        2717,
+        8579,
+        2822,
+        8583
+      ],
+      "centroid_rowcol_jpg": [
+        5539.69,
+        17162.9
+      ],
+      "tifxyz_boundary_distance_px": 274.536,
+      "tifxyz_invalid_overlap_fraction": 0.0,
+      "tifxyz_touches_invalid_boundary": false,
+      "tifxyz_bbox_min_distance_px": 274.332,
+      "per_threshold": {
+        "1": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.681132,
+          "bbox_near_black_fraction": 0.703774,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "4": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.7,
+          "bbox_near_black_fraction": 0.732075,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "8": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.703774,
+          "bbox_near_black_fraction": 0.739623,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "12": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.716981,
+          "bbox_near_black_fraction": 0.758491,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "16": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.728302,
+          "bbox_near_black_fraction": 0.777358,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "24": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.798113,
+          "bbox_near_black_fraction": 0.801887,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "32": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.828302,
+          "bbox_near_black_fraction": 0.828302,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        }
+      },
+      "touches_render_bg_by_threshold": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "render_bg_min_distance_by_threshold": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "stable_across_thresholds": true,
+      "n_thresholds_touching": 7,
+      "min_distance_range_px": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "rank": 7,
+      "component_id": 566,
+      "group": "interior_control",
+      "score": 0.178003,
+      "direction": "vertical",
+      "size_pixels_processed": 333,
+      "bbox_rowcol_processed": [
+        1702,
+        10951,
+        1809,
+        10955
+      ],
+      "centroid_rowcol_jpg": [
+        3508.89,
+        21906.85
+      ],
+      "tifxyz_boundary_distance_px": 787.61,
+      "tifxyz_invalid_overlap_fraction": 0.0,
+      "tifxyz_touches_invalid_boundary": false,
+      "tifxyz_bbox_min_distance_px": 786.644,
+      "per_threshold": {
+        "1": {
+          "render_bg_min_distance_px": 662.048,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.024074,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": false
+        },
+        "4": {
+          "render_bg_min_distance_px": 662.048,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.035185,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": false
+        },
+        "8": {
+          "render_bg_min_distance_px": 662.048,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.038889,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": false
+        },
+        "12": {
+          "render_bg_min_distance_px": 662.048,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.038889,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": false
+        },
+        "16": {
+          "render_bg_min_distance_px": 661.653,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.044444,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": false
+        },
+        "24": {
+          "render_bg_min_distance_px": 660.734,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.048148,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": false
+        },
+        "32": {
+          "render_bg_min_distance_px": 660.734,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.057407,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": false
+        }
+      },
+      "touches_render_bg_by_threshold": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "render_bg_min_distance_by_threshold": [
+        662.048,
+        662.048,
+        662.048,
+        662.048,
+        661.653,
+        660.734,
+        660.734
+      ],
+      "stable_across_thresholds": true,
+      "n_thresholds_touching": 0,
+      "min_distance_range_px": [
+        660.734,
+        662.048
+      ]
+    },
+    {
+      "rank": 8,
+      "component_id": 795,
+      "group": "suspected_black_edge",
+      "score": 0.172064,
+      "direction": "horizontal",
+      "size_pixels_processed": 105,
+      "bbox_rowcol_processed": [
+        2105,
+        240,
+        2107,
+        282
+      ],
+      "centroid_rowcol_jpg": [
+        4211.77,
+        515.6
+      ],
+      "tifxyz_boundary_distance_px": 117.098,
+      "tifxyz_invalid_overlap_fraction": 0.0,
+      "tifxyz_touches_invalid_boundary": false,
+      "tifxyz_bbox_min_distance_px": 117.098,
+      "per_threshold": {
+        "1": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.635659,
+          "bbox_near_black_fraction": 0.635659,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "4": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.651163,
+          "bbox_near_black_fraction": 0.651163,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "8": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.666667,
+          "bbox_near_black_fraction": 0.666667,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "12": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.666667,
+          "bbox_near_black_fraction": 0.666667,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "16": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.666667,
+          "bbox_near_black_fraction": 0.666667,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "24": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.674419,
+          "bbox_near_black_fraction": 0.682171,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "32": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.674419,
+          "bbox_near_black_fraction": 0.682171,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        }
+      },
+      "touches_render_bg_by_threshold": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "render_bg_min_distance_by_threshold": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "stable_across_thresholds": true,
+      "n_thresholds_touching": 7,
+      "min_distance_range_px": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "rank": 10,
+      "component_id": 965,
+      "group": "suspected_black_edge",
+      "score": 0.170168,
+      "direction": "vertical",
+      "size_pixels_processed": 208,
+      "bbox_rowcol_processed": [
+        2397,
+        4690,
+        2458,
+        4694
+      ],
+      "centroid_rowcol_jpg": [
+        4859.52,
+        9383.31
+      ],
+      "tifxyz_boundary_distance_px": 647.0,
+      "tifxyz_invalid_overlap_fraction": 0.0,
+      "tifxyz_touches_invalid_boundary": false,
+      "tifxyz_bbox_min_distance_px": 647.0,
+      "per_threshold": {
+        "1": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.177419,
+          "bbox_near_black_fraction": 0.183871,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "4": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.193548,
+          "bbox_near_black_fraction": 0.193548,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "8": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.206452,
+          "bbox_near_black_fraction": 0.206452,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "12": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.206452,
+          "bbox_near_black_fraction": 0.206452,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "16": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.206452,
+          "bbox_near_black_fraction": 0.206452,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "24": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.212903,
+          "bbox_near_black_fraction": 0.212903,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "32": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.219355,
+          "bbox_near_black_fraction": 0.219355,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        }
+      },
+      "touches_render_bg_by_threshold": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "render_bg_min_distance_by_threshold": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "stable_across_thresholds": true,
+      "n_thresholds_touching": 7,
+      "min_distance_range_px": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "rank": 11,
+      "component_id": 690,
+      "group": "interior_control",
+      "score": 0.168743,
+      "direction": "horizontal",
+      "size_pixels_processed": 130,
+      "bbox_rowcol_processed": [
+        1999,
+        10299,
+        2000,
+        10367
+      ],
+      "centroid_rowcol_jpg": [
+        3998.94,
+        20665.06
+      ],
+      "tifxyz_boundary_distance_px": 984.403,
+      "tifxyz_invalid_overlap_fraction": 0.0,
+      "tifxyz_touches_invalid_boundary": false,
+      "tifxyz_bbox_min_distance_px": 983.943,
+      "per_threshold": {
+        "1": {
+          "render_bg_min_distance_px": 980.691,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 20.0,
+          "touches_render_bg": false
+        },
+        "4": {
+          "render_bg_min_distance_px": 980.691,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 20.0,
+          "touches_render_bg": false
+        },
+        "8": {
+          "render_bg_min_distance_px": 980.691,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 20.0,
+          "touches_render_bg": false
+        },
+        "12": {
+          "render_bg_min_distance_px": 980.691,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 20.0,
+          "touches_render_bg": false
+        },
+        "16": {
+          "render_bg_min_distance_px": 980.691,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 20.0,
+          "touches_render_bg": false
+        },
+        "24": {
+          "render_bg_min_distance_px": 980.34,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 20.0,
+          "touches_render_bg": false
+        },
+        "32": {
+          "render_bg_min_distance_px": 980.34,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 20.0,
+          "touches_render_bg": false
+        }
+      },
+      "touches_render_bg_by_threshold": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "render_bg_min_distance_by_threshold": [
+        980.691,
+        980.691,
+        980.691,
+        980.691,
+        980.691,
+        980.34,
+        980.34
+      ],
+      "stable_across_thresholds": true,
+      "n_thresholds_touching": 0,
+      "min_distance_range_px": [
+        980.34,
+        980.691
+      ]
+    },
+    {
+      "rank": 15,
+      "component_id": 638,
+      "group": "suspected_black_edge",
+      "score": 0.166563,
+      "direction": "horizontal",
+      "size_pixels_processed": 132,
+      "bbox_rowcol_processed": [
+        1916,
+        805,
+        1917,
+        873
+      ],
+      "centroid_rowcol_jpg": [
+        3832.95,
+        1678.95
+      ],
+      "tifxyz_boundary_distance_px": 656.88,
+      "tifxyz_invalid_overlap_fraction": 0.0,
+      "tifxyz_touches_invalid_boundary": false,
+      "tifxyz_bbox_min_distance_px": 656.83,
+      "per_threshold": {
+        "1": {
+          "render_bg_min_distance_px": 53.0,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 53.0,
+          "touches_render_bg": false
+        },
+        "4": {
+          "render_bg_min_distance_px": 53.0,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 53.0,
+          "touches_render_bg": false
+        },
+        "8": {
+          "render_bg_min_distance_px": 53.0,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 53.0,
+          "touches_render_bg": false
+        },
+        "12": {
+          "render_bg_min_distance_px": 53.0,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 53.0,
+          "touches_render_bg": false
+        },
+        "16": {
+          "render_bg_min_distance_px": 53.0,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 53.0,
+          "touches_render_bg": false
+        },
+        "24": {
+          "render_bg_min_distance_px": 53.0,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 53.0,
+          "touches_render_bg": false
+        },
+        "32": {
+          "render_bg_min_distance_px": 53.0,
+          "render_bg_overlap_fraction": 0.0,
+          "bbox_near_black_fraction": 0.0,
+          "any_dark_min_distance_px": 53.0,
+          "touches_render_bg": false
+        }
+      },
+      "touches_render_bg_by_threshold": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "render_bg_min_distance_by_threshold": [
+        53.0,
+        53.0,
+        53.0,
+        53.0,
+        53.0,
+        53.0,
+        53.0
+      ],
+      "stable_across_thresholds": true,
+      "n_thresholds_touching": 0,
+      "min_distance_range_px": [
+        53.0,
+        53.0
+      ]
+    },
+    {
+      "rank": 16,
+      "component_id": 78,
+      "group": "suspected_black_edge",
+      "score": 0.166419,
+      "direction": "horizontal",
+      "size_pixels_processed": 107,
+      "bbox_rowcol_processed": [
+        334,
+        10713,
+        335,
+        10771
+      ],
+      "centroid_rowcol_jpg": [
+        668.9,
+        21486.24
+      ],
+      "tifxyz_boundary_distance_px": 296.978,
+      "tifxyz_invalid_overlap_fraction": 0.0,
+      "tifxyz_touches_invalid_boundary": false,
+      "tifxyz_bbox_min_distance_px": 296.978,
+      "per_threshold": {
+        "1": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.381356,
+          "bbox_near_black_fraction": 0.389831,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "4": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.415254,
+          "bbox_near_black_fraction": 0.423729,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "8": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.457627,
+          "bbox_near_black_fraction": 0.474576,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "12": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.516949,
+          "bbox_near_black_fraction": 0.516949,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "16": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.559322,
+          "bbox_near_black_fraction": 0.559322,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "24": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.610169,
+          "bbox_near_black_fraction": 0.610169,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        },
+        "32": {
+          "render_bg_min_distance_px": 0.0,
+          "render_bg_overlap_fraction": 0.635593,
+          "bbox_near_black_fraction": 0.635593,
+          "any_dark_min_distance_px": 0.0,
+          "touches_render_bg": true
+        }
+      },
+      "touches_render_bg_by_threshold": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "render_bg_min_distance_by_threshold": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "stable_across_thresholds": true,
+      "n_thresholds_touching": 7,
+      "min_distance_range_px": [
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

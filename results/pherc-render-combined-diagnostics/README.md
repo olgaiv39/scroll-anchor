@@ -143,6 +143,14 @@ Two published artifacts were built from this run:
   consumed `regions.json` and `metadata.json` from this run to map exported ranks 7
   and 11 onto normalized tifxyz raster cells. It additionally required the external
   tifxyz arrays
+- [../pherc-alignment-audit/README.md](../pherc-alignment-audit/README.md)
+  investigated exactly why the tifxyz-invalid diagnostic did not account for all the
+  black render wedges seen here. It compared the two masks under four simple
+  orientation hypotheses and found the gap is not a misalignment: identity gave the
+  strongest agreement of the four, and tifxyz-invalid surface turned out to be a
+  subset of the broader render-derived background, which covers interior wedges that
+  still carry valid surface coordinates. It read the candidate list and the external
+  render and tifxyz inputs
 
 Both downstream artifacts pass the raw detector scores and the exported order
 through unchanged.

@@ -1,0 +1,213 @@
+{
+  "format": "scroll-anchor.render-alignment-audit/v0",
+  "note": "Analysis-only audit. No repository code changed, no detector rerun, no scores or ranking altered, no boundary penalty introduced. Candidates remain exploratory.",
+  "input_paths": {
+    "source_render_jpg": "/Users/olga/Documents/scrollprize/code/PHercParis4-20260623163339-2.4um-0.22m-78keV-volume-20260411134726-alpha-overlay-combined-ds8.jpg",
+    "tifxyz_normalized_dir": "/Users/olga/Documents/scrollprize/code/data/tifxyz_normalized",
+    "existing_run_dir": "/Users/olga/Documents/scrollprize/code/results/pherc-render-tifxyz-diagnostics-20260731",
+    "audit_output_dir": "/Users/olga/Documents/scrollprize/code/results/pherc-alignment-audit-20260731"
+  },
+  "input_shapes": {
+    "source_render_rowcol": [
+      6270,
+      24030
+    ],
+    "processed_raster_rowcol": [
+      3135,
+      12015
+    ],
+    "tifxyz_raster_rowcol": [
+      627,
+      2403
+    ],
+    "tifxyz_shape_from_run_metadata": [
+      627,
+      2403
+    ],
+    "shapes_consistent_with_run": true
+  },
+  "scales": {
+    "jpg_to_tifxyz_row": 10.0,
+    "jpg_to_tifxyz_col": 10.0,
+    "processed_to_tifxyz_row": 5.0,
+    "processed_to_tifxyz_col": 5.0
+  },
+  "scales_exact_integer": {
+    "jpg_to_tifxyz": true,
+    "processed_to_tifxyz": true
+  },
+  "candidate_count": 200,
+  "candidate_ordering_non_increasing_score": true,
+  "detector_run_reused": {
+    "region_counts": {
+      "n_regions_total": 1152,
+      "n_regions_above_threshold": 428,
+      "n_regions_exported": 200,
+      "n_regions_suppressed": 228,
+      "max_regions_cap": 200
+    },
+    "exported_score_range": [
+      0.133379,
+      0.200628
+    ],
+    "detection_rerun": false,
+    "scores_recomputed": false
+  },
+  "tifxyz_projection_reconstruction_check": {
+    "rule": "bbox-min of recomputed map minus stored component-min; must be <= 0",
+    "max_deviation": 0.00046899414064682787,
+    "min_deviation": -17.489985717773436,
+    "median_deviation": -0.0470297851562691,
+    "n_violations_gt_0": 24,
+    "faithful": false
+  },
+  "tifxyz_invalid_fraction_processed": 0.133779,
+  "thresholds_tested": [
+    1,
+    4,
+    8,
+    12,
+    16,
+    24,
+    32
+  ],
+  "threshold_stats": {
+    "1": {
+      "background_fraction": 0.30487316,
+      "n_render_bg_boundary_px": 131506,
+      "dark_fraction": 0.30878656,
+      "n_components": 16232,
+      "n_border_components": 15,
+      "n_kept_components": 4
+    },
+    "4": {
+      "background_fraction": 0.30678067,
+      "n_render_bg_boundary_px": 119837,
+      "dark_fraction": 0.31015263,
+      "n_components": 11232,
+      "n_border_components": 8,
+      "n_kept_components": 1
+    },
+    "8": {
+      "background_fraction": 0.30749824,
+      "n_render_bg_boundary_px": 116179,
+      "dark_fraction": 0.31092028,
+      "n_components": 10493,
+      "n_border_components": 10,
+      "n_kept_components": 1
+    },
+    "12": {
+      "background_fraction": 0.3079514,
+      "n_render_bg_boundary_px": 116892,
+      "dark_fraction": 0.31145717,
+      "n_components": 10391,
+      "n_border_components": 9,
+      "n_kept_components": 1
+    },
+    "16": {
+      "background_fraction": 0.30830762,
+      "n_render_bg_boundary_px": 117618,
+      "dark_fraction": 0.31193876,
+      "n_components": 10385,
+      "n_border_components": 12,
+      "n_kept_components": 1
+    },
+    "24": {
+      "background_fraction": 0.30892753,
+      "n_render_bg_boundary_px": 118957,
+      "dark_fraction": 0.31282577,
+      "n_components": 10632,
+      "n_border_components": 9,
+      "n_kept_components": 1
+    },
+    "32": {
+      "background_fraction": 0.30960069,
+      "n_render_bg_boundary_px": 121233,
+      "dark_fraction": 0.31371179,
+      "n_components": 11638,
+      "n_border_components": 11,
+      "n_kept_components": 1
+    }
+  },
+  "min_component_px": 5000,
+  "orientation_variants_tested": [
+    "identity",
+    "hflip",
+    "vflip",
+    "hvflip"
+  ],
+  "transpose_tested": false,
+  "representative_threshold": 32,
+  "representative_threshold_selection": {
+    "rule": "threshold minimising the local relative change of background fraction across its neighbours (flattest plateau), restricted to thresholds whose background fraction exceeds 1e-4",
+    "background_fractions": {
+      "1": 0.30487316,
+      "4": 0.30678067,
+      "8": 0.30749824,
+      "12": 0.3079514,
+      "16": 0.30830762,
+      "24": 0.30892753,
+      "32": 0.30960069
+    },
+    "local_relative_change": {
+      "1": 0.006257,
+      "4": 0.008557,
+      "8": 0.003807,
+      "12": 0.002628,
+      "16": 0.003166,
+      "24": 0.004186,
+      "32": 0.002174
+    },
+    "selected": 32
+  },
+  "best_orientation_by_metric": {
+    "iou": "identity",
+    "render_bg_precision_wrt_tifxyz_invalid": "identity",
+    "render_bg_recall_wrt_tifxyz_invalid": "identity",
+    "median_dist_render_bg_boundary_to_tifxyz_boundary_px": "identity",
+    "median_dist_tifxyz_boundary_to_render_bg_boundary_px": "identity"
+  },
+  "best_orientation_overall": "identity",
+  "metrics_agree_on_one_orientation": true,
+  "mean_iou_by_orientation": {
+    "identity": 0.434773,
+    "hflip": 0.343546,
+    "vflip": 0.199496,
+    "hvflip": 0.200847
+  },
+  "mean_iou_uplift_over_identity": 0.0,
+  "suspected_black_edge_ranks": [
+    5,
+    6,
+    8,
+    10,
+    15,
+    16
+  ],
+  "interior_control_ranks": [
+    7,
+    11
+  ],
+  "suspected_black_edge_consistently_close_to_render_boundary": false,
+  "interior_controls_remain_interior": true,
+  "candidate_classification_stable_across_thresholds": true,
+  "candidate_component_ids_by_rank": {
+    "5": 215,
+    "6": 1064,
+    "7": 566,
+    "8": 795,
+    "10": 965,
+    "11": 690,
+    "15": 638,
+    "16": 78
+  },
+  "conclusion_status": "mixed_or_inconclusive",
+  "conclusion_rationale": "evidence does not satisfy any single interpretation cleanly",
+  "limitations": [
+    "Candidate footprints are approximated by their bounding boxes; regions.json does not store component pixel masks.",
+    "Alignment between the tifxyz grid and the render remains an assumption; only the exact integer raster scale is verified.",
+    "Edge-connected near-black extraction is a sensitivity probe, not a validated background segmentation.",
+    "No CT evidence, no surface-normal geometry, no coordinate mapping.",
+    "Candidates are neither confirmed surface errors nor confirmed false positives."
+  ]
+}

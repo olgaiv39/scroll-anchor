@@ -180,6 +180,21 @@ source JPG are not. Those candidates are the shared input behind the ranking-pol
 and candidate-to-tifxyz artifacts below:
 [`results/pherc-render-combined-diagnostics/`](results/pherc-render-combined-diagnostics/README.md)
 
+### Render-to-tifxyz alignment audit
+
+The two diagnostic masks above disagreed, so a separate offline audit compared
+identity against horizontal, vertical, and combined flip hypotheses to check whether
+that gap was an orientation error. Identity had the strongest measured agreement on
+every metric (mean IoU `0.4348`, against `0.3435`, `0.1995` and `0.2008`).
+
+The masks are not equivalent: `tifxyz`-invalid surface was a **subset** of a broader
+render-background mask covering more than twice the area (`0.1338` against `0.3096`
+at threshold 32), with recall `1.0`. That supports different validity semantics
+rather than a misalignment. This makes identity the best tested hypothesis but does
+not remove the explicit assumption, so `map-render-candidates` still requires
+`--assume-identity-orientation`:
+[`results/pherc-alignment-audit/`](results/pherc-alignment-audit/README.md)
+
 ### Render-background ranking-policy audit
 
 Render-background diagnostics exposed several top-ranked candidates dominated by

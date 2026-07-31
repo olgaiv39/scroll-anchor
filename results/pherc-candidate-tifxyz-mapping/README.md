@@ -138,6 +138,19 @@ have a surface coordinate attached to them.
 - exact integer scale division confirms only that the two rasters are dimensionally
   compatible. It is not evidence of correct orientation
 
+A separate offline audit does provide supporting evidence. It compared the
+`tifxyz`-invalid mask against the render-derived background under four simple
+orientation hypotheses and found identity strongest on every metric (mean IoU
+`0.4348`, against `0.3435` for a horizontal flip, `0.1995` vertical and `0.2008`
+both):
+[`../pherc-alignment-audit/README.md`](../pherc-alignment-audit/README.md)
+
+That is supporting evidence, not an official metadata guarantee. Only four rigid
+hypotheses were tested, with no registration search, and the audit records its
+overall status as mixed. Identity therefore remains an **explicit assumption** in
+the CLI: `map-render-candidates` still requires `--assume-identity-orientation` and
+that requirement is unchanged.
+
 The next stage is local CT validation at these coordinates, not another 2D
 classification step. Until that is done, nothing here validates 3D geometry: a flat
 render carries no through-thickness CT evidence and no surface-normal geometry.
