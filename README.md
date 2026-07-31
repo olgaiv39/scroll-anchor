@@ -3,7 +3,8 @@
 **Conservative, read-only surface-label diagnostics for volumetric papyrus CT**
 
 ScrollAnchor takes an *approximate* papyrus surface (Volume Cartographer
-`tifxyz`) and a CT volume/ROI, and localizes two high-value failure modes:
+`tifxyz`) and a CT volume/ROI, and produces diagnostics for two high-value failure
+modes:
 
 1. **Normal-direction drift** - the surface sits off the physical sheet
 2. **Sheet-switch jumps** - a patch has jumped onto a neighboring sheet (the most
@@ -21,13 +22,29 @@ Imprecision*). It is functional, reproducible research software with a clear
 validation roadmap, useful today for expert-assisted surface review, controlled
 benchmark construction, and identifying potentially high-risk surface regions
 
+## Choose a workflow
+
+The core workflow is the 3D surface-label and CT diagnostic workflow. The 2D render
+workflow is exploratory review prioritization and is not volumetric validation. The
+PHerc artifacts are a real-data case study and evidence chain rather than a separate
+product, and the render candidates in them are not confirmed reconstruction failures
+
+| Available data | Command | Purpose |
+| --- | --- | --- |
+| Surface labels or tifxyz plus a CT volume or ROI | `scroll-anchor analyze` | Run the core 3D drift and neighboring-sheet diagnostics |
+| A 2D render image without CT evidence | `scroll-anchor analyze-render` | Export exploratory review candidates |
+| Existing render-analysis outputs | `scroll-anchor render-report` | Build a manual review report without rerunning detection |
+| Render candidates plus tifxyz channels | `scroll-anchor map-render-candidates` | Map selected candidate ranks to surface coordinates |
+
+Mapping selects candidates by exported rank, which is not the component ID
+
 ## Why this, and how it relates to the existing ecosystem
 
 Verified against `ScrollPrize/villa`:
 
 - `lasagna` **corrects/grows** surfaces via GPU-oriented optimization (needs
   preprocessed evidence + winding volumes). ScrollAnchor is a **read-only
-  pre-filter** that says *where* correction is safe vs. risky
+  pre-filter** that says *where* correction is safe versus risky
 - `segmentation/vc_proofreader` is a **human** napari review UI with no automatic
   error localization. ScrollAnchor prioritizes *which patches a human should open*
 - `segmentation/evaluation` computes **global** metrics against full ground truth.
@@ -109,13 +126,13 @@ results/run/
 
 The `analyze` command above is the primary 3D pipeline: it needs a `tifxyz` surface
 and a CT volume/ROI, and reports drift and sheet-switch diagnostics with
-through-thickness CT evidence and surface-normal geometry.
+through-thickness CT evidence and surface-normal geometry
 
 `analyze-render` is a **separate, exploratory** workflow for the case where all you
 have is a single downsampled 2D surface **render** (a JPG), with no surface geometry
 and no CT volume. It runs a CPU-only, classical image-processing detector that flags
 **candidate visual discontinuities** - places where the render texture appears to
-shift laterally, which *may* correspond to a sheet skip or a local render shift.
+shift laterally, which *may* correspond to a sheet skip or a local render shift
 
 ```bash
 pip install -e ".[render]"   # + Pillow for JPG decode and overlay drawing
@@ -151,7 +168,7 @@ results/render-run/
 render is available) from artifacts that already exist. It is report-only: it reads
 `metadata.json`, `summary.json`, `regions.json` and `overlay.png`, does **not** run
 the detector, does **not** read `diagnostics.npz`, and overwrites only the report
-files. Numerical results are unchanged.
+files. Numerical results are unchanged
 
 ```bash
 scroll-anchor render-report \
@@ -167,12 +184,35 @@ scroll-anchor render-report \
 A published example run (PHercParis4 segment w110-112) is recorded in
 [`results/pherc-render/`](results/pherc-render/README.md)
 
+### PHerc evidence chain
+
+The PHerc artifacts are a real-data case study on a single render, not a separate
+product. They form one chain:
+
+- render analysis exports exploratory 2D candidates
+- [combined diagnostics](results/pherc-render-combined-diagnostics/README.md)
+  describe tifxyz-invalid and render-background relationships without changing
+  detector scores
+- the [alignment audit](results/pherc-alignment-audit/README.md) compares four simple
+  orientation hypotheses, with identity strongest among those tested but not proven
+- the [ranking-policy audit](results/pherc-ranking-policy-audit/README.md) tests
+  alternative review-order policies without changing the production ranking
+- [candidate mapping](results/pherc-candidate-tifxyz-mapping/README.md) converts
+  selected exported ranks to tifxyz surface coordinates under an explicit
+  identity-orientation assumption
+- [local CT evidence](results/pherc-ct-local-evidence/README.md) inspects ranks 7 and
+  11 under a registration-supported transformed-coordinate interpretation that remains
+  supported, not globally verified
+
+No step in this chain classifies any candidate as a confirmed sheet skip, a
+reconstruction error, or a false positive
+
 ### Published combined-diagnostics run
 
 A lightweight combined run on the same PHerc render is now published, carrying both
 diagnostic systems at once: normalized `tifxyz` valid-surface diagnostics and
 render-derived edge-connected near-black background diagnostics. Both are reviewer
-fields only, so raw scores and the exported candidate order are unchanged.
+fields only, so raw scores and the exported candidate order are unchanged
 
 Only the machine-readable core is committed (`regions.json`, `metadata.json`,
 `summary.json`, plus the contact sheet); `diagnostics.npz`, the full overlay, and the
@@ -185,7 +225,7 @@ and candidate-to-tifxyz artifacts below:
 The two diagnostic masks above disagreed, so a separate offline audit compared
 identity against horizontal, vertical, and combined flip hypotheses to check whether
 that gap was an orientation error. Identity had the strongest measured agreement on
-every metric (mean IoU `0.4348`, against `0.3435`, `0.1995` and `0.2008`).
+every metric (mean IoU `0.4348`, against `0.3435`, `0.1995` and `0.2008`)
 
 The masks are not equivalent: `tifxyz`-invalid surface was a **subset** of a broader
 render-background mask covering more than twice the area (`0.1338` against `0.3096`
@@ -203,7 +243,7 @@ raw, half-penalty, full-penalty, and hard-split review orders on an already
 exported run, without rerunning detection. The half penalty
 (`raw_score * (1 - 0.5 * overlap)`) was the least aggressive sufficient tested
 policy: it cleared the known background cases out of the top 20 while keeping the
-interior controls prominent.
+interior controls prominent
 
 It was **not adopted**, because the evaluation used a single render and
 substantially reordered the full candidate list (Spearman 0.599 against raw
@@ -218,7 +258,7 @@ reviewers to read alongside the score. Details, artifacts, and limitations:
 normalized `tifxyz` surface coordinates. It selects candidates by exported rank or
 component ID (never confusing the two), maps the source-render centroid onto the
 tifxyz grid by aligned half-open containment, and reads `x.tif`, `y.tif`, `z.tif` at
-that cell.
+that cell
 
 ```bash
 scroll-anchor map-render-candidates \
@@ -249,7 +289,7 @@ surface coordinates. A flat render has no through-thickness CT evidence and no
 normal geometry, so its output is a set of 2D candidates for manual community
 review, not a validated correction. If nothing passes the conservative texture,
 border, multi-scale, and coherence gates, it returns an empty region list rather
-than forcing a positive.
+than forcing a positive
 
 ### Local CT evidence for the mapped candidates
 
@@ -257,15 +297,15 @@ Small level-0 CT neighbourhoods were extracted at the positions that exported ra
 and 11 map to, so the mapped candidates can be looked at against real volumetric data.
 The tifxyz coordinates were carried into the CT volume frame by the inverse
 registration; that transformed interpretation is supported - not verified - by the
-registration landmark residuals and by a native-vs-transformed chunk-presence check.
-Each crop is 64x64x64 uint8, centred on the mapped voxel.
+registration landmark residuals and by a native-versus-transformed chunk-presence
+check. Each crop is 64x64x64 uint8, centred on the mapped voxel
 
 Both mapped points fall within populated regions of the masked reconstruction, where
 laminar structure is visible, and the two ranks sit in measurably different local
 intensity contexts (rank 7 in a lower-density neighbourhood than its crop, rank 11 in a
 higher-density one). This is evidence for inspection only: it does not classify either
 candidate and it does not validate the detector. The coordinate-frame interpretation and
-the identity render-to-tifxyz orientation assumption both remain open.
+the identity render-to-tifxyz orientation assumption both remain open
 
 - [`results/pherc-ct-local-evidence/`](results/pherc-ct-local-evidence/README.md)
 - [`rank-7-orthogonal.png`](results/pherc-ct-local-evidence/rank-7-orthogonal.png)
@@ -303,9 +343,9 @@ Findings on this cube (source sheet 328, neighbour 329, 96³ ROI):
 
 - **Conservative safety behaviour transferred to the tested cube.** ScrollAnchor's
   harmful acceptance (confidently accepting a vertex that sits on the wrong sheet) is
-  **0.00** vs **~0.15** for naive snap-to-brightest; switch review-recall is **1.00** -
-  the injected neighboring-sheet switch is always surfaced for review, and no
-  wrong-sheet vertex is confidently accepted
+  **0.00** versus **~0.15** for naive snap-to-brightest; switch review-recall is
+  **1.00** - the injected neighboring-sheet switch is always surfaced for review, and
+  no wrong-sheet vertex is confidently accepted
 - **Precision is currently limited on the tested strongly curved real geometry.**
   Thresholds calibrated on flat synthetic sheets over-fire on real papyrus curvature:
   switch precision ~0.19, drift localization remains weak (F1 ~0.01), and ~27% of the
@@ -313,13 +353,14 @@ Findings on this cube (source sheet 328, neighbour 329, 96³ ROI):
   currently behaves as a very conservative "flag-for-review" filter rather than a
   precise localizer
 
-On the tested cube this experiment is a **successful validation of the conservative
-safety concept** and a viable expert-in-the-loop workflow - the injected switch is
-always surfaced and nothing wrong-sheet is confidently accepted. It also usefully
-identifies the next research bottleneck: real curvature increases false positives, so
-**curvature-aware residual modelling and improved calibration** are the next
-development priorities. This single controlled-corruption cube does not, on its own,
-establish general real-scroll precision
+On the tested cube this experiment **supports the conservative safety concept on
+this controlled real-geometry benchmark** and illustrates a viable
+expert-in-the-loop workflow - the injected switch is always surfaced and nothing
+wrong-sheet is confidently accepted. It also usefully identifies the next research
+bottleneck: real curvature increases false positives, so **curvature-aware residual
+modelling and improved calibration** are the next development priorities. This
+single controlled-corruption cube does not, on its own, establish general
+real-scroll precision
 
 Conclusion: ScrollAnchor is ready for technical community review as an experimental
 diagnostic and validation framework. The current real-cube benchmark supports its

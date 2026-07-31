@@ -400,11 +400,6 @@ def make_contact_sheet(records, rank_key, score_key, image, out_path, policy_tit
     plt.close(fig)
 
 
-# --------------------------------------------------------------------------
-# Main
-# --------------------------------------------------------------------------
-
-
 def main():
     regions_doc, metadata, summary = load_inputs()
     records, validation = build_records(regions_doc)

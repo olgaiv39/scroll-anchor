@@ -243,7 +243,7 @@ n_tif_contour = int(tif_contour_rows.size)
 del tif_contour, tif_valid, tif_valid_raw
 log(f"tifxyz contour pixels={n_tif_contour}")
 
-# Reconstruction self-check: bbox-min of the recomputed map vs the stored
+# Reconstruction self-check: bbox-min of the recomputed map against the stored
 # per-region value. The stored value is the min over the true component pixels,
 # and bbox superset => recomputed_bbox_min <= stored for a faithful reconstruction.
 recon_dev = []

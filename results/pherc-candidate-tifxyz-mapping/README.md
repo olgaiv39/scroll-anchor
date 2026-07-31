@@ -1,9 +1,9 @@
 # PHerc candidate-to-tifxyz mapping
 
 Render-to-surface-coordinate mapping for two exported candidates from the
-PHercParis4 w110-112 exploratory render run.
+PHercParis4 w110-112 exploratory render run
 
-This is a **coordinate mapping artifact**. It is not CT validation.
+This is a **coordinate mapping artifact**. It is not CT validation
 
 ## Purpose
 
@@ -19,7 +19,7 @@ candidate it walks a fixed chain:
 
 The command reads `regions.json`, `metadata.json` and the three coordinate TIFFs.
 It writes only its own output directory and never touches the `analyze-render`
-run it reads.
+run it reads
 
 It does **not**:
 
@@ -91,11 +91,11 @@ tifxyz_col = floor(source_jpg_col / source_to_tifxyz_col_scale)
 - it is **not** a subpixel surface position
 
 A cell counts as valid only when x, y and z are all finite and none of them equals
-the exact `-1` invalid sentinel. Zero is a legitimate coordinate and stays valid.
+the exact `-1` invalid sentinel. Zero is a legitimate coordinate and stays valid
 
 ## PHerc result
 
-Two candidates were mapped from the exported ranked subset of 200 candidates.
+Two candidates were mapped from the exported ranked subset of 200 candidates
 
 | Exported rank | Component ID | Direction | Tifxyz row | Tifxyz col | Valid | x | y | z |
 |---:|---:|---|---:|---:|---|---:|---:|---:|
@@ -118,7 +118,7 @@ Checks that passed for both candidates:
 The raw detector scores and exported ranks are carried through unchanged. Neither
 candidate is a confirmed sheet skip, a confirmed reconstruction error, or a
 confirmed false positive. They remain exploratory 2D visual anomalies that now
-have a surface coordinate attached to them.
+have a surface coordinate attached to them
 
 ## Orientation and CT limitations
 
@@ -149,11 +149,11 @@ That is supporting evidence, not an official metadata guarantee. Only four rigid
 hypotheses were tested, with no registration search, and the audit records its
 overall status as mixed. Identity therefore remains an **explicit assumption** in
 the CLI: `map-render-candidates` still requires `--assume-identity-orientation` and
-that requirement is unchanged.
+that requirement is unchanged
 
 The next stage is local CT validation at these coordinates, not another 2D
 classification step. Until that is done, nothing here validates 3D geometry: a flat
-render carries no through-thickness CT evidence and no surface-normal geometry.
+render carries no through-thickness CT evidence and no surface-normal geometry
 
 ## Artifacts
 
@@ -172,25 +172,36 @@ render carries no through-thickness CT evidence and no surface-normal geometry.
   rank, component ID, raw score, tifxyz row and column, validity, and x/y/z
 
 The source render JPG and the tifxyz arrays are **not stored in this repository**.
-The committed JSON, CSV and PNG preserve the completed result without them.
+The committed JSON, CSV and PNG preserve the completed result without them
 
 ## Provenance
 
 The candidate regions and metadata this mapping consumed are published. The
 `regions.json` and `metadata.json` inputs come from the combined-diagnostics run at
 [`../pherc-render-combined-diagnostics/`](../pherc-render-combined-diagnostics/README.md),
-which supplies the exported ranks, component IDs and raw scores used above.
+which supplies the exported ranks, component IDs and raw scores used above
 
 Rerunning the mapping still requires the external normalized tifxyz arrays, since
 `x.tif`, `y.tif` and `z.tif` are what the coordinates are read from and they are not
 committed here. Regenerating the optional preview PNG additionally requires the
-external source JPG.
+external source JPG
+
+## Subsequent CT follow-up
+
+A later registration-supported transformed-coordinate interpretation was used to
+extract local CT evidence for exported ranks 7 and 11. That follow-up does not
+retroactively change the guarantees of the mapping command and does not verify
+global coordinate provenance. Mapping itself still produces no native CT indices,
+identity orientation remains an explicit assumption, exported rank and component ID
+remain distinct, and this mapping artifact alone is not CT validation. The evidence
+is documented in
+[`../pherc-ct-local-evidence/README.md`](../pherc-ct-local-evidence/README.md)
 
 ## Attribution
 
 Source render derived from Vesuvius Challenge open data (PHercParis4 segment
 20260623163339-w110-112). This artifact does not imply endorsement by the Vesuvius
-Challenge.
+Challenge
 
 - Author: Olga Ivanova
 - Repository: https://github.com/olgaiv39/scroll-anchor

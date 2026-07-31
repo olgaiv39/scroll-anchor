@@ -1,7 +1,7 @@
 # PHerc render ranking-policy audit
 
 Offline comparison of candidate **review order** for the PHercParis4 w110-112
-exploratory render run.
+exploratory render run
 
 ## Purpose
 
@@ -12,7 +12,7 @@ score put a better set of candidates in front of a human reviewer first?
 
 The audit reused the already exported combined-diagnostics run. It read only
 `regions.json`, `metadata.json` and `summary.json`, plus the source render once for
-the contact-sheet crops.
+the contact-sheet crops
 
 The audit did **not**:
 
@@ -44,10 +44,10 @@ With `overlap = render_background_overlap_fraction`, clamped defensively to
   `raw_score * (1 - render_background_overlap_fraction)`
 - **hard 0.20 split**
   candidates with `overlap < 0.20` first in raw-score order, then the rest in
-  raw-score order. Comparison only, not proposed for production.
+  raw-score order. Comparison only, not proposed for production
 
 Ties are broken deterministically by higher adjusted score, then higher raw score,
-then lower component ID.
+then lower component ID
 
 ## Main findings
 
@@ -80,7 +80,7 @@ penalty at all, and the penalized ones fall a long way, displacing everything
 below them upward. Zero-overlap candidates keep their raw score, so their order
 relative to one another is preserved and none of them is demoted. Even so, a
 policy that moves two thirds of the list by more than 20 positions is not
-something to adopt on the strength of one render.
+something to adopt on the strength of one render
 
 ## Decision
 
@@ -97,7 +97,7 @@ something to adopt on the strength of one render.
 
 The practical takeaway for a reviewer today is to read
 `render_background_overlap_fraction` alongside the score in `regions.json` and use
-it to decide where to spend attention. That requires no change to the tool.
+it to decide where to spend attention. That requires no change to the tool
 
 ## Limitations
 
@@ -122,7 +122,7 @@ it to decide where to spend attention. That requires no change to the tool.
 
 Visible black render background and `tifxyz`-invalid surface are different things
 that can disagree over large areas. This audit used the render-background
-diagnostic only; `tifxyz` validity diagnostics were deliberately not used.
+diagnostic only; `tifxyz` validity diagnostics were deliberately not used
 
 ## Artifacts
 
@@ -143,7 +143,7 @@ diagnostic only; `tifxyz` validity diagnostics were deliberately not used.
 In the contact sheets, the yellow box is the candidate bounding box and the frame
 color marks the calibration group. Each crop is labelled with policy rank,
 original rank, component ID, raw score, secondary review score, overlap,
-background distance, and the source-JPG bounding box.
+background distance, and the source-JPG bounding box
 
 Notes on reproducing this:
 
@@ -151,8 +151,8 @@ Notes on reproducing this:
   run supplying `regions.json`, `metadata.json` and `summary.json`, including the
   `render_background_overlap_fraction` field the script reads, is committed at
   [`../pherc-render-combined-diagnostics/`](../pherc-render-combined-diagnostics/README.md).
-  Note that the older [`results/pherc-render/`](../pherc-render/README.md) run
-  predates the render-background diagnostics and does not carry those fields
+  The older [`results/pherc-render/`](../pherc-render/README.md) run predates the
+  render-background diagnostics and does not carry those fields
 - the source JPG remains external and is not stored in this repository. It is still
   required to regenerate the contact-sheet crops, so the analysis numbers can be
   recomputed from the published JSON while the image outputs cannot. This is not a
@@ -166,7 +166,7 @@ Notes on reproducing this:
 
 Source render derived from Vesuvius Challenge open data (PHercParis4 segment
 20260623163339-w110-112). This review does not imply endorsement by the Vesuvius
-Challenge.
+Challenge
 
 - Author: Olga Ivanova
 - Repository: https://github.com/olgaiv39/scroll-anchor

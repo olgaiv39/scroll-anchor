@@ -1,12 +1,12 @@
 # PHerc combined render diagnostics
 
 The published lightweight core of a completed `analyze-render` run on the
-PHercParis4 w110-112 surface render.
+PHercParis4 w110-112 surface render
 
 This directory holds the machine-readable outputs only: the exported candidate
 list, the run metadata, the count summary, and the review contact sheet. The large
 numerical arrays and full-resolution overlays from the original run are omitted.
-Everything here was produced by a single completed run and copied unmodified.
+Everything here was produced by a single completed run and copied unmodified
 
 ## Source run
 
@@ -30,12 +30,12 @@ The 200 exported candidates are the ranked subset, ordered by strictly decreasin
 raw detector score. The detector response, the raw detector score, the exported
 rank, and the component ID are four separate things and are kept separate here: an
 exported rank is a position in this list, while a component ID identifies a
-connected component of the detector response and is unrelated to rank.
+connected component of the detector response and is unrelated to rank
 
 ## Diagnostics enabled
 
 This run carried **two separate and independent diagnostic systems**. Both are
-reviewer aids attached to each exported candidate. Neither changed the detector.
+reviewer aids attached to each exported candidate. Neither changed the detector
 
 ### 1. Normalized tifxyz valid-surface diagnostics
 
@@ -76,7 +76,7 @@ describe different things and can disagree over large areas: one is visible
 near-black pixels in a 2D render, the other is missing surface coordinates in the
 tifxyz grid. Both are reviewer diagnostics. Neither confirms a sheet skip and
 neither confirms a reconstruction error. The run's own metadata records this
-distinction as an explicit limitation.
+distinction as an explicit limitation
 
 ## Key observations
 
@@ -102,7 +102,7 @@ Verified directly from the copied `regions.json`:
 
 None of these candidates is a confirmed false positive. High render-background
 overlap means a candidate sits largely on near-black render area, which is a reason
-for a reviewer to look at it differently, not an adjudication.
+for a reviewer to look at it differently, not an adjudication
 
 ## Published files
 
@@ -125,14 +125,14 @@ Deliberately not stored in this repository:
 
 The two JSON files preserve the exact exported candidates and the exact diagnostic
 fields that the published downstream artifacts consume, so those results remain
-inspectable without the large inputs.
+inspectable without the large inputs
 
 The contact sheet is a 2D review artifact. It is not a CT overlay and it is not CT
-validation.
+validation
 
 ## Downstream artifacts
 
-Two published artifacts were built from this run:
+The following downstream artifacts were built from this run:
 
 - [../pherc-ranking-policy-audit/README.md](../pherc-ranking-policy-audit/README.md)
   consumed `regions.json`, `metadata.json` and `summary.json` from this run, using
@@ -152,14 +152,14 @@ Two published artifacts were built from this run:
   still carry valid surface coordinates. It read the candidate list and the external
   render and tifxyz inputs
 
-Both downstream artifacts pass the raw detector scores and the exported order
-through unchanged.
+These downstream artifacts pass the raw detector scores and the exported order
+through unchanged
 
 ## Attribution
 
 Source render derived from Vesuvius Challenge open data (PHercParis4 segment
 20260623163339-w110-112). This artifact does not imply endorsement by the Vesuvius
-Challenge.
+Challenge
 
 - Author: Olga Ivanova
 - Repository: https://github.com/olgaiv39/scroll-anchor

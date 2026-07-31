@@ -2,7 +2,12 @@
 
 Offline audit asking whether the normalized `tifxyz` validity raster and the
 PHercParis4 w110-112 render-derived edge-connected near-black background are
-consistent under simple orientation hypotheses.
+consistent under simple orientation hypotheses
+
+## Result summary
+
+- identity was the strongest of the four tested simple orientation hypotheses
+- this does not establish the official orientation and does not solve registration
 
 ## Purpose
 
@@ -28,11 +33,11 @@ The audit did **not**:
 
 Detection was not rerun and scores were not recomputed. The audit's own summary
 records `detection_rerun: false` and `scores_recomputed: false`, and reuses the
-existing 200 exported candidates with score range `0.133379` to `0.200628`.
+existing 200 exported candidates with score range `0.133379` to `0.200628`
 
 ## Inputs and method
 
-All values below are read from the copied artifacts.
+All values below are read from the copied artifacts
 
 | Property | Value |
 | --- | --- |
@@ -58,11 +63,11 @@ projected `tifxyz`-invalid mask and the render-derived background mask:
 - median and p90 contour distance in both directions, in processed pixels
 
 Boundary sets are deterministically stride-subsampled to at most 200000 pixels per
-set, with the stride recorded per row.
+set, with the stride recorded per row
 
 Transpose was not tested, and the artifact records why: the raster dimensions
-(`627x2403` against `3135x12015`) make it incompatible. Note that this is a
-statement about dimensional compatibility, not about orientation.
+(`627x2403` against `3135x12015`) make it incompatible. This is a statement about
+dimensional compatibility, not about orientation
 
 ## Main result
 
@@ -79,7 +84,7 @@ IoU across the seven thresholds:
 All five recorded metrics selected identity, and the audit records
 `metrics_agree_on_one_orientation: true` with `best_orientation_overall: identity`.
 The recorded `mean_iou_uplift_over_identity` is `0.0`, meaning no tested
-alternative beat it.
+alternative beat it
 
 At the representative threshold `32`:
 
@@ -112,7 +117,7 @@ parameterization has no coordinates; the render-derived background additionally
 covers interior near-black wedges that carry valid surface coordinates. The
 `mask_alignment_overview.png` figure shows this directly: the projected
 `tifxyz`-invalid contour traces the outer sheet boundary, while background contours
-also enclose interior wedges.
+also enclose interior wedges
 
 ## Interpretation
 
@@ -134,13 +139,13 @@ The audit's own recorded verdict is deliberately reserved:
 `conclusion_status: "mixed_or_inconclusive"`, with the rationale that the evidence
 "does not satisfy any single interpretation cleanly". The orientation comparison is
 one clear signal inside an otherwise mixed result, and the artifact's own note
-states that "no single metric is sufficient to declare alignment".
+states that "no single metric is sufficient to declare alignment"
 
 ## Candidate observations
 
 Eight of the 200 exported candidates were inspected in detail at threshold 32.
 Exported rank and component ID are distinct: rank is a position in the ranked
-subset, component ID identifies a connected component of the detector response.
+subset, component ID identifies a connected component of the detector response
 
 | Exported rank | Component ID | Group | Score | Render-bg overlap | Render-bg distance (px) | Touches bg | tifxyz-invalid overlap | tifxyz boundary distance (px) |
 | ---: | ---: | --- | ---: | ---: | ---: | --- | ---: | ---: |
@@ -169,7 +174,7 @@ subset, component ID identifies a connected component of the detector response.
 
 These are **diagnostic observations, not confirmed labels**. No candidate here is a
 confirmed sheet skip, a confirmed reconstruction error, or a confirmed false
-positive.
+positive
 
 Two caveats when comparing these numbers to the combined-diagnostics run:
 
@@ -212,7 +217,7 @@ Not stored in this repository:
 
 The committed outputs preserve the completed comparison. Rerunning the audit
 requires both external inputs at the paths recorded in `audit_summary.json`, so
-this is not a full reproduction from a Git clone alone.
+this is not a full reproduction from a Git clone alone
 
 ## Limitations
 
@@ -233,7 +238,7 @@ this is not a full reproduction from a Git clone alone.
 
 Source render derived from Vesuvius Challenge open data (PHercParis4 segment
 20260623163339-w110-112). This audit does not imply endorsement by the Vesuvius
-Challenge.
+Challenge
 
 - Author: Olga Ivanova
 - Repository: https://github.com/olgaiv39/scroll-anchor

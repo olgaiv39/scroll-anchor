@@ -215,7 +215,7 @@ def project_valid_mask(
 
     Compatibility is exact in this revision: the source render must be an integer
     multiple of the tifxyz raster in BOTH axes, with the SAME factor in each
-    (factor 1, i.e. identity, is allowed). A near-miss raster - for example a
+    (factor 1 is allowed and means identity). A near-miss raster - for example a
     flattened tifxyz differing by a couple of rows and columns - is rejected rather
     than stretched onto the render, because stretching would silently misplace every
     mesh boundary. There is deliberately no tolerance, override, crop, offset, flip,
