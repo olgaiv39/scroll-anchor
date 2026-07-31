@@ -161,6 +161,18 @@ render carries no through-thickness CT evidence and no surface-normal geometry.
 The source render JPG and the tifxyz arrays are **not stored in this repository**.
 The committed JSON, CSV and PNG preserve the completed result without them.
 
+## Provenance
+
+The candidate regions and metadata this mapping consumed are published. The
+`regions.json` and `metadata.json` inputs come from the combined-diagnostics run at
+[`../pherc-render-combined-diagnostics/`](../pherc-render-combined-diagnostics/README.md),
+which supplies the exported ranks, component IDs and raw scores used above.
+
+Rerunning the mapping still requires the external normalized tifxyz arrays, since
+`x.tif`, `y.tif` and `z.tif` are what the coordinates are read from and they are not
+committed here. Regenerating the optional preview PNG additionally requires the
+external source JPG.
+
 ## Attribution
 
 Source render derived from Vesuvius Challenge open data (PHercParis4 segment

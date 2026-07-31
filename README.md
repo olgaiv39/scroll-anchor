@@ -167,6 +167,19 @@ scroll-anchor render-report \
 A published example run (PHercParis4 segment w110-112) is recorded in
 [`results/pherc-render/`](results/pherc-render/README.md)
 
+### Published combined-diagnostics run
+
+A lightweight combined run on the same PHerc render is now published, carrying both
+diagnostic systems at once: normalized `tifxyz` valid-surface diagnostics and
+render-derived edge-connected near-black background diagnostics. Both are reviewer
+fields only, so raw scores and the exported candidate order are unchanged.
+
+Only the machine-readable core is committed (`regions.json`, `metadata.json`,
+`summary.json`, plus the contact sheet); `diagnostics.npz`, the full overlay, and the
+source JPG are not. Those candidates are the shared input behind the ranking-policy
+and candidate-to-tifxyz artifacts below:
+[`results/pherc-render-combined-diagnostics/`](results/pherc-render-combined-diagnostics/README.md)
+
 ### Render-background ranking-policy audit
 
 Render-background diagnostics exposed several top-ranked candidates dominated by

@@ -1,0 +1,94 @@
+{
+  "format": "scroll-anchor.render-metadata/v0",
+  "source_filename": "PHercParis4-20260623163339-2.4um-0.22m-78keV-volume-20260411134726-alpha-overlay-combined-ds8.jpg",
+  "jpg_shape_rowcol": [
+    6270,
+    24030
+  ],
+  "processed_shape_rowcol": [
+    3135,
+    12015
+  ],
+  "working_downsample": 2,
+  "scale_processed_to_jpg_rowcol": [
+    2.0,
+    2.0
+  ],
+  "jpg_to_full_render_factor": 8,
+  "orientation": "no rotation, flip, or axis swap; rows=Y, cols=X throughout",
+  "params": {
+    "working_downsample": 2,
+    "max_working_pixels": 60000000,
+    "lc_window": 15,
+    "seam_long": 81,
+    "seam_thin": 3,
+    "seam_shift": 1,
+    "max_lag": 8,
+    "tex_lo": 0.02,
+    "tex_hi": 0.06,
+    "anomaly_thr": 0.15,
+    "min_region_pixels": 40,
+    "max_regions": 200,
+    "border_frac": 0.02,
+    "multiscale_factor": 2,
+    "lag_consistency": 0.6,
+    "max_diag_pixels": 2000000,
+    "jpg_to_full_factor": 8
+  },
+  "runtime_seconds": 410.119,
+  "peak_rss_mb": 3027.0,
+  "region_counts": {
+    "n_regions_total": 1152,
+    "n_regions_above_threshold": 428,
+    "n_regions_exported": 200,
+    "n_regions_suppressed": 228,
+    "max_regions_cap": 200
+  },
+  "exported_score_range": [
+    0.133379,
+    0.200628
+  ],
+  "limitations": "Render-only 2D analysis. No surface-normal geometry or CT evidence. Candidates are exploratory visual anomalies on a render for manual review, not confirmed sheet switches, 3D drift, or voxel displacement. 2D displacement is in render (JPG) pixels only. Full-render coordinates are a documented x8 mapping, not verified VC3D coordinates.",
+  "tifxyz_valid_mask_used": true,
+  "tifxyz_valid_mask": {
+    "raster_shape_rowcol": [
+      627,
+      2403
+    ],
+    "valid_fraction_tifxyz": 0.866221,
+    "valid_fraction_processed": 0.866221,
+    "validity_rule": "x, y and z all finite and none equal to -1 (no mask.tif used)",
+    "projection": "centre-aligned nearest-neighbour to the working analysis raster",
+    "boundary_distance_units": "processed (working-resolution) pixels",
+    "effect_on_scoring": "none; diagnostics only in this revision",
+    "alignment_assumptions": {
+      "same_raster_origin": true,
+      "same_row_column_orientation": true,
+      "same_spatial_extent": true,
+      "axis_swap": false,
+      "horizontal_flip": false,
+      "vertical_flip": false,
+      "crop_or_offset": false,
+      "independently_verified": false,
+      "note": "Assumed, not proven. Only an exact shared integer raster scale is verified; the origin, orientation and extent correspondence between the tifxyz grid and the render has NOT been independently confirmed from dataset metadata."
+    }
+  },
+  "render_background_mask_used": true,
+  "render_background_mask": {
+    "source": "edge-connected near-black pixels from the processed render",
+    "grayscale_threshold_8bit": 32,
+    "minimum_component_pixels_processed": 5000,
+    "connectivity": 4,
+    "near_black_fraction_processed": 0.313712,
+    "background_fraction_processed": 0.309601,
+    "n_near_black_components": 11638,
+    "n_border_connected_components": 11,
+    "n_retained_components": 1,
+    "distance_units": "processed (working-resolution) pixels",
+    "effect_on_scoring": "none; diagnostics only",
+    "limitations": [
+      "The grayscale threshold and minimum component size are explicit run parameters, not universally calibrated values; they depend on the dataset, the render and the working resolution.",
+      "Visible black render background is NOT equivalent to tifxyz invalid surface: the two describe different things and can disagree over large areas."
+    ]
+  }
+}

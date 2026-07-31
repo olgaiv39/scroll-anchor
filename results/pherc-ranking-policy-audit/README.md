@@ -147,14 +147,18 @@ background distance, and the source-JPG bounding box.
 
 Notes on reproducing this:
 
-- the source JPG is not stored in this repository
-- the script is the exact analysis script used for this audit, unmodified
-- it expects the corresponding local combined-diagnostics run and the source
-  render to be present at the paths recorded in `audit_summary.json`. That
-  combined-diagnostics run is a separate local run and is not committed here; the
-  published [`results/pherc-render/`](../pherc-render/README.md) run predates the
-  render-background diagnostics and does not contain the overlap fields the script
-  reads
+- the JSON inputs this audit consumed are now published. The combined-diagnostics
+  run supplying `regions.json`, `metadata.json` and `summary.json`, including the
+  `render_background_overlap_fraction` field the script reads, is committed at
+  [`../pherc-render-combined-diagnostics/`](../pherc-render-combined-diagnostics/README.md).
+  Note that the older [`results/pherc-render/`](../pherc-render/README.md) run
+  predates the render-background diagnostics and does not carry those fields
+- the source JPG remains external and is not stored in this repository. It is still
+  required to regenerate the contact-sheet crops, so the analysis numbers can be
+  recomputed from the published JSON while the image outputs cannot. This is not a
+  full reproduction from a Git clone alone
+- the script is the exact analysis script used for this audit, unmodified. It
+  expects the inputs at the paths recorded in `audit_summary.json`
 - the committed JSON, CSV, and contact sheets preserve the completed result even
   when those large source inputs are unavailable
 
