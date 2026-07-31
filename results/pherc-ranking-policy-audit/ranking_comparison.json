@@ -1,0 +1,8209 @@
+{
+  "format": "scroll-anchor.ranking-policy-audit/v0",
+  "analysis_only": true,
+  "detector_score_unchanged": true,
+  "rank_change_convention": "rank_change = policy_rank - raw_rank; positive means demoted (moved down the review list)",
+  "source_run": "pherc-render-combined-diagnostics-20260731",
+  "candidates": [
+    {
+      "component_id": 244,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.200628,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 134.833,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1592.0,
+        6346.0,
+        1594.0,
+        6540.0
+      ],
+      "centroid_rowcol_jpg": [
+        1592.74,
+        6438.22
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.200628,
+          "rank": 1,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.200628,
+          "rank": 1,
+          "rank_change": 0
+        },
+        "C_full_penalty": {
+          "score": 0.200628,
+          "rank": 1,
+          "rank_change": 0
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.200628,
+          "rank": 1,
+          "rank_change": 0
+        }
+      }
+    },
+    {
+      "component_id": 391,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.186059,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 643.453,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2516.0,
+        21340.0,
+        2524.0,
+        21528.0
+      ],
+      "centroid_rowcol_jpg": [
+        2519.49,
+        21431.57
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.186059,
+          "rank": 2,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.186059,
+          "rank": 2,
+          "rank_change": 0
+        },
+        "C_full_penalty": {
+          "score": 0.186059,
+          "rank": 2,
+          "rank_change": 0
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.186059,
+          "rank": 2,
+          "rank_change": 0
+        }
+      }
+    },
+    {
+      "component_id": 934,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.185157,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 90.427,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4682.0,
+        15212.0,
+        4868.0,
+        15216.0
+      ],
+      "centroid_rowcol_jpg": [
+        4774.81,
+        15214.09
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.185157,
+          "rank": 3,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.185157,
+          "rank": 3,
+          "rank_change": 0
+        },
+        "C_full_penalty": {
+          "score": 0.185157,
+          "rank": 3,
+          "rank_change": 0
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.185157,
+          "rank": 3,
+          "rank_change": 0
+        }
+      }
+    },
+    {
+      "component_id": 924,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.182775,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 534.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4636.0,
+        4550.0,
+        4864.0,
+        4554.0
+      ],
+      "centroid_rowcol_jpg": [
+        4744.53,
+        4552.34
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.182775,
+          "rank": 4,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.182775,
+          "rank": 4,
+          "rank_change": 0
+        },
+        "C_full_penalty": {
+          "score": 0.182775,
+          "rank": 4,
+          "rank_change": 0
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.182775,
+          "rank": 4,
+          "rank_change": 0
+        }
+      }
+    },
+    {
+      "component_id": 215,
+      "calibration_group": "known_background",
+      "raw_score": 0.181901,
+      "overlap": 0.929032,
+      "stored_overlap": 0.929032,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        1436.0,
+        17078.0,
+        1580.0,
+        17082.0
+      ],
+      "centroid_rowcol_jpg": [
+        1509.14,
+        17079.43
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.181901,
+          "rank": 5,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.097405,
+          "rank": 176,
+          "rank_change": 171
+        },
+        "C_full_penalty": {
+          "score": 0.012909,
+          "rank": 198,
+          "rank_change": 193
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.181901,
+          "rank": 143,
+          "rank_change": 138
+        }
+      }
+    },
+    {
+      "component_id": 1064,
+      "calibration_group": "known_background",
+      "raw_score": 0.180722,
+      "overlap": 0.835938,
+      "stored_overlap": 0.835938,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        5434.0,
+        17158.0,
+        5644.0,
+        17166.0
+      ],
+      "centroid_rowcol_jpg": [
+        5539.69,
+        17162.9
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.180722,
+          "rank": 6,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.105186,
+          "rank": 168,
+          "rank_change": 162
+        },
+        "C_full_penalty": {
+          "score": 0.02965,
+          "rank": 189,
+          "rank_change": 183
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.180722,
+          "rank": 144,
+          "rank_change": 138
+        }
+      }
+    },
+    {
+      "component_id": 566,
+      "calibration_group": "interior_control",
+      "raw_score": 0.178003,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 661.653,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3404.0,
+        21902.0,
+        3618.0,
+        21910.0
+      ],
+      "centroid_rowcol_jpg": [
+        3508.89,
+        21906.85
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.178003,
+          "rank": 7,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.178003,
+          "rank": 5,
+          "rank_change": -2
+        },
+        "C_full_penalty": {
+          "score": 0.178003,
+          "rank": 5,
+          "rank_change": -2
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.178003,
+          "rank": 5,
+          "rank_change": -2
+        }
+      }
+    },
+    {
+      "component_id": 795,
+      "calibration_group": "known_background",
+      "raw_score": 0.172064,
+      "overlap": 0.6,
+      "stored_overlap": 0.6,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4210.0,
+        480.0,
+        4214.0,
+        564.0
+      ],
+      "centroid_rowcol_jpg": [
+        4211.77,
+        515.6
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.172064,
+          "rank": 8,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.120445,
+          "rank": 151,
+          "rank_change": 143
+        },
+        "C_full_penalty": {
+          "score": 0.068826,
+          "rank": 165,
+          "rank_change": 157
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.172064,
+          "rank": 145,
+          "rank_change": 137
+        }
+      }
+    },
+    {
+      "component_id": 923,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.171302,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 180.58,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4634.0,
+        494.0,
+        4802.0,
+        498.0
+      ],
+      "centroid_rowcol_jpg": [
+        4715.1,
+        495.81
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.171302,
+          "rank": 9,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.171302,
+          "rank": 6,
+          "rank_change": -3
+        },
+        "C_full_penalty": {
+          "score": 0.171302,
+          "rank": 6,
+          "rank_change": -3
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.171302,
+          "rank": 6,
+          "rank_change": -3
+        }
+      }
+    },
+    {
+      "component_id": 965,
+      "calibration_group": "known_background",
+      "raw_score": 0.170168,
+      "overlap": 0.240385,
+      "stored_overlap": 0.240385,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4794.0,
+        9380.0,
+        4916.0,
+        9388.0
+      ],
+      "centroid_rowcol_jpg": [
+        4859.52,
+        9383.31
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.170168,
+          "rank": 10,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.149715,
+          "rank": 58,
+          "rank_change": 48
+        },
+        "C_full_penalty": {
+          "score": 0.129262,
+          "rank": 140,
+          "rank_change": 130
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.170168,
+          "rank": 146,
+          "rank_change": 136
+        }
+      }
+    },
+    {
+      "component_id": 690,
+      "calibration_group": "interior_control",
+      "raw_score": 0.168743,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 981.041,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3998.0,
+        20598.0,
+        4000.0,
+        20734.0
+      ],
+      "centroid_rowcol_jpg": [
+        3998.94,
+        20665.06
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.168743,
+          "rank": 11,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.168743,
+          "rank": 7,
+          "rank_change": -4
+        },
+        "C_full_penalty": {
+          "score": 0.168743,
+          "rank": 7,
+          "rank_change": -4
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.168743,
+          "rank": 7,
+          "rank_change": -4
+        }
+      }
+    },
+    {
+      "component_id": 507,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.168584,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 550.215,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3098.0,
+        6550.0,
+        3182.0,
+        6550.0
+      ],
+      "centroid_rowcol_jpg": [
+        3140.0,
+        6550.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.168584,
+          "rank": 12,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.168584,
+          "rank": 8,
+          "rank_change": -4
+        },
+        "C_full_penalty": {
+          "score": 0.168584,
+          "rank": 8,
+          "rank_change": -4
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.168584,
+          "rank": 8,
+          "rank_change": -4
+        }
+      }
+    },
+    {
+      "component_id": 605,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.16828,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 264.518,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3712.0,
+        17782.0,
+        3796.0,
+        17782.0
+      ],
+      "centroid_rowcol_jpg": [
+        3754.0,
+        17782.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.16828,
+          "rank": 13,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.16828,
+          "rank": 9,
+          "rank_change": -4
+        },
+        "C_full_penalty": {
+          "score": 0.16828,
+          "rank": 9,
+          "rank_change": -4
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.16828,
+          "rank": 9,
+          "rank_change": -4
+        }
+      }
+    },
+    {
+      "component_id": 533,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.167543,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 798.448,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3278.0,
+        21522.0,
+        3292.0,
+        21768.0
+      ],
+      "centroid_rowcol_jpg": [
+        3284.76,
+        21644.42
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.167543,
+          "rank": 14,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.167543,
+          "rank": 10,
+          "rank_change": -4
+        },
+        "C_full_penalty": {
+          "score": 0.167543,
+          "rank": 10,
+          "rank_change": -4
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.167543,
+          "rank": 10,
+          "rank_change": -4
+        }
+      }
+    },
+    {
+      "component_id": 638,
+      "calibration_group": "ambiguous",
+      "raw_score": 0.166563,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 53.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3832.0,
+        1610.0,
+        3834.0,
+        1746.0
+      ],
+      "centroid_rowcol_jpg": [
+        3832.95,
+        1678.95
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.166563,
+          "rank": 15,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.166563,
+          "rank": 11,
+          "rank_change": -4
+        },
+        "C_full_penalty": {
+          "score": 0.166563,
+          "rank": 11,
+          "rank_change": -4
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.166563,
+          "rank": 11,
+          "rank_change": -4
+        }
+      }
+    },
+    {
+      "component_id": 78,
+      "calibration_group": "known_background",
+      "raw_score": 0.166419,
+      "overlap": 0.654206,
+      "stored_overlap": 0.654206,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        668.0,
+        21426.0,
+        670.0,
+        21542.0
+      ],
+      "centroid_rowcol_jpg": [
+        668.9,
+        21486.24
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.166419,
+          "rank": 16,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.111983,
+          "rank": 156,
+          "rank_change": 140
+        },
+        "C_full_penalty": {
+          "score": 0.057547,
+          "rank": 172,
+          "rank_change": 156
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.166419,
+          "rank": 147,
+          "rank_change": 131
+        }
+      }
+    },
+    {
+      "component_id": 1150,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.165786,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 48.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        6106.0,
+        16480.0,
+        6106.0,
+        16592.0
+      ],
+      "centroid_rowcol_jpg": [
+        6106.0,
+        16536.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.165786,
+          "rank": 17,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.165786,
+          "rank": 12,
+          "rank_change": -5
+        },
+        "C_full_penalty": {
+          "score": 0.165786,
+          "rank": 12,
+          "rank_change": -5
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.165786,
+          "rank": 12,
+          "rank_change": -5
+        }
+      }
+    },
+    {
+      "component_id": 457,
+      "calibration_group": "known_background",
+      "raw_score": 0.165157,
+      "overlap": 0.91567,
+      "stored_overlap": 0.91567,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        2808.0,
+        7826.0,
+        3142.0,
+        7856.0
+      ],
+      "centroid_rowcol_jpg": [
+        2980.08,
+        7841.73
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.165157,
+          "rank": 18,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.089542,
+          "rank": 190,
+          "rank_change": 172
+        },
+        "C_full_penalty": {
+          "score": 0.013928,
+          "rank": 197,
+          "rank_change": 179
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.165157,
+          "rank": 148,
+          "rank_change": 130
+        }
+      }
+    },
+    {
+      "component_id": 300,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.163321,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 147.231,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2080.0,
+        7144.0,
+        2248.0,
+        7148.0
+      ],
+      "centroid_rowcol_jpg": [
+        2166.14,
+        7145.18
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.163321,
+          "rank": 19,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.163321,
+          "rank": 13,
+          "rank_change": -6
+        },
+        "C_full_penalty": {
+          "score": 0.163321,
+          "rank": 13,
+          "rank_change": -6
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.163321,
+          "rank": 13,
+          "rank_change": -6
+        }
+      }
+    },
+    {
+      "component_id": 511,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.162295,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 936.09,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3166.0,
+        11270.0,
+        3168.0,
+        11452.0
+      ],
+      "centroid_rowcol_jpg": [
+        3166.02,
+        11360.32
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.162295,
+          "rank": 20,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.162295,
+          "rank": 14,
+          "rank_change": -6
+        },
+        "C_full_penalty": {
+          "score": 0.162295,
+          "rank": 14,
+          "rank_change": -6
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.162295,
+          "rank": 14,
+          "rank_change": -6
+        }
+      }
+    },
+    {
+      "component_id": 436,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.162016,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 436.657,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2718.0,
+        14370.0,
+        2720.0,
+        14452.0
+      ],
+      "centroid_rowcol_jpg": [
+        2718.29,
+        14408.86
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.162016,
+          "rank": 21,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.162016,
+          "rank": 15,
+          "rank_change": -6
+        },
+        "C_full_penalty": {
+          "score": 0.162016,
+          "rank": 15,
+          "rank_change": -6
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.162016,
+          "rank": 15,
+          "rank_change": -6
+        }
+      }
+    },
+    {
+      "component_id": 156,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.162,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 76.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1056.0,
+        10660.0,
+        1060.0,
+        10766.0
+      ],
+      "centroid_rowcol_jpg": [
+        1057.72,
+        10716.27
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.162,
+          "rank": 22,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.162,
+          "rank": 16,
+          "rank_change": -6
+        },
+        "C_full_penalty": {
+          "score": 0.162,
+          "rank": 16,
+          "rank_change": -6
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.162,
+          "rank": 16,
+          "rank_change": -6
+        }
+      }
+    },
+    {
+      "component_id": 818,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.161861,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 562.648,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4260.0,
+        21990.0,
+        4386.0,
+        21994.0
+      ],
+      "centroid_rowcol_jpg": [
+        4322.54,
+        21991.72
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.161861,
+          "rank": 23,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.161861,
+          "rank": 17,
+          "rank_change": -6
+        },
+        "C_full_penalty": {
+          "score": 0.161861,
+          "rank": 17,
+          "rank_change": -6
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.161861,
+          "rank": 17,
+          "rank_change": -6
+        }
+      }
+    },
+    {
+      "component_id": 1008,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.161791,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 380.337,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5068.0,
+        3680.0,
+        5182.0,
+        3682.0
+      ],
+      "centroid_rowcol_jpg": [
+        5127.04,
+        3681.55
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.161791,
+          "rank": 24,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.161791,
+          "rank": 18,
+          "rank_change": -6
+        },
+        "C_full_penalty": {
+          "score": 0.161791,
+          "rank": 18,
+          "rank_change": -6
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.161791,
+          "rank": 18,
+          "rank_change": -6
+        }
+      }
+    },
+    {
+      "component_id": 65,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.161608,
+      "overlap": 0.170455,
+      "stored_overlap": 0.170455,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        584.0,
+        5898.0,
+        600.0,
+        6094.0
+      ],
+      "centroid_rowcol_jpg": [
+        593.28,
+        5996.86
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.161608,
+          "rank": 25,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.147835,
+          "rank": 68,
+          "rank_change": 43
+        },
+        "C_full_penalty": {
+          "score": 0.134061,
+          "rank": 134,
+          "rank_change": 109
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.161608,
+          "rank": 19,
+          "rank_change": -6
+        }
+      }
+    },
+    {
+      "component_id": 1093,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.161283,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 196.84,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5660.0,
+        7812.0,
+        5754.0,
+        7814.0
+      ],
+      "centroid_rowcol_jpg": [
+        5712.14,
+        7812.86
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.161283,
+          "rank": 26,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.161283,
+          "rank": 19,
+          "rank_change": -7
+        },
+        "C_full_penalty": {
+          "score": 0.161283,
+          "rank": 19,
+          "rank_change": -7
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.161283,
+          "rank": 20,
+          "rank_change": -6
+        }
+      }
+    },
+    {
+      "component_id": 862,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.160631,
+      "overlap": 0.831579,
+      "stored_overlap": 0.831579,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4404.0,
+        1214.0,
+        4504.0,
+        1216.0
+      ],
+      "centroid_rowcol_jpg": [
+        4456.32,
+        1214.93
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.160631,
+          "rank": 27,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.093842,
+          "rank": 183,
+          "rank_change": 156
+        },
+        "C_full_penalty": {
+          "score": 0.027054,
+          "rank": 192,
+          "rank_change": 165
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.160631,
+          "rank": 149,
+          "rank_change": 122
+        }
+      }
+    },
+    {
+      "component_id": 121,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.160618,
+      "overlap": 0.793103,
+      "stored_overlap": 0.793103,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        898.0,
+        14006.0,
+        900.0,
+        14096.0
+      ],
+      "centroid_rowcol_jpg": [
+        899.06,
+        14049.59
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.160618,
+          "rank": 28,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.096925,
+          "rank": 178,
+          "rank_change": 150
+        },
+        "C_full_penalty": {
+          "score": 0.033231,
+          "rank": 187,
+          "rank_change": 159
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.160618,
+          "rank": 150,
+          "rank_change": 122
+        }
+      }
+    },
+    {
+      "component_id": 602,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.160462,
+      "overlap": 0.00369,
+      "stored_overlap": 0.00369,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3690.0,
+        1510.0,
+        3834.0,
+        1518.0
+      ],
+      "centroid_rowcol_jpg": [
+        3762.1,
+        1513.31
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.160462,
+          "rank": 29,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.160166,
+          "rank": 20,
+          "rank_change": -9
+        },
+        "C_full_penalty": {
+          "score": 0.15987,
+          "rank": 20,
+          "rank_change": -9
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.160462,
+          "rank": 21,
+          "rank_change": -8
+        }
+      }
+    },
+    {
+      "component_id": 723,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.159619,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 946.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4078.0,
+        20412.0,
+        4080.0,
+        20552.0
+      ],
+      "centroid_rowcol_jpg": [
+        4078.86,
+        20487.62
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.159619,
+          "rank": 30,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.159619,
+          "rank": 21,
+          "rank_change": -9
+        },
+        "C_full_penalty": {
+          "score": 0.159619,
+          "rank": 21,
+          "rank_change": -9
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.159619,
+          "rank": 22,
+          "rank_change": -8
+        }
+      }
+    },
+    {
+      "component_id": 309,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.159513,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 930.059,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2114.0,
+        4346.0,
+        2120.0,
+        4482.0
+      ],
+      "centroid_rowcol_jpg": [
+        2117.15,
+        4408.85
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.159513,
+          "rank": 31,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.159513,
+          "rank": 22,
+          "rank_change": -9
+        },
+        "C_full_penalty": {
+          "score": 0.159513,
+          "rank": 22,
+          "rank_change": -9
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.159513,
+          "rank": 23,
+          "rank_change": -8
+        }
+      }
+    },
+    {
+      "component_id": 942,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.159369,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 557.008,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4692.0,
+        4362.0,
+        4808.0,
+        4366.0
+      ],
+      "centroid_rowcol_jpg": [
+        4751.28,
+        4364.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.159369,
+          "rank": 32,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.159369,
+          "rank": 23,
+          "rank_change": -9
+        },
+        "C_full_penalty": {
+          "score": 0.159369,
+          "rank": 23,
+          "rank_change": -9
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.159369,
+          "rank": 24,
+          "rank_change": -8
+        }
+      }
+    },
+    {
+      "component_id": 619,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.159216,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1031.361,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3758.0,
+        20656.0,
+        3906.0,
+        20660.0
+      ],
+      "centroid_rowcol_jpg": [
+        3833.98,
+        20657.99
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.159216,
+          "rank": 33,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.159216,
+          "rank": 24,
+          "rank_change": -9
+        },
+        "C_full_penalty": {
+          "score": 0.159216,
+          "rank": 24,
+          "rank_change": -9
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.159216,
+          "rank": 25,
+          "rank_change": -8
+        }
+      }
+    },
+    {
+      "component_id": 592,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.159101,
+      "overlap": 0.751323,
+      "stored_overlap": 0.751323,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3580.0,
+        1476.0,
+        3688.0,
+        1484.0
+      ],
+      "centroid_rowcol_jpg": [
+        3636.11,
+        1478.67
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.159101,
+          "rank": 34,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.099333,
+          "rank": 173,
+          "rank_change": 139
+        },
+        "C_full_penalty": {
+          "score": 0.039565,
+          "rank": 182,
+          "rank_change": 148
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.159101,
+          "rank": 151,
+          "rank_change": 117
+        }
+      }
+    },
+    {
+      "component_id": 458,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.159074,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 810.055,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2808.0,
+        11290.0,
+        2810.0,
+        11430.0
+      ],
+      "centroid_rowcol_jpg": [
+        2809.14,
+        11366.37
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.159074,
+          "rank": 35,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.159074,
+          "rank": 25,
+          "rank_change": -10
+        },
+        "C_full_penalty": {
+          "score": 0.159074,
+          "rank": 25,
+          "rank_change": -10
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.159074,
+          "rank": 26,
+          "rank_change": -9
+        }
+      }
+    },
+    {
+      "component_id": 371,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.15838,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 425.319,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2456.0,
+        6466.0,
+        2460.0,
+        6632.0
+      ],
+      "centroid_rowcol_jpg": [
+        2458.33,
+        6545.75
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.15838,
+          "rank": 36,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.15838,
+          "rank": 26,
+          "rank_change": -10
+        },
+        "C_full_penalty": {
+          "score": 0.15838,
+          "rank": 26,
+          "rank_change": -10
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.15838,
+          "rank": 27,
+          "rank_change": -9
+        }
+      }
+    },
+    {
+      "component_id": 1047,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.157854,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 264.03,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5290.0,
+        4966.0,
+        5414.0,
+        4968.0
+      ],
+      "centroid_rowcol_jpg": [
+        5352.0,
+        4967.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.157854,
+          "rank": 37,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.157854,
+          "rank": 27,
+          "rank_change": -10
+        },
+        "C_full_penalty": {
+          "score": 0.157854,
+          "rank": 27,
+          "rank_change": -10
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.157854,
+          "rank": 28,
+          "rank_change": -9
+        }
+      }
+    },
+    {
+      "component_id": 466,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.157679,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 726.651,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2846.0,
+        6116.0,
+        2970.0,
+        6118.0
+      ],
+      "centroid_rowcol_jpg": [
+        2909.38,
+        6117.08
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.157679,
+          "rank": 38,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.157679,
+          "rank": 28,
+          "rank_change": -10
+        },
+        "C_full_penalty": {
+          "score": 0.157679,
+          "rank": 28,
+          "rank_change": -10
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.157679,
+          "rank": 29,
+          "rank_change": -9
+        }
+      }
+    },
+    {
+      "component_id": 122,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.157437,
+      "overlap": 0.390244,
+      "stored_overlap": 0.390244,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        900.0,
+        12538.0,
+        902.0,
+        12608.0
+      ],
+      "centroid_rowcol_jpg": [
+        901.76,
+        12574.83
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.157437,
+          "rank": 39,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.126718,
+          "rank": 145,
+          "rank_change": 106
+        },
+        "C_full_penalty": {
+          "score": 0.095998,
+          "rank": 152,
+          "rank_change": 113
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.157437,
+          "rank": 152,
+          "rank_change": 113
+        }
+      }
+    },
+    {
+      "component_id": 629,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.157427,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 170.074,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3798.0,
+        15108.0,
+        3800.0,
+        15232.0
+      ],
+      "centroid_rowcol_jpg": [
+        3799.06,
+        15171.41
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.157427,
+          "rank": 40,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.157427,
+          "rank": 29,
+          "rank_change": -11
+        },
+        "C_full_penalty": {
+          "score": 0.157427,
+          "rank": 29,
+          "rank_change": -11
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.157427,
+          "rank": 30,
+          "rank_change": -10
+        }
+      }
+    },
+    {
+      "component_id": 825,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.157279,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 821.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4274.0,
+        4314.0,
+        4280.0,
+        4494.0
+      ],
+      "centroid_rowcol_jpg": [
+        4277.0,
+        4407.93
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.157279,
+          "rank": 41,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.157279,
+          "rank": 30,
+          "rank_change": -11
+        },
+        "C_full_penalty": {
+          "score": 0.157279,
+          "rank": 30,
+          "rank_change": -11
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.157279,
+          "rank": 31,
+          "rank_change": -10
+        }
+      }
+    },
+    {
+      "component_id": 1087,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.15697,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 42.012,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5606.0,
+        506.0,
+        5708.0,
+        508.0
+      ],
+      "centroid_rowcol_jpg": [
+        5656.26,
+        507.93
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.15697,
+          "rank": 42,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.15697,
+          "rank": 31,
+          "rank_change": -11
+        },
+        "C_full_penalty": {
+          "score": 0.15697,
+          "rank": 31,
+          "rank_change": -11
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.15697,
+          "rank": 32,
+          "rank_change": -10
+        }
+      }
+    },
+    {
+      "component_id": 906,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.156957,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 741.968,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4568.0,
+        11826.0,
+        4652.0,
+        11828.0
+      ],
+      "centroid_rowcol_jpg": [
+        4607.79,
+        11826.88
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.156957,
+          "rank": 43,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.156957,
+          "rank": 32,
+          "rank_change": -11
+        },
+        "C_full_penalty": {
+          "score": 0.156957,
+          "rank": 32,
+          "rank_change": -11
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.156957,
+          "rank": 33,
+          "rank_change": -10
+        }
+      }
+    },
+    {
+      "component_id": 607,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.156837,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1123.824,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3724.0,
+        20130.0,
+        3728.0,
+        20212.0
+      ],
+      "centroid_rowcol_jpg": [
+        3726.23,
+        20171.72
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.156837,
+          "rank": 44,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.156837,
+          "rank": 33,
+          "rank_change": -11
+        },
+        "C_full_penalty": {
+          "score": 0.156837,
+          "rank": 33,
+          "rank_change": -11
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.156837,
+          "rank": 34,
+          "rank_change": -10
+        }
+      }
+    },
+    {
+      "component_id": 256,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.15651,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 47.074,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1670.0,
+        22512.0,
+        1678.0,
+        22708.0
+      ],
+      "centroid_rowcol_jpg": [
+        1672.67,
+        22612.32
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.15651,
+          "rank": 45,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.15651,
+          "rank": 34,
+          "rank_change": -11
+        },
+        "C_full_penalty": {
+          "score": 0.15651,
+          "rank": 34,
+          "rank_change": -11
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.15651,
+          "rank": 35,
+          "rank_change": -10
+        }
+      }
+    },
+    {
+      "component_id": 887,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.156334,
+      "overlap": 0.709302,
+      "stored_overlap": 0.709302,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4472.0,
+        9356.0,
+        4550.0,
+        9360.0
+      ],
+      "centroid_rowcol_jpg": [
+        4518.35,
+        9357.56
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.156334,
+          "rank": 46,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.10089,
+          "rank": 171,
+          "rank_change": 125
+        },
+        "C_full_penalty": {
+          "score": 0.045446,
+          "rank": 178,
+          "rank_change": 132
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.156334,
+          "rank": 153,
+          "rank_change": 107
+        }
+      }
+    },
+    {
+      "component_id": 1051,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.156257,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 301.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5358.0,
+        12630.0,
+        5510.0,
+        12638.0
+      ],
+      "centroid_rowcol_jpg": [
+        5441.23,
+        12633.9
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.156257,
+          "rank": 47,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.156257,
+          "rank": 35,
+          "rank_change": -12
+        },
+        "C_full_penalty": {
+          "score": 0.156257,
+          "rank": 35,
+          "rank_change": -12
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.156257,
+          "rank": 36,
+          "rank_change": -11
+        }
+      }
+    },
+    {
+      "component_id": 85,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.15576,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 109.165,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        692.0,
+        11784.0,
+        772.0,
+        11784.0
+      ],
+      "centroid_rowcol_jpg": [
+        732.0,
+        11784.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.15576,
+          "rank": 48,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.15576,
+          "rank": 36,
+          "rank_change": -12
+        },
+        "C_full_penalty": {
+          "score": 0.15576,
+          "rank": 36,
+          "rank_change": -12
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.15576,
+          "rank": 37,
+          "rank_change": -11
+        }
+      }
+    },
+    {
+      "component_id": 292,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.155453,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 553.231,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2034.0,
+        2966.0,
+        2034.0,
+        3074.0
+      ],
+      "centroid_rowcol_jpg": [
+        2034.0,
+        3020.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.155453,
+          "rank": 49,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.155453,
+          "rank": 37,
+          "rank_change": -12
+        },
+        "C_full_penalty": {
+          "score": 0.155453,
+          "rank": 37,
+          "rank_change": -12
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.155453,
+          "rank": 38,
+          "rank_change": -11
+        }
+      }
+    },
+    {
+      "component_id": 34,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.155375,
+      "overlap": 0.08642,
+      "stored_overlap": 0.08642,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        292.0,
+        21312.0,
+        296.0,
+        21412.0
+      ],
+      "centroid_rowcol_jpg": [
+        293.56,
+        21364.81
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.155375,
+          "rank": 50,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.148661,
+          "rank": 64,
+          "rank_change": 14
+        },
+        "C_full_penalty": {
+          "score": 0.141947,
+          "rank": 89,
+          "rank_change": 39
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.155375,
+          "rank": 39,
+          "rank_change": -11
+        }
+      }
+    },
+    {
+      "component_id": 1068,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.155145,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 175.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5484.0,
+        3424.0,
+        5592.0,
+        3424.0
+      ],
+      "centroid_rowcol_jpg": [
+        5538.0,
+        3424.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.155145,
+          "rank": 51,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.155145,
+          "rank": 38,
+          "rank_change": -13
+        },
+        "C_full_penalty": {
+          "score": 0.155145,
+          "rank": 38,
+          "rank_change": -13
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.155145,
+          "rank": 40,
+          "rank_change": -11
+        }
+      }
+    },
+    {
+      "component_id": 826,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.15499,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 117.835,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4286.0,
+        9650.0,
+        4288.0,
+        9776.0
+      ],
+      "centroid_rowcol_jpg": [
+        4286.77,
+        9711.46
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.15499,
+          "rank": 52,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.15499,
+          "rank": 39,
+          "rank_change": -13
+        },
+        "C_full_penalty": {
+          "score": 0.15499,
+          "rank": 39,
+          "rank_change": -13
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.15499,
+          "rank": 41,
+          "rank_change": -11
+        }
+      }
+    },
+    {
+      "component_id": 835,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.154852,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 702.263,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4330.0,
+        10888.0,
+        4332.0,
+        11000.0
+      ],
+      "centroid_rowcol_jpg": [
+        4331.21,
+        10948.72
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.154852,
+          "rank": 53,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.154852,
+          "rank": 40,
+          "rank_change": -13
+        },
+        "C_full_penalty": {
+          "score": 0.154852,
+          "rank": 40,
+          "rank_change": -13
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.154852,
+          "rank": 42,
+          "rank_change": -11
+        }
+      }
+    },
+    {
+      "component_id": 145,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.154456,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 417.469,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1034.0,
+        5110.0,
+        1094.0,
+        5112.0
+      ],
+      "centroid_rowcol_jpg": [
+        1062.98,
+        5110.68
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.154456,
+          "rank": 54,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.154456,
+          "rank": 41,
+          "rank_change": -13
+        },
+        "C_full_penalty": {
+          "score": 0.154456,
+          "rank": 41,
+          "rank_change": -13
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.154456,
+          "rank": 43,
+          "rank_change": -11
+        }
+      }
+    },
+    {
+      "component_id": 318,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.154237,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 477.747,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2198.0,
+        5800.0,
+        2198.0,
+        5984.0
+      ],
+      "centroid_rowcol_jpg": [
+        2198.0,
+        5892.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.154237,
+          "rank": 55,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.154237,
+          "rank": 42,
+          "rank_change": -13
+        },
+        "C_full_penalty": {
+          "score": 0.154237,
+          "rank": 42,
+          "rank_change": -13
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.154237,
+          "rank": 44,
+          "rank_change": -11
+        }
+      }
+    },
+    {
+      "component_id": 24,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.154,
+      "overlap": 0.607891,
+      "stored_overlap": 0.607891,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        230.0,
+        6000.0,
+        604.0,
+        6364.0
+      ],
+      "centroid_rowcol_jpg": [
+        371.57,
+        6197.33
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.154,
+          "rank": 56,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.107192,
+          "rank": 163,
+          "rank_change": 107
+        },
+        "C_full_penalty": {
+          "score": 0.060385,
+          "rank": 170,
+          "rank_change": 114
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.154,
+          "rank": 154,
+          "rank_change": 98
+        }
+      }
+    },
+    {
+      "component_id": 1044,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.153892,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 248.453,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5274.0,
+        21710.0,
+        5416.0,
+        21718.0
+      ],
+      "centroid_rowcol_jpg": [
+        5345.78,
+        21713.64
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.153892,
+          "rank": 57,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.153892,
+          "rank": 43,
+          "rank_change": -14
+        },
+        "C_full_penalty": {
+          "score": 0.153892,
+          "rank": 43,
+          "rank_change": -14
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.153892,
+          "rank": 45,
+          "rank_change": -12
+        }
+      }
+    },
+    {
+      "component_id": 9,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.153876,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        166.0,
+        21542.0,
+        178.0,
+        21556.0
+      ],
+      "centroid_rowcol_jpg": [
+        171.45,
+        21549.36
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.153876,
+          "rank": 58,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.153876,
+          "rank": 44,
+          "rank_change": -14
+        },
+        "C_full_penalty": {
+          "score": 0.153876,
+          "rank": 44,
+          "rank_change": -14
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.153876,
+          "rank": 46,
+          "rank_change": -12
+        }
+      }
+    },
+    {
+      "component_id": 1053,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.153712,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 223.973,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5364.0,
+        21830.0,
+        5452.0,
+        21830.0
+      ],
+      "centroid_rowcol_jpg": [
+        5408.0,
+        21830.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.153712,
+          "rank": 59,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.153712,
+          "rank": 45,
+          "rank_change": -14
+        },
+        "C_full_penalty": {
+          "score": 0.153712,
+          "rank": 45,
+          "rank_change": -14
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.153712,
+          "rank": 47,
+          "rank_change": -12
+        }
+      }
+    },
+    {
+      "component_id": 296,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.153576,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 511.786,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2060.0,
+        5412.0,
+        2062.0,
+        5530.0
+      ],
+      "centroid_rowcol_jpg": [
+        2060.98,
+        5471.93
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.153576,
+          "rank": 60,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.153576,
+          "rank": 46,
+          "rank_change": -14
+        },
+        "C_full_penalty": {
+          "score": 0.153576,
+          "rank": 46,
+          "rank_change": -14
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.153576,
+          "rank": 48,
+          "rank_change": -12
+        }
+      }
+    },
+    {
+      "component_id": 824,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.153372,
+      "overlap": 0.259542,
+      "stored_overlap": 0.259542,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4274.0,
+        750.0,
+        4280.0,
+        834.0
+      ],
+      "centroid_rowcol_jpg": [
+        4277.4,
+        791.65
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.153372,
+          "rank": 61,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.133469,
+          "rank": 141,
+          "rank_change": 80
+        },
+        "C_full_penalty": {
+          "score": 0.113566,
+          "rank": 144,
+          "rank_change": 83
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.153372,
+          "rank": 155,
+          "rank_change": 94
+        }
+      }
+    },
+    {
+      "component_id": 175,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.153116,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 155.647,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1196.0,
+        10774.0,
+        1206.0,
+        10994.0
+      ],
+      "centroid_rowcol_jpg": [
+        1201.87,
+        10882.95
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.153116,
+          "rank": 62,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.153116,
+          "rank": 47,
+          "rank_change": -15
+        },
+        "C_full_penalty": {
+          "score": 0.153116,
+          "rank": 47,
+          "rank_change": -15
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.153116,
+          "rank": 49,
+          "rank_change": -13
+        }
+      }
+    },
+    {
+      "component_id": 260,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.152922,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 565.532,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1708.0,
+        3434.0,
+        1786.0,
+        3434.0
+      ],
+      "centroid_rowcol_jpg": [
+        1747.0,
+        3434.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.152922,
+          "rank": 63,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.152922,
+          "rank": 48,
+          "rank_change": -15
+        },
+        "C_full_penalty": {
+          "score": 0.152922,
+          "rank": 48,
+          "rank_change": -15
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.152922,
+          "rank": 50,
+          "rank_change": -13
+        }
+      }
+    },
+    {
+      "component_id": 985,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.15277,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 475.304,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4890.0,
+        4518.0,
+        4982.0,
+        4518.0
+      ],
+      "centroid_rowcol_jpg": [
+        4936.0,
+        4518.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.15277,
+          "rank": 64,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.15277,
+          "rank": 49,
+          "rank_change": -15
+        },
+        "C_full_penalty": {
+          "score": 0.15277,
+          "rank": 49,
+          "rank_change": -15
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.15277,
+          "rank": 51,
+          "rank_change": -13
+        }
+      }
+    },
+    {
+      "component_id": 982,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.152695,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 137.102,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4876.0,
+        15620.0,
+        5028.0,
+        15624.0
+      ],
+      "centroid_rowcol_jpg": [
+        4952.47,
+        15621.26
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.152695,
+          "rank": 65,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.152695,
+          "rank": 50,
+          "rank_change": -15
+        },
+        "C_full_penalty": {
+          "score": 0.152695,
+          "rank": 50,
+          "rank_change": -15
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.152695,
+          "rank": 52,
+          "rank_change": -13
+        }
+      }
+    },
+    {
+      "component_id": 153,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.15241,
+      "overlap": 0.344828,
+      "stored_overlap": 0.344828,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        1044.0,
+        17114.0,
+        1054.0,
+        17228.0
+      ],
+      "centroid_rowcol_jpg": [
+        1049.74,
+        17178.27
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.15241,
+          "rank": 66,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.126132,
+          "rank": 147,
+          "rank_change": 81
+        },
+        "C_full_penalty": {
+          "score": 0.099855,
+          "rank": 150,
+          "rank_change": 84
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.15241,
+          "rank": 156,
+          "rank_change": 90
+        }
+      }
+    },
+    {
+      "component_id": 347,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.152256,
+      "overlap": 0.337079,
+      "stored_overlap": 0.337079,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        2340.0,
+        1556.0,
+        2402.0,
+        1560.0
+      ],
+      "centroid_rowcol_jpg": [
+        2372.61,
+        1558.04
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.152256,
+          "rank": 67,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.126595,
+          "rank": 146,
+          "rank_change": 79
+        },
+        "C_full_penalty": {
+          "score": 0.100934,
+          "rank": 148,
+          "rank_change": 81
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.152256,
+          "rank": 157,
+          "rank_change": 90
+        }
+      }
+    },
+    {
+      "component_id": 1137,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.151986,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 104.69,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5960.0,
+        11198.0,
+        5964.0,
+        11290.0
+      ],
+      "centroid_rowcol_jpg": [
+        5962.92,
+        11246.68
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.151986,
+          "rank": 68,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.151986,
+          "rank": 51,
+          "rank_change": -17
+        },
+        "C_full_penalty": {
+          "score": 0.151986,
+          "rank": 51,
+          "rank_change": -17
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.151986,
+          "rank": 53,
+          "rank_change": -15
+        }
+      }
+    },
+    {
+      "component_id": 305,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.151959,
+      "overlap": 0.780635,
+      "stored_overlap": 0.780635,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        2094.0,
+        15446.0,
+        2444.0,
+        15518.0
+      ],
+      "centroid_rowcol_jpg": [
+        2290.36,
+        15472.85
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.151959,
+          "rank": 69,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.092647,
+          "rank": 184,
+          "rank_change": 115
+        },
+        "C_full_penalty": {
+          "score": 0.033334,
+          "rank": 186,
+          "rank_change": 117
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.151959,
+          "rank": 158,
+          "rank_change": 89
+        }
+      }
+    },
+    {
+      "component_id": 440,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.151056,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1113.922,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2722.0,
+        3968.0,
+        2880.0,
+        3970.0
+      ],
+      "centroid_rowcol_jpg": [
+        2801.31,
+        3969.98
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.151056,
+          "rank": 70,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.151056,
+          "rank": 52,
+          "rank_change": -18
+        },
+        "C_full_penalty": {
+          "score": 0.151056,
+          "rank": 52,
+          "rank_change": -18
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.151056,
+          "rank": 54,
+          "rank_change": -16
+        }
+      }
+    },
+    {
+      "component_id": 843,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.150963,
+      "overlap": 0.409774,
+      "stored_overlap": 0.409774,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4356.0,
+        1484.0,
+        4362.0,
+        1722.0
+      ],
+      "centroid_rowcol_jpg": [
+        4359.63,
+        1600.77
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.150963,
+          "rank": 71,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.120033,
+          "rank": 152,
+          "rank_change": 81
+        },
+        "C_full_penalty": {
+          "score": 0.089102,
+          "rank": 153,
+          "rank_change": 82
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.150963,
+          "rank": 159,
+          "rank_change": 88
+        }
+      }
+    },
+    {
+      "component_id": 284,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.150754,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 289.762,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1948.0,
+        14000.0,
+        1950.0,
+        14088.0
+      ],
+      "centroid_rowcol_jpg": [
+        1949.5,
+        14046.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.150754,
+          "rank": 72,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.150754,
+          "rank": 53,
+          "rank_change": -19
+        },
+        "C_full_penalty": {
+          "score": 0.150754,
+          "rank": 53,
+          "rank_change": -19
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.150754,
+          "rank": 55,
+          "rank_change": -17
+        }
+      }
+    },
+    {
+      "component_id": 570,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.150506,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 2.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3440.0,
+        1512.0,
+        3536.0,
+        1514.0
+      ],
+      "centroid_rowcol_jpg": [
+        3488.41,
+        1512.82
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.150506,
+          "rank": 73,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.150506,
+          "rank": 54,
+          "rank_change": -19
+        },
+        "C_full_penalty": {
+          "score": 0.150506,
+          "rank": 54,
+          "rank_change": -19
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.150506,
+          "rank": 56,
+          "rank_change": -17
+        }
+      }
+    },
+    {
+      "component_id": 864,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.149995,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 702.086,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4410.0,
+        20982.0,
+        4538.0,
+        20984.0
+      ],
+      "centroid_rowcol_jpg": [
+        4467.48,
+        20982.87
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.149995,
+          "rank": 74,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.149995,
+          "rank": 55,
+          "rank_change": -19
+        },
+        "C_full_penalty": {
+          "score": 0.149995,
+          "rank": 55,
+          "rank_change": -19
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.149995,
+          "rank": 57,
+          "rank_change": -17
+        }
+      }
+    },
+    {
+      "component_id": 100,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.149992,
+      "overlap": 0.070175,
+      "stored_overlap": 0.070175,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        784.0,
+        18482.0,
+        784.0,
+        18594.0
+      ],
+      "centroid_rowcol_jpg": [
+        784.0,
+        18538.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.149992,
+          "rank": 75,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.144729,
+          "rank": 82,
+          "rank_change": 7
+        },
+        "C_full_penalty": {
+          "score": 0.139466,
+          "rank": 103,
+          "rank_change": 28
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.149992,
+          "rank": 58,
+          "rank_change": -17
+        }
+      }
+    },
+    {
+      "component_id": 1084,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.14995,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 271.007,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5578.0,
+        16410.0,
+        5670.0,
+        16416.0
+      ],
+      "centroid_rowcol_jpg": [
+        5620.0,
+        16412.63
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.14995,
+          "rank": 76,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.14995,
+          "rank": 56,
+          "rank_change": -20
+        },
+        "C_full_penalty": {
+          "score": 0.14995,
+          "rank": 56,
+          "rank_change": -20
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.14995,
+          "rank": 59,
+          "rank_change": -17
+        }
+      }
+    },
+    {
+      "component_id": 1006,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.149867,
+      "overlap": 0.07377,
+      "stored_overlap": 0.07377,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        5056.0,
+        17308.0,
+        5162.0,
+        17314.0
+      ],
+      "centroid_rowcol_jpg": [
+        5112.02,
+        17310.89
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.149867,
+          "rank": 77,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.144339,
+          "rank": 85,
+          "rank_change": 8
+        },
+        "C_full_penalty": {
+          "score": 0.138811,
+          "rank": 106,
+          "rank_change": 29
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.149867,
+          "rank": 60,
+          "rank_change": -17
+        }
+      }
+    },
+    {
+      "component_id": 1029,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.149846,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 354.51,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5222.0,
+        4590.0,
+        5224.0,
+        4692.0
+      ],
+      "centroid_rowcol_jpg": [
+        5223.73,
+        4639.4
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.149846,
+          "rank": 78,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.149846,
+          "rank": 57,
+          "rank_change": -21
+        },
+        "C_full_penalty": {
+          "score": 0.149846,
+          "rank": 57,
+          "rank_change": -21
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.149846,
+          "rank": 61,
+          "rank_change": -17
+        }
+      }
+    },
+    {
+      "component_id": 192,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.149516,
+      "overlap": 0.905085,
+      "stored_overlap": 0.905085,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        1288.0,
+        14226.0,
+        1296.0,
+        14376.0
+      ],
+      "centroid_rowcol_jpg": [
+        1291.82,
+        14298.39
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.149516,
+          "rank": 79,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.081854,
+          "rank": 196,
+          "rank_change": 117
+        },
+        "C_full_penalty": {
+          "score": 0.014191,
+          "rank": 196,
+          "rank_change": 117
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.149516,
+          "rank": 160,
+          "rank_change": 81
+        }
+      }
+    },
+    {
+      "component_id": 39,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.149437,
+      "overlap": 0.605097,
+      "stored_overlap": 0.605097,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        328.0,
+        13680.0,
+        706.0,
+        14088.0
+      ],
+      "centroid_rowcol_jpg": [
+        476.69,
+        13907.05
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.149437,
+          "rank": 80,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.104225,
+          "rank": 169,
+          "rank_change": 89
+        },
+        "C_full_penalty": {
+          "score": 0.059013,
+          "rank": 171,
+          "rank_change": 91
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.149437,
+          "rank": 161,
+          "rank_change": 81
+        }
+      }
+    },
+    {
+      "component_id": 764,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.149369,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 846.979,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4138.0,
+        13604.0,
+        4220.0,
+        13604.0
+      ],
+      "centroid_rowcol_jpg": [
+        4179.0,
+        13604.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.149369,
+          "rank": 81,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.149369,
+          "rank": 59,
+          "rank_change": -22
+        },
+        "C_full_penalty": {
+          "score": 0.149369,
+          "rank": 58,
+          "rank_change": -23
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.149369,
+          "rank": 62,
+          "rank_change": -19
+        }
+      }
+    },
+    {
+      "component_id": 1073,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.149193,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 287.021,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5536.0,
+        11220.0,
+        5602.0,
+        11222.0
+      ],
+      "centroid_rowcol_jpg": [
+        5570.22,
+        11220.49
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.149193,
+          "rank": 82,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.149193,
+          "rank": 60,
+          "rank_change": -22
+        },
+        "C_full_penalty": {
+          "score": 0.149193,
+          "rank": 59,
+          "rank_change": -23
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.149193,
+          "rank": 63,
+          "rank_change": -19
+        }
+      }
+    },
+    {
+      "component_id": 467,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.149179,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1216.883,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2848.0,
+        19852.0,
+        2936.0,
+        19852.0
+      ],
+      "centroid_rowcol_jpg": [
+        2892.0,
+        19852.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.149179,
+          "rank": 83,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.149179,
+          "rank": 61,
+          "rank_change": -22
+        },
+        "C_full_penalty": {
+          "score": 0.149179,
+          "rank": 60,
+          "rank_change": -23
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.149179,
+          "rank": 64,
+          "rank_change": -19
+        }
+      }
+    },
+    {
+      "component_id": 115,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.148935,
+      "overlap": 0.804878,
+      "stored_overlap": 0.804878,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        862.0,
+        13954.0,
+        874.0,
+        14104.0
+      ],
+      "centroid_rowcol_jpg": [
+        867.4,
+        14025.88
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.148935,
+          "rank": 84,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.088998,
+          "rank": 192,
+          "rank_change": 108
+        },
+        "C_full_penalty": {
+          "score": 0.02906,
+          "rank": 190,
+          "rank_change": 106
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.148935,
+          "rank": 162,
+          "rank_change": 78
+        }
+      }
+    },
+    {
+      "component_id": 207,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.148886,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 107.87,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1400.0,
+        17346.0,
+        1566.0,
+        17390.0
+      ],
+      "centroid_rowcol_jpg": [
+        1488.66,
+        17361.94
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.148886,
+          "rank": 85,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.148886,
+          "rank": 62,
+          "rank_change": -23
+        },
+        "C_full_penalty": {
+          "score": 0.148886,
+          "rank": 61,
+          "rank_change": -24
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.148886,
+          "rank": 65,
+          "rank_change": -20
+        }
+      }
+    },
+    {
+      "component_id": 1054,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.148784,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 229.787,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5368.0,
+        4508.0,
+        5474.0,
+        4510.0
+      ],
+      "centroid_rowcol_jpg": [
+        5415.15,
+        4508.65
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.148784,
+          "rank": 86,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.148784,
+          "rank": 63,
+          "rank_change": -23
+        },
+        "C_full_penalty": {
+          "score": 0.148784,
+          "rank": 62,
+          "rank_change": -24
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.148784,
+          "rank": 66,
+          "rank_change": -20
+        }
+      }
+    },
+    {
+      "component_id": 808,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.148628,
+      "overlap": 0.166667,
+      "stored_overlap": 0.166667,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4246.0,
+        594.0,
+        4250.0,
+        702.0
+      ],
+      "centroid_rowcol_jpg": [
+        4249.04,
+        652.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.148628,
+          "rank": 87,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.136242,
+          "rank": 130,
+          "rank_change": 43
+        },
+        "C_full_penalty": {
+          "score": 0.123857,
+          "rank": 142,
+          "rank_change": 55
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.148628,
+          "rank": 67,
+          "rank_change": -20
+        }
+      }
+    },
+    {
+      "component_id": 559,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.148446,
+      "overlap": 0.830323,
+      "stored_overlap": 0.830323,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3372.0,
+        15710.0,
+        3706.0,
+        15784.0
+      ],
+      "centroid_rowcol_jpg": [
+        3555.8,
+        15726.47
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.148446,
+          "rank": 88,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.086817,
+          "rank": 193,
+          "rank_change": 105
+        },
+        "C_full_penalty": {
+          "score": 0.025188,
+          "rank": 193,
+          "rank_change": 105
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.148446,
+          "rank": 163,
+          "rank_change": 75
+        }
+      }
+    },
+    {
+      "component_id": 809,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.148097,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 871.009,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4250.0,
+        12394.0,
+        4370.0,
+        12396.0
+      ],
+      "centroid_rowcol_jpg": [
+        4305.27,
+        12395.14
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.148097,
+          "rank": 89,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.148097,
+          "rank": 65,
+          "rank_change": -24
+        },
+        "C_full_penalty": {
+          "score": 0.148097,
+          "rank": 63,
+          "rank_change": -26
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.148097,
+          "rank": 68,
+          "rank_change": -21
+        }
+      }
+    },
+    {
+      "component_id": 1072,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.148054,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 92.779,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5500.0,
+        23382.0,
+        5648.0,
+        23386.0
+      ],
+      "centroid_rowcol_jpg": [
+        5574.56,
+        23384.35
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.148054,
+          "rank": 90,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.148054,
+          "rank": 66,
+          "rank_change": -24
+        },
+        "C_full_penalty": {
+          "score": 0.148054,
+          "rank": 64,
+          "rank_change": -26
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.148054,
+          "rank": 69,
+          "rank_change": -21
+        }
+      }
+    },
+    {
+      "component_id": 1128,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.147878,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 49.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5880.0,
+        5534.0,
+        5884.0,
+        5608.0
+      ],
+      "centroid_rowcol_jpg": [
+        5881.82,
+        5573.39
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.147878,
+          "rank": 91,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.147878,
+          "rank": 67,
+          "rank_change": -24
+        },
+        "C_full_penalty": {
+          "score": 0.147878,
+          "rank": 65,
+          "rank_change": -26
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.147878,
+          "rank": 70,
+          "rank_change": -21
+        }
+      }
+    },
+    {
+      "component_id": 943,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.147555,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 226.02,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4692.0,
+        23164.0,
+        4852.0,
+        23168.0
+      ],
+      "centroid_rowcol_jpg": [
+        4770.2,
+        23165.62
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.147555,
+          "rank": 92,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.147555,
+          "rank": 69,
+          "rank_change": -23
+        },
+        "C_full_penalty": {
+          "score": 0.147555,
+          "rank": 66,
+          "rank_change": -26
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.147555,
+          "rank": 71,
+          "rank_change": -21
+        }
+      }
+    },
+    {
+      "component_id": 661,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.147437,
+      "overlap": 0.762073,
+      "stored_overlap": 0.762073,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3902.0,
+        9360.0,
+        4232.0,
+        9378.0
+      ],
+      "centroid_rowcol_jpg": [
+        4029.19,
+        9368.16
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.147437,
+          "rank": 93,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.091258,
+          "rank": 188,
+          "rank_change": 95
+        },
+        "C_full_penalty": {
+          "score": 0.035079,
+          "rank": 185,
+          "rank_change": 92
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.147437,
+          "rank": 164,
+          "rank_change": 71
+        }
+      }
+    },
+    {
+      "component_id": 820,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.147386,
+      "overlap": 0.933594,
+      "stored_overlap": 0.933594,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4262.0,
+        9280.0,
+        4518.0,
+        9392.0
+      ],
+      "centroid_rowcol_jpg": [
+        4382.29,
+        9375.23
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.147386,
+          "rank": 94,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.078587,
+          "rank": 199,
+          "rank_change": 105
+        },
+        "C_full_penalty": {
+          "score": 0.009787,
+          "rank": 200,
+          "rank_change": 106
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.147386,
+          "rank": 165,
+          "rank_change": 71
+        }
+      }
+    },
+    {
+      "component_id": 977,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.147258,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 81.492,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4846.0,
+        17494.0,
+        4960.0,
+        17496.0
+      ],
+      "centroid_rowcol_jpg": [
+        4903.96,
+        17494.98
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.147258,
+          "rank": 95,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.147258,
+          "rank": 70,
+          "rank_change": -25
+        },
+        "C_full_penalty": {
+          "score": 0.147258,
+          "rank": 67,
+          "rank_change": -28
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.147258,
+          "rank": 72,
+          "rank_change": -23
+        }
+      }
+    },
+    {
+      "component_id": 4,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.146884,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 50.16,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        144.0,
+        5338.0,
+        228.0,
+        5338.0
+      ],
+      "centroid_rowcol_jpg": [
+        186.0,
+        5338.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.146884,
+          "rank": 96,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.146884,
+          "rank": 71,
+          "rank_change": -25
+        },
+        "C_full_penalty": {
+          "score": 0.146884,
+          "rank": 68,
+          "rank_change": -28
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.146884,
+          "rank": 73,
+          "rank_change": -23
+        }
+      }
+    },
+    {
+      "component_id": 1063,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.146866,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 195.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5420.0,
+        3970.0,
+        5532.0,
+        3976.0
+      ],
+      "centroid_rowcol_jpg": [
+        5472.53,
+        3973.1
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.146866,
+          "rank": 97,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.146866,
+          "rank": 72,
+          "rank_change": -25
+        },
+        "C_full_penalty": {
+          "score": 0.146866,
+          "rank": 69,
+          "rank_change": -28
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.146866,
+          "rank": 74,
+          "rank_change": -23
+        }
+      }
+    },
+    {
+      "component_id": 227,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.146844,
+      "overlap": 0.509804,
+      "stored_overlap": 0.509804,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        1478.0,
+        14528.0,
+        1540.0,
+        14532.0
+      ],
+      "centroid_rowcol_jpg": [
+        1510.0,
+        14530.67
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.146844,
+          "rank": 98,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.109413,
+          "rank": 161,
+          "rank_change": 63
+        },
+        "C_full_penalty": {
+          "score": 0.071982,
+          "rank": 162,
+          "rank_change": 64
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.146844,
+          "rank": 166,
+          "rank_change": 68
+        }
+      }
+    },
+    {
+      "component_id": 716,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.14644,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 742.026,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4070.0,
+        10902.0,
+        4070.0,
+        10982.0
+      ],
+      "centroid_rowcol_jpg": [
+        4070.0,
+        10942.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.14644,
+          "rank": 99,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.14644,
+          "rank": 73,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.14644,
+          "rank": 70,
+          "rank_change": -29
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.14644,
+          "rank": 75,
+          "rank_change": -24
+        }
+      }
+    },
+    {
+      "component_id": 675,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.146343,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 993.484,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3948.0,
+        4886.0,
+        3956.0,
+        5026.0
+      ],
+      "centroid_rowcol_jpg": [
+        3951.1,
+        4959.87
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.146343,
+          "rank": 100,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.146343,
+          "rank": 74,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.146343,
+          "rank": 71,
+          "rank_change": -29
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.146343,
+          "rank": 76,
+          "rank_change": -24
+        }
+      }
+    },
+    {
+      "component_id": 651,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.146282,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 817.24,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3874.0,
+        18896.0,
+        3876.0,
+        18960.0
+      ],
+      "centroid_rowcol_jpg": [
+        3874.86,
+        18929.72
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.146282,
+          "rank": 101,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.146282,
+          "rank": 75,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.146282,
+          "rank": 72,
+          "rank_change": -29
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.146282,
+          "rank": 77,
+          "rank_change": -24
+        }
+      }
+    },
+    {
+      "component_id": 688,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.146053,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 968.393,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3990.0,
+        20896.0,
+        4006.0,
+        21002.0
+      ],
+      "centroid_rowcol_jpg": [
+        4000.98,
+        20944.72
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.146053,
+          "rank": 102,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.146053,
+          "rank": 76,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.146053,
+          "rank": 73,
+          "rank_change": -29
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.146053,
+          "rank": 78,
+          "rank_change": -24
+        }
+      }
+    },
+    {
+      "component_id": 590,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.145856,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1147.848,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3558.0,
+        20634.0,
+        3674.0,
+        20634.0
+      ],
+      "centroid_rowcol_jpg": [
+        3616.0,
+        20634.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.145856,
+          "rank": 103,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.145856,
+          "rank": 77,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.145856,
+          "rank": 74,
+          "rank_change": -29
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.145856,
+          "rank": 79,
+          "rank_change": -24
+        }
+      }
+    },
+    {
+      "component_id": 290,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.145555,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 482.249,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2016.0,
+        2690.0,
+        2028.0,
+        2858.0
+      ],
+      "centroid_rowcol_jpg": [
+        2020.45,
+        2779.73
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.145555,
+          "rank": 104,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.145555,
+          "rank": 78,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.145555,
+          "rank": 75,
+          "rank_change": -29
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.145555,
+          "rank": 80,
+          "rank_change": -24
+        }
+      }
+    },
+    {
+      "component_id": 1016,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.145077,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 273.585,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5142.0,
+        8264.0,
+        5272.0,
+        8270.0
+      ],
+      "centroid_rowcol_jpg": [
+        5207.61,
+        8267.1
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.145077,
+          "rank": 105,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.145077,
+          "rank": 79,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.145077,
+          "rank": 76,
+          "rank_change": -29
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.145077,
+          "rank": 81,
+          "rank_change": -24
+        }
+      }
+    },
+    {
+      "component_id": 184,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.144935,
+      "overlap": 0.771429,
+      "stored_overlap": 0.771429,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        1244.0,
+        16984.0,
+        1402.0,
+        16996.0
+      ],
+      "centroid_rowcol_jpg": [
+        1319.66,
+        16988.83
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.144935,
+          "rank": 106,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.089031,
+          "rank": 191,
+          "rank_change": 85
+        },
+        "C_full_penalty": {
+          "score": 0.033128,
+          "rank": 188,
+          "rank_change": 82
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.144935,
+          "rank": 167,
+          "rank_change": 61
+        }
+      }
+    },
+    {
+      "component_id": 1033,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.144916,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 278.189,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5244.0,
+        4860.0,
+        5392.0,
+        4864.0
+      ],
+      "centroid_rowcol_jpg": [
+        5318.15,
+        4862.3
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.144916,
+          "rank": 107,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.144916,
+          "rank": 80,
+          "rank_change": -27
+        },
+        "C_full_penalty": {
+          "score": 0.144916,
+          "rank": 77,
+          "rank_change": -30
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.144916,
+          "rank": 82,
+          "rank_change": -25
+        }
+      }
+    },
+    {
+      "component_id": 1141,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.144899,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 96.933,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        6000.0,
+        8182.0,
+        6004.0,
+        8302.0
+      ],
+      "centroid_rowcol_jpg": [
+        6002.08,
+        8239.23
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.144899,
+          "rank": 108,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.144899,
+          "rank": 81,
+          "rank_change": -27
+        },
+        "C_full_penalty": {
+          "score": 0.144899,
+          "rank": 78,
+          "rank_change": -30
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.144899,
+          "rank": 83,
+          "rank_change": -25
+        }
+      }
+    },
+    {
+      "component_id": 232,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.144535,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 530.911,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1506.0,
+        3734.0,
+        1658.0,
+        3738.0
+      ],
+      "centroid_rowcol_jpg": [
+        1579.62,
+        3736.51
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.144535,
+          "rank": 109,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.144535,
+          "rank": 83,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.144535,
+          "rank": 79,
+          "rank_change": -30
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.144535,
+          "rank": 84,
+          "rank_change": -25
+        }
+      }
+    },
+    {
+      "component_id": 676,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.144424,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 949.613,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3952.0,
+        20706.0,
+        4058.0,
+        20846.0
+      ],
+      "centroid_rowcol_jpg": [
+        3997.17,
+        20769.38
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.144424,
+          "rank": 110,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.144424,
+          "rank": 84,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.144424,
+          "rank": 80,
+          "rank_change": -30
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.144424,
+          "rank": 85,
+          "rank_change": -25
+        }
+      }
+    },
+    {
+      "component_id": 502,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.14436,
+      "overlap": 0.731006,
+      "stored_overlap": 0.731006,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3028.0,
+        17112.0,
+        3312.0,
+        17150.0
+      ],
+      "centroid_rowcol_jpg": [
+        3162.73,
+        17129.89
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.14436,
+          "rank": 111,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.091596,
+          "rank": 187,
+          "rank_change": 76
+        },
+        "C_full_penalty": {
+          "score": 0.038832,
+          "rank": 183,
+          "rank_change": 72
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.14436,
+          "rank": 168,
+          "rank_change": 57
+        }
+      }
+    },
+    {
+      "component_id": 930,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.144328,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 721.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4666.0,
+        12148.0,
+        4670.0,
+        12266.0
+      ],
+      "centroid_rowcol_jpg": [
+        4667.82,
+        12205.74
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.144328,
+          "rank": 112,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.144328,
+          "rank": 86,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.144328,
+          "rank": 81,
+          "rank_change": -31
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.144328,
+          "rank": 86,
+          "rank_change": -26
+        }
+      }
+    },
+    {
+      "component_id": 275,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.144252,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 521.311,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1894.0,
+        3098.0,
+        1894.0,
+        3188.0
+      ],
+      "centroid_rowcol_jpg": [
+        1894.0,
+        3143.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.144252,
+          "rank": 113,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.144252,
+          "rank": 87,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.144252,
+          "rank": 82,
+          "rank_change": -31
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.144252,
+          "rank": 87,
+          "rank_change": -26
+        }
+      }
+    },
+    {
+      "component_id": 612,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.144106,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 968.282,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3732.0,
+        3626.0,
+        3824.0,
+        3628.0
+      ],
+      "centroid_rowcol_jpg": [
+        3779.26,
+        3626.96
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.144106,
+          "rank": 114,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.144106,
+          "rank": 88,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.144106,
+          "rank": 83,
+          "rank_change": -31
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.144106,
+          "rank": 88,
+          "rank_change": -26
+        }
+      }
+    },
+    {
+      "component_id": 1040,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.143662,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 234.002,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5272.0,
+        3052.0,
+        5454.0,
+        3058.0
+      ],
+      "centroid_rowcol_jpg": [
+        5370.45,
+        3055.28
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.143662,
+          "rank": 115,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.143662,
+          "rank": 89,
+          "rank_change": -26
+        },
+        "C_full_penalty": {
+          "score": 0.143662,
+          "rank": 84,
+          "rank_change": -31
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.143662,
+          "rank": 89,
+          "rank_change": -26
+        }
+      }
+    },
+    {
+      "component_id": 434,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.143592,
+      "overlap": 0.722772,
+      "stored_overlap": 0.722772,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        2716.0,
+        9296.0,
+        2834.0,
+        9298.0
+      ],
+      "centroid_rowcol_jpg": [
+        2779.47,
+        9297.19
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.143592,
+          "rank": 116,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.0917,
+          "rank": 186,
+          "rank_change": 70
+        },
+        "C_full_penalty": {
+          "score": 0.039808,
+          "rank": 181,
+          "rank_change": 65
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.143592,
+          "rank": 169,
+          "rank_change": 53
+        }
+      }
+    },
+    {
+      "component_id": 445,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.143545,
+      "overlap": 0.922727,
+      "stored_overlap": 0.922727,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        2746.0,
+        7856.0,
+        2908.0,
+        7862.0
+      ],
+      "centroid_rowcol_jpg": [
+        2827.2,
+        7859.6
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.143545,
+          "rank": 117,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.077319,
+          "rank": 200,
+          "rank_change": 83
+        },
+        "C_full_penalty": {
+          "score": 0.011092,
+          "rank": 199,
+          "rank_change": 82
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.143545,
+          "rank": 170,
+          "rank_change": 53
+        }
+      }
+    },
+    {
+      "component_id": 425,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.143531,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 82.298,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2654.0,
+        17336.0,
+        2654.0,
+        17448.0
+      ],
+      "centroid_rowcol_jpg": [
+        2654.0,
+        17392.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.143531,
+          "rank": 118,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.143531,
+          "rank": 90,
+          "rank_change": -28
+        },
+        "C_full_penalty": {
+          "score": 0.143531,
+          "rank": 85,
+          "rank_change": -33
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.143531,
+          "rank": 90,
+          "rank_change": -28
+        }
+      }
+    },
+    {
+      "component_id": 310,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.143206,
+      "overlap": 0.717391,
+      "stored_overlap": 0.717391,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        2124.0,
+        1508.0,
+        2328.0,
+        1532.0
+      ],
+      "centroid_rowcol_jpg": [
+        2219.84,
+        1519.29
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.143206,
+          "rank": 119,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.091839,
+          "rank": 185,
+          "rank_change": 66
+        },
+        "C_full_penalty": {
+          "score": 0.040471,
+          "rank": 180,
+          "rank_change": 61
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.143206,
+          "rank": 171,
+          "rank_change": 52
+        }
+      }
+    },
+    {
+      "component_id": 346,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.142957,
+      "overlap": 0.512935,
+      "stored_overlap": 0.512935,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        2334.0,
+        1466.0,
+        3154.0,
+        1512.0
+      ],
+      "centroid_rowcol_jpg": [
+        2658.51,
+        1488.76
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.142957,
+          "rank": 120,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.106293,
+          "rank": 166,
+          "rank_change": 46
+        },
+        "C_full_penalty": {
+          "score": 0.069629,
+          "rank": 164,
+          "rank_change": 44
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.142957,
+          "rank": 172,
+          "rank_change": 52
+        }
+      }
+    },
+    {
+      "component_id": 200,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.142835,
+      "overlap": 0.065574,
+      "stored_overlap": 0.065574,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        1360.0,
+        9422.0,
+        1448.0,
+        9424.0
+      ],
+      "centroid_rowcol_jpg": [
+        1406.36,
+        9423.48
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.142835,
+          "rank": 121,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.138152,
+          "rank": 113,
+          "rank_change": -8
+        },
+        "C_full_penalty": {
+          "score": 0.133469,
+          "rank": 138,
+          "rank_change": 17
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.142835,
+          "rank": 91,
+          "rank_change": -30
+        }
+      }
+    },
+    {
+      "component_id": 970,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.142567,
+      "overlap": 0.26087,
+      "stored_overlap": 0.26087,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4812.0,
+        17266.0,
+        4884.0,
+        17270.0
+      ],
+      "centroid_rowcol_jpg": [
+        4850.74,
+        17267.98
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.142567,
+          "rank": 122,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.123971,
+          "rank": 149,
+          "rank_change": 27
+        },
+        "C_full_penalty": {
+          "score": 0.105376,
+          "rank": 147,
+          "rank_change": 25
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.142567,
+          "rank": 173,
+          "rank_change": 51
+        }
+      }
+    },
+    {
+      "component_id": 351,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.142465,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 485.276,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2356.0,
+        10818.0,
+        2442.0,
+        10820.0
+      ],
+      "centroid_rowcol_jpg": [
+        2396.88,
+        10819.29
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.142465,
+          "rank": 123,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.142465,
+          "rank": 91,
+          "rank_change": -32
+        },
+        "C_full_penalty": {
+          "score": 0.142465,
+          "rank": 86,
+          "rank_change": -37
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.142465,
+          "rank": 92,
+          "rank_change": -31
+        }
+      }
+    },
+    {
+      "component_id": 582,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.142373,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 992.854,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3510.0,
+        21212.0,
+        3604.0,
+        21216.0
+      ],
+      "centroid_rowcol_jpg": [
+        3554.38,
+        21213.49
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.142373,
+          "rank": 124,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.142373,
+          "rank": 92,
+          "rank_change": -32
+        },
+        "C_full_penalty": {
+          "score": 0.142373,
+          "rank": 87,
+          "rank_change": -37
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.142373,
+          "rank": 93,
+          "rank_change": -31
+        }
+      }
+    },
+    {
+      "component_id": 974,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.142307,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 519.71,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4824.0,
+        3598.0,
+        4908.0,
+        3598.0
+      ],
+      "centroid_rowcol_jpg": [
+        4866.0,
+        3598.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.142307,
+          "rank": 125,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.142307,
+          "rank": 93,
+          "rank_change": -32
+        },
+        "C_full_penalty": {
+          "score": 0.142307,
+          "rank": 88,
+          "rank_change": -37
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.142307,
+          "rank": 94,
+          "rank_change": -31
+        }
+      }
+    },
+    {
+      "component_id": 449,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.14214,
+      "overlap": 0.674976,
+      "stored_overlap": 0.674976,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        2774.0,
+        7882.0,
+        2892.0,
+        8078.0
+      ],
+      "centroid_rowcol_jpg": [
+        2839.81,
+        7961.34
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.14214,
+          "rank": 126,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.094169,
+          "rank": 182,
+          "rank_change": 56
+        },
+        "C_full_penalty": {
+          "score": 0.046199,
+          "rank": 177,
+          "rank_change": 51
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.14214,
+          "rank": 174,
+          "rank_change": 48
+        }
+      }
+    },
+    {
+      "component_id": 316,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.141957,
+      "overlap": 0.315789,
+      "stored_overlap": 0.315789,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        2162.0,
+        17204.0,
+        2274.0,
+        17216.0
+      ],
+      "centroid_rowcol_jpg": [
+        2213.85,
+        17206.62
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.141957,
+          "rank": 127,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.119543,
+          "rank": 153,
+          "rank_change": 26
+        },
+        "C_full_penalty": {
+          "score": 0.097129,
+          "rank": 151,
+          "rank_change": 24
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.141957,
+          "rank": 175,
+          "rank_change": 48
+        }
+      }
+    },
+    {
+      "component_id": 1144,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.141817,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 20.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        6038.0,
+        9564.0,
+        6132.0,
+        9568.0
+      ],
+      "centroid_rowcol_jpg": [
+        6086.26,
+        9566.03
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.141817,
+          "rank": 128,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.141817,
+          "rank": 94,
+          "rank_change": -34
+        },
+        "C_full_penalty": {
+          "score": 0.141817,
+          "rank": 90,
+          "rank_change": -38
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.141817,
+          "rank": 95,
+          "rank_change": -33
+        }
+      }
+    },
+    {
+      "component_id": 953,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.141612,
+      "overlap": 0.122449,
+      "stored_overlap": 0.122449,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4728.0,
+        17120.0,
+        4822.0,
+        17122.0
+      ],
+      "centroid_rowcol_jpg": [
+        4774.94,
+        17121.96
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.141612,
+          "rank": 129,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.132942,
+          "rank": 143,
+          "rank_change": 14
+        },
+        "C_full_penalty": {
+          "score": 0.124272,
+          "rank": 141,
+          "rank_change": 12
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.141612,
+          "rank": 96,
+          "rank_change": -33
+        }
+      }
+    },
+    {
+      "component_id": 280,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.141398,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 478.093,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1932.0,
+        2788.0,
+        1940.0,
+        3012.0
+      ],
+      "centroid_rowcol_jpg": [
+        1935.22,
+        2883.85
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.141398,
+          "rank": 130,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.141398,
+          "rank": 95,
+          "rank_change": -35
+        },
+        "C_full_penalty": {
+          "score": 0.141398,
+          "rank": 91,
+          "rank_change": -39
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.141398,
+          "rank": 97,
+          "rank_change": -33
+        }
+      }
+    },
+    {
+      "component_id": 731,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.141385,
+      "overlap": 0.435714,
+      "stored_overlap": 0.435714,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4096.0,
+        7986.0,
+        4240.0,
+        7988.0
+      ],
+      "centroid_rowcol_jpg": [
+        4168.96,
+        7987.01
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.141385,
+          "rank": 131,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.110583,
+          "rank": 158,
+          "rank_change": 27
+        },
+        "C_full_penalty": {
+          "score": 0.079782,
+          "rank": 157,
+          "rank_change": 26
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.141385,
+          "rank": 176,
+          "rank_change": 45
+        }
+      }
+    },
+    {
+      "component_id": 708,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.141346,
+      "overlap": 0.622222,
+      "stored_overlap": 0.622222,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4058.0,
+        7940.0,
+        4062.0,
+        7992.0
+      ],
+      "centroid_rowcol_jpg": [
+        4060.44,
+        7965.69
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.141346,
+          "rank": 132,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.097372,
+          "rank": 177,
+          "rank_change": 45
+        },
+        "C_full_penalty": {
+          "score": 0.053397,
+          "rank": 173,
+          "rank_change": 41
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.141346,
+          "rank": 177,
+          "rank_change": 45
+        }
+      }
+    },
+    {
+      "component_id": 40,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.141239,
+      "overlap": 0.629371,
+      "stored_overlap": 0.629371,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        342.0,
+        13496.0,
+        418.0,
+        13596.0
+      ],
+      "centroid_rowcol_jpg": [
+        383.45,
+        13552.11
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.141239,
+          "rank": 133,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.096793,
+          "rank": 179,
+          "rank_change": 46
+        },
+        "C_full_penalty": {
+          "score": 0.052347,
+          "rank": 174,
+          "rank_change": 41
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.141239,
+          "rank": 178,
+          "rank_change": 45
+        }
+      }
+    },
+    {
+      "component_id": 747,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140934,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 843.195,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4118.0,
+        3448.0,
+        4202.0,
+        3448.0
+      ],
+      "centroid_rowcol_jpg": [
+        4160.0,
+        3448.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140934,
+          "rank": 134,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.140934,
+          "rank": 96,
+          "rank_change": -38
+        },
+        "C_full_penalty": {
+          "score": 0.140934,
+          "rank": 92,
+          "rank_change": -42
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140934,
+          "rank": 98,
+          "rank_change": -36
+        }
+      }
+    },
+    {
+      "component_id": 370,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140876,
+      "overlap": 0.553377,
+      "stored_overlap": 0.553377,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        2446.0,
+        17094.0,
+        2936.0,
+        17130.0
+      ],
+      "centroid_rowcol_jpg": [
+        2735.31,
+        17109.06
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140876,
+          "rank": 135,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.101897,
+          "rank": 170,
+          "rank_change": 35
+        },
+        "C_full_penalty": {
+          "score": 0.062918,
+          "rank": 168,
+          "rank_change": 33
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140876,
+          "rank": 179,
+          "rank_change": 44
+        }
+      }
+    },
+    {
+      "component_id": 249,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140796,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 535.516,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1632.0,
+        11712.0,
+        1754.0,
+        11714.0
+      ],
+      "centroid_rowcol_jpg": [
+        1684.81,
+        11712.7
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140796,
+          "rank": 136,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.140796,
+          "rank": 97,
+          "rank_change": -39
+        },
+        "C_full_penalty": {
+          "score": 0.140796,
+          "rank": 93,
+          "rank_change": -43
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140796,
+          "rank": 99,
+          "rank_change": -37
+        }
+      }
+    },
+    {
+      "component_id": 1148,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140792,
+      "overlap": 0.443299,
+      "stored_overlap": 0.443299,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        6074.0,
+        9518.0,
+        6142.0,
+        9524.0
+      ],
+      "centroid_rowcol_jpg": [
+        6111.69,
+        9521.84
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140792,
+          "rank": 137,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.109586,
+          "rank": 160,
+          "rank_change": 23
+        },
+        "C_full_penalty": {
+          "score": 0.078379,
+          "rank": 159,
+          "rank_change": 22
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140792,
+          "rank": 180,
+          "rank_change": 43
+        }
+      }
+    },
+    {
+      "component_id": 1018,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140718,
+      "overlap": 0.235294,
+      "stored_overlap": 0.235294,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        5164.0,
+        17322.0,
+        5254.0,
+        17330.0
+      ],
+      "centroid_rowcol_jpg": [
+        5211.81,
+        17327.03
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140718,
+          "rank": 138,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.124163,
+          "rank": 148,
+          "rank_change": 10
+        },
+        "C_full_penalty": {
+          "score": 0.107608,
+          "rank": 145,
+          "rank_change": 7
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140718,
+          "rank": 181,
+          "rank_change": 43
+        }
+      }
+    },
+    {
+      "component_id": 72,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140619,
+      "overlap": 0.5,
+      "stored_overlap": 0.5,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        622.0,
+        2368.0,
+        700.0,
+        2370.0
+      ],
+      "centroid_rowcol_jpg": [
+        661.0,
+        2369.18
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140619,
+          "rank": 139,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.105464,
+          "rank": 167,
+          "rank_change": 28
+        },
+        "C_full_penalty": {
+          "score": 0.070309,
+          "rank": 163,
+          "rank_change": 24
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140619,
+          "rank": 182,
+          "rank_change": 43
+        }
+      }
+    },
+    {
+      "component_id": 704,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.14037,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 884.102,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4046.0,
+        5376.0,
+        4190.0,
+        5512.0
+      ],
+      "centroid_rowcol_jpg": [
+        4111.23,
+        5440.97
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.14037,
+          "rank": 140,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.14037,
+          "rank": 98,
+          "rank_change": -42
+        },
+        "C_full_penalty": {
+          "score": 0.14037,
+          "rank": 94,
+          "rank_change": -46
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.14037,
+          "rank": 100,
+          "rank_change": -40
+        }
+      }
+    },
+    {
+      "component_id": 1,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140342,
+      "overlap": 0.644098,
+      "stored_overlap": 0.644098,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        126.0,
+        21358.0,
+        742.0,
+        21786.0
+      ],
+      "centroid_rowcol_jpg": [
+        352.59,
+        21580.83
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140342,
+          "rank": 141,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.095145,
+          "rank": 181,
+          "rank_change": 40
+        },
+        "C_full_penalty": {
+          "score": 0.049948,
+          "rank": 176,
+          "rank_change": 35
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140342,
+          "rank": 183,
+          "rank_change": 42
+        }
+      }
+    },
+    {
+      "component_id": 645,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140311,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1017.307,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3862.0,
+        20532.0,
+        3938.0,
+        20534.0
+      ],
+      "centroid_rowcol_jpg": [
+        3900.0,
+        20532.97
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140311,
+          "rank": 142,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.140311,
+          "rank": 99,
+          "rank_change": -43
+        },
+        "C_full_penalty": {
+          "score": 0.140311,
+          "rank": 95,
+          "rank_change": -47
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140311,
+          "rank": 101,
+          "rank_change": -41
+        }
+      }
+    },
+    {
+      "component_id": 882,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140248,
+      "overlap": 0.436782,
+      "stored_overlap": 0.436782,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4460.0,
+        7786.0,
+        4464.0,
+        7870.0
+      ],
+      "centroid_rowcol_jpg": [
+        4461.45,
+        7827.54
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140248,
+          "rank": 143,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.109619,
+          "rank": 159,
+          "rank_change": 16
+        },
+        "C_full_penalty": {
+          "score": 0.07899,
+          "rank": 158,
+          "rank_change": 15
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140248,
+          "rank": 184,
+          "rank_change": 41
+        }
+      }
+    },
+    {
+      "component_id": 546,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140199,
+      "overlap": 0.244898,
+      "stored_overlap": 0.244898,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3340.0,
+        15760.0,
+        3430.0,
+        15792.0
+      ],
+      "centroid_rowcol_jpg": [
+        3381.96,
+        15770.67
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140199,
+          "rank": 144,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.123032,
+          "rank": 150,
+          "rank_change": 6
+        },
+        "C_full_penalty": {
+          "score": 0.105865,
+          "rank": 146,
+          "rank_change": 2
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140199,
+          "rank": 185,
+          "rank_change": 41
+        }
+      }
+    },
+    {
+      "component_id": 783,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140097,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 897.02,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4184.0,
+        19440.0,
+        4262.0,
+        19442.0
+      ],
+      "centroid_rowcol_jpg": [
+        4224.08,
+        19440.43
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140097,
+          "rank": 145,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.140097,
+          "rank": 100,
+          "rank_change": -45
+        },
+        "C_full_penalty": {
+          "score": 0.140097,
+          "rank": 96,
+          "rank_change": -49
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140097,
+          "rank": 102,
+          "rank_change": -43
+        }
+      }
+    },
+    {
+      "component_id": 794,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140044,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 866.707,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4208.0,
+        20798.0,
+        4212.0,
+        20934.0
+      ],
+      "centroid_rowcol_jpg": [
+        4208.99,
+        20867.49
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140044,
+          "rank": 146,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.140044,
+          "rank": 101,
+          "rank_change": -45
+        },
+        "C_full_penalty": {
+          "score": 0.140044,
+          "rank": 97,
+          "rank_change": -49
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140044,
+          "rank": 103,
+          "rank_change": -43
+        }
+      }
+    },
+    {
+      "component_id": 601,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140029,
+      "overlap": 0.633962,
+      "stored_overlap": 0.633962,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3664.0,
+        1456.0,
+        3844.0,
+        1466.0
+      ],
+      "centroid_rowcol_jpg": [
+        3740.01,
+        1462.88
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140029,
+          "rank": 147,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.095642,
+          "rank": 180,
+          "rank_change": 33
+        },
+        "C_full_penalty": {
+          "score": 0.051256,
+          "rank": 175,
+          "rank_change": 28
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140029,
+          "rank": 186,
+          "rank_change": 39
+        }
+      }
+    },
+    {
+      "component_id": 501,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.140003,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 894.4,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3022.0,
+        11296.0,
+        3104.0,
+        11296.0
+      ],
+      "centroid_rowcol_jpg": [
+        3063.0,
+        11296.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.140003,
+          "rank": 148,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.140003,
+          "rank": 102,
+          "rank_change": -46
+        },
+        "C_full_penalty": {
+          "score": 0.140003,
+          "rank": 98,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.140003,
+          "rank": 104,
+          "rank_change": -44
+        }
+      }
+    },
+    {
+      "component_id": 527,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.139768,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 357.918,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3248.0,
+        6892.0,
+        3250.0,
+        7058.0
+      ],
+      "centroid_rowcol_jpg": [
+        3249.08,
+        6972.12
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.139768,
+          "rank": 149,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.139768,
+          "rank": 103,
+          "rank_change": -46
+        },
+        "C_full_penalty": {
+          "score": 0.139768,
+          "rank": 99,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.139768,
+          "rank": 105,
+          "rank_change": -44
+        }
+      }
+    },
+    {
+      "component_id": 365,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.139705,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1023.158,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2434.0,
+        20012.0,
+        2434.0,
+        20092.0
+      ],
+      "centroid_rowcol_jpg": [
+        2434.0,
+        20052.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.139705,
+          "rank": 150,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.139705,
+          "rank": 104,
+          "rank_change": -46
+        },
+        "C_full_penalty": {
+          "score": 0.139705,
+          "rank": 100,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.139705,
+          "rank": 106,
+          "rank_change": -44
+        }
+      }
+    },
+    {
+      "component_id": 748,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.139635,
+      "overlap": 0.86735,
+      "stored_overlap": 0.86735,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4120.0,
+        17038.0,
+        4690.0,
+        17260.0
+      ],
+      "centroid_rowcol_jpg": [
+        4473.77,
+        17201.04
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.139635,
+          "rank": 151,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.079079,
+          "rank": 198,
+          "rank_change": 47
+        },
+        "C_full_penalty": {
+          "score": 0.018523,
+          "rank": 195,
+          "rank_change": 44
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.139635,
+          "rank": 187,
+          "rank_change": 36
+        }
+      }
+    },
+    {
+      "component_id": 110,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.139556,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 12.042,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        840.0,
+        18102.0,
+        950.0,
+        18106.0
+      ],
+      "centroid_rowcol_jpg": [
+        899.81,
+        18103.79
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.139556,
+          "rank": 152,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.139556,
+          "rank": 105,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.139556,
+          "rank": 101,
+          "rank_change": -51
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.139556,
+          "rank": 107,
+          "rank_change": -45
+        }
+      }
+    },
+    {
+      "component_id": 303,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.139473,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 284.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2092.0,
+        17860.0,
+        2160.0,
+        17994.0
+      ],
+      "centroid_rowcol_jpg": [
+        2130.7,
+        17911.64
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.139473,
+          "rank": 153,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.139473,
+          "rank": 106,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.139473,
+          "rank": 102,
+          "rank_change": -51
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.139473,
+          "rank": 108,
+          "rank_change": -45
+        }
+      }
+    },
+    {
+      "component_id": 867,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.139431,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 750.003,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4418.0,
+        4332.0,
+        4422.0,
+        4528.0
+      ],
+      "centroid_rowcol_jpg": [
+        4420.12,
+        4427.27
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.139431,
+          "rank": 154,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.139431,
+          "rank": 107,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.139431,
+          "rank": 104,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.139431,
+          "rank": 109,
+          "rank_change": -45
+        }
+      }
+    },
+    {
+      "component_id": 358,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.139194,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 295.169,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2384.0,
+        22412.0,
+        2386.0,
+        22458.0
+      ],
+      "centroid_rowcol_jpg": [
+        2384.86,
+        22435.86
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.139194,
+          "rank": 155,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.139194,
+          "rank": 108,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.139194,
+          "rank": 105,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.139194,
+          "rank": 110,
+          "rank_change": -45
+        }
+      }
+    },
+    {
+      "component_id": 1100,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.138605,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 76.158,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5720.0,
+        8986.0,
+        5800.0,
+        8986.0
+      ],
+      "centroid_rowcol_jpg": [
+        5760.0,
+        8986.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.138605,
+          "rank": 156,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.138605,
+          "rank": 109,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.138605,
+          "rank": 107,
+          "rank_change": -49
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.138605,
+          "rank": 111,
+          "rank_change": -45
+        }
+      }
+    },
+    {
+      "component_id": 913,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.1385,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 427.142,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4592.0,
+        6538.0,
+        4710.0,
+        6542.0
+      ],
+      "centroid_rowcol_jpg": [
+        4653.75,
+        6540.54
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.1385,
+          "rank": 157,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.1385,
+          "rank": 110,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.1385,
+          "rank": 108,
+          "rank_change": -49
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.1385,
+          "rank": 112,
+          "rank_change": -45
+        }
+      }
+    },
+    {
+      "component_id": 848,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.138443,
+      "overlap": 0.382178,
+      "stored_overlap": 0.382178,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4370.0,
+        1262.0,
+        4602.0,
+        1278.0
+      ],
+      "centroid_rowcol_jpg": [
+        4488.36,
+        1271.96
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.138443,
+          "rank": 158,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.111988,
+          "rank": 155,
+          "rank_change": -3
+        },
+        "C_full_penalty": {
+          "score": 0.085533,
+          "rank": 155,
+          "rank_change": -3
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.138443,
+          "rank": 188,
+          "rank_change": 30
+        }
+      }
+    },
+    {
+      "component_id": 911,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.138208,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 620.311,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4582.0,
+        3732.0,
+        4692.0,
+        3732.0
+      ],
+      "centroid_rowcol_jpg": [
+        4637.0,
+        3732.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.138208,
+          "rank": 159,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.138208,
+          "rank": 111,
+          "rank_change": -48
+        },
+        "C_full_penalty": {
+          "score": 0.138208,
+          "rank": 109,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.138208,
+          "rank": 113,
+          "rank_change": -46
+        }
+      }
+    },
+    {
+      "component_id": 453,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.138158,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 512.978,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2794.0,
+        22062.0,
+        2798.0,
+        22134.0
+      ],
+      "centroid_rowcol_jpg": [
+        2795.3,
+        22096.1
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.138158,
+          "rank": 160,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.138158,
+          "rank": 112,
+          "rank_change": -48
+        },
+        "C_full_penalty": {
+          "score": 0.138158,
+          "rank": 110,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.138158,
+          "rank": 114,
+          "rank_change": -46
+        }
+      }
+    },
+    {
+      "component_id": 986,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.138139,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 174.889,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4906.0,
+        7702.0,
+        5058.0,
+        7708.0
+      ],
+      "centroid_rowcol_jpg": [
+        4991.58,
+        7704.83
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.138139,
+          "rank": 161,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.138139,
+          "rank": 114,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.138139,
+          "rank": 111,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.138139,
+          "rank": 115,
+          "rank_change": -46
+        }
+      }
+    },
+    {
+      "component_id": 422,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.138111,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 4.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2618.0,
+        9390.0,
+        2714.0,
+        9390.0
+      ],
+      "centroid_rowcol_jpg": [
+        2666.0,
+        9390.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.138111,
+          "rank": 162,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.138111,
+          "rank": 115,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.138111,
+          "rank": 112,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.138111,
+          "rank": 116,
+          "rank_change": -46
+        }
+      }
+    },
+    {
+      "component_id": 535,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.138098,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1126.159,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3286.0,
+        5180.0,
+        3372.0,
+        5182.0
+      ],
+      "centroid_rowcol_jpg": [
+        3327.0,
+        5181.52
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.138098,
+          "rank": 163,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.138098,
+          "rank": 116,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.138098,
+          "rank": 113,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.138098,
+          "rank": 117,
+          "rank_change": -46
+        }
+      }
+    },
+    {
+      "component_id": 664,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.13804,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 963.229,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3910.0,
+        20142.0,
+        4046.0,
+        20314.0
+      ],
+      "centroid_rowcol_jpg": [
+        3954.0,
+        20245.18
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.13804,
+          "rank": 164,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.13804,
+          "rank": 117,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.13804,
+          "rank": 114,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.13804,
+          "rank": 118,
+          "rank_change": -46
+        }
+      }
+    },
+    {
+      "component_id": 851,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.13794,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 769.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4374.0,
+        4276.0,
+        4384.0,
+        4444.0
+      ],
+      "centroid_rowcol_jpg": [
+        4379.26,
+        4353.33
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.13794,
+          "rank": 165,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.13794,
+          "rank": 118,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.13794,
+          "rank": 115,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.13794,
+          "rank": 119,
+          "rank_change": -46
+        }
+      }
+    },
+    {
+      "component_id": 265,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.137921,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 151.321,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1774.0,
+        10468.0,
+        1852.0,
+        10470.0
+      ],
+      "centroid_rowcol_jpg": [
+        1809.45,
+        10469.29
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.137921,
+          "rank": 166,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.137921,
+          "rank": 119,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.137921,
+          "rank": 116,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.137921,
+          "rank": 120,
+          "rank_change": -46
+        }
+      }
+    },
+    {
+      "component_id": 677,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.137685,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 988.071,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3954.0,
+        4628.0,
+        3960.0,
+        4878.0
+      ],
+      "centroid_rowcol_jpg": [
+        3957.68,
+        4761.16
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.137685,
+          "rank": 167,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.137685,
+          "rank": 120,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.137685,
+          "rank": 117,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.137685,
+          "rank": 121,
+          "rank_change": -46
+        }
+      }
+    },
+    {
+      "component_id": 261,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.137529,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 753.011,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1734.0,
+        4346.0,
+        1812.0,
+        4348.0
+      ],
+      "centroid_rowcol_jpg": [
+        1773.0,
+        4347.38
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.137529,
+          "rank": 168,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.137529,
+          "rank": 121,
+          "rank_change": -47
+        },
+        "C_full_penalty": {
+          "score": 0.137529,
+          "rank": 118,
+          "rank_change": -50
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.137529,
+          "rank": 122,
+          "rank_change": -46
+        }
+      }
+    },
+    {
+      "component_id": 640,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.137504,
+      "overlap": 0.828446,
+      "stored_overlap": 0.828446,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3850.0,
+        17084.0,
+        4012.0,
+        17218.0
+      ],
+      "centroid_rowcol_jpg": [
+        3909.89,
+        17190.84
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.137504,
+          "rank": 169,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.080547,
+          "rank": 197,
+          "rank_change": 28
+        },
+        "C_full_penalty": {
+          "score": 0.023589,
+          "rank": 194,
+          "rank_change": 25
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.137504,
+          "rank": 189,
+          "rank_change": 20
+        }
+      }
+    },
+    {
+      "component_id": 585,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.137369,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1154.041,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3532.0,
+        19884.0,
+        3696.0,
+        19888.0
+      ],
+      "centroid_rowcol_jpg": [
+        3617.2,
+        19885.92
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.137369,
+          "rank": 170,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.137369,
+          "rank": 122,
+          "rank_change": -48
+        },
+        "C_full_penalty": {
+          "score": 0.137369,
+          "rank": 119,
+          "rank_change": -51
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.137369,
+          "rank": 123,
+          "rank_change": -47
+        }
+      }
+    },
+    {
+      "component_id": 64,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.137254,
+      "overlap": 0.441176,
+      "stored_overlap": 0.441176,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        576.0,
+        2384.0,
+        694.0,
+        2388.0
+      ],
+      "centroid_rowcol_jpg": [
+        632.65,
+        2386.2
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.137254,
+          "rank": 171,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.106977,
+          "rank": 164,
+          "rank_change": -7
+        },
+        "C_full_penalty": {
+          "score": 0.076701,
+          "rank": 161,
+          "rank_change": -10
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.137254,
+          "rank": 190,
+          "rank_change": 19
+        }
+      }
+    },
+    {
+      "component_id": 504,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.137243,
+      "overlap": 0.682893,
+      "stored_overlap": 0.682893,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3038.0,
+        9302.0,
+        3274.0,
+        9324.0
+      ],
+      "centroid_rowcol_jpg": [
+        3167.98,
+        9313.14
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.137243,
+          "rank": 172,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.090382,
+          "rank": 189,
+          "rank_change": 17
+        },
+        "C_full_penalty": {
+          "score": 0.043521,
+          "rank": 179,
+          "rank_change": 7
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.137243,
+          "rank": 191,
+          "rank_change": 19
+        }
+      }
+    },
+    {
+      "component_id": 876,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.137087,
+      "overlap": 0.405405,
+      "stored_overlap": 0.405405,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4446.0,
+        7728.0,
+        4448.0,
+        7808.0
+      ],
+      "centroid_rowcol_jpg": [
+        4446.89,
+        7768.89
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.137087,
+          "rank": 173,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.109299,
+          "rank": 162,
+          "rank_change": -11
+        },
+        "C_full_penalty": {
+          "score": 0.081511,
+          "rank": 156,
+          "rank_change": -17
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.137087,
+          "rank": 192,
+          "rank_change": 19
+        }
+      }
+    },
+    {
+      "component_id": 1129,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.137085,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 62.769,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5888.0,
+        12196.0,
+        5996.0,
+        12198.0
+      ],
+      "centroid_rowcol_jpg": [
+        5938.29,
+        12196.67
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.137085,
+          "rank": 174,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.137085,
+          "rank": 123,
+          "rank_change": -51
+        },
+        "C_full_penalty": {
+          "score": 0.137085,
+          "rank": 120,
+          "rank_change": -54
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.137085,
+          "rank": 124,
+          "rank_change": -50
+        }
+      }
+    },
+    {
+      "component_id": 558,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.136581,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1178.042,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3372.0,
+        4162.0,
+        3566.0,
+        4164.0
+      ],
+      "centroid_rowcol_jpg": [
+        3458.67,
+        4163.14
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.136581,
+          "rank": 175,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.136581,
+          "rank": 124,
+          "rank_change": -51
+        },
+        "C_full_penalty": {
+          "score": 0.136581,
+          "rank": 121,
+          "rank_change": -54
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.136581,
+          "rank": 125,
+          "rank_change": -50
+        }
+      }
+    },
+    {
+      "component_id": 1045,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.136521,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 19.925,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        5276.0,
+        17398.0,
+        5454.0,
+        17402.0
+      ],
+      "centroid_rowcol_jpg": [
+        5366.55,
+        17399.58
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.136521,
+          "rank": 176,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.136521,
+          "rank": 125,
+          "rank_change": -51
+        },
+        "C_full_penalty": {
+          "score": 0.136521,
+          "rank": 122,
+          "rank_change": -54
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.136521,
+          "rank": 126,
+          "rank_change": -50
+        }
+      }
+    },
+    {
+      "component_id": 228,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.136508,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 40.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1480.0,
+        22276.0,
+        1574.0,
+        22276.0
+      ],
+      "centroid_rowcol_jpg": [
+        1527.0,
+        22276.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.136508,
+          "rank": 177,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.136508,
+          "rank": 126,
+          "rank_change": -51
+        },
+        "C_full_penalty": {
+          "score": 0.136508,
+          "rank": 123,
+          "rank_change": -54
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.136508,
+          "rank": 127,
+          "rank_change": -50
+        }
+      }
+    },
+    {
+      "component_id": 279,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.136426,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 435.753,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        1922.0,
+        11052.0,
+        2032.0,
+        11054.0
+      ],
+      "centroid_rowcol_jpg": [
+        1976.08,
+        11052.92
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.136426,
+          "rank": 178,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.136426,
+          "rank": 127,
+          "rank_change": -51
+        },
+        "C_full_penalty": {
+          "score": 0.136426,
+          "rank": 124,
+          "rank_change": -54
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.136426,
+          "rank": 128,
+          "rank_change": -50
+        }
+      }
+    },
+    {
+      "component_id": 912,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.136363,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 55.973,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4584.0,
+        7368.0,
+        4674.0,
+        7368.0
+      ],
+      "centroid_rowcol_jpg": [
+        4629.0,
+        7368.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.136363,
+          "rank": 179,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.136363,
+          "rank": 128,
+          "rank_change": -51
+        },
+        "C_full_penalty": {
+          "score": 0.136363,
+          "rank": 125,
+          "rank_change": -54
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.136363,
+          "rank": 129,
+          "rank_change": -50
+        }
+      }
+    },
+    {
+      "component_id": 894,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.13631,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 105.309,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4490.0,
+        17494.0,
+        4492.0,
+        17570.0
+      ],
+      "centroid_rowcol_jpg": [
+        4490.89,
+        17529.2
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.13631,
+          "rank": 180,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.13631,
+          "rank": 129,
+          "rank_change": -51
+        },
+        "C_full_penalty": {
+          "score": 0.13631,
+          "rank": 126,
+          "rank_change": -54
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.13631,
+          "rank": 130,
+          "rank_change": -50
+        }
+      }
+    },
+    {
+      "component_id": 927,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.135975,
+      "overlap": 0.432967,
+      "stored_overlap": 0.432967,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4650.0,
+        9172.0,
+        4788.0,
+        9310.0
+      ],
+      "centroid_rowcol_jpg": [
+        4681.46,
+        9227.17
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.135975,
+          "rank": 181,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.106539,
+          "rank": 165,
+          "rank_change": -16
+        },
+        "C_full_penalty": {
+          "score": 0.077102,
+          "rank": 160,
+          "rank_change": -21
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.135975,
+          "rank": 193,
+          "rank_change": 12
+        }
+      }
+    },
+    {
+      "component_id": 893,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.135886,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 766.001,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4486.0,
+        12954.0,
+        4570.0,
+        12954.0
+      ],
+      "centroid_rowcol_jpg": [
+        4528.0,
+        12954.0
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.135886,
+          "rank": 182,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.135886,
+          "rank": 131,
+          "rank_change": -51
+        },
+        "C_full_penalty": {
+          "score": 0.135886,
+          "rank": 127,
+          "rank_change": -55
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.135886,
+          "rank": 131,
+          "rank_change": -51
+        }
+      }
+    },
+    {
+      "component_id": 354,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.135771,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1024.769,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2364.0,
+        4260.0,
+        2368.0,
+        4362.0
+      ],
+      "centroid_rowcol_jpg": [
+        2365.74,
+        4311.94
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.135771,
+          "rank": 183,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.135771,
+          "rank": 132,
+          "rank_change": -51
+        },
+        "C_full_penalty": {
+          "score": 0.135771,
+          "rank": 128,
+          "rank_change": -55
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.135771,
+          "rank": 132,
+          "rank_change": -51
+        }
+      }
+    },
+    {
+      "component_id": 866,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.135649,
+      "overlap": 0.087838,
+      "stored_overlap": 0.087838,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4418.0,
+        1314.0,
+        4558.0,
+        1326.0
+      ],
+      "centroid_rowcol_jpg": [
+        4491.01,
+        1320.61
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.135649,
+          "rank": 184,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.129691,
+          "rank": 144,
+          "rank_change": -40
+        },
+        "C_full_penalty": {
+          "score": 0.123734,
+          "rank": 143,
+          "rank_change": -41
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.135649,
+          "rank": 133,
+          "rank_change": -51
+        }
+      }
+    },
+    {
+      "component_id": 871,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.135154,
+      "overlap": 0.258537,
+      "stored_overlap": 0.258537,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4428.0,
+        1290.0,
+        4600.0,
+        1298.0
+      ],
+      "centroid_rowcol_jpg": [
+        4501.4,
+        1295.14
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.135154,
+          "rank": 185,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.117683,
+          "rank": 154,
+          "rank_change": -31
+        },
+        "C_full_penalty": {
+          "score": 0.100212,
+          "rank": 149,
+          "rank_change": -36
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.135154,
+          "rank": 194,
+          "rank_change": 9
+        }
+      }
+    },
+    {
+      "component_id": 879,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.135125,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 595.063,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4454.0,
+        21826.0,
+        4456.0,
+        21952.0
+      ],
+      "centroid_rowcol_jpg": [
+        4454.03,
+        21889.05
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.135125,
+          "rank": 186,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.135125,
+          "rank": 133,
+          "rank_change": -53
+        },
+        "C_full_penalty": {
+          "score": 0.135125,
+          "rank": 129,
+          "rank_change": -57
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.135125,
+          "rank": 134,
+          "rank_change": -52
+        }
+      }
+    },
+    {
+      "component_id": 182,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.1351,
+      "overlap": 0.78607,
+      "stored_overlap": 0.78607,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        1228.0,
+        9246.0,
+        1426.0,
+        9262.0
+      ],
+      "centroid_rowcol_jpg": [
+        1323.55,
+        9253.02
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.1351,
+          "rank": 187,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.082001,
+          "rank": 195,
+          "rank_change": 8
+        },
+        "C_full_penalty": {
+          "score": 0.028902,
+          "rank": 191,
+          "rank_change": 4
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.1351,
+          "rank": 195,
+          "rank_change": 8
+        }
+      }
+    },
+    {
+      "component_id": 938,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.135087,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 283.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4688.0,
+        17982.0,
+        4830.0,
+        17988.0
+      ],
+      "centroid_rowcol_jpg": [
+        4762.68,
+        17984.12
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.135087,
+          "rank": 188,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.135087,
+          "rank": 134,
+          "rank_change": -54
+        },
+        "C_full_penalty": {
+          "score": 0.135087,
+          "rank": 130,
+          "rank_change": -58
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.135087,
+          "rank": 135,
+          "rank_change": -53
+        }
+      }
+    },
+    {
+      "component_id": 395,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.134945,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 1091.37,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2546.0,
+        4156.0,
+        2552.0,
+        4346.0
+      ],
+      "centroid_rowcol_jpg": [
+        2548.71,
+        4254.01
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.134945,
+          "rank": 189,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.134945,
+          "rank": 135,
+          "rank_change": -54
+        },
+        "C_full_penalty": {
+          "score": 0.134945,
+          "rank": 131,
+          "rank_change": -58
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.134945,
+          "rank": 136,
+          "rank_change": -53
+        }
+      }
+    },
+    {
+      "component_id": 522,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.13483,
+      "overlap": 0.353383,
+      "stored_overlap": 0.353383,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3216.0,
+        9380.0,
+        3294.0,
+        9388.0
+      ],
+      "centroid_rowcol_jpg": [
+        3256.11,
+        9384.57
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.13483,
+          "rank": 190,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.111007,
+          "rank": 157,
+          "rank_change": -33
+        },
+        "C_full_penalty": {
+          "score": 0.087183,
+          "rank": 154,
+          "rank_change": -36
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.13483,
+          "rank": 196,
+          "rank_change": 6
+        }
+      }
+    },
+    {
+      "component_id": 372,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.134729,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 9.0,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2456.0,
+        7518.0,
+        2566.0,
+        7520.0
+      ],
+      "centroid_rowcol_jpg": [
+        2508.23,
+        7518.94
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.134729,
+          "rank": 191,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.134729,
+          "rank": 136,
+          "rank_change": -55
+        },
+        "C_full_penalty": {
+          "score": 0.134729,
+          "rank": 132,
+          "rank_change": -59
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.134729,
+          "rank": 137,
+          "rank_change": -54
+        }
+      }
+    },
+    {
+      "component_id": 554,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.134677,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 325.994,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3360.0,
+        17908.0,
+        3570.0,
+        17912.0
+      ],
+      "centroid_rowcol_jpg": [
+        3470.83,
+        17910.3
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.134677,
+          "rank": 192,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.134677,
+          "rank": 137,
+          "rank_change": -55
+        },
+        "C_full_penalty": {
+          "score": 0.134677,
+          "rank": 133,
+          "rank_change": -59
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.134677,
+          "rank": 138,
+          "rank_change": -54
+        }
+      }
+    },
+    {
+      "component_id": 124,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.133966,
+      "overlap": 0.718693,
+      "stored_overlap": 0.718693,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        922.0,
+        14006.0,
+        990.0,
+        14186.0
+      ],
+      "centroid_rowcol_jpg": [
+        948.88,
+        14111.89
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.133966,
+          "rank": 193,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.085826,
+          "rank": 194,
+          "rank_change": 1
+        },
+        "C_full_penalty": {
+          "score": 0.037686,
+          "rank": 184,
+          "rank_change": -9
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.133966,
+          "rank": 197,
+          "rank_change": 4
+        }
+      }
+    },
+    {
+      "component_id": 362,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.133847,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 572.071,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        2396.0,
+        13426.0,
+        2548.0,
+        13430.0
+      ],
+      "centroid_rowcol_jpg": [
+        2476.43,
+        13428.18
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.133847,
+          "rank": 194,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.133847,
+          "rank": 138,
+          "rank_change": -56
+        },
+        "C_full_penalty": {
+          "score": 0.133847,
+          "rank": 135,
+          "rank_change": -59
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.133847,
+          "rank": 139,
+          "rank_change": -55
+        }
+      }
+    },
+    {
+      "component_id": 944,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.133685,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 565.305,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4698.0,
+        3228.0,
+        4796.0,
+        3232.0
+      ],
+      "centroid_rowcol_jpg": [
+        4752.63,
+        3229.75
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.133685,
+          "rank": 195,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.133685,
+          "rank": 139,
+          "rank_change": -56
+        },
+        "C_full_penalty": {
+          "score": 0.133685,
+          "rank": 136,
+          "rank_change": -59
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.133685,
+          "rank": 140,
+          "rank_change": -55
+        }
+      }
+    },
+    {
+      "component_id": 686,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.133645,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 976.664,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        3988.0,
+        4786.0,
+        3990.0,
+        4874.0
+      ],
+      "centroid_rowcol_jpg": [
+        3989.64,
+        4830.55
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.133645,
+          "rank": 196,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.133645,
+          "rank": 140,
+          "rank_change": -56
+        },
+        "C_full_penalty": {
+          "score": 0.133645,
+          "rank": 137,
+          "rank_change": -59
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.133645,
+          "rank": 141,
+          "rank_change": -55
+        }
+      }
+    },
+    {
+      "component_id": 91,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.133622,
+      "overlap": 0.520243,
+      "stored_overlap": 0.520243,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        754.0,
+        13940.0,
+        824.0,
+        14128.0
+      ],
+      "centroid_rowcol_jpg": [
+        805.83,
+        14027.14
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.133622,
+          "rank": 197,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.098864,
+          "rank": 174,
+          "rank_change": -23
+        },
+        "C_full_penalty": {
+          "score": 0.064106,
+          "rank": 167,
+          "rank_change": -30
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.133622,
+          "rank": 198,
+          "rank_change": 1
+        }
+      }
+    },
+    {
+      "component_id": 515,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.133606,
+      "overlap": 0.535714,
+      "stored_overlap": 0.535714,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        3196.0,
+        9324.0,
+        3396.0,
+        9336.0
+      ],
+      "centroid_rowcol_jpg": [
+        3284.54,
+        9332.37
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.133606,
+          "rank": 198,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.097819,
+          "rank": 175,
+          "rank_change": -23
+        },
+        "C_full_penalty": {
+          "score": 0.062031,
+          "rank": 169,
+          "rank_change": -29
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.133606,
+          "rank": 199,
+          "rank_change": 1
+        }
+      }
+    },
+    {
+      "component_id": 781,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.133515,
+      "overlap": 0.50383,
+      "stored_overlap": 0.50383,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "bbox_rowcol_jpg": [
+        4180.0,
+        1172.0,
+        4482.0,
+        1444.0
+      ],
+      "centroid_rowcol_jpg": [
+        4332.92,
+        1331.39
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.133515,
+          "rank": 199,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.099881,
+          "rank": 172,
+          "rank_change": -27
+        },
+        "C_full_penalty": {
+          "score": 0.066246,
+          "rank": 166,
+          "rank_change": -33
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.133515,
+          "rank": 200,
+          "rank_change": 1
+        }
+      }
+    },
+    {
+      "component_id": 868,
+      "calibration_group": "unlabelled",
+      "raw_score": 0.133379,
+      "overlap": 0.0,
+      "stored_overlap": 0.0,
+      "background_distance_px": 481.664,
+      "touches_render_background": false,
+      "bbox_rowcol_jpg": [
+        4418.0,
+        18360.0,
+        4502.0,
+        18362.0
+      ],
+      "centroid_rowcol_jpg": [
+        4464.41,
+        18360.74
+      ],
+      "policies": {
+        "A_raw": {
+          "score": 0.133379,
+          "rank": 200,
+          "rank_change": 0
+        },
+        "B_half_penalty": {
+          "score": 0.133379,
+          "rank": 142,
+          "rank_change": -58
+        },
+        "C_full_penalty": {
+          "score": 0.133379,
+          "rank": 139,
+          "rank_change": -61
+        },
+        "D_hard_flag_0_20": {
+          "score": 0.133379,
+          "rank": 142,
+          "rank_change": -58
+        }
+      }
+    }
+  ]
+}

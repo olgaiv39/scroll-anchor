@@ -167,6 +167,23 @@ scroll-anchor render-report \
 A published example run (PHercParis4 segment w110-112) is recorded in
 [`results/pherc-render/`](results/pherc-render/README.md)
 
+### Render-background ranking-policy audit
+
+Render-background diagnostics exposed several top-ranked candidates dominated by
+black render background rather than papyrus texture. An offline audit compared
+raw, half-penalty, full-penalty, and hard-split review orders on an already
+exported run, without rerunning detection. The half penalty
+(`raw_score * (1 - 0.5 * overlap)`) was the least aggressive sufficient tested
+policy: it cleared the known background cases out of the top 20 while keeping the
+interior controls prominent.
+
+It was **not adopted**, because the evaluation used a single render and
+substantially reordered the full candidate list (Spearman 0.599 against raw
+order; 129 of 200 candidates moved by more than 20 positions). Runtime scores and
+ranking are unchanged; render-background overlap stays a diagnostic field for
+reviewers to read alongside the score. Details, artifacts, and limitations:
+[`results/pherc-ranking-policy-audit/`](results/pherc-ranking-policy-audit/README.md)
+
 What this workflow **cannot** report, by construction: confirmed sheet switches,
 true 3D drift, signed error along a surface normal, voxel displacement, or corrected
 surface coordinates. A flat render has no through-thickness CT evidence and no

@@ -1,0 +1,1453 @@
+{
+  "format": "scroll-anchor.ranking-policy-audit-summary/v0",
+  "analysis_only": true,
+  "scope_note": "Offline comparison of candidate review ORDER only. The detector score, the analyze-render outputs and the ScrollAnchor code are unchanged. No candidate is classified here as a confirmed false positive.",
+  "verified_input_counts": {
+    "source_run_directory": "pherc-render-combined-diagnostics-20260731",
+    "source_filename": "PHercParis4-20260623163339-2.4um-0.22m-78keV-volume-20260411134726-alpha-overlay-combined-ds8.jpg",
+    "n_regions_total": 1152,
+    "n_regions_above_threshold": 428,
+    "n_regions_exported": 200,
+    "n_regions_suppressed": 228,
+    "n_candidates_loaded_from_regions_json": 200,
+    "exported_score_range_metadata": [
+      0.133379,
+      0.200628
+    ],
+    "observed_raw_score_range": [
+      0.133379,
+      0.200628
+    ],
+    "summary_json_counts_match_metadata": true,
+    "exported_is_ranked_subset": true,
+    "raw_rank_reproduced_by_deterministic_sort": true,
+    "raw_order_is_descending_by_score": true,
+    "n_unique_component_ids": 200,
+    "overlap_values_outside_0_1": [],
+    "n_overlap_values_outside_0_1": 0,
+    "component_ids_touching_background_with_zero_overlap": [
+      9
+    ],
+    "component_ids_with_overlap_but_not_touching": []
+  },
+  "overlap_distribution": {
+    "n_candidates": 200,
+    "n_overlap_eq_0": 133,
+    "n_overlap_gt_0": 67,
+    "n_overlap_lt_0_01": 134,
+    "n_overlap_in_0_to_0_20_exclusive_of_zero": 9,
+    "n_overlap_ge_0_20": 58,
+    "n_overlap_ge_0_50": 39,
+    "n_touches_render_background": 68,
+    "max_overlap": 0.933594
+  },
+  "coordinate_handling": {
+    "source_jpg_coordinates_available_in_regions_json": true,
+    "field_used": "bbox_rowcol_jpg",
+    "transformation_applied_by_this_audit": "none; bbox_rowcol_jpg used directly as source-JPG (row, col) coordinates",
+    "verification": "bbox_rowcol_jpg == bbox_rowcol_processed * scale_processed_to_jpg_rowcol [2.0, 2.0]",
+    "n_bboxes_failing_verification": 0,
+    "jpg_shape_rowcol": [
+      6270,
+      24030
+    ],
+    "processed_shape_rowcol": [
+      3135,
+      12015
+    ],
+    "orientation_note": "no rotation, flip, or axis swap; rows=Y, cols=X throughout"
+  },
+  "source_image_read": {
+    "path": "PHercParis4-20260623163339-2.4um-0.22m-78keV-volume-20260411134726-alpha-overlay-combined-ds8.jpg",
+    "decoded_once": true,
+    "decoded_mode": "L",
+    "decoded_size_wh": [
+      24030,
+      6270
+    ],
+    "shape_matches_metadata_jpg_shape_rowcol": true
+  },
+  "policy_formulas": {
+    "A_raw": "review_score_raw = raw_score",
+    "B_half_penalty": "review_score_half = raw_score * (1 - 0.5 * overlap)",
+    "C_full_penalty": "review_score_full = raw_score * (1 - overlap)",
+    "D_hard_flag_0_20": "overlap < 0.20 ranked first by raw score; overlap >= 0.20 appended afterwards by raw score. COMPARISON ONLY - not proposed as production behaviour.",
+    "overlap_definition": "render_background_overlap_fraction, clamped defensively to [0, 1]",
+    "tie_break": "higher adjusted score, then higher raw score, then lower component id"
+  },
+  "top_k_statistics": {
+    "A_raw": {
+      "top_10": {
+        "k": 10,
+        "n_overlap_gt_0": 4,
+        "n_overlap_ge_0_20": 4,
+        "n_overlap_ge_0_50": 3,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [],
+        "leaving_vs_raw": [],
+        "n_entering": 0,
+        "n_leaving": 0
+      },
+      "top_20": {
+        "k": 20,
+        "n_overlap_gt_0": 6,
+        "n_overlap_ge_0_20": 6,
+        "n_overlap_ge_0_50": 5,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [],
+        "leaving_vs_raw": [],
+        "n_entering": 0,
+        "n_leaving": 0
+      },
+      "top_50": {
+        "k": 50,
+        "n_overlap_gt_0": 14,
+        "n_overlap_ge_0_20": 11,
+        "n_overlap_ge_0_50": 9,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [],
+        "leaving_vs_raw": [],
+        "n_entering": 0,
+        "n_leaving": 0
+      }
+    },
+    "B_half_penalty": {
+      "top_10": {
+        "k": 10,
+        "n_overlap_gt_0": 0,
+        "n_overlap_ge_0_20": 0,
+        "n_overlap_ge_0_50": 0,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [
+          {
+            "component_id": 690,
+            "original_rank": 11,
+            "policy_rank": 7,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 507,
+            "original_rank": 12,
+            "policy_rank": 8,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 605,
+            "original_rank": 13,
+            "policy_rank": 9,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 533,
+            "original_rank": 14,
+            "policy_rank": 10,
+            "overlap": 0.0
+          }
+        ],
+        "leaving_vs_raw": [
+          {
+            "component_id": 215,
+            "original_rank": 5,
+            "policy_rank": 176,
+            "overlap": 0.929032
+          },
+          {
+            "component_id": 1064,
+            "original_rank": 6,
+            "policy_rank": 168,
+            "overlap": 0.835938
+          },
+          {
+            "component_id": 795,
+            "original_rank": 8,
+            "policy_rank": 151,
+            "overlap": 0.6
+          },
+          {
+            "component_id": 965,
+            "original_rank": 10,
+            "policy_rank": 58,
+            "overlap": 0.240385
+          }
+        ],
+        "n_entering": 4,
+        "n_leaving": 4
+      },
+      "top_20": {
+        "k": 20,
+        "n_overlap_gt_0": 1,
+        "n_overlap_ge_0_20": 0,
+        "n_overlap_ge_0_50": 0,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [
+          {
+            "component_id": 436,
+            "original_rank": 21,
+            "policy_rank": 15,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 156,
+            "original_rank": 22,
+            "policy_rank": 16,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 818,
+            "original_rank": 23,
+            "policy_rank": 17,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1008,
+            "original_rank": 24,
+            "policy_rank": 18,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1093,
+            "original_rank": 26,
+            "policy_rank": 19,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 602,
+            "original_rank": 29,
+            "policy_rank": 20,
+            "overlap": 0.00369
+          }
+        ],
+        "leaving_vs_raw": [
+          {
+            "component_id": 215,
+            "original_rank": 5,
+            "policy_rank": 176,
+            "overlap": 0.929032
+          },
+          {
+            "component_id": 1064,
+            "original_rank": 6,
+            "policy_rank": 168,
+            "overlap": 0.835938
+          },
+          {
+            "component_id": 795,
+            "original_rank": 8,
+            "policy_rank": 151,
+            "overlap": 0.6
+          },
+          {
+            "component_id": 965,
+            "original_rank": 10,
+            "policy_rank": 58,
+            "overlap": 0.240385
+          },
+          {
+            "component_id": 78,
+            "original_rank": 16,
+            "policy_rank": 156,
+            "overlap": 0.654206
+          },
+          {
+            "component_id": 457,
+            "original_rank": 18,
+            "policy_rank": 190,
+            "overlap": 0.91567
+          }
+        ],
+        "n_entering": 6,
+        "n_leaving": 6
+      },
+      "top_50": {
+        "k": 50,
+        "n_overlap_gt_0": 1,
+        "n_overlap_ge_0_20": 0,
+        "n_overlap_ge_0_50": 0,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [
+          {
+            "component_id": 1068,
+            "original_rank": 51,
+            "policy_rank": 38,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 826,
+            "original_rank": 52,
+            "policy_rank": 39,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 835,
+            "original_rank": 53,
+            "policy_rank": 40,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 145,
+            "original_rank": 54,
+            "policy_rank": 41,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 318,
+            "original_rank": 55,
+            "policy_rank": 42,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1044,
+            "original_rank": 57,
+            "policy_rank": 43,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 9,
+            "original_rank": 58,
+            "policy_rank": 44,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1053,
+            "original_rank": 59,
+            "policy_rank": 45,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 296,
+            "original_rank": 60,
+            "policy_rank": 46,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 175,
+            "original_rank": 62,
+            "policy_rank": 47,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 260,
+            "original_rank": 63,
+            "policy_rank": 48,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 985,
+            "original_rank": 64,
+            "policy_rank": 49,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 982,
+            "original_rank": 65,
+            "policy_rank": 50,
+            "overlap": 0.0
+          }
+        ],
+        "leaving_vs_raw": [
+          {
+            "component_id": 215,
+            "original_rank": 5,
+            "policy_rank": 176,
+            "overlap": 0.929032
+          },
+          {
+            "component_id": 1064,
+            "original_rank": 6,
+            "policy_rank": 168,
+            "overlap": 0.835938
+          },
+          {
+            "component_id": 795,
+            "original_rank": 8,
+            "policy_rank": 151,
+            "overlap": 0.6
+          },
+          {
+            "component_id": 965,
+            "original_rank": 10,
+            "policy_rank": 58,
+            "overlap": 0.240385
+          },
+          {
+            "component_id": 78,
+            "original_rank": 16,
+            "policy_rank": 156,
+            "overlap": 0.654206
+          },
+          {
+            "component_id": 457,
+            "original_rank": 18,
+            "policy_rank": 190,
+            "overlap": 0.91567
+          },
+          {
+            "component_id": 65,
+            "original_rank": 25,
+            "policy_rank": 68,
+            "overlap": 0.170455
+          },
+          {
+            "component_id": 862,
+            "original_rank": 27,
+            "policy_rank": 183,
+            "overlap": 0.831579
+          },
+          {
+            "component_id": 121,
+            "original_rank": 28,
+            "policy_rank": 178,
+            "overlap": 0.793103
+          },
+          {
+            "component_id": 592,
+            "original_rank": 34,
+            "policy_rank": 173,
+            "overlap": 0.751323
+          },
+          {
+            "component_id": 122,
+            "original_rank": 39,
+            "policy_rank": 145,
+            "overlap": 0.390244
+          },
+          {
+            "component_id": 887,
+            "original_rank": 46,
+            "policy_rank": 171,
+            "overlap": 0.709302
+          },
+          {
+            "component_id": 34,
+            "original_rank": 50,
+            "policy_rank": 64,
+            "overlap": 0.08642
+          }
+        ],
+        "n_entering": 13,
+        "n_leaving": 13
+      }
+    },
+    "C_full_penalty": {
+      "top_10": {
+        "k": 10,
+        "n_overlap_gt_0": 0,
+        "n_overlap_ge_0_20": 0,
+        "n_overlap_ge_0_50": 0,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [
+          {
+            "component_id": 690,
+            "original_rank": 11,
+            "policy_rank": 7,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 507,
+            "original_rank": 12,
+            "policy_rank": 8,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 605,
+            "original_rank": 13,
+            "policy_rank": 9,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 533,
+            "original_rank": 14,
+            "policy_rank": 10,
+            "overlap": 0.0
+          }
+        ],
+        "leaving_vs_raw": [
+          {
+            "component_id": 215,
+            "original_rank": 5,
+            "policy_rank": 198,
+            "overlap": 0.929032
+          },
+          {
+            "component_id": 1064,
+            "original_rank": 6,
+            "policy_rank": 189,
+            "overlap": 0.835938
+          },
+          {
+            "component_id": 795,
+            "original_rank": 8,
+            "policy_rank": 165,
+            "overlap": 0.6
+          },
+          {
+            "component_id": 965,
+            "original_rank": 10,
+            "policy_rank": 140,
+            "overlap": 0.240385
+          }
+        ],
+        "n_entering": 4,
+        "n_leaving": 4
+      },
+      "top_20": {
+        "k": 20,
+        "n_overlap_gt_0": 1,
+        "n_overlap_ge_0_20": 0,
+        "n_overlap_ge_0_50": 0,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [
+          {
+            "component_id": 436,
+            "original_rank": 21,
+            "policy_rank": 15,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 156,
+            "original_rank": 22,
+            "policy_rank": 16,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 818,
+            "original_rank": 23,
+            "policy_rank": 17,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1008,
+            "original_rank": 24,
+            "policy_rank": 18,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1093,
+            "original_rank": 26,
+            "policy_rank": 19,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 602,
+            "original_rank": 29,
+            "policy_rank": 20,
+            "overlap": 0.00369
+          }
+        ],
+        "leaving_vs_raw": [
+          {
+            "component_id": 215,
+            "original_rank": 5,
+            "policy_rank": 198,
+            "overlap": 0.929032
+          },
+          {
+            "component_id": 1064,
+            "original_rank": 6,
+            "policy_rank": 189,
+            "overlap": 0.835938
+          },
+          {
+            "component_id": 795,
+            "original_rank": 8,
+            "policy_rank": 165,
+            "overlap": 0.6
+          },
+          {
+            "component_id": 965,
+            "original_rank": 10,
+            "policy_rank": 140,
+            "overlap": 0.240385
+          },
+          {
+            "component_id": 78,
+            "original_rank": 16,
+            "policy_rank": 172,
+            "overlap": 0.654206
+          },
+          {
+            "component_id": 457,
+            "original_rank": 18,
+            "policy_rank": 197,
+            "overlap": 0.91567
+          }
+        ],
+        "n_entering": 6,
+        "n_leaving": 6
+      },
+      "top_50": {
+        "k": 50,
+        "n_overlap_gt_0": 1,
+        "n_overlap_ge_0_20": 0,
+        "n_overlap_ge_0_50": 0,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [
+          {
+            "component_id": 1068,
+            "original_rank": 51,
+            "policy_rank": 38,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 826,
+            "original_rank": 52,
+            "policy_rank": 39,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 835,
+            "original_rank": 53,
+            "policy_rank": 40,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 145,
+            "original_rank": 54,
+            "policy_rank": 41,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 318,
+            "original_rank": 55,
+            "policy_rank": 42,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1044,
+            "original_rank": 57,
+            "policy_rank": 43,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 9,
+            "original_rank": 58,
+            "policy_rank": 44,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1053,
+            "original_rank": 59,
+            "policy_rank": 45,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 296,
+            "original_rank": 60,
+            "policy_rank": 46,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 175,
+            "original_rank": 62,
+            "policy_rank": 47,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 260,
+            "original_rank": 63,
+            "policy_rank": 48,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 985,
+            "original_rank": 64,
+            "policy_rank": 49,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 982,
+            "original_rank": 65,
+            "policy_rank": 50,
+            "overlap": 0.0
+          }
+        ],
+        "leaving_vs_raw": [
+          {
+            "component_id": 215,
+            "original_rank": 5,
+            "policy_rank": 198,
+            "overlap": 0.929032
+          },
+          {
+            "component_id": 1064,
+            "original_rank": 6,
+            "policy_rank": 189,
+            "overlap": 0.835938
+          },
+          {
+            "component_id": 795,
+            "original_rank": 8,
+            "policy_rank": 165,
+            "overlap": 0.6
+          },
+          {
+            "component_id": 965,
+            "original_rank": 10,
+            "policy_rank": 140,
+            "overlap": 0.240385
+          },
+          {
+            "component_id": 78,
+            "original_rank": 16,
+            "policy_rank": 172,
+            "overlap": 0.654206
+          },
+          {
+            "component_id": 457,
+            "original_rank": 18,
+            "policy_rank": 197,
+            "overlap": 0.91567
+          },
+          {
+            "component_id": 65,
+            "original_rank": 25,
+            "policy_rank": 134,
+            "overlap": 0.170455
+          },
+          {
+            "component_id": 862,
+            "original_rank": 27,
+            "policy_rank": 192,
+            "overlap": 0.831579
+          },
+          {
+            "component_id": 121,
+            "original_rank": 28,
+            "policy_rank": 187,
+            "overlap": 0.793103
+          },
+          {
+            "component_id": 592,
+            "original_rank": 34,
+            "policy_rank": 182,
+            "overlap": 0.751323
+          },
+          {
+            "component_id": 122,
+            "original_rank": 39,
+            "policy_rank": 152,
+            "overlap": 0.390244
+          },
+          {
+            "component_id": 887,
+            "original_rank": 46,
+            "policy_rank": 178,
+            "overlap": 0.709302
+          },
+          {
+            "component_id": 34,
+            "original_rank": 50,
+            "policy_rank": 89,
+            "overlap": 0.08642
+          }
+        ],
+        "n_entering": 13,
+        "n_leaving": 13
+      }
+    },
+    "D_hard_flag_0_20": {
+      "top_10": {
+        "k": 10,
+        "n_overlap_gt_0": 0,
+        "n_overlap_ge_0_20": 0,
+        "n_overlap_ge_0_50": 0,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [
+          {
+            "component_id": 690,
+            "original_rank": 11,
+            "policy_rank": 7,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 507,
+            "original_rank": 12,
+            "policy_rank": 8,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 605,
+            "original_rank": 13,
+            "policy_rank": 9,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 533,
+            "original_rank": 14,
+            "policy_rank": 10,
+            "overlap": 0.0
+          }
+        ],
+        "leaving_vs_raw": [
+          {
+            "component_id": 215,
+            "original_rank": 5,
+            "policy_rank": 143,
+            "overlap": 0.929032
+          },
+          {
+            "component_id": 1064,
+            "original_rank": 6,
+            "policy_rank": 144,
+            "overlap": 0.835938
+          },
+          {
+            "component_id": 795,
+            "original_rank": 8,
+            "policy_rank": 145,
+            "overlap": 0.6
+          },
+          {
+            "component_id": 965,
+            "original_rank": 10,
+            "policy_rank": 146,
+            "overlap": 0.240385
+          }
+        ],
+        "n_entering": 4,
+        "n_leaving": 4
+      },
+      "top_20": {
+        "k": 20,
+        "n_overlap_gt_0": 1,
+        "n_overlap_ge_0_20": 0,
+        "n_overlap_ge_0_50": 0,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [
+          {
+            "component_id": 436,
+            "original_rank": 21,
+            "policy_rank": 15,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 156,
+            "original_rank": 22,
+            "policy_rank": 16,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 818,
+            "original_rank": 23,
+            "policy_rank": 17,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1008,
+            "original_rank": 24,
+            "policy_rank": 18,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 65,
+            "original_rank": 25,
+            "policy_rank": 19,
+            "overlap": 0.170455
+          },
+          {
+            "component_id": 1093,
+            "original_rank": 26,
+            "policy_rank": 20,
+            "overlap": 0.0
+          }
+        ],
+        "leaving_vs_raw": [
+          {
+            "component_id": 215,
+            "original_rank": 5,
+            "policy_rank": 143,
+            "overlap": 0.929032
+          },
+          {
+            "component_id": 1064,
+            "original_rank": 6,
+            "policy_rank": 144,
+            "overlap": 0.835938
+          },
+          {
+            "component_id": 795,
+            "original_rank": 8,
+            "policy_rank": 145,
+            "overlap": 0.6
+          },
+          {
+            "component_id": 965,
+            "original_rank": 10,
+            "policy_rank": 146,
+            "overlap": 0.240385
+          },
+          {
+            "component_id": 78,
+            "original_rank": 16,
+            "policy_rank": 147,
+            "overlap": 0.654206
+          },
+          {
+            "component_id": 457,
+            "original_rank": 18,
+            "policy_rank": 148,
+            "overlap": 0.91567
+          }
+        ],
+        "n_entering": 6,
+        "n_leaving": 6
+      },
+      "top_50": {
+        "k": 50,
+        "n_overlap_gt_0": 3,
+        "n_overlap_ge_0_20": 0,
+        "n_overlap_ge_0_50": 0,
+        "median_overlap": 0.0,
+        "entering_vs_raw": [
+          {
+            "component_id": 1068,
+            "original_rank": 51,
+            "policy_rank": 40,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 826,
+            "original_rank": 52,
+            "policy_rank": 41,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 835,
+            "original_rank": 53,
+            "policy_rank": 42,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 145,
+            "original_rank": 54,
+            "policy_rank": 43,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 318,
+            "original_rank": 55,
+            "policy_rank": 44,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1044,
+            "original_rank": 57,
+            "policy_rank": 45,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 9,
+            "original_rank": 58,
+            "policy_rank": 46,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 1053,
+            "original_rank": 59,
+            "policy_rank": 47,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 296,
+            "original_rank": 60,
+            "policy_rank": 48,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 175,
+            "original_rank": 62,
+            "policy_rank": 49,
+            "overlap": 0.0
+          },
+          {
+            "component_id": 260,
+            "original_rank": 63,
+            "policy_rank": 50,
+            "overlap": 0.0
+          }
+        ],
+        "leaving_vs_raw": [
+          {
+            "component_id": 215,
+            "original_rank": 5,
+            "policy_rank": 143,
+            "overlap": 0.929032
+          },
+          {
+            "component_id": 1064,
+            "original_rank": 6,
+            "policy_rank": 144,
+            "overlap": 0.835938
+          },
+          {
+            "component_id": 795,
+            "original_rank": 8,
+            "policy_rank": 145,
+            "overlap": 0.6
+          },
+          {
+            "component_id": 965,
+            "original_rank": 10,
+            "policy_rank": 146,
+            "overlap": 0.240385
+          },
+          {
+            "component_id": 78,
+            "original_rank": 16,
+            "policy_rank": 147,
+            "overlap": 0.654206
+          },
+          {
+            "component_id": 457,
+            "original_rank": 18,
+            "policy_rank": 148,
+            "overlap": 0.91567
+          },
+          {
+            "component_id": 862,
+            "original_rank": 27,
+            "policy_rank": 149,
+            "overlap": 0.831579
+          },
+          {
+            "component_id": 121,
+            "original_rank": 28,
+            "policy_rank": 150,
+            "overlap": 0.793103
+          },
+          {
+            "component_id": 592,
+            "original_rank": 34,
+            "policy_rank": 151,
+            "overlap": 0.751323
+          },
+          {
+            "component_id": 122,
+            "original_rank": 39,
+            "policy_rank": 152,
+            "overlap": 0.390244
+          },
+          {
+            "component_id": 887,
+            "original_rank": 46,
+            "policy_rank": 153,
+            "overlap": 0.709302
+          }
+        ],
+        "n_entering": 11,
+        "n_leaving": 11
+      }
+    }
+  },
+  "calibration_candidate_rank_table": [
+    {
+      "original_rank": 5,
+      "component_id": 215,
+      "calibration_group": "known_background",
+      "raw_score": 0.181901,
+      "overlap": 0.929032,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "rank_policy_A_raw": 5,
+      "rank_policy_B_half": 176,
+      "rank_policy_C_full": 198,
+      "rank_policy_D_hard_0_20": 143,
+      "half_score": 0.097405,
+      "full_score": 0.012909
+    },
+    {
+      "original_rank": 6,
+      "component_id": 1064,
+      "calibration_group": "known_background",
+      "raw_score": 0.180722,
+      "overlap": 0.835938,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "rank_policy_A_raw": 6,
+      "rank_policy_B_half": 168,
+      "rank_policy_C_full": 189,
+      "rank_policy_D_hard_0_20": 144,
+      "half_score": 0.105186,
+      "full_score": 0.02965
+    },
+    {
+      "original_rank": 7,
+      "component_id": 566,
+      "calibration_group": "interior_control",
+      "raw_score": 0.178003,
+      "overlap": 0.0,
+      "background_distance_px": 661.653,
+      "touches_render_background": false,
+      "rank_policy_A_raw": 7,
+      "rank_policy_B_half": 5,
+      "rank_policy_C_full": 5,
+      "rank_policy_D_hard_0_20": 5,
+      "half_score": 0.178003,
+      "full_score": 0.178003
+    },
+    {
+      "original_rank": 8,
+      "component_id": 795,
+      "calibration_group": "known_background",
+      "raw_score": 0.172064,
+      "overlap": 0.6,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "rank_policy_A_raw": 8,
+      "rank_policy_B_half": 151,
+      "rank_policy_C_full": 165,
+      "rank_policy_D_hard_0_20": 145,
+      "half_score": 0.120445,
+      "full_score": 0.068826
+    },
+    {
+      "original_rank": 10,
+      "component_id": 965,
+      "calibration_group": "known_background",
+      "raw_score": 0.170168,
+      "overlap": 0.240385,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "rank_policy_A_raw": 10,
+      "rank_policy_B_half": 58,
+      "rank_policy_C_full": 140,
+      "rank_policy_D_hard_0_20": 146,
+      "half_score": 0.149715,
+      "full_score": 0.129262
+    },
+    {
+      "original_rank": 11,
+      "component_id": 690,
+      "calibration_group": "interior_control",
+      "raw_score": 0.168743,
+      "overlap": 0.0,
+      "background_distance_px": 981.041,
+      "touches_render_background": false,
+      "rank_policy_A_raw": 11,
+      "rank_policy_B_half": 7,
+      "rank_policy_C_full": 7,
+      "rank_policy_D_hard_0_20": 7,
+      "half_score": 0.168743,
+      "full_score": 0.168743
+    },
+    {
+      "original_rank": 15,
+      "component_id": 638,
+      "calibration_group": "ambiguous",
+      "raw_score": 0.166563,
+      "overlap": 0.0,
+      "background_distance_px": 53.0,
+      "touches_render_background": false,
+      "rank_policy_A_raw": 15,
+      "rank_policy_B_half": 11,
+      "rank_policy_C_full": 11,
+      "rank_policy_D_hard_0_20": 11,
+      "half_score": 0.166563,
+      "full_score": 0.166563
+    },
+    {
+      "original_rank": 16,
+      "component_id": 78,
+      "calibration_group": "known_background",
+      "raw_score": 0.166419,
+      "overlap": 0.654206,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "rank_policy_A_raw": 16,
+      "rank_policy_B_half": 156,
+      "rank_policy_C_full": 172,
+      "rank_policy_D_hard_0_20": 147,
+      "half_score": 0.111983,
+      "full_score": 0.057547
+    },
+    {
+      "original_rank": 18,
+      "component_id": 457,
+      "calibration_group": "known_background",
+      "raw_score": 0.165157,
+      "overlap": 0.91567,
+      "background_distance_px": 0.0,
+      "touches_render_background": true,
+      "rank_policy_A_raw": 18,
+      "rank_policy_B_half": 190,
+      "rank_policy_C_full": 197,
+      "rank_policy_D_hard_0_20": 148,
+      "half_score": 0.089542,
+      "full_score": 0.013928
+    }
+  ],
+  "calibration_group_definition": {
+    "known_background_original_ranks": [
+      5,
+      6,
+      8,
+      10,
+      16,
+      18
+    ],
+    "interior_control_original_ranks": [
+      7,
+      11
+    ],
+    "ambiguous_original_ranks": [
+      15
+    ],
+    "note": "Calibration examples only, not a complete ground-truth dataset. The ambiguous case is treated as neither positive nor negative evidence."
+  },
+  "rank_movement_statistics": {
+    "A_raw": {
+      "max_abs_rank_movement": 0,
+      "median_abs_rank_movement": 0.0,
+      "mean_abs_rank_movement": 0.0,
+      "max_demotion_positions": 0,
+      "max_promotion_positions": 0,
+      "most_demoted": {
+        "component_id": 244,
+        "raw_rank": 1,
+        "policy_rank": 1,
+        "overlap": 0.0
+      },
+      "most_promoted": {
+        "component_id": 244,
+        "raw_rank": 1,
+        "policy_rank": 1,
+        "overlap": 0.0
+      },
+      "spearman_rho_vs_raw": 1.0,
+      "n_rank_change_gt_5": 0,
+      "n_rank_change_gt_10": 0,
+      "n_rank_change_gt_20": 0,
+      "negligible_overlap_lt_0_01": {
+        "n_candidates": 134,
+        "max_abs_rank_movement": 0,
+        "median_abs_rank_movement": 0.0,
+        "n_moving_more_than_5": 0,
+        "n_moving_more_than_10": 0,
+        "n_demoted": 0,
+        "n_promoted": 0
+      }
+    },
+    "B_half_penalty": {
+      "max_abs_rank_movement": 172,
+      "median_abs_rank_movement": 26.0,
+      "mean_abs_rank_movement": 38.11,
+      "max_demotion_positions": 172,
+      "max_promotion_positions": 58,
+      "most_demoted": {
+        "component_id": 457,
+        "raw_rank": 18,
+        "policy_rank": 190,
+        "overlap": 0.91567
+      },
+      "most_promoted": {
+        "component_id": 868,
+        "raw_rank": 200,
+        "policy_rank": 142,
+        "overlap": 0.0
+      },
+      "spearman_rho_vs_raw": 0.598593,
+      "n_rank_change_gt_5": 186,
+      "n_rank_change_gt_10": 163,
+      "n_rank_change_gt_20": 129,
+      "negligible_overlap_lt_0_01": {
+        "n_candidates": 134,
+        "max_abs_rank_movement": 58,
+        "median_abs_rank_movement": 25.0,
+        "n_moving_more_than_5": 122,
+        "n_moving_more_than_10": 106,
+        "n_demoted": 0,
+        "n_promoted": 130
+      }
+    },
+    "C_full_penalty": {
+      "max_abs_rank_movement": 193,
+      "median_abs_rank_movement": 30.0,
+      "mean_abs_rank_movement": 41.06,
+      "max_demotion_positions": 193,
+      "max_promotion_positions": 61,
+      "most_demoted": {
+        "component_id": 215,
+        "raw_rank": 5,
+        "policy_rank": 198,
+        "overlap": 0.929032
+      },
+      "most_promoted": {
+        "component_id": 868,
+        "raw_rank": 200,
+        "policy_rank": 139,
+        "overlap": 0.0
+      },
+      "spearman_rho_vs_raw": 0.533307,
+      "n_rank_change_gt_5": 185,
+      "n_rank_change_gt_10": 165,
+      "n_rank_change_gt_20": 133,
+      "negligible_overlap_lt_0_01": {
+        "n_candidates": 134,
+        "max_abs_rank_movement": 61,
+        "median_abs_rank_movement": 28.0,
+        "n_moving_more_than_5": 122,
+        "n_moving_more_than_10": 106,
+        "n_demoted": 0,
+        "n_promoted": 130
+      }
+    },
+    "D_hard_flag_0_20": {
+      "max_abs_rank_movement": 138,
+      "median_abs_rank_movement": 26.0,
+      "mean_abs_rank_movement": 35.96,
+      "max_demotion_positions": 138,
+      "max_promotion_positions": 58,
+      "most_demoted": {
+        "component_id": 215,
+        "raw_rank": 5,
+        "policy_rank": 143,
+        "overlap": 0.929032
+      },
+      "most_promoted": {
+        "component_id": 868,
+        "raw_rank": 200,
+        "policy_rank": 142,
+        "overlap": 0.0
+      },
+      "spearman_rho_vs_raw": 0.663669,
+      "n_rank_change_gt_5": 184,
+      "n_rank_change_gt_10": 158,
+      "n_rank_change_gt_20": 121,
+      "negligible_overlap_lt_0_01": {
+        "n_candidates": 134,
+        "max_abs_rank_movement": 58,
+        "median_abs_rank_movement": 23.0,
+        "n_moving_more_than_5": 122,
+        "n_moving_more_than_10": 100,
+        "n_demoted": 0,
+        "n_promoted": 130
+      }
+    }
+  },
+  "recommendation": "add_half_penalty_review_score",
+  "rationale": [
+    "Policy B demotes every known render-background calibration case out of the top 20 while both interior controls stay within the top 10.",
+    "Policy C also satisfies the criteria but is monotonically stronger; it drives high-overlap candidates to near-zero review score, which is closer to hiding them than to reordering them. Six calibration examples do not justify the more aggressive option, so the least aggressive sufficient policy is selected.",
+    "Overlap is strongly bimodal in this run: 133 of 200 candidates have exactly zero overlap and only 1 candidate(s) fall in (0, 0.01), so a soft penalty here cannot behave as broad suppression of everything touching a black pixel.",
+    "Zero-overlap candidates keep their raw score under both soft policies, so they can only be displaced upward as penalised candidates fall past them; they are never demoted.",
+    "The raw detector score is preserved as a separate field; the review score is an additional ordering key, not a replacement.",
+    "Policy D (hard flag at 0.20) is reported for contrast only. It discards raw score evidence at the threshold boundary and is not recommended."
+  ],
+  "limitations": [
+    "Only six known render-background examples, two interior controls and one ambiguous case are available; this is calibration, not ground truth.",
+    "No candidate in this audit is confirmed as a false positive. High render-background overlap is a review-priority signal, not an error verdict.",
+    "render_background_overlap_fraction depends on run-specific mask parameters (8-bit grayscale threshold 32, minimum component 5000 processed pixels, 4-connectivity, edge-connected only) and is not universally calibrated.",
+    "Visible black render background is not equivalent to tifxyz-invalid surface; tifxyz diagnostics were deliberately not used in this ranking audit.",
+    "Conclusions cover only the 200 exported candidates, not the 428 above-threshold or 1152 total connected components.",
+    "The penalty coefficients 0.5 and 1.0 were fixed in advance. No parameter search or coefficient tuning was performed, so 0.5 is not claimed optimal.",
+    "The hard-filter comparison at overlap 0.20 is reported for contrast only and is explicitly not recommended as production behaviour.",
+    "One candidate touches the render background with zero recorded overlap, so a purely overlap-based penalty leaves it entirely unpenalised.",
+    "Results are specific to this single render and this single diagnostics run."
+  ],
+  "decision_criteria": {
+    "criteria_definition": {
+      "C1": "every known render-background calibration case falls out of the top 20",
+      "C2": "both interior controls remain within the top 10",
+      "C3": "no candidate with overlap < 0.01 is demoted relative to raw order",
+      "C4": "at most 50% of candidates receive any penalty at all (guards against broad suppression)"
+    },
+    "selection_rule": "Prefer the least aggressive policy satisfying all criteria (B before C). If none satisfies them, keep_diagnostics_only. If the calibration examples cannot be resolved, insufficient_evidence.",
+    "results": {
+      "B_half_penalty": {
+        "C1_all_known_background_demoted_out_of_top_20": true,
+        "C2_both_interior_controls_within_top_10": true,
+        "C3_no_negligible_overlap_candidate_demoted": true,
+        "C4_penalty_touches_at_most_half_of_candidates": true,
+        "known_background_ranks": [
+          58,
+          151,
+          156,
+          168,
+          176,
+          190
+        ],
+        "interior_control_ranks": [
+          5,
+          7
+        ],
+        "all_criteria_met": true
+      },
+      "C_full_penalty": {
+        "C1_all_known_background_demoted_out_of_top_20": true,
+        "C2_both_interior_controls_within_top_10": true,
+        "C3_no_negligible_overlap_candidate_demoted": true,
+        "C4_penalty_touches_at_most_half_of_candidates": true,
+        "known_background_ranks": [
+          140,
+          165,
+          172,
+          189,
+          197,
+          198
+        ],
+        "interior_control_ranks": [
+          5,
+          7
+        ],
+        "all_criteria_met": true
+      }
+    }
+  },
+  "decision_evidence": {
+    "known_background_ranks_raw": [
+      5,
+      6,
+      8,
+      10,
+      16,
+      18
+    ],
+    "known_background_ranks_half": [
+      58,
+      151,
+      156,
+      168,
+      176,
+      190
+    ],
+    "known_background_ranks_full": [
+      140,
+      165,
+      172,
+      189,
+      197,
+      198
+    ],
+    "interior_control_ranks_raw": [
+      7,
+      11
+    ],
+    "interior_control_ranks_half": [
+      5,
+      7
+    ],
+    "interior_control_ranks_full": [
+      5,
+      7
+    ],
+    "negligible_overlap_stability_half": {
+      "n_candidates": 134,
+      "max_abs_rank_movement": 58,
+      "median_abs_rank_movement": 25.0,
+      "n_moving_more_than_5": 122,
+      "n_moving_more_than_10": 106,
+      "n_demoted": 0,
+      "n_promoted": 130
+    },
+    "negligible_overlap_stability_full": {
+      "n_candidates": 134,
+      "max_abs_rank_movement": 61,
+      "median_abs_rank_movement": 28.0,
+      "n_moving_more_than_5": 122,
+      "n_moving_more_than_10": 106,
+      "n_demoted": 0,
+      "n_promoted": 130
+    }
+  },
+  "recommendation_wording": "Add the selected penalty as a SECONDARY review-order score only. The raw detector score remains the primary, unchanged field, and analyze-render score/rank/JSON behaviour is not altered by this audit."
+}
