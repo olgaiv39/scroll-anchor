@@ -1,0 +1,195 @@
+{
+  "format": "scroll-anchor.candidate-tifxyz-mapping/v0",
+  "note": "Render-to-tifxyz coordinate mapping for selected exported candidates. No CT volume was opened; no candidate was rescored, reordered or classified as a confirmed error.",
+  "inputs": {
+    "regions": "/Users/olga/Documents/scrollprize/code/results/pherc-render-combined-diagnostics-20260731/regions.json",
+    "metadata": "/Users/olga/Documents/scrollprize/code/results/pherc-render-combined-diagnostics-20260731/metadata.json",
+    "tifxyz_dir": "/Users/olga/Documents/scrollprize/code/data/tifxyz_normalized",
+    "render": "/Users/olga/Documents/scrollprize/code/PHercParis4-20260623163339-2.4um-0.22m-78keV-volume-20260411134726-alpha-overlay-combined-ds8.jpg",
+    "source_filename": "PHercParis4-20260623163339-2.4um-0.22m-78keV-volume-20260411134726-alpha-overlay-combined-ds8.jpg",
+    "n_exported_candidates": 200
+  },
+  "shapes": {
+    "jpg_shape_rowcol": [
+      6270,
+      24030
+    ],
+    "processed_shape_rowcol": [
+      3135,
+      12015
+    ],
+    "tifxyz_shape_rowcol": [
+      627,
+      2403
+    ]
+  },
+  "scales": {
+    "source_to_tifxyz_rowcol": [
+      10,
+      10
+    ],
+    "processed_to_tifxyz_rowcol": [
+      5,
+      5
+    ],
+    "derivation": "Derived from the supplied shapes; never hardcoded. Each axis must divide exactly into a positive integer, checked independently for rows and columns. The tifxyz raster is never resampled."
+  },
+  "mapping_assumption": "Identity orientation was assumed and was explicitly requested by the caller (--assume-identity-orientation): the tifxyz raster is treated as sharing the render's origin, row/column orientation and spatial extent, with no flip, no transpose, no crop and no offset. The render metadata does not record the tifxyz/render orientation, so this correspondence is NOT independently verified. If it is wrong, every mapped cell below is wrong.",
+  "identity_orientation_assumed": true,
+  "orientation_independently_verified": false,
+  "pixel_containment_convention": "Aligned half-open raster blocks: tifxyz_row = floor(jpg_row / source_to_tifxyz_row_scale) and tifxyz_col = floor(jpg_col / source_to_tifxyz_col_scale). Each tifxyz cell covers exactly one row_scale x col_scale block of source-JPG pixels, half-open on the high side. The mapped cell is the block CONTAINING the candidate centroid; it is not a subpixel-accurate surface position, and no interpolation is performed.",
+  "invalid_cell_convention": "A tifxyz cell is valid only when x, y and z are all finite and none of them equals the exact -1 invalid sentinel. Zero is a legitimate coordinate value and stays valid. An invalid selected cell is reported as invalid and is never replaced by a nearby valid cell: there is no nearest-valid search or fallback.",
+  "coordinate_interpretation_warning": [
+    "Values are read from x.tif, y.tif and z.tif, in that order.",
+    "They are not yet converted to a CT NumPy array index.",
+    "CT volume axis order and bounds remain unverified.",
+    "An array may use z, y, x ordering, but this command does not assume that."
+  ],
+  "selection": {
+    "ranks_requested": [
+      7,
+      11
+    ],
+    "component_ids_requested": [],
+    "n_selected": 2,
+    "ordering": "ascending exported rank, then component ID"
+  },
+  "candidates": [
+    {
+      "exported_rank": 7,
+      "component_id": 566,
+      "score": 0.178003,
+      "direction": "vertical",
+      "centroid_rowcol_jpg": [
+        3508.89,
+        21906.85
+      ],
+      "centroid_rowcol_processed": [
+        1754.445,
+        10953.425
+      ],
+      "centroid_anchor": "centroid_rowcol_jpg",
+      "processed_centroid_source": "derived from the source-JPG centroid via metadata scale_processed_to_jpg_rowcol (regions.json stores no processed centroid)",
+      "bbox_rowcol_jpg": [
+        3404.0,
+        21902.0,
+        3618.0,
+        21910.0
+      ],
+      "bbox_rowcol_processed": [
+        1702,
+        10951,
+        1809,
+        10955
+      ],
+      "source_to_tifxyz_scale_rowcol": [
+        10,
+        10
+      ],
+      "processed_to_tifxyz_scale_rowcol": [
+        5,
+        5
+      ],
+      "tifxyz_row": 350,
+      "tifxyz_col": 2190,
+      "tifxyz_cell_from_source_rowcol": [
+        350,
+        2190
+      ],
+      "tifxyz_cell_from_processed_rowcol": [
+        350,
+        2190
+      ],
+      "tifxyz_cell_paths_agree": true,
+      "tifxyz_cell_valid": true,
+      "x": 5404.45556640625,
+      "y": 5874.21826171875,
+      "z": 10886.724609375,
+      "tifxyz_cell_jpg_bbox_rowcol": [
+        3500,
+        21900,
+        3510,
+        21910
+      ],
+      "mapping_assumption": "Identity orientation was assumed and was explicitly requested by the caller (--assume-identity-orientation): the tifxyz raster is treated as sharing the render's origin, row/column orientation and spatial extent, with no flip, no transpose, no crop and no offset. The render metadata does not record the tifxyz/render orientation, so this correspondence is NOT independently verified. If it is wrong, every mapped cell below is wrong.",
+      "coordinate_interpretation_warning": [
+        "Values are read from x.tif, y.tif and z.tif, in that order.",
+        "They are not yet converted to a CT NumPy array index.",
+        "CT volume axis order and bounds remain unverified.",
+        "An array may use z, y, x ordering, but this command does not assume that."
+      ]
+    },
+    {
+      "exported_rank": 11,
+      "component_id": 690,
+      "score": 0.168743,
+      "direction": "horizontal",
+      "centroid_rowcol_jpg": [
+        3998.94,
+        20665.06
+      ],
+      "centroid_rowcol_processed": [
+        1999.47,
+        10332.53
+      ],
+      "centroid_anchor": "centroid_rowcol_jpg",
+      "processed_centroid_source": "derived from the source-JPG centroid via metadata scale_processed_to_jpg_rowcol (regions.json stores no processed centroid)",
+      "bbox_rowcol_jpg": [
+        3998.0,
+        20598.0,
+        4000.0,
+        20734.0
+      ],
+      "bbox_rowcol_processed": [
+        1999,
+        10299,
+        2000,
+        10367
+      ],
+      "source_to_tifxyz_scale_rowcol": [
+        10,
+        10
+      ],
+      "processed_to_tifxyz_scale_rowcol": [
+        5,
+        5
+      ],
+      "tifxyz_row": 399,
+      "tifxyz_col": 2066,
+      "tifxyz_cell_from_source_rowcol": [
+        399,
+        2066
+      ],
+      "tifxyz_cell_from_processed_rowcol": [
+        399,
+        2066
+      ],
+      "tifxyz_cell_paths_agree": true,
+      "tifxyz_cell_valid": true,
+      "x": 3683.823974609375,
+      "y": 4615.5400390625,
+      "z": 10383.7734375,
+      "tifxyz_cell_jpg_bbox_rowcol": [
+        3990,
+        20660,
+        4000,
+        20670
+      ],
+      "mapping_assumption": "Identity orientation was assumed and was explicitly requested by the caller (--assume-identity-orientation): the tifxyz raster is treated as sharing the render's origin, row/column orientation and spatial extent, with no flip, no transpose, no crop and no offset. The render metadata does not record the tifxyz/render orientation, so this correspondence is NOT independently verified. If it is wrong, every mapped cell below is wrong.",
+      "coordinate_interpretation_warning": [
+        "Values are read from x.tif, y.tif and z.tif, in that order.",
+        "They are not yet converted to a CT NumPy array index.",
+        "CT volume axis order and bounds remain unverified.",
+        "An array may use z, y, x ordering, but this command does not assume that."
+      ]
+    }
+  ],
+  "limitations": [
+    "Mapping stage only: no CT volume is opened and no voxel is sampled.",
+    "Identity orientation is assumed, not verified; see mapping_assumption.",
+    "The mapped cell is a containing raster block, not a subpixel surface position.",
+    "Candidates remain exploratory 2D visual anomalies, not confirmed sheet skips or confirmed surface errors.",
+    "Candidate scores and exported ranks are passed through unchanged; this command never rescores, reorders, filters or suppresses candidates.",
+    "Coordinates are read straight from the tifxyz rasters with no unit conversion, no scaling and no CT axis reordering."
+  ]
+}

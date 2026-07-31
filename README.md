@@ -184,6 +184,37 @@ ranking are unchanged; render-background overlap stays a diagnostic field for
 reviewers to read alongside the score. Details, artifacts, and limitations:
 [`results/pherc-ranking-policy-audit/`](results/pherc-ranking-policy-audit/README.md)
 
+### Candidate-to-tifxyz mapping
+
+`map-render-candidates` is the reproducible bridge from an exported 2D candidate to
+normalized `tifxyz` surface coordinates. It selects candidates by exported rank or
+component ID (never confusing the two), maps the source-render centroid onto the
+tifxyz grid by aligned half-open containment, and reads `x.tif`, `y.tif`, `z.tif` at
+that cell.
+
+```bash
+scroll-anchor map-render-candidates \
+  --regions results/render-run/regions.json \
+  --metadata results/render-run/metadata.json \
+  --tifxyz-dir path/to/tifxyz_normalized \
+  --rank 7 --rank 11 \
+  --assume-identity-orientation \
+  --output results/mapping-run/
+```
+
+- strict shape validation: scale factors are derived from the input shapes and must
+  be exact positive integers per axis; incompatible rasters fail
+- dual agreement: the cell is derived independently from the source and processed
+  centroids and the two must match
+- identity render-to-tifxyz orientation must be explicitly acknowledged with
+  `--assume-identity-orientation`; it is never assumed silently and the command
+  cannot verify it
+- it does **not** assume CT array order and performs no CT validation. The values
+  are raw tifxyz coordinates, not CT NumPy indices
+- on the published PHerc run, ranks 7 and 11 mapped to valid tifxyz cells with both
+  coordinate paths in agreement:
+  [`results/pherc-candidate-tifxyz-mapping/`](results/pherc-candidate-tifxyz-mapping/README.md)
+
 What this workflow **cannot** report, by construction: confirmed sheet switches,
 true 3D drift, signed error along a surface normal, voxel displacement, or corrected
 surface coordinates. A flat render has no through-thickness CT evidence and no

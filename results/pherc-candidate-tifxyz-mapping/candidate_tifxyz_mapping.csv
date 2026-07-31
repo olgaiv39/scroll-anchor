@@ -1,0 +1,3 @@
+exported_rank,component_id,score,direction,centroid_jpg_row,centroid_jpg_col,centroid_processed_row,centroid_processed_col,source_to_tifxyz_row_scale,source_to_tifxyz_col_scale,processed_to_tifxyz_row_scale,processed_to_tifxyz_col_scale,tifxyz_row,tifxyz_col,tifxyz_cell_valid,x,y,z
+7,566,0.178003,vertical,3508.890,21906.850,1754.445,10953.425,10,10,5,5,350,2190,True,5404.455566,5874.218262,10886.724609
+11,690,0.168743,horizontal,3998.940,20665.060,1999.470,10332.530,10,10,5,5,399,2066,True,3683.823975,4615.540039,10383.773438
