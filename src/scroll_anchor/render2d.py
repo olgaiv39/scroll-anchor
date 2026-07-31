@@ -167,13 +167,16 @@ def _read_coord_tif(path: str) -> np.ndarray:
     return arr.astype(np.float32, copy=False)
 
 
-def load_tifxyz_valid_mask(directory: str) -> np.ndarray:
-    """Derive a boolean valid-surface mask from a tifxyz ``x/y/z.tif`` triple
+def load_tifxyz_coords(
+    directory: str,
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Load a tifxyz ``x/y/z.tif`` triple plus its boolean valid-surface mask
 
-    A pixel is valid only where all three world coordinates are finite and none of
-    them is the ``-1`` invalid sentinel. ``mask.tif`` is deliberately NOT consulted:
-    the matching render dataset has none, so validity must come from the coordinate
-    rasters themselves. ``meta.json`` is not read either.
+    Returns ``(x, y, z, valid)``, all with the same 2D shape. A cell is valid only
+    where all three world coordinates are finite and none of them is the ``-1``
+    invalid sentinel. ``mask.tif`` is deliberately NOT consulted: the matching
+    render dataset has none, so validity must come from the coordinate rasters
+    themselves. ``meta.json`` is not read either.
     """
     coords = []
     for name in ("x.tif", "y.tif", "z.tif"):
@@ -195,7 +198,12 @@ def load_tifxyz_valid_mask(directory: str) -> np.ndarray:
         | (y == TIFXYZ_INVALID_SENTINEL)
         | (z == TIFXYZ_INVALID_SENTINEL)
     )
-    return finite & ~sentinel
+    return x, y, z, finite & ~sentinel
+
+
+def load_tifxyz_valid_mask(directory: str) -> np.ndarray:
+    """Derive a boolean valid-surface mask from a tifxyz ``x/y/z.tif`` triple"""
+    return load_tifxyz_coords(directory)[3]
 
 
 def project_valid_mask(

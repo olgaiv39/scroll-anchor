@@ -114,6 +114,39 @@ def cmd_render_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_map_render_candidates(args: argparse.Namespace) -> int:
+    # Mapping stage only: exported candidate -> source-render location -> tifxyz
+    # cell -> x/y/z values. Does NOT rerun detection, change scores or ranking,
+    # open a CT volume, or convert coordinates to a CT array index.
+    from .tifxyz_mapping import map_render_candidates
+
+    if os.path.isdir(args.output) and os.listdir(args.output):
+        log.info("output directory already exists and is not empty: %s "
+                 "(existing files with the same names will be overwritten)", args.output)
+
+    info = map_render_candidates(
+        args.regions, args.metadata, args.tifxyz_dir, args.output,
+        ranks=args.rank, component_ids=args.component_id,
+        assume_identity_orientation=args.assume_identity_orientation,
+        render_path=args.render,
+    )
+    log.info(
+        "mapped %d candidate(s) onto tifxyz %s (source scale %s, processed scale %s) -> %s",
+        info["n_selected"], info["tifxyz_shape_rowcol"],
+        info["source_to_tifxyz_rowcol"], info["processed_to_tifxyz_rowcol"], args.output,
+    )
+    for e in info["candidates"]:
+        log.info(
+            "  rank %d = component %d: tifxyz (row %d, col %d) valid=%s x=%s y=%s z=%s",
+            e["exported_rank"], e["component_id"], e["tifxyz_row"], e["tifxyz_col"],
+            e["tifxyz_cell_valid"], e["x"], e["y"], e["z"],
+        )
+    log.info("identity orientation was assumed on request and is NOT independently "
+             "verified; x/y/z are raw tifxyz values, not CT array indices, and CT "
+             "volume axis order and bounds remain unverified")
+    return 0
+
+
 def cmd_benchmark(args: argparse.Namespace) -> int:
     from .synth import make_scene
     from .metrics import evaluate
@@ -208,6 +241,35 @@ def build_parser() -> argparse.ArgumentParser:
     rr.add_argument("--render", default=None,
                     help="optional source JPG for higher-quality crop pages")
     rr.set_defaults(func=cmd_render_report)
+
+    mc = sub.add_parser(
+        "map-render-candidates",
+        help="Map already exported 2D render candidates onto a compatible tifxyz "
+             "raster and read x/y/z at the containing cell (mapping only; does not "
+             "rerun detection, change scores/ranking, or open a CT volume)",
+    )
+    mc.add_argument("--regions", required=True,
+                    help="regions.json from an analyze-render run (read-only)")
+    mc.add_argument("--metadata", required=True,
+                    help="metadata.json from the same run (read-only)")
+    mc.add_argument("--tifxyz-dir", required=True,
+                    help="tifxyz directory holding x.tif/y.tif/z.tif")
+    mc.add_argument("--output", required=True, help="output directory")
+    mc.add_argument("--rank", type=int, action="append", default=None,
+                    help="exported rank to map (1-based position in the ranked "
+                         "subset, NOT the component ID); repeatable")
+    mc.add_argument("--component-id", type=int, action="append", default=None,
+                    help="connected-component ID to map (NOT the exported rank); "
+                         "repeatable. At least one --rank or --component-id required")
+    mc.add_argument("--render", default=None,
+                    help="optional source JPG; when given, writes a "
+                         "render-to-tifxyz mapping preview PNG (not a CT overlay)")
+    mc.add_argument("--assume-identity-orientation", action="store_true",
+                    help="required acknowledgement that the tifxyz raster shares the "
+                         "render's origin, orientation and extent (no flip, transpose, "
+                         "crop or offset). The metadata does not record orientation, so "
+                         "it is never assumed silently. Flips are not implemented")
+    mc.set_defaults(func=cmd_map_render_candidates)
 
     b = sub.add_parser("benchmark", help="Run the synthetic corruption benchmark")
     b.add_argument("--output", required=True)
