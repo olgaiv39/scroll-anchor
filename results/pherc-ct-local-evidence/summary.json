@@ -1,0 +1,369 @@
+{
+  "purpose": "small level-0 CT evidence crops for exported ranks 7 and 11 under the supported transformed-coordinate reading",
+  "source_volume": "s3://vesuvius-challenge-open-data/PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr/",
+  "pyramid_level": 0,
+  "voxel_size_um": 2.4,
+  "array_order": "[z, y, x]",
+  "volume_shape_zyx": [
+    75784,
+    32693,
+    32693
+  ],
+  "chunk_shape": [
+    128,
+    128,
+    128
+  ],
+  "dtype": "uint8",
+  "compressor": null,
+  "filters": null,
+  "order": "C",
+  "dimension_separator": "/",
+  "fill_value": 0,
+  "coordinate_interpretation": {
+    "reading": "transformed",
+    "status": "supported, not verified",
+    "basis": "registration landmark residual test and native-vs-transformed chunk-presence discrimination"
+  },
+  "totals": {
+    "chunk_objects_requested": 5,
+    "chunk_objects_returned_200": 5,
+    "array_bytes_read": 10485760,
+    "array_mib_read": 10.0,
+    "other_objects_requested": 0
+  },
+  "crops": [
+    {
+      "tag": "rank-7",
+      "exported_rank": 7,
+      "component_id": 566,
+      "pyramid_level": 0,
+      "voxel_size_um": 2.4,
+      "source_volume": "s3://vesuvius-challenge-open-data/PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr/",
+      "coordinate_interpretation": "supported transformed reading (tifxyz frame -> moving volume via inverse registration)",
+      "moving_xyz": [
+        7844.51,
+        20078.1,
+        64777.95
+      ],
+      "floor_array_index_zyx": [
+        64777,
+        20078,
+        7844
+      ],
+      "requested_bounds_zyx": [
+        [
+          64745,
+          64809
+        ],
+        [
+          20046,
+          20110
+        ],
+        [
+          7812,
+          7876
+        ]
+      ],
+      "actual_bounds_zyx": [
+        [
+          64745,
+          64809
+        ],
+        [
+          20046,
+          20110
+        ],
+        [
+          7812,
+          7876
+        ]
+      ],
+      "bounds_clipped_against_volume": false,
+      "volume_shape_zyx": [
+        75784,
+        32693,
+        32693
+      ],
+      "bounds_within_volume": true,
+      "crop_shape": [
+        64,
+        64,
+        64
+      ],
+      "crop_dtype": "uint8",
+      "crop_shape_is_64_cubed": true,
+      "center_local_index_zyx": [
+        32,
+        32,
+        32
+      ],
+      "center_is_32_32_32": true,
+      "all_voxels_covered_by_fetched_chunks": true,
+      "chunks": [
+        {
+          "key": "0/505/156/61",
+          "chunk_origin_zyx": [
+            64640,
+            19968,
+            7808
+          ],
+          "http_status": 200,
+          "bytes": 2097152,
+          "byte_count_matches_128cubed": true,
+          "present": true,
+          "contributed_region_global_zyx": [
+            [
+              64745,
+              64768
+            ],
+            [
+              20046,
+              20096
+            ],
+            [
+              7812,
+              7876
+            ]
+          ],
+          "contributed_voxels": 73600
+        },
+        {
+          "key": "0/505/157/61",
+          "chunk_origin_zyx": [
+            64640,
+            20096,
+            7808
+          ],
+          "http_status": 200,
+          "bytes": 2097152,
+          "byte_count_matches_128cubed": true,
+          "present": true,
+          "contributed_region_global_zyx": [
+            [
+              64745,
+              64768
+            ],
+            [
+              20096,
+              20110
+            ],
+            [
+              7812,
+              7876
+            ]
+          ],
+          "contributed_voxels": 20608
+        },
+        {
+          "key": "0/506/156/61",
+          "chunk_origin_zyx": [
+            64768,
+            19968,
+            7808
+          ],
+          "http_status": 200,
+          "bytes": 2097152,
+          "byte_count_matches_128cubed": true,
+          "present": true,
+          "contributed_region_global_zyx": [
+            [
+              64768,
+              64809
+            ],
+            [
+              20046,
+              20096
+            ],
+            [
+              7812,
+              7876
+            ]
+          ],
+          "contributed_voxels": 131200
+        },
+        {
+          "key": "0/506/157/61",
+          "chunk_origin_zyx": [
+            64768,
+            20096,
+            7808
+          ],
+          "http_status": 200,
+          "bytes": 2097152,
+          "byte_count_matches_128cubed": true,
+          "present": true,
+          "contributed_region_global_zyx": [
+            [
+              64768,
+              64809
+            ],
+            [
+              20096,
+              20110
+            ],
+            [
+              7812,
+              7876
+            ]
+          ],
+          "contributed_voxels": 36736
+        }
+      ],
+      "bytes_read": 8388608,
+      "stats": {
+        "min": 0,
+        "max": 201,
+        "mean": 67.363373,
+        "std": 38.150181,
+        "nonzero_fraction": 0.99998093,
+        "nonzero_voxels": 262139,
+        "total_voxels": 262144
+      },
+      "center_voxel_value": 29,
+      "neighborhood_9x9x9": {
+        "shape": [
+          9,
+          9,
+          9
+        ],
+        "voxels": 729,
+        "clipped": false,
+        "min": 4,
+        "max": 98,
+        "mean": 43.440329,
+        "std": 18.909127,
+        "nonzero_fraction": 1.0
+      }
+    },
+    {
+      "tag": "rank-11",
+      "exported_rank": 11,
+      "component_id": 690,
+      "pyramid_level": 0,
+      "voxel_size_um": 2.4,
+      "source_volume": "s3://vesuvius-challenge-open-data/PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr/",
+      "coordinate_interpretation": "supported transformed reading (tifxyz frame -> moving volume via inverse registration)",
+      "moving_xyz": [
+        14780.35,
+        20406.48,
+        63151.52
+      ],
+      "floor_array_index_zyx": [
+        63151,
+        20406,
+        14780
+      ],
+      "requested_bounds_zyx": [
+        [
+          63119,
+          63183
+        ],
+        [
+          20374,
+          20438
+        ],
+        [
+          14748,
+          14812
+        ]
+      ],
+      "actual_bounds_zyx": [
+        [
+          63119,
+          63183
+        ],
+        [
+          20374,
+          20438
+        ],
+        [
+          14748,
+          14812
+        ]
+      ],
+      "bounds_clipped_against_volume": false,
+      "volume_shape_zyx": [
+        75784,
+        32693,
+        32693
+      ],
+      "bounds_within_volume": true,
+      "crop_shape": [
+        64,
+        64,
+        64
+      ],
+      "crop_dtype": "uint8",
+      "crop_shape_is_64_cubed": true,
+      "center_local_index_zyx": [
+        32,
+        32,
+        32
+      ],
+      "center_is_32_32_32": true,
+      "all_voxels_covered_by_fetched_chunks": true,
+      "chunks": [
+        {
+          "key": "0/493/159/115",
+          "chunk_origin_zyx": [
+            63104,
+            20352,
+            14720
+          ],
+          "http_status": 200,
+          "bytes": 2097152,
+          "byte_count_matches_128cubed": true,
+          "present": true,
+          "contributed_region_global_zyx": [
+            [
+              63119,
+              63183
+            ],
+            [
+              20374,
+              20438
+            ],
+            [
+              14748,
+              14812
+            ]
+          ],
+          "contributed_voxels": 262144
+        }
+      ],
+      "bytes_read": 2097152,
+      "stats": {
+        "min": 0,
+        "max": 235,
+        "mean": 69.894554,
+        "std": 37.11403,
+        "nonzero_fraction": 0.99997711,
+        "nonzero_voxels": 262138,
+        "total_voxels": 262144
+      },
+      "center_voxel_value": 105,
+      "neighborhood_9x9x9": {
+        "shape": [
+          9,
+          9,
+          9
+        ],
+        "voxels": 729,
+        "clipped": false,
+        "min": 72,
+        "max": 151,
+        "mean": 114.116598,
+        "std": 16.150573,
+        "nonzero_fraction": 1.0
+      }
+    }
+  ],
+  "not_claimed": [
+    "confirmed sheet skip",
+    "reconstruction error",
+    "false positive",
+    "volumetrically validated",
+    "verified provenance"
+  ]
+}

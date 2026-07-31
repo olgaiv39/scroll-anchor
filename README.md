@@ -251,6 +251,26 @@ review, not a validated correction. If nothing passes the conservative texture,
 border, multi-scale, and coherence gates, it returns an empty region list rather
 than forcing a positive.
 
+### Local CT evidence for the mapped candidates
+
+Small level-0 CT neighbourhoods were extracted at the positions that exported ranks 7
+and 11 map to, so the mapped candidates can be looked at against real volumetric data.
+The tifxyz coordinates were carried into the CT volume frame by the inverse
+registration; that transformed interpretation is supported - not verified - by the
+registration landmark residuals and by a native-vs-transformed chunk-presence check.
+Each crop is 64x64x64 uint8, centred on the mapped voxel.
+
+Both mapped points fall within populated regions of the masked reconstruction, where
+laminar structure is visible, and the two ranks sit in measurably different local
+intensity contexts (rank 7 in a lower-density neighbourhood than its crop, rank 11 in a
+higher-density one). This is evidence for inspection only: it does not classify either
+candidate and it does not validate the detector. The coordinate-frame interpretation and
+the identity render-to-tifxyz orientation assumption both remain open.
+
+- [`results/pherc-ct-local-evidence/`](results/pherc-ct-local-evidence/README.md)
+- [`rank-7-orthogonal.png`](results/pherc-ct-local-evidence/rank-7-orthogonal.png)
+- [`rank-11-orthogonal.png`](results/pherc-ct-local-evidence/rank-11-orthogonal.png)
+
 ## How it works (brief)
 
 For each surface vertex: estimate the world-space normal, sample the CT intensity
