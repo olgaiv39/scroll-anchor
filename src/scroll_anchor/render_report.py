@@ -102,15 +102,77 @@ def _crop_panel(f: np.ndarray, reg: Dict, half: int = 190):
     return crop, box
 
 
+# Optional stored diagnostic sets, in (overlap, distance, touches) order. The two
+# sets measure different things and are never merged into one number or one line.
+_RENDER_BG_KEYS = (
+    "render_background_overlap_fraction",
+    "render_background_distance_px",
+    "touches_render_background",
+)
+_TIFXYZ_INVALID_KEYS = (
+    "invalid_overlap_fraction",
+    "boundary_distance_px",
+    "touches_invalid_boundary",
+)
+
+
+def _fmt_fraction(value) -> str:
+    try:
+        f = float(value)
+    except (TypeError, ValueError):
+        return "n/a"
+    return f"{f:.3f}" if np.isfinite(f) else "n/a"
+
+
+def _fmt_distance(value) -> str:
+    try:
+        f = float(value)
+    except (TypeError, ValueError):
+        return "n/a"
+    return f"{f:.1f} px" if np.isfinite(f) else "n/a"
+
+
+def _fmt_touches(value) -> str:
+    return "n/a" if value is None else ("yes" if value else "no")
+
+
+def _diagnostic_line(reg: Dict, keys: Tuple[str, str, str], label: str,
+                     distance_label: str) -> Optional[str]:
+    """Render one stored diagnostic set as a compact caption line
+
+    Returns ``None`` when the whole set is absent, so legacy reports keep their
+    existing captions with no placeholder. Presence is tested against ``None``, not
+    truthiness: a stored 0.0 overlap or a ``False`` touch flag is real data and is
+    displayed. A missing or non-finite distance inside an otherwise present set
+    reads ``n/a`` rather than suppressing the line.
+    """
+    overlap_key, distance_key, touches_key = keys
+    if all(reg.get(k) is None for k in keys):
+        return None
+    return (
+        f"{label} overlap {_fmt_fraction(reg.get(overlap_key))}"
+        f" | {distance_label} {_fmt_distance(reg.get(distance_key))}"
+        f" | touches {_fmt_touches(reg.get(touches_key))}"
+    )
+
+
 def _panel_title(reg: Dict, rank: int) -> str:
     jr, jc = reg["centroid_rowcol_jpg"]
     disp = reg.get("displacement_jpg_pixels")
     disp_s = "n/a" if disp is None else f"{float(disp):g} px"
-    return (
-        f"#{rank}  id {reg['id']}  score {float(reg['score']):.3f}\n"
-        f"{reg['direction']}   2D shift {disp_s}\n"
-        f"JPG row {jr:.0f}, col {jc:.0f}"
-    )
+    lines = [
+        f"#{rank}  id {reg['id']}  score {float(reg['score']):.3f}",
+        f"{reg['direction']}   2D shift {disp_s}",
+        f"JPG row {jr:.0f}, col {jc:.0f}",
+    ]
+    for keys, label, distance_label in (
+        (_RENDER_BG_KEYS, "render-bg", "distance"),
+        (_TIFXYZ_INVALID_KEYS, "tifxyz-invalid", "boundary distance"),
+    ):
+        line = _diagnostic_line(reg, keys, label, distance_label)
+        if line is not None:
+            lines.append(line)
+    return "\n".join(lines)
 
 
 # --------------------------------------------------------------------------- #
