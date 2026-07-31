@@ -146,6 +146,52 @@ pip install -e ".[dev,benchmark]"
 python -m pytest -q
 ```
 
+### Container
+
+The repository includes a CPU-only Dockerfile for reproducible runs. Build the
+image from the repository root:
+
+```bash
+docker build -t scroll-anchor:local .
+```
+
+The entrypoint is the `scroll-anchor` CLI, so running the image with no arguments
+prints the help screen:
+
+```bash
+docker run --rm scroll-anchor:local
+```
+
+Output directories require a writable mount. The synthetic benchmark writes into
+the mounted path:
+
+```bash
+mkdir -p results/docker-bench
+
+docker run --rm \
+  -v "$PWD/results/docker-bench:/output" \
+  scroll-anchor:local \
+  benchmark --output /output --seed 0
+```
+
+Commands that use local files follow the same mount pattern. Mount input data
+read-only where possible, and mount a separate writable directory for output:
+
+```bash
+docker run --rm \
+  -v "/path/to/input:/data:ro" \
+  -v "/path/to/output:/output" \
+  scroll-anchor:local \
+  <command> <arguments>
+```
+
+Manually validated in Docker: the image build, the CLI help screen, the runtime
+extras, all subcommand help screens, and one synthetic benchmark run
+
+Not validated in Docker: real CT analysis, remote Zarr access, real render
+analysis, PDF generation, candidate mapping on real artifacts, and the full
+real-cube benchmark
+
 ## Analyze a real surface
 
 ```bash

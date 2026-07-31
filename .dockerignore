@@ -1,0 +1,66 @@
+# Build context exclusions for the scroll-anchor CLI image.
+# Keep: src, pyproject.toml, README.md, LICENSE, CITATION.cff, configs, scripts,
+# Dockerfile.
+
+# Version control and CI
+.git
+.gitignore
+.gitattributes
+.github
+
+# Virtual environments
+.venv
+venv
+env
+**/.tox
+**/.nox
+
+# Python and pytest caches
+**/__pycache__
+**/*.py[cod]
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/.cache
+
+# Build outputs
+build
+dist
+.eggs
+**/*.egg-info
+
+# Not required for installation or runtime
+tests
+results
+data
+docs
+examples
+.claude
+
+# Environment and credential files
+**/.env
+**/.env.*
+**/*.pem
+**/*.key
+**/*.netrc
+**/credentials*
+**/secrets*
+
+# Editor and OS metadata
+.idea
+.vscode
+**/.DS_Store
+**/Thumbs.db
+**/*.swp
+
+# Large scientific and generated files
+**/*.npy
+**/*.npz
+**/*.nrrd
+**/*.tif
+**/*.tiff
+**/*.jpg
+**/*.jpeg
+**/*.png
+**/*.pdf
+**/*.zarr
