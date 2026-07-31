@@ -53,6 +53,20 @@ Verified against `ScrollPrize/villa`:
 The gap it fills: a standalone, CPU-friendly, ground-truth-free tool that turns
 `(tifxyz surface + CT ROI)` into localized drift/switch diagnostics
 
+## Validation status
+
+Validation is layered, and each layer supports a different claim:
+
+- the synthetic benchmark demonstrates precise detection under **controlled
+  synthetic** corruptions of a gently curved multi-sheet volume
+- the real-cube experiment uses real CT and real sheet geometry with injected
+  corruptions and supports the conservative safety concept
+- naturally occurring real annotation failures have **not yet been evaluated**
+  against full ground truth
+
+The exploratory 2D PHerc workflow provides review candidates and supporting
+evidence, not volumetric detector validation
+
 ## Results (synthetic benchmark, reproducible)
 
 Two parallel-sheet CT volume + a clean surface corrupted with drift, a
@@ -81,6 +95,41 @@ pip install -e .
 scroll-anchor benchmark --output results/bench --seed 0
 cat results/bench/metrics.json
 ```
+
+## Real-cube benchmark (real CT + real geometry, controlled corruptions)
+
+`scripts/run_real_cube_benchmark.py` runs the diagnostics on a real Scroll 1
+instance-label cube (`02256_02512_04816`): a medial surface is extracted from one
+labelled sheet, then **controlled** drift and a **real neighbouring-sheet** switch
+are injected. This is *not* validation on naturally occurring annotation errors
+
+```bash
+pip install -e ".[benchmark]"
+python scripts/run_real_cube_benchmark.py --output results/real_cube_02256_02512_04816
+```
+
+Findings on this cube (source sheet 328, neighbour 329, 96³ ROI):
+
+- **Conservative safety behaviour transferred to the tested cube.** ScrollAnchor's
+  harmful acceptance (confidently accepting a vertex that sits on the wrong sheet) is
+  **0.00** versus **~0.15** for naive snap-to-brightest; switch review-recall is
+  **1.00** - the injected neighboring-sheet switch is always surfaced for review, and
+  no wrong-sheet vertex is confidently accepted
+- **Precision is currently limited on the tested strongly curved real geometry.**
+  Thresholds calibrated on flat synthetic sheets over-fire on real papyrus curvature:
+  switch precision ~0.19, drift localization remains weak (F1 ~0.01), and ~27% of the
+  *clean* surface is flagged for review. On strongly curved real geometry the tool
+  currently behaves as a very conservative "flag-for-review" filter rather than a
+  precise localizer
+
+On the tested cube this experiment **supports the conservative safety concept on
+this controlled real-geometry benchmark** and illustrates a viable
+expert-in-the-loop workflow - the injected switch is always surfaced and nothing
+wrong-sheet is confidently accepted. It also usefully identifies the next research
+bottleneck: real curvature increases false positives, so **curvature-aware residual
+modelling and improved calibration** are the next development priorities. This
+single controlled-corruption cube does not, on its own, establish general
+real-scroll precision
 
 ## Install
 
@@ -121,6 +170,22 @@ results/run/
 ├── arrays/*.npy            # per-vertex fields (confidence, drift, switch, ...)
 └── surface/                # tifxyz copy + sa_confidence/sa_drift/sa_switch/sa_review channels
 ```
+
+## How it works (brief)
+
+For each surface vertex: estimate the world-space normal, sample the CT intensity
+profile along ±`radius` voxels (trilinear, CPU), then:
+
+- **Drift** = signed offset to the distance-weighted nearest sheet peak
+- **Sheet-switch** = a robust (median-consensus) ~one-spacing positional jump,
+  confirmed by strong on-sheet evidence, grown by hysteresis over the patch
+- **Confidence** = product of contrast, peak margin, geometric continuity, and
+  evidence - so any single weakness drives confidence toward 0
+- **Review** = switch, or low confidence, or large drift
+
+See `docs/method.md` for details and `docs/coordinate_conventions.md` for the
+coordinate/normal conventions (verified against `villa/lasagna/tifxyz_format.md`
+and the `vesuvius` tifxyz API)
 
 ## Exploratory 2D render analysis (separate workflow)
 
@@ -180,6 +245,13 @@ scroll-anchor render-report \
   working resolution and `top_candidates.png` is regenerated
 - Without `--render`, the existing `top_candidates.png` is reused and the PDF notes
   that the source render was unavailable
+
+## PHerc case study: one real render
+
+This is a real-data case study built from one PHerc render. It links exploratory 2D
+candidates to boundary diagnostics, orientation testing, tifxyz mapping, and limited
+local CT inspection. It does not classify any candidate as a confirmed reconstruction
+failure, and it does not constitute full volumetric validation
 
 A published example run (PHercParis4 segment w110-112) is recorded in
 [`results/pherc-render/`](results/pherc-render/README.md)
@@ -311,66 +383,6 @@ the identity render-to-tifxyz orientation assumption both remain open
 - [`rank-7-orthogonal.png`](results/pherc-ct-local-evidence/rank-7-orthogonal.png)
 - [`rank-11-orthogonal.png`](results/pherc-ct-local-evidence/rank-11-orthogonal.png)
 
-## How it works (brief)
-
-For each surface vertex: estimate the world-space normal, sample the CT intensity
-profile along ±`radius` voxels (trilinear, CPU), then:
-
-- **Drift** = signed offset to the distance-weighted nearest sheet peak
-- **Sheet-switch** = a robust (median-consensus) ~one-spacing positional jump,
-  confirmed by strong on-sheet evidence, grown by hysteresis over the patch
-- **Confidence** = product of contrast, peak margin, geometric continuity, and
-  evidence - so any single weakness drives confidence toward 0
-- **Review** = switch, or low confidence, or large drift
-
-See `docs/method.md` for details and `docs/coordinate_conventions.md` for the
-coordinate/normal conventions (verified against `villa/lasagna/tifxyz_format.md`
-and the `vesuvius` tifxyz API)
-
-## Real-cube benchmark (real CT + real geometry, controlled corruptions)
-
-`scripts/run_real_cube_benchmark.py` runs the diagnostics on a real Scroll 1
-instance-label cube (`02256_02512_04816`): a medial surface is extracted from one
-labelled sheet, then **controlled** drift and a **real neighbouring-sheet** switch
-are injected. This is *not* validation on naturally occurring annotation errors
-
-```bash
-pip install -e ".[benchmark]"
-python scripts/run_real_cube_benchmark.py --output results/real_cube_02256_02512_04816
-```
-
-Findings on this cube (source sheet 328, neighbour 329, 96³ ROI):
-
-- **Conservative safety behaviour transferred to the tested cube.** ScrollAnchor's
-  harmful acceptance (confidently accepting a vertex that sits on the wrong sheet) is
-  **0.00** versus **~0.15** for naive snap-to-brightest; switch review-recall is
-  **1.00** - the injected neighboring-sheet switch is always surfaced for review, and
-  no wrong-sheet vertex is confidently accepted
-- **Precision is currently limited on the tested strongly curved real geometry.**
-  Thresholds calibrated on flat synthetic sheets over-fire on real papyrus curvature:
-  switch precision ~0.19, drift localization remains weak (F1 ~0.01), and ~27% of the
-  *clean* surface is flagged for review. On strongly curved real geometry the tool
-  currently behaves as a very conservative "flag-for-review" filter rather than a
-  precise localizer
-
-On the tested cube this experiment **supports the conservative safety concept on
-this controlled real-geometry benchmark** and illustrates a viable
-expert-in-the-loop workflow - the injected switch is always surfaced and nothing
-wrong-sheet is confidently accepted. It also usefully identifies the next research
-bottleneck: real curvature increases false positives, so **curvature-aware residual
-modelling and improved calibration** are the next development priorities. This
-single controlled-corruption cube does not, on its own, establish general
-real-scroll precision
-
-Conclusion: ScrollAnchor is ready for technical community review as an experimental
-diagnostic and validation framework. The current real-cube benchmark supports its
-conservative safety principle and demonstrates a viable expert-in-the-loop workflow,
-while also identifying precision on strongly curved surfaces as the main development
-priority. The current release is most useful for assisted review, controlled
-benchmark construction, failure analysis, and collaborative method development.
-Additional validation with known real annotation failures is needed before
-recommending broader or unattended use
-
 ## Current scope and development priorities
 
 These are the current boundaries of what has been demonstrated, and the research
@@ -398,6 +410,15 @@ priorities that follow from them:
   is exported in a **cube-index coordinate frame** (ROI-local indices offset by the
   cube origin) with NRRD metadata validation / axis resolution enforced; full VC3D
   coordinate compatibility is not claimed until visual alignment is checked
+
+Conclusion: ScrollAnchor is ready for technical community review as an experimental
+diagnostic and validation framework. The current real-cube benchmark supports its
+conservative safety principle and demonstrates a viable expert-in-the-loop workflow,
+while also identifying precision on strongly curved surfaces as the main development
+priority. The current release is most useful for assisted review, controlled
+benchmark construction, failure analysis, and collaborative method development.
+Additional validation with known real annotation failures is needed before
+recommending broader or unattended use
 
 ## Development roadmap
 
