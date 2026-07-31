@@ -252,6 +252,87 @@ def boundary_distance(valid: np.ndarray) -> np.ndarray:
 
 
 # --------------------------------------------------------------------------- #
+# Optional render-derived background mask (visible black margins)             #
+# --------------------------------------------------------------------------- #
+# Explicit 4-neighbour connectivity. Under 8-connectivity a diagonal chain of
+# interior specks can leak out to the raster edge and drag real papyrus into the
+# "background" set, so diagonal touches deliberately do NOT connect components.
+_FOUR_CONNECTED = np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]], dtype=bool)
+
+
+def derive_render_background_mask(
+    f: np.ndarray,
+    grayscale_threshold: int,
+    min_component_pixels: int,
+) -> Tuple[np.ndarray, Dict[str, object]]:
+    """Edge-connected near-black background of the processed render
+
+    ``f`` is the working-resolution grayscale render in [0, 1] that the caller
+    already holds, so the image is never reloaded or re-decoded.
+
+    Only near-black components that reach an outer raster edge AND cover at least
+    ``min_component_pixels`` are kept, so dark papyrus marks in the interior are
+    never treated as background. The rule is deliberately blunt - no Otsu,
+    adaptive thresholding, morphology, learned segmentation, or flood-fill
+    heuristics - because both parameters are dataset- and resolution-dependent and
+    must stay explicit per run rather than become hidden universal assumptions.
+
+    Returns ``(background_mask, stats)``. The mask is boolean with exactly ``f``'s
+    shape. This is a descriptive render property: visible black background is NOT
+    the same thing as tifxyz invalid surface.
+    """
+    thr = int(grayscale_threshold)
+    minpx = int(min_component_pixels)
+    if thr != grayscale_threshold or not (0 <= thr <= 255):
+        raise ValueError(
+            "grayscale_threshold must be an integer in the inclusive 8-bit range "
+            f"0..255, got {grayscale_threshold!r}"
+        )
+    if minpx != min_component_pixels or minpx < 1:
+        raise ValueError(
+            "min_component_pixels must be a positive integer count of processed "
+            f"(working-resolution) pixels, got {min_component_pixels!r}"
+        )
+
+    a = np.asarray(f, dtype=np.float32)
+    if a.ndim != 2:
+        raise ValueError(f"expected a 2D processed render, got shape {a.shape}")
+    # Quantise back to the 8-bit levels the render was decoded from, so the
+    # threshold is a plain grayscale level rather than a float in disguise.
+    g8 = np.rint(np.clip(a, 0.0, 1.0) * 255.0).astype(np.uint8)
+
+    dark = g8 <= thr
+    labels, nlab = cc_label(dark, structure=_FOUR_CONNECTED)
+    if nlab == 0:
+        bg = np.zeros(a.shape, dtype=bool)
+        n_border = n_kept = 0
+    else:
+        border = np.concatenate(
+            [labels[0, :], labels[-1, :], labels[:, 0], labels[:, -1]]
+        )
+        border_labels = np.unique(border)
+        border_labels = border_labels[border_labels != 0]
+        counts = np.bincount(labels.ravel(), minlength=nlab + 1)
+        kept_labels = border_labels[counts[border_labels] >= minpx]
+        keep = np.zeros(nlab + 1, dtype=bool)
+        keep[kept_labels] = True
+        bg = keep[labels]
+        n_border, n_kept = int(border_labels.size), int(kept_labels.size)
+
+    stats: Dict[str, object] = {
+        "grayscale_threshold_8bit": thr,
+        "minimum_component_pixels_processed": minpx,
+        "connectivity": 4,
+        "near_black_fraction_processed": round(float(dark.mean()), 6),
+        "background_fraction_processed": round(float(bg.mean()), 6),
+        "n_near_black_components": int(nlab),
+        "n_border_connected_components": n_border,
+        "n_retained_components": n_kept,
+    }
+    return bg, stats
+
+
+# --------------------------------------------------------------------------- #
 # Core detector                                                               #
 # --------------------------------------------------------------------------- #
 def _shift(a: np.ndarray, s: int, axis: int) -> np.ndarray:
@@ -406,6 +487,7 @@ def extract_regions_with_stats(
     scale_col: float,
     params: Optional[RenderParams] = None,
     valid_mask: Optional[np.ndarray] = None,
+    render_background_mask: Optional[np.ndarray] = None,
 ) -> Tuple[List[Dict[str, object]], Dict[str, int]]:
     """Threshold, cluster and score candidates; return (exported, counts)
 
@@ -420,8 +502,10 @@ def extract_regions_with_stats(
     The exported list is therefore a RANKED SUBSET, not necessarily every response.
 
     An optional working-resolution ``valid_mask`` adds purely descriptive
-    mesh-boundary fields to each exported region. It does NOT affect the score,
-    the threshold, the region set, or the ranking.
+    mesh-boundary fields to each exported region, and an optional
+    ``render_background_mask`` adds purely descriptive render-background fields.
+    The two are independent and neither affects the score, the threshold, the
+    region set, or the ranking.
     """
     p = params or RenderParams()
     bdist = None
@@ -433,6 +517,17 @@ def extract_regions_with_stats(
                 f"analysis shape {diag.anomaly.shape}"
             )
         bdist = boundary_distance(valid_mask)
+    bgdist = None
+    if render_background_mask is not None:
+        render_background_mask = np.asarray(render_background_mask, dtype=bool)
+        if render_background_mask.shape != diag.anomaly.shape:
+            raise ValueError(
+                f"render background mask shape {render_background_mask.shape} does "
+                f"not match the working analysis shape {diag.anomaly.shape}"
+            )
+        # Same padded convention as the tifxyz distance: background pixels are 0
+        # and the raster edge counts as background rather than unbounded interior.
+        bgdist = boundary_distance(~render_background_mask)
     binary = diag.anomaly > p.anomaly_thr
     labels, n = cc_label(binary)
     regions: List[Dict[str, object]] = []
@@ -495,6 +590,17 @@ def extract_regions_with_stats(
             reg["invalid_overlap_fraction"] = round(float(np.mean(~valid_mask[m])), 6)
             # <= 1 px means the region contains, or directly abuts, invalid area.
             reg["touches_invalid_boundary"] = bool(d_min <= 1.0)
+        if bgdist is not None:
+            # Descriptive only, and measured over the ACTUAL component pixels ``m``
+            # rather than the bounding box, which would over-report on sparse or
+            # diagonal candidates.
+            bg_min = float(bgdist[m].min())
+            reg["render_background_distance_px"] = round(bg_min, 3)
+            reg["render_background_overlap_fraction"] = round(
+                float(np.mean(render_background_mask[m])), 6
+            )
+            # Same one-pixel descriptive convention as the tifxyz field above.
+            reg["touches_render_background"] = bool(bg_min <= 1.0)
         regions.append(reg)
 
     # Deterministic ranking: score desc, then id asc for stable tie-breaks.
@@ -826,9 +932,10 @@ def write_outputs(
 
     _write_overlay(paths["overlay"], f, regions, params)
 
-    # Additive only when the tifxyz option was used; otherwise the payload keys are
-    # exactly the pre-existing schema.
+    # Additive only when the matching option was used; otherwise the payload keys
+    # are exactly the pre-existing schema. The two diagnostics are independent.
     used_tifxyz = bool(metadata.get("tifxyz_valid_mask_used", False))
+    used_render_bg = bool(metadata.get("render_background_mask_used", False))
 
     regions_payload: Dict[str, object] = {
         "format": "scroll-anchor.render-candidates/v0",
@@ -841,6 +948,8 @@ def write_outputs(
     }
     if used_tifxyz:
         regions_payload["tifxyz_valid_mask_used"] = True
+    if used_render_bg:
+        regions_payload["render_background_mask_used"] = True
     regions_payload["regions"] = regions
     with open(paths["regions"], "w", encoding="utf-8") as fh:
         json.dump(regions_payload, fh, indent=2)
@@ -858,6 +967,8 @@ def write_outputs(
     }
     if used_tifxyz:
         summary_payload["tifxyz_valid_mask_used"] = True
+    if used_render_bg:
+        summary_payload["render_background_mask_used"] = True
     summary_payload["limitations"] = metadata.get("limitations")
     with open(paths["summary"], "w", encoding="utf-8") as fh:
         json.dump(summary_payload, fh, indent=2)
@@ -895,16 +1006,35 @@ def analyze_render(
     output_dir: str,
     params: Optional[RenderParams] = None,
     tifxyz_dir: Optional[str] = None,
+    render_background_threshold: Optional[int] = None,
+    render_background_min_component_pixels: Optional[int] = None,
 ) -> Dict[str, object]:
     """Full workflow: decode -> detect -> write outputs. Returns a summary dict
 
     ``tifxyz_dir`` optionally supplies the matching ``x/y/z.tif`` rasters. When
     given, a valid-surface mask is derived from them and each exported candidate
-    gains descriptive mesh-boundary fields. Detection, scoring and ranking are
-    unchanged either way.
+    gains descriptive mesh-boundary fields.
+
+    ``render_background_threshold`` and ``render_background_min_component_pixels``
+    optionally enable the render-derived background diagnostics. BOTH are required
+    together and neither has a default: the values are dataset- and
+    resolution-dependent, so they must be stated per run.
+
+    Detection, scoring and ranking are unchanged in every combination.
     """
     p = params or RenderParams()
     t0 = time.perf_counter()
+
+    if (render_background_threshold is None) != (
+        render_background_min_component_pixels is None
+    ):
+        raise ValueError(
+            "render-background diagnostics require BOTH render_background_threshold "
+            "and render_background_min_component_pixels; got threshold="
+            f"{render_background_threshold!r} and min_component_pixels="
+            f"{render_background_min_component_pixels!r}. Neither has a default "
+            "because both are dataset- and resolution-dependent."
+        )
 
     f, jpg_shape, proc_shape, scale_row, scale_col = load_render(render_path, p)
 
@@ -941,8 +1071,31 @@ def analyze_render(
             },
         }
 
+    bg_mask = None
+    bg_info: Optional[Dict[str, object]] = None
+    if render_background_threshold is not None:
+        bg_mask, bg_stats = derive_render_background_mask(
+            f, render_background_threshold, render_background_min_component_pixels
+        )
+        bg_info = {
+            "source": "edge-connected near-black pixels from the processed render",
+            **bg_stats,
+            "distance_units": "processed (working-resolution) pixels",
+            "effect_on_scoring": "none; diagnostics only",
+            "limitations": [
+                "The grayscale threshold and minimum component size are explicit "
+                "run parameters, not universally calibrated values; they depend on "
+                "the dataset, the render and the working resolution.",
+                "Visible black render background is NOT equivalent to tifxyz "
+                "invalid surface: the two describe different things and can "
+                "disagree over large areas.",
+            ],
+        }
+
     diag = analyze_array(f, p)
-    regions, counts = extract_regions_with_stats(diag, scale_row, scale_col, p, valid_mask)
+    regions, counts = extract_regions_with_stats(
+        diag, scale_row, scale_col, p, valid_mask, bg_mask
+    )
 
     runtime = time.perf_counter() - t0
     peak_mb = _peak_rss_mb()
@@ -979,6 +1132,9 @@ def analyze_render(
     if tifxyz_info is not None:
         metadata["tifxyz_valid_mask_used"] = True
         metadata["tifxyz_valid_mask"] = tifxyz_info
+    if bg_info is not None:
+        metadata["render_background_mask_used"] = True
+        metadata["render_background_mask"] = bg_info
 
     paths = write_outputs(output_dir, f, diag, regions, metadata, counts, p)
     return {
@@ -990,6 +1146,7 @@ def analyze_render(
         "peak_rss_mb": peak_mb,
         "processed_shape_rowcol": metadata["processed_shape_rowcol"],
         "tifxyz_valid_mask_used": bool(valid_mask is not None),
+        "render_background_mask_used": bool(bg_mask is not None),
         "paths": paths,
     }
 

@@ -70,7 +70,12 @@ def cmd_analyze_render(args: argparse.Namespace) -> int:
         max_working_pixels=args.max_pixels,
         jpg_to_full_factor=args.full_render_factor,
     )
-    summary = analyze_render(args.render, args.output, params, tifxyz_dir=args.tifxyz_dir)
+    summary = analyze_render(
+        args.render, args.output, params,
+        tifxyz_dir=args.tifxyz_dir,
+        render_background_threshold=args.render_background_threshold,
+        render_background_min_component_pixels=args.render_background_min_component_pixels,
+    )
     log.info(
         "render analysis: %d exported / %d above-threshold / %d total response(s), "
         "score %.3f-%.3f, processed %s, %.1fs -> %s",
@@ -82,6 +87,11 @@ def cmd_analyze_render(args: argparse.Namespace) -> int:
     if summary["tifxyz_valid_mask_used"]:
         log.info("tifxyz valid-surface mask applied as diagnostics only; "
                  "scores and ranking are unchanged")
+    if summary["render_background_mask_used"]:
+        log.info("render-derived background diagnostics applied (grayscale threshold "
+                 "%d, min component %d processed px); scores and ranking are unchanged",
+                 args.render_background_threshold,
+                 args.render_background_min_component_pixels)
     return 0
 
 
@@ -176,6 +186,16 @@ def build_parser() -> argparse.ArgumentParser:
                    help="optional tifxyz directory (x.tif/y.tif/z.tif) matching the render; "
                         "derives a valid-surface mask and adds mesh-boundary diagnostics to "
                         "each candidate. Does not change scores or ranking")
+    r.add_argument("--render-background-threshold", type=int, default=None,
+                   help="optional 8-bit grayscale level (0..255); pixels at or below it "
+                        "count as near-black. Must be given together with "
+                        "--render-background-min-component-pixels. No default: the "
+                        "value is dataset- and resolution-dependent")
+    r.add_argument("--render-background-min-component-pixels", type=int, default=None,
+                   help="optional minimum size, in processed working-resolution pixels, "
+                        "of an edge-connected near-black component counted as render "
+                        "background. Adds descriptive fields to each candidate; does not "
+                        "change scores or ranking")
     r.set_defaults(func=cmd_analyze_render)
 
     rr = sub.add_parser(

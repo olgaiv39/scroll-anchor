@@ -11,6 +11,7 @@ from scroll_anchor.render2d import (
     analyze_array,
     analyze_render,
     boundary_distance,
+    derive_render_background_mask,
     extract_regions,
     extract_regions_with_stats,
     jpg_to_full,
@@ -623,3 +624,419 @@ def test_cli_tifxyz_dir_defaults_to_none():
         ["analyze-render", "--render", "r.jpg", "--output", "o", "--tifxyz-dir", "t"]
     )
     assert args.tifxyz_dir == "t"
+
+
+# --------------------------------------------------------------------------- #
+# Optional render-derived background mask (visible black margins)             #
+# --------------------------------------------------------------------------- #
+RENDER_BG_FIELDS = (
+    "render_background_distance_px",
+    "render_background_overlap_fraction",
+    "touches_render_background",
+)
+
+
+def _white(shape=(32, 32)):
+    """Uniformly white processed render in [0, 1] (nothing near-black)"""
+    return np.ones(shape, np.float32)
+
+
+def _diag_from_mask(active):
+    """Diagnostics whose single response is exactly ``active`` (any shape, not a box)"""
+    active = np.asarray(active, bool)
+    shape = active.shape
+    zeros = np.zeros(shape, np.float32)
+    return RenderDiagnostics(
+        anomaly=np.where(active, np.float32(0.5), np.float32(0.0)),
+        texture=np.full(shape, 0.06, np.float32),
+        seam_h=zeros.copy(),
+        seam_v=zeros.copy(),
+        lag_h=zeros.copy(),
+        lag_v=zeros.copy(),
+        agreement=np.ones(shape, np.float32),
+        horizontal=np.ones(shape, bool),
+        proc_shape=shape,
+    )
+
+
+def test_border_connected_near_black_component_is_retained():
+    img = _white()
+    img[:8, :] = 0.0  # 8x32 = 256 px reaching the top raster edge
+    bg, stats = derive_render_background_mask(img, 8, 100)
+
+    expected = np.zeros((32, 32), bool)
+    expected[:8, :] = True
+    assert np.array_equal(bg, expected)
+    assert stats["n_retained_components"] == 1
+    assert stats["background_fraction_processed"] == pytest.approx(256 / 1024)
+
+
+def test_internal_near_black_component_is_not_background():
+    img = _white()
+    img[:8, :] = 0.0          # border-connected margin
+    img[15:25, 15:25] = 0.0   # interior dark mark, 100 px, touches no edge
+    bg, stats = derive_render_background_mask(img, 8, 50)
+
+    assert stats["n_near_black_components"] == 2
+    assert stats["n_border_connected_components"] == 1
+    assert stats["n_retained_components"] == 1
+    # Dark papyrus marks in the interior must never become "background".
+    assert not bg[15:25, 15:25].any()
+    assert bg[:8, :].all()
+
+
+def test_border_connected_component_below_minimum_size_is_dropped():
+    img = _white()
+    img[0, :8] = 0.0  # 8 px on the top edge
+    bg, stats = derive_render_background_mask(img, 8, 100)
+
+    assert not bg.any()
+    assert stats["n_near_black_components"] == 1
+    assert stats["n_border_connected_components"] == 1
+    assert stats["n_retained_components"] == 0
+    assert stats["background_fraction_processed"] == 0.0
+    # The pixels are still counted as near-black; only the retention differs.
+    # Fractions are reported rounded to 6 decimals, as elsewhere in the module.
+    assert stats["near_black_fraction_processed"] == pytest.approx(8 / 1024, abs=1e-6)
+
+
+def test_diagonal_touch_does_not_connect_under_four_connectivity():
+    img = _white((16, 16))
+    img[0:2, 0:2] = 0.0   # 4 px in the corner, touches both raster edges
+    img[2:6, 2:6] = 0.0   # 16 px interior, meets the corner block only diagonally
+    bg, stats = derive_render_background_mask(img, 8, 1)
+
+    # Under 8-connectivity these would be one border-connected component.
+    assert stats["n_near_black_components"] == 2
+    assert stats["n_border_connected_components"] == 1
+    assert stats["n_retained_components"] == 1
+    assert bg[0:2, 0:2].all()
+    assert not bg[2:6, 2:6].any()
+
+
+def test_threshold_bounds_zero_and_255_are_accepted():
+    img = _white()
+    img[:4, :] = 0.0  # exactly 0 -> grayscale level 0
+    bg0, stats0 = derive_render_background_mask(img, 0, 1)
+    assert bg0[:4, :].all() and not bg0[4:, :].any()
+    assert stats0["grayscale_threshold_8bit"] == 0
+
+    bg255, stats255 = derive_render_background_mask(img, 255, 1)
+    # Every level is <= 255, so the whole raster is one border-connected component.
+    assert bg255.all()
+    assert stats255["near_black_fraction_processed"] == 1.0
+    assert stats255["n_near_black_components"] == 1
+
+
+@pytest.mark.parametrize("bad", [-1, 256, 300])
+def test_threshold_outside_8bit_range_is_rejected(bad):
+    with pytest.raises(ValueError, match="0..255"):
+        derive_render_background_mask(_white(), bad, 10)
+
+
+@pytest.mark.parametrize("bad", [0, -5])
+def test_non_positive_minimum_component_size_is_rejected(bad):
+    with pytest.raises(ValueError, match="positive integer"):
+        derive_render_background_mask(_white(), 8, bad)
+
+
+def test_background_mask_shape_dtype_and_statistics():
+    img = _white((20, 40))
+    img[:5, :] = 0.0            # 200 px border-connected
+    img[10:12, 10:12] = 0.0     # 4 px interior
+    bg, stats = derive_render_background_mask(img, 8, 50)
+
+    assert bg.dtype == np.bool_ and bg.shape == (20, 40)
+    assert stats == {
+        "grayscale_threshold_8bit": 8,
+        "minimum_component_pixels_processed": 50,
+        "connectivity": 4,
+        "near_black_fraction_processed": 0.255,   # 204 / 800
+        "background_fraction_processed": 0.25,    # 200 / 800
+        "n_near_black_components": 2,
+        "n_border_connected_components": 1,
+        "n_retained_components": 1,
+    }
+
+
+def _l_shaped_candidate():
+    """An L-shaped response whose bbox contains pixels the component does not own"""
+    active = np.zeros((64, 64), bool)
+    active[20:32, 20:24] = True  # vertical arm
+    active[28:32, 20:40] = True  # horizontal arm -> bbox rows 20..31, cols 20..39
+    return active
+
+
+def test_region_overlap_uses_component_pixels_not_bbox():
+    active = _l_shaped_candidate()
+    bg = np.zeros((64, 64), bool)
+    bg[20:27, 30:40] = True  # inside the candidate bbox, outside the component
+
+    diag = _diag_from_mask(active)
+    regs, _ = extract_regions_with_stats(
+        diag, 1.0, 1.0, RenderParams(), None, bg
+    )
+    assert len(regs) == 1
+    r = regs[0]
+    r0, c0, r1, c1 = r["bbox_rowcol_processed"]
+    assert (r0, c0, r1, c1) == (20, 20, 31, 39)
+    # A bbox-based calculation would report ~1/3 overlap here.
+    assert bg[r0:r1 + 1, c0:c1 + 1].mean() > 0.25
+    assert r["render_background_overlap_fraction"] == 0.0
+    # Nearest component pixel is row 28 under the block's last row 26.
+    assert r["render_background_distance_px"] == pytest.approx(2.0)
+    assert r["touches_render_background"] is False
+
+
+def test_candidate_inside_background_has_zero_distance_and_touches():
+    diag = _blob_diag()  # 12x12 response at rows/cols 20..31
+    bg = np.zeros((64, 64), bool)
+    bg[:, 30:] = True  # covers the right 2 columns of the blob
+
+    regs, _ = extract_regions_with_stats(diag, 1.0, 1.0, RenderParams(), None, bg)
+    r = regs[0]
+    assert r["render_background_distance_px"] == 0.0
+    assert r["touches_render_background"] is True
+    assert r["render_background_overlap_fraction"] == pytest.approx(2 / 12, abs=1e-6)
+
+
+def test_interior_candidate_has_positive_distance_and_no_overlap():
+    diag = _blob_diag()
+    bg = np.zeros((64, 64), bool)
+    bg[:, 40:] = True  # clear of the blob (cols 20..31)
+
+    regs, _ = extract_regions_with_stats(diag, 1.0, 1.0, RenderParams(), None, bg)
+    r = regs[0]
+    assert r["render_background_overlap_fraction"] == 0.0
+    assert r["touches_render_background"] is False
+    # Column 40 is 9 px from the blob's right edge (col 31); the padded raster edge
+    # is 21 px away, so the background dominates.
+    assert r["render_background_distance_px"] == pytest.approx(9.0)
+
+
+def test_render_background_mask_does_not_change_scores_or_ranking():
+    base = _texture(seed=13)
+    img = base.copy()
+    mid = img.shape[0] // 2
+    img[mid:, :] = np.roll(base, 6, axis=1)[mid:, :]
+    p = RenderParams()
+    diag = analyze_array(img, p)
+
+    bg = np.zeros(diag.anomaly.shape, bool)
+    bg[:, 200:] = True
+
+    plain, c_plain = extract_regions_with_stats(diag, 1.0, 1.0, p)
+    marked, c_marked = extract_regions_with_stats(diag, 1.0, 1.0, p, None, bg)
+
+    assert c_plain == c_marked
+    assert [r["id"] for r in plain] == [r["id"] for r in marked]
+    assert [r["score"] for r in plain] == [r["score"] for r in marked]
+    for a, b in zip(plain, marked):
+        assert all(b[k] == v for k, v in a.items())
+
+
+def test_no_render_background_fields_without_mask():
+    diag = _blob_diag()
+    regs, _ = extract_regions_with_stats(diag, 1.0, 1.0, RenderParams())
+    assert regs and all(k not in regs[0] for k in RENDER_BG_FIELDS)
+
+
+def test_render_background_mask_shape_mismatch_raises():
+    diag = _blob_diag()
+    with pytest.raises(ValueError, match="render background mask shape"):
+        extract_regions_with_stats(
+            diag, 1.0, 1.0, RenderParams(), None, np.ones((32, 32), bool)
+        )
+
+
+def test_tifxyz_and_render_background_diagnostics_coexist_on_a_region():
+    diag = _blob_diag()  # blob at rows/cols 20..31
+    valid = np.ones((64, 64), bool)
+    valid[:, 30:] = False   # tifxyz invalid overlaps the blob's right 2 columns
+    bg = np.zeros((64, 64), bool)
+    bg[:, 40:] = True       # render background is clear of the blob
+
+    regs, _ = extract_regions_with_stats(diag, 1.0, 1.0, RenderParams(), valid, bg)
+    r = regs[0]
+    assert set(NEW_FIELDS) | set(RENDER_BG_FIELDS) <= set(r)
+    # Deliberately disagreeing masks: neither field set may be derived from the other.
+    assert r["boundary_distance_px"] == 0.0
+    assert r["touches_invalid_boundary"] is True
+    assert r["invalid_overlap_fraction"] == pytest.approx(2 / 12, abs=1e-6)
+    assert r["render_background_distance_px"] == pytest.approx(9.0)
+    assert r["touches_render_background"] is False
+    assert r["render_background_overlap_fraction"] == 0.0
+
+
+def _margin_render(tmp_path, h=200, w=320, seed=14, margin=20):
+    """Seam render with a deterministic black left margin (edge-connected background)"""
+    Image = pytest.importorskip("PIL.Image")
+    base = _texture(h, w, seed=seed)
+    img = base.copy()
+    img[h // 2:, :] = np.roll(base, 6, axis=1)[h // 2:, :]
+    img[:, :margin] = 0.0
+    path = tmp_path / "render_margin.png"  # lossless: keeps the margin exactly black
+    Image.fromarray((img * 255).astype(np.uint8), mode="L").save(str(path))
+    return str(path)
+
+
+def test_analyze_render_without_render_background_args_preserves_previous_schema(tmp_path):
+    import json
+
+    render = _margin_render(tmp_path)
+    summary = analyze_render(render, str(tmp_path / "out"), RenderParams(working_downsample=1))
+    assert summary["render_background_mask_used"] is False
+
+    for key in ("regions", "summary", "metadata"):
+        with open(summary["paths"][key], encoding="utf-8") as fh:
+            raw = fh.read()
+        assert "render_background" not in raw, f"{key}.json leaked a render-background key"
+        for field in RENDER_BG_FIELDS:
+            assert field not in raw, f"{key}.json leaked {field}"
+
+    with open(summary["paths"]["regions"], encoding="utf-8") as fh:
+        payload = json.load(fh)
+    assert set(payload) == PREV_REGIONS_KEYS
+    assert payload["regions"]
+    for r in payload["regions"]:
+        assert set(r) == PREV_REGION_FIELDS
+
+    with open(summary["paths"]["summary"], encoding="utf-8") as fh:
+        assert set(json.load(fh)) == PREV_SUMMARY_KEYS
+
+    with open(summary["paths"]["metadata"], encoding="utf-8") as fh:
+        meta = json.load(fh)
+    assert "render_background_mask_used" not in meta
+    assert "render_background_mask" not in meta
+
+
+def test_analyze_render_with_render_background_args_adds_diagnostics_only(tmp_path):
+    import json
+
+    render = _margin_render(tmp_path)
+    p = RenderParams(working_downsample=1)
+    plain = analyze_render(render, str(tmp_path / "out_plain"), p)
+    marked = analyze_render(
+        render, str(tmp_path / "out_bg"), p,
+        render_background_threshold=8,
+        render_background_min_component_pixels=500,
+    )
+
+    assert marked["render_background_mask_used"] is True
+    assert marked["tifxyz_valid_mask_used"] is False
+    for k in ("n_regions_exported", "n_regions_above_threshold", "n_regions_total",
+              "exported_score_range"):
+        assert marked[k] == plain[k]
+
+    with open(marked["paths"]["regions"], encoding="utf-8") as fh:
+        payload = json.load(fh)
+    assert payload["render_background_mask_used"] is True
+    assert payload["format"] == "scroll-anchor.render-candidates/v0"  # unchanged
+    assert set(payload) == PREV_REGIONS_KEYS | {"render_background_mask_used"}
+    assert payload["regions"]
+    for r in payload["regions"]:
+        assert set(r) == PREV_REGION_FIELDS | set(RENDER_BG_FIELDS)
+        assert r["render_background_distance_px"] >= 0.0
+        assert 0.0 <= r["render_background_overlap_fraction"] <= 1.0
+        assert isinstance(r["touches_render_background"], bool)
+
+    with open(marked["paths"]["summary"], encoding="utf-8") as fh:
+        assert set(json.load(fh)) == PREV_SUMMARY_KEYS | {"render_background_mask_used"}
+
+    with open(marked["paths"]["metadata"], encoding="utf-8") as fh:
+        meta = json.load(fh)
+    assert meta["render_background_mask_used"] is True
+    info = meta["render_background_mask"]
+    assert info["grayscale_threshold_8bit"] == 8
+    assert info["minimum_component_pixels_processed"] == 500
+    assert info["connectivity"] == 4
+    assert info["source"].startswith("edge-connected near-black")
+    assert info["effect_on_scoring"] == "none; diagnostics only"
+    assert info["distance_units"] == "processed (working-resolution) pixels"
+    # The injected 200x20 margin is the retained background.
+    assert info["background_fraction_processed"] == pytest.approx(20 / 320, abs=0.01)
+    assert info["n_retained_components"] >= 1
+    assert any("not universally calibrated" in s for s in info["limitations"])
+    assert any("NOT equivalent to tifxyz" in s for s in info["limitations"])
+    # The threshold is a run parameter, not a detector parameter.
+    assert "render_background_threshold" not in meta["params"]
+
+
+@pytest.mark.parametrize("kwargs", [
+    {"render_background_threshold": 8},
+    {"render_background_min_component_pixels": 500},
+])
+def test_analyze_render_requires_both_render_background_args(tmp_path, kwargs):
+    render = _margin_render(tmp_path)
+    with pytest.raises(ValueError, match="require BOTH"):
+        analyze_render(render, str(tmp_path / "out"), RenderParams(working_downsample=1),
+                       **kwargs)
+
+
+def test_analyze_render_with_tifxyz_and_render_background_together(tmp_path):
+    import json
+
+    render = _margin_render(tmp_path)  # 200x320
+    p = RenderParams(working_downsample=1)
+    plain = analyze_render(render, str(tmp_path / "out_plain"), p)
+
+    # tifxyz raster at half the render resolution (consistent 2x scaling).
+    xyz = np.ones((100, 160), np.float32)
+    invalid = np.zeros((100, 160), bool)
+    invalid[:, 120:] = True
+    x, y, z = xyz.copy(), xyz.copy() * 2, xyz.copy() * 3
+    for a in (x, y, z):
+        a[invalid] = -1.0
+    d = _write_tifxyz(tmp_path / "tifxyz_both", x, y, z)
+
+    both = analyze_render(
+        render, str(tmp_path / "out_both"), p, tifxyz_dir=d,
+        render_background_threshold=8,
+        render_background_min_component_pixels=500,
+    )
+
+    assert both["tifxyz_valid_mask_used"] is True
+    assert both["render_background_mask_used"] is True
+    for k in ("n_regions_exported", "n_regions_above_threshold", "n_regions_total",
+              "exported_score_range"):
+        assert both[k] == plain[k]
+
+    with open(both["paths"]["metadata"], encoding="utf-8") as fh:
+        meta = json.load(fh)
+    # Both blocks present, neither overwriting the other.
+    assert meta["tifxyz_valid_mask_used"] is True
+    assert meta["render_background_mask_used"] is True
+    assert meta["tifxyz_valid_mask"]["raster_shape_rowcol"] == [100, 160]
+    assert meta["render_background_mask"]["grayscale_threshold_8bit"] == 8
+
+    with open(both["paths"]["regions"], encoding="utf-8") as fh:
+        payload = json.load(fh)
+    assert set(payload) == PREV_REGIONS_KEYS | {
+        "tifxyz_valid_mask_used", "render_background_mask_used"
+    }
+    assert payload["regions"]
+    for r in payload["regions"]:
+        assert set(r) == PREV_REGION_FIELDS | set(NEW_FIELDS) | set(RENDER_BG_FIELDS)
+
+    with open(both["paths"]["summary"], encoding="utf-8") as fh:
+        assert set(json.load(fh)) == PREV_SUMMARY_KEYS | {
+            "tifxyz_valid_mask_used", "render_background_mask_used"
+        }
+
+
+def test_cli_render_background_options_default_to_none():
+    from scroll_anchor.cli import build_parser
+
+    args = build_parser().parse_args(
+        ["analyze-render", "--render", "r.jpg", "--output", "o"]
+    )
+    assert args.render_background_threshold is None
+    assert args.render_background_min_component_pixels is None
+
+    args = build_parser().parse_args([
+        "analyze-render", "--render", "r.jpg", "--output", "o",
+        "--render-background-threshold", "32",
+        "--render-background-min-component-pixels", "5000",
+    ])
+    assert args.render_background_threshold == 32
+    assert args.render_background_min_component_pixels == 5000
