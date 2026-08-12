@@ -1,0 +1,666 @@
+{
+  "repository_provenance": {
+    "repo_path_note": "recorded relative; absolute paths intentionally omitted",
+    "branch": "main",
+    "head_sha": "ae61e391736cbb64a38271a345fec0b8449e785a",
+    "last_commit": "ae61e39 add validated container workflow",
+    "status_short": "?? results/pherc1667-candidate07-external-evaluation.zip\n?? results/pherc1667-candidate07-external-evaluation/\n?? scripts/evaluate_pherc1667_candidate07.py",
+    "working_tree_clean": false,
+    "python_version": "3.8.15",
+    "numpy_version": "1.23.5"
+  },
+  "package_provenance": {
+    "logical_filename": "scrollanchor-package-pherc1667-candidate07.zip",
+    "source": "Alan Thompson / Discord altommo",
+    "received_date": "2026-08-03",
+    "expected_size_bytes": 14732072,
+    "expected_sha256": "2460120eba5be9c0dde08827ffe8c5f196f14e1eb6db0fe60645751bd56871a6",
+    "extraction_location": "data/external/pherc1667-candidate07/ (gitignored)"
+  },
+  "input_validation": {
+    "files_present": {
+      "ct_roi.npy": true,
+      "README.md": true,
+      "surface/x.tif": true,
+      "surface/y.tif": true,
+      "surface/z.tif": true,
+      "surface/generations.tif": true,
+      "surface/meta.json": true,
+      "ground_truth/distance_to_reference.npy": true,
+      "ground_truth/signed_normal_offset.npy": true,
+      "ground_truth/failure_sector_mask.tif": true,
+      "ground_truth/failure_sector.json": true,
+      "scrollanchor_firstpass/diagnostics.json": true,
+      "scrollanchor_firstpass/review_regions.json": true
+    },
+    "surface_grid_shape": [
+      14,
+      14
+    ],
+    "xyz_shapes_agree": true,
+    "dtypes": {
+      "x": "float32",
+      "y": "float32",
+      "z": "float32",
+      "generations": "uint16",
+      "ct": "uint8",
+      "distance_to_reference": "float64",
+      "signed_normal_offset": "float64"
+    },
+    "mask_tif_present": false,
+    "validity_rule": "valid = z > 0 (no mask.tif supplied)",
+    "sentinel_value_observed": -1.0,
+    "all_coords_finite": true,
+    "surface_valid_count": 100,
+    "surface_valid_equals_rows2_11_cols2_11": true,
+    "ct_shape": [
+      256,
+      256,
+      256
+    ],
+    "ct_axis_contract": "ct indexed [z,y,x]; surface point (X,Y,Z) samples index (Z,Y,X); origin zero",
+    "coords_in_ct_bounds": true,
+    "coord_ranges": {
+      "X": [
+        139.83880615234375,
+        230.32229614257812
+      ],
+      "Y": [
+        121.2274398803711,
+        233.59490966796875
+      ],
+      "Z": [
+        122.38699340820312,
+        208.0127716064453
+      ]
+    },
+    "gt_distance_finite_mask_equals_surface_valid": true,
+    "gt_signed_finite_mask_equals_surface_valid": true,
+    "gt_mask_subset_of_surface_valid": true,
+    "gt_mask_equals_distance_gt_4_on_surface_valid": true,
+    "gt_positive_count": 34,
+    "gt_connected_components_4conn": 1,
+    "gt_component_sizes": [
+      34
+    ],
+    "gt_bbox_rowcol_full_grid": [
+      [
+        6,
+        2
+      ],
+      [
+        11,
+        11
+      ]
+    ],
+    "gt_bbox_rowcol_block_local": [
+      [
+        4,
+        0
+      ],
+      [
+        9,
+        9
+      ]
+    ],
+    "gt_bbox_matches_package_json_block_local": true,
+    "gt_max_distance": 10.270547776030222
+  },
+  "reproduction_comparison": {
+    "reference": "scrollanchor_firstpass/ supplied by Alan Thompson",
+    "command": "scroll-anchor analyze --surface <pkg>/surface --volume <pkg>/ct_roi.npy --config configs/default.yaml --output <pkg>/reproduced-default --no-channels",
+    "resolved_config_identical": true,
+    "diagnostics_format_identical": true,
+    "diagnostics_summary_identical": true,
+    "summary_first_pass": {
+      "n_vertices": 196,
+      "n_valid": 64,
+      "estimated_sheet_spacing_voxels": 8.0,
+      "frac_review": 1.0,
+      "frac_switch": 1.0,
+      "frac_drift_flagged": 0.796875,
+      "mean_confidence": 0.7096490859985352,
+      "n_correction_proposals": 0
+    },
+    "summary_reproduced": {
+      "n_vertices": 196,
+      "n_valid": 64,
+      "estimated_sheet_spacing_voxels": 8.0,
+      "frac_review": 1.0,
+      "frac_switch": 1.0,
+      "frac_drift_flagged": 0.796875,
+      "mean_confidence": 0.7096490859985352,
+      "n_correction_proposals": 0
+    },
+    "review_region_count_first_pass": 1,
+    "review_region_count_reproduced": 1,
+    "review_regions_identical": true,
+    "review_region_fields_reproduced": [
+      {
+        "id": 1,
+        "reason": "sheet_switch",
+        "priority": 3.7078,
+        "size_vertices": 64,
+        "bbox_rowcol": [
+          3,
+          3,
+          10,
+          10
+        ],
+        "centroid_rowcol": [
+          6.5,
+          6.5
+        ],
+        "mean_confidence": 0.7096,
+        "mean_drift_voxels": 4.3125,
+        "has_switch": true
+      }
+    ],
+    "per_array_comparison": {
+      "chosen_offset.npy": {
+        "shape": [
+          14,
+          14
+        ],
+        "dtype": "float32",
+        "shape_dtype_match": true,
+        "equal_nan_aware": true,
+        "nan_pattern_identical": true,
+        "bytes_identical": true,
+        "max_abs_difference_finite": 0.0,
+        "tolerance": "exact equality required; NaN treated as equal where both are NaN"
+      },
+      "confidence.npy": {
+        "shape": [
+          14,
+          14
+        ],
+        "dtype": "float32",
+        "shape_dtype_match": true,
+        "equal_nan_aware": true,
+        "nan_pattern_identical": true,
+        "bytes_identical": true,
+        "max_abs_difference_finite": 0.0,
+        "tolerance": "exact equality required; NaN treated as equal where both are NaN"
+      },
+      "correction_offset.npy": {
+        "shape": [
+          14,
+          14
+        ],
+        "dtype": "float32",
+        "shape_dtype_match": true,
+        "equal_nan_aware": true,
+        "nan_pattern_identical": true,
+        "bytes_identical": true,
+        "max_abs_difference_finite": 0.0,
+        "tolerance": "exact equality required; NaN treated as equal where both are NaN"
+      },
+      "drift_score.npy": {
+        "shape": [
+          14,
+          14
+        ],
+        "dtype": "float32",
+        "shape_dtype_match": true,
+        "equal_nan_aware": true,
+        "nan_pattern_identical": true,
+        "bytes_identical": true,
+        "max_abs_difference_finite": 0.0,
+        "tolerance": "exact equality required; NaN treated as equal where both are NaN"
+      },
+      "geom_offset.npy": {
+        "shape": [
+          14,
+          14
+        ],
+        "dtype": "float32",
+        "shape_dtype_match": true,
+        "equal_nan_aware": true,
+        "nan_pattern_identical": true,
+        "bytes_identical": true,
+        "max_abs_difference_finite": 0.0,
+        "tolerance": "exact equality required; NaN treated as equal where both are NaN"
+      },
+      "review.npy": {
+        "shape": [
+          14,
+          14
+        ],
+        "dtype": "uint8",
+        "shape_dtype_match": true,
+        "equal_nan_aware": true,
+        "nan_pattern_identical": true,
+        "bytes_identical": true,
+        "max_abs_difference_finite": 0.0,
+        "tolerance": "exact equality required; NaN treated as equal where both are NaN"
+      },
+      "switch_score.npy": {
+        "shape": [
+          14,
+          14
+        ],
+        "dtype": "float32",
+        "shape_dtype_match": true,
+        "equal_nan_aware": true,
+        "nan_pattern_identical": true,
+        "bytes_identical": true,
+        "max_abs_difference_finite": 0.0,
+        "tolerance": "exact equality required; NaN treated as equal where both are NaN"
+      }
+    },
+    "all_supplied_arrays_bytewise_identical": true,
+    "verdict": "EXACT"
+  },
+  "resolved_frozen_configuration": {
+    "seed": 0,
+    "chunk_rows": 128,
+    "sampling": {
+      "radius": 12.0,
+      "step": 0.5,
+      "order": 1,
+      "cval": 0.0
+    },
+    "diagnostics": {
+      "peak_min_prominence_frac": 0.15,
+      "peak_min_separation": 2.0,
+      "drift_min": 1.0,
+      "sheet_spacing": null,
+      "switch_frac_of_spacing": 0.5,
+      "smooth_window": 9,
+      "switch_smooth_window": 31,
+      "margin_soft": 0.25
+    },
+    "review": {
+      "confidence_review_below": 0.5,
+      "min_region_vertices": 4,
+      "max_regions": 200
+    },
+    "correction": {
+      "enabled": false,
+      "min_confidence": 0.85,
+      "max_offset": 6.0,
+      "require_margin": 0.4
+    }
+  },
+  "detector_evaluable_derivation": {
+    "definition": "surface.valid & normal_valid, exactly as pipeline.analyze_surface computes it",
+    "normal_valid_mechanism": "normals.compute_normals sets invalid vertices to NaN before np.gradient. np.gradient's central/one-sided stencils therefore propagate NaN to every vertex whose 3x3 neighbourhood touches an invalid vertex, so the valid block is eroded by exactly one vertex on each side.",
+    "count": 64,
+    "equals_one_vertex_3x3_erosion_of_surface_valid": true,
+    "equals_rows3_10_cols3_10_inner_8x8": true,
+    "agrees_with_emitted_finite_chosen_offset": true,
+    "excluded_ring_count": 36,
+    "reported_n_valid_in_diagnostics": 64,
+    "estimated_sheet_spacing_voxels": 8.0
+  },
+  "generation_distribution": {
+    "surface_valid": {
+      "1": 4,
+      "2": 12,
+      "3": 20,
+      "4": 28,
+      "5": 36
+    },
+    "detector_evaluable": {
+      "1": 4,
+      "2": 12,
+      "3": 20,
+      "4": 28
+    },
+    "gt_positive": {
+      "2": 1,
+      "3": 5,
+      "4": 12,
+      "5": 16
+    },
+    "excluded_from_detector": {
+      "5": 36
+    },
+    "gt_positive_and_excluded": {
+      "5": 16
+    }
+  },
+  "domain_A_surface_valid": {
+    "description": "All 100 tifxyz-valid vertices, described by coverage and evaluation state.",
+    "n_surface_valid": 100,
+    "detector_coverage": 0.64,
+    "n_detector_evaluable": 64,
+    "n_not_evaluated": 36,
+    "not_evaluated_fraction": 0.36,
+    "reviewed_fraction_of_surface_valid": 0.64,
+    "gt_positive": {
+      "total": 34,
+      "coverage": 0.5294117647058824,
+      "reviewed": 18,
+      "evaluated_not_reviewed": 0,
+      "not_evaluated": 16
+    },
+    "clean": {
+      "total": 66,
+      "coverage": 0.696969696969697,
+      "reviewed": 46,
+      "evaluated_not_reviewed": 0,
+      "not_evaluated": 20
+    },
+    "evaluation_state_counts": {
+      "reviewed": 64,
+      "evaluated_not_reviewed": 0,
+      "not_evaluated": 36
+    },
+    "caveat": "not_evaluated vertices are NOT true negatives and NOT false negatives. The detector emitted no decision for them; a zero in the review mask there is an absence of coverage, not a negative call."
+  },
+  "domain_B_detector_evaluable": {
+    "description": "The only domain where the confusion matrix expresses detector decisions: every vertex here received a real score.",
+    "n": 64,
+    "n_gt_positive": 18,
+    "n_clean": 46,
+    "confusion": {
+      "tp": 18,
+      "fp": 46,
+      "fn": 0,
+      "tn": 0,
+      "n": 64,
+      "precision": 0.28125,
+      "recall": 1.0,
+      "f1": 0.43902439024390244,
+      "iou": 0.28125,
+      "dice": 0.43902439024390244
+    },
+    "clean_false_positive_count": 46,
+    "clean_false_positive_rate": 1.0,
+    "fraction_of_evaluable_failure_sector_reviewed": 1.0,
+    "fraction_of_evaluable_clean_surface_left_unflagged": 0.0
+  },
+  "domain_C_literal_emitted_mask": {
+    "description": "Conventional confusion matrix over all 100 surface-valid vertices, reading the emitted review mask literally.",
+    "coverage_confounded": true,
+    "caveat": "COVERAGE-CONFOUNDED. 36 of the 100 vertices carry an emitted zero only because the detector never scored them. Those zeros are counted here as negatives (16 as FN, 20 as TN), which credits and penalises the detector for decisions it did not make. This is reported for completeness only and is not the primary result.",
+    "confusion": {
+      "tp": 18,
+      "fp": 46,
+      "fn": 16,
+      "tn": 20,
+      "n": 100,
+      "precision": 0.28125,
+      "recall": 0.5294117647058824,
+      "f1": 0.3673469387755102,
+      "iou": 0.225,
+      "dice": 0.3673469387755102
+    },
+    "fn_are_all_uncovered": true,
+    "tn_are_all_uncovered": true
+  },
+  "review_condition_attribution": {
+    "review_rule": "valid & ((switch_score >= 0.5) | (confidence < 0.5) | (drift_score >= 0.35*spacing))",
+    "big_drift_threshold_voxels": 2.8,
+    "n_evaluable": 64,
+    "n_reviewed": 64,
+    "switch_condition_true": 64,
+    "low_confidence_condition_true": 16,
+    "big_drift_condition_true": 42,
+    "reviewed_not_satisfying_switch_condition": 0,
+    "switch_condition_alone_reproduces_review": true,
+    "switch_score_unique_values_on_evaluable": [
+      1.0
+    ]
+  },
+  "switch_rule_removed_diagnostic": {
+    "description": "Diagnostic counterfactual only, not an alternative validated detector: valid & ((confidence < 0.5) | (drift_score >= 0.35*spacing)), i.e. the review OR-rule with the switch_score term removed.",
+    "rule": "valid & ((confidence < 0.5) | (drift_score >= 0.35*spacing))",
+    "reviewed_count": 50,
+    "confusion": {
+      "tp": 15,
+      "fp": 35,
+      "fn": 3,
+      "tn": 11,
+      "n": 64,
+      "precision": 0.3,
+      "recall": 0.8333333333333334,
+      "f1": 0.4411764705882353,
+      "iou": 0.2830188679245283,
+      "dice": 0.4411764705882353
+    },
+    "clean_left_unflagged": 11,
+    "clean_left_unflagged_of_clean_evaluable": "11 / 46"
+  },
+  "signal_comparison": {
+    "domain": "detector-evaluable vertices only (n=64)",
+    "geom_offset_vs_signed_normal_offset": {
+      "n": 64,
+      "pearson_r": 0.04310836037002233,
+      "spearman_rho": 0.09056776556776555,
+      "degenerate": false,
+      "mae_voxels": 2.3071542788974764,
+      "sign_agreement_fraction": 0.578125,
+      "sign_caveat": "The package states the signed-offset sign is comparable only within this one trace, and ScrollAnchor's normal orientation is fixed by its own global mean-normal convention. Sign agreement is therefore not evidence of physical agreement.",
+      "geom_offset_abs_max_voxels": 4.167487144470215,
+      "signed_normal_offset_abs_max_voxels": 6.078068111857526
+    },
+    "abs_geom_offset_vs_distance_to_reference": {
+      "n": 64,
+      "pearson_r": 0.4877895511350657,
+      "spearman_rho": 0.46730769230769226,
+      "degenerate": false,
+      "mae_voxels": 1.883861486871826,
+      "abs_geom_offset": {
+        "name": "abs(geom_offset)",
+        "count": 64,
+        "mean": 0.8099945997819304,
+        "median": 0.5018957853317261,
+        "p10": 0.05600309669971466,
+        "p90": 2.0303906440734862,
+        "min": 0.02300739288330078,
+        "max": 4.167487144470215
+      },
+      "distance_to_reference": {
+        "name": "distance_to_reference",
+        "count": 64,
+        "mean": 2.6577989671132087,
+        "median": 2.4857927044327717,
+        "p10": 0.576026332092687,
+        "p90": 5.068954139521388,
+        "min": 0.24576627186338962,
+        "max": 6.3092133838872755
+      }
+    },
+    "switch_classification_vs_gt": {
+      "tp": 18,
+      "fp": 46,
+      "fn": 0,
+      "tn": 0,
+      "n": 64,
+      "precision": 0.28125,
+      "recall": 1.0,
+      "f1": 0.43902439024390244,
+      "iou": 0.28125,
+      "dice": 0.43902439024390244
+    },
+    "review_mask_vs_gt": {
+      "tp": 18,
+      "fp": 46,
+      "fn": 0,
+      "tn": 0,
+      "n": 64,
+      "precision": 0.28125,
+      "recall": 1.0,
+      "f1": 0.43902439024390244,
+      "iou": 0.28125,
+      "dice": 0.43902439024390244
+    },
+    "distributions_failure_vs_clean": {
+      "confidence": {
+        "failure_sector": {
+          "name": "confidence | labelled-divergence",
+          "count": 18,
+          "mean": 0.6809109648068746,
+          "median": 0.7390323877334595,
+          "p10": 0.35470966100692747,
+          "p90": 0.9334971845149994,
+          "min": 0.2948036193847656,
+          "max": 0.9457640647888184
+        },
+        "clean": {
+          "name": "confidence | clean",
+          "count": 46,
+          "mean": 0.7208943941994853,
+          "median": 0.7692692875862122,
+          "p10": 0.38648824393749237,
+          "p90": 0.9877002537250519,
+          "min": 0.01601877063512802,
+          "max": 0.9957059621810913
+        }
+      },
+      "drift_score": {
+        "failure_sector": {
+          "name": "drift_score | labelled-divergence",
+          "count": 18,
+          "mean": 4.833333333333333,
+          "median": 4.75,
+          "p10": 0.0,
+          "p90": 7.600000000000001,
+          "min": 0.0,
+          "max": 11.5
+        },
+        "clean": {
+          "name": "drift_score | clean",
+          "count": 46,
+          "mean": 4.108695652173913,
+          "median": 3.5,
+          "p10": 0.0,
+          "p90": 9.25,
+          "min": 0.0,
+          "max": 12.0
+        }
+      },
+      "switch_score": {
+        "failure_sector": {
+          "name": "switch_score | labelled-divergence",
+          "count": 18,
+          "mean": 1.0,
+          "median": 1.0,
+          "p10": 1.0,
+          "p90": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "clean": {
+          "name": "switch_score | clean",
+          "count": 46,
+          "mean": 1.0,
+          "median": 1.0,
+          "p10": 1.0,
+          "p90": 1.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      },
+      "chosen_offset": {
+        "failure_sector": {
+          "name": "chosen_offset | labelled-divergence",
+          "count": 18,
+          "mean": 1.4166666666666667,
+          "median": 3.75,
+          "p10": -6.65,
+          "p90": 6.65,
+          "min": -11.5,
+          "max": 9.0
+        },
+        "clean": {
+          "name": "chosen_offset | clean",
+          "count": 46,
+          "mean": -2.717391304347826,
+          "median": -3.0,
+          "p10": -9.25,
+          "p90": 2.5,
+          "min": -12.0,
+          "max": 7.5
+        }
+      },
+      "geom_offset": {
+        "failure_sector": {
+          "name": "geom_offset | labelled-divergence",
+          "count": 18,
+          "mean": 0.49248670041561127,
+          "median": 0.7328388541936874,
+          "p10": -0.8262818574905393,
+          "p90": 2.156984043121338,
+          "min": -4.167487144470215,
+          "max": 2.4427013397216797
+        },
+        "clean": {
+          "name": "geom_offset | clean",
+          "count": 46,
+          "mean": 0.09320617175620535,
+          "median": 0.027015209197998047,
+          "p10": -0.8982203006744385,
+          "p90": 0.7933053970336914,
+          "min": -3.520623207092285,
+          "max": 2.279723644256592
+        }
+      }
+    }
+  },
+  "switch_signal_diagnosis": {
+    "code_path": "diagnostics._robust_residual_magnitude(points_xyz, valid, switch_smooth_window=31)",
+    "observation_median_window": 31,
+    "observation_grid_size": [
+      14,
+      14
+    ],
+    "reference_is_constant_across_grid": true,
+    "reference_point_xyz": [
+      -1.0,
+      -1.0,
+      -1.0
+    ],
+    "sentinel_vertices_in_grid": 96,
+    "sentinel_fraction_of_grid": 0.4897959183673469,
+    "valid_point_centroid_xyz": [
+      183.52254653930663,
+      177.2715313720703,
+      163.9161116027832
+    ],
+    "switch_mag_on_evaluable_voxels": {
+      "name": "switch_mag",
+      "count": 64,
+      "mean": 306.0998098190663,
+      "median": 306.1274787200841,
+      "p10": 280.17586484274466,
+      "p90": 331.3663860395024,
+      "min": 262.31067661498196,
+      "max": 349.5657943645389
+    },
+    "switch_ratio_on_evaluable": {
+      "name": "switch_mag / spacing",
+      "count": 64,
+      "mean": 38.26247622738329,
+      "median": 38.265934840010516,
+      "p10": 35.02198310534308,
+      "p90": 41.4207982549378,
+      "min": 32.788834576872745,
+      "max": 43.69572429556736
+    },
+    "switch_threshold_high": 0.5,
+    "measured_explanation": "The 31-vertex median window exceeds the 14-vertex grid, so with mode='nearest' the 'local' reference collapses to a single constant point. Because the sentinel-filled invalid vertices (value -1) are included in that median and are replicated by the border mode, the reference lands exactly on (-1,-1,-1), outside the patch. switch_mag then measures distance from the patch to that point (hundreds of voxels), so switch_ratio saturates far above the 0.5 threshold at every evaluable vertex. The switch channel therefore carries no localisation information on this package."
+  },
+  "scientific_limitations": [
+    "The reference-divergence label marks divergence of this trace from an accepted VC3D reference. It is not physical-sheet ground truth: it does not prove which physical sheet is correct, and does not prove a permanent sheet switch occurred.",
+    "The package explicitly withdraws the w011 accepted surface as an evaluation reference; the reference used for distance_to_reference is not re-verifiable from the contents of this package alone.",
+    "n = 100 surface-valid vertices from a single 14x14 patch on one scroll. All reported rates have wide binomial uncertainty and none of this generalises.",
+    "The trace is coarse (step size 10 voxels). A 34-vertex sector is near the resolution limit for localisation, as the package itself notes.",
+    "36 of 100 vertices received no detector decision, so 16 of 34 labelled-divergence vertices cannot be scored either way. Any single-number score over 100 vertices mixes detection behaviour with coverage loss.",
+    "Because the review mask covers every evaluable vertex, precision, IoU and Dice on Domain B are fully determined by the labelled-divergence prevalence within the covered block (18/64). They measure prevalence, not discrimination.",
+    "Recall of 1.0 on Domain B is not evidence of localisation: a detector that flags everything achieves it by construction.",
+    "The switch channel is saturated and therefore carries no per-vertex information on this package; correlations involving it are not meaningful.",
+    "No confidence intervals or significance tests are reported because a single saturated, fully-flagged patch does not support them."
+  ],
+  "unsupported_claims": [
+    "NOT SHOWN: that ScrollAnchor localised the failure sector. It flagged the whole covered block; the flag carries no positional information.",
+    "NOT SHOWN: that the flagged vertices are physically wrong sheet assignments.",
+    "NOT SHOWN: that the 16 uncovered labelled-divergence vertices would have been detected or missed had they been covered.",
+    "NOT SHOWN: that geom_offset measures the same physical quantity as signed_normal_offset.",
+    "NOT SHOWN: any generalisation to other scrolls, cubes, traces or grid sizes.",
+    "NOT SHOWN: that the reference-divergence label is a correct physical sheet labelling."
+  ]
+}
