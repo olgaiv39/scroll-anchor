@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import numpy as np
-from scipy.ndimage import median_filter, uniform_filter
+from scipy.ndimage import distance_transform_edt, median_filter, uniform_filter
 from scipy.signal import find_peaks
 
 from .config import DiagnosticsConfig
@@ -44,10 +44,22 @@ def _grid_normal_residual(points_xyz, normals, valid, window):
 def _robust_residual_magnitude(points_xyz, valid, window):
     """Return distance from a large-window median surface"""
     w = max(5, int(window) | 1)
+    H, W = valid.shape
+    # The requested background scale must fit the grid to define a reference.
+    if not valid.any() or w > H or w > W:
+        return np.zeros((H, W), dtype=np.float32)
+
+    # Make the reference independent of arbitrary values stored outside the surface.
+    completed = points_xyz.copy()
+    nearest = distance_transform_edt(
+        ~valid, return_distances=False, return_indices=True
+    )
+    completed[~valid] = points_xyz[tuple(nearest[:, ~valid])]
+
     ref = np.empty_like(points_xyz)
     for c in range(3):
-        ref[..., c] = median_filter(points_xyz[..., c], size=w, mode="nearest")
-    mag = np.linalg.norm(points_xyz - ref, axis=-1)
+        ref[..., c] = median_filter(completed[..., c], size=w, mode="nearest")
+    mag = np.linalg.norm(completed - ref, axis=-1)
     mag[~valid] = 0.0
     return mag.astype(np.float32)
 
