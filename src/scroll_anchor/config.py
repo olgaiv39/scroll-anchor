@@ -37,6 +37,10 @@ class ReviewConfig:
     """Review-region extraction settings"""
 
     confidence_review_below: float = 0.5
+    # Drift remains an exported exploratory diagnostic. It is not a default
+    # actionable review trigger because real-geometry validation has not shown
+    # it to be sheet-specific. Set this only to reproduce the legacy policy.
+    include_drift_in_review: bool = False
     min_region_vertices: int = 4
     max_regions: int = 200
 

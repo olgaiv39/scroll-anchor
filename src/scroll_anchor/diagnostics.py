@@ -2,11 +2,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Optional
 import numpy as np
 from scipy.ndimage import distance_transform_edt, median_filter, uniform_filter
 from scipy.signal import find_peaks
 
-from .config import DiagnosticsConfig
+from .config import DiagnosticsConfig, ReviewConfig
 
 @dataclass
 class Diagnostics:
@@ -102,6 +103,7 @@ def compute_diagnostics(
     valid: np.ndarray,
     cfg: DiagnosticsConfig,
     correction=None,
+    review_cfg: Optional[ReviewConfig] = None,
 ) -> Diagnostics:
     """Compute per-vertex drift, switch, confidence, and correction signals"""
     H, W, T = profiles.shape
@@ -187,21 +189,26 @@ def compute_diagnostics(
 
     return _finalize(
         valid, chosen_offset, drift_score, switch_score, geom_offset, margin,
-        evidence, contrast, confidence, spacing, cfg, correction,
+        evidence, contrast, confidence, spacing, cfg, correction, review_cfg,
     )
 
 
 def _finalize(
     valid, chosen_offset, drift_score, switch_score, geom_offset, margin,
-    evidence, contrast, confidence, spacing, cfg, correction,
+    evidence, contrast, confidence, spacing, cfg, correction, review_cfg,
 ) -> Diagnostics:
     H, W = valid.shape
-    big_drift = drift_score >= 0.35 * spacing
-    review = valid & (
+    # Drift is exploratory information, not an actionable default review
+    # trigger.  ``report.apply_review`` can opt into the legacy policy via
+    # ReviewConfig.include_drift_in_review without changing any diagnostics.
+    review_cfg = review_cfg or ReviewConfig()
+    review_condition = (
         (switch_score >= 0.5)
-        | (confidence < 0.5)
-        | big_drift
+        | (confidence < review_cfg.confidence_review_below)
     )
+    if review_cfg.include_drift_in_review:
+        review_condition |= drift_score >= 0.35 * spacing
+    review = valid & review_condition
 
     correction_offset = np.full((H, W), np.nan, dtype=np.float32)
     if correction is not None and getattr(correction, "enabled", False):

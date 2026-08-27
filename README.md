@@ -227,7 +227,10 @@ profile along ±`radius` voxels (trilinear, CPU), then:
   confirmed by strong on-sheet evidence, grown by hysteresis over the patch
 - **Confidence** = product of contrast, peak margin, geometric continuity, and
   evidence - so any single weakness drives confidence toward 0
-- **Review** = switch, or low confidence, or large drift
+- **Review** = switch or low confidence. Drift remains exported as an exploratory
+  diagnostic, but is not a default review trigger because its real-geometry
+  sheet-specificity has not been established. Set
+  `review.include_drift_in_review: true` only to reproduce the legacy policy.
 
 See `docs/method.md` for details and `docs/coordinate_conventions.md` for the
 coordinate/normal conventions (verified against `villa/lasagna/tifxyz_format.md`

@@ -14,14 +14,18 @@ from .tifxyz import Surface, write_tifxyz
 
 
 def apply_review(diag: Diagnostics, cfg: ReviewConfig) -> np.ndarray:
-    """(Re)compute the review mask from confidence, switch and drift signals"""
-    spacing = diag.estimated_spacing
-    big_drift = diag.drift_score >= 0.35 * spacing
-    review = diag.valid & (
+    """(Re)compute actionable review from switch and confidence evidence.
+
+    Drift is retained as an exported exploratory diagnostic.  Legacy callers may
+    explicitly opt into making it a review trigger through ``cfg``.
+    """
+    review_condition = (
         (diag.switch_score >= 0.5)
         | (diag.confidence < cfg.confidence_review_below)
-        | big_drift
     )
+    if cfg.include_drift_in_review:
+        review_condition |= diag.drift_score >= 0.35 * diag.estimated_spacing
+    review = diag.valid & review_condition
     diag.review = review
     return review
 

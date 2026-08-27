@@ -38,7 +38,7 @@ def analyze_surface(surface: Surface, volume: VolumeROI, config: RunConfig) -> A
     )
     diag = compute_diagnostics(
         profiles, offsets, points, normals, valid, config.diagnostics,
-        correction=config.correction,
+        correction=config.correction, review_cfg=config.review,
     )
     return AnalysisResult(
         diagnostics=diag, normals=normals, profiles=profiles, offsets=offsets, points_xyz=points
