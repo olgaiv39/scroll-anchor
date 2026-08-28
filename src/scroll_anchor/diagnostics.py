@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from enum import IntEnum
 from typing import Optional
 import numpy as np
 from scipy.ndimage import distance_transform_edt, median_filter, uniform_filter
@@ -9,10 +10,22 @@ from scipy.signal import find_peaks
 
 from .config import DiagnosticsConfig, ReviewConfig
 
+
+class ProfileSelectionState(IntEnum):
+    """How a profile reference was obtained, independent of review policy."""
+
+    NOT_EVALUATED = 0
+    LOCAL_PEAK_SINGLE = 1
+    LOCAL_PEAK_MULTIPLE = 2
+    GLOBAL_MAX_FALLBACK = 3
+    PROFILE_UNUSABLE = 4
+
+
 @dataclass
 class Diagnostics:
     valid: np.ndarray            # (H, W) bool
     chosen_offset: np.ndarray    # (H, W) signed voxels to chosen sheet peak
+    profile_selection_state: np.ndarray  # (H, W) uint8 ProfileSelectionState
     drift_score: np.ndarray      # (H, W) |chosen_offset| (0 below drift_min)
     switch_score: np.ndarray     # (H, W) in [0, 1]
     geom_offset: np.ndarray      # (H, W) signed normal residual vs smoothed grid
@@ -140,6 +153,9 @@ def compute_diagnostics(
     med_range = med_range if med_range > 1e-6 else 1.0
 
     chosen_offset = np.full((H, W), np.nan, dtype=np.float32)
+    profile_selection_state = np.full(
+        (H, W), ProfileSelectionState.NOT_EVALUATED, dtype=np.uint8
+    )
     evidence = np.zeros((H, W), dtype=np.float32)
     margin = np.ones((H, W), dtype=np.float32)
     peak_offsets_grid = np.empty((H, W), dtype=object)
@@ -152,15 +168,21 @@ def compute_diagnostics(
                 continue
             rng_ij = prange[i, j]
             if rng_ij < 1e-6:
+                profile_selection_state[i, j] = ProfileSelectionState.PROFILE_UNUSABLE
                 peak_offsets_grid[i, j] = np.empty(0)
                 continue
             norm_prof = (profiles[i, j] - pmin[i, j]) / rng_ij
-            peaks, props = find_peaks(
+            peaks, _ = find_peaks(
                 norm_prof, prominence=cfg.peak_min_prominence_frac, distance=min_dist
             )
             if peaks.size == 0:
                 # Fall back to the global maximum of the profile
+                profile_selection_state[i, j] = ProfileSelectionState.GLOBAL_MAX_FALLBACK
                 peaks = np.array([int(np.argmax(norm_prof))])
+            elif peaks.size == 1:
+                profile_selection_state[i, j] = ProfileSelectionState.LOCAL_PEAK_SINGLE
+            else:
+                profile_selection_state[i, j] = ProfileSelectionState.LOCAL_PEAK_MULTIPLE
             offs = offsets[peaks]
             heights = norm_prof[peaks]
             peak_offsets_grid[i, j] = (offs, heights)
@@ -210,14 +232,16 @@ def compute_diagnostics(
     confidence[~valid] = 0.0
 
     return _finalize(
-        valid, chosen_offset, drift_score, switch_score, geom_offset, margin,
-        evidence, contrast, confidence, spacing, cfg, correction, review_cfg,
+        valid, chosen_offset, profile_selection_state, drift_score, switch_score,
+        geom_offset, margin, evidence, contrast, confidence, spacing, cfg,
+        correction, review_cfg,
     )
 
 
 def _finalize(
-    valid, chosen_offset, drift_score, switch_score, geom_offset, margin,
-    evidence, contrast, confidence, spacing, cfg, correction, review_cfg,
+    valid, chosen_offset, profile_selection_state, drift_score, switch_score,
+    geom_offset, margin, evidence, contrast, confidence, spacing, cfg, correction,
+    review_cfg,
 ) -> Diagnostics:
     H, W = valid.shape
     # Drift is exploratory information, not an actionable default review
@@ -245,6 +269,7 @@ def _finalize(
     return Diagnostics(
         valid=valid,
         chosen_offset=chosen_offset,
+        profile_selection_state=profile_selection_state,
         drift_score=drift_score,
         switch_score=switch_score,
         geom_offset=geom_offset,

@@ -15,6 +15,10 @@ non-neural and needs no training or ground truth at inference
    - **Peaks**: `scipy.signal.find_peaks` on each normalized profile; a
      distance-weighted score `height * exp(-|offset|/spacing)` picks the *chosen*
      sheet peak and yields a best-vs-second **margin**
+   - **Profile selection state**: records one detected local peak, multiple
+     detected local peaks, global-maximum fallback after no detected local peak,
+     unusable profile, or not evaluated. This is selection provenance, not a
+     probability and not an automatic review cause
    - **Drift**: `chosen_offset` = signed distance to the chosen peak; a drifted
      surface shows a consistent nonzero offset back toward the true sheet
    - **Sheet-switch**: a **robust** (median-consensus over a large window) 3D
@@ -24,9 +28,11 @@ non-neural and needs no training or ground truth at inference
      The 3D magnitude is used (not the normal projection) because normals are
      unreliable at the switch cliff
    - **Sheet spacing** is estimated from median inter-peak distance if not set
-   - **Confidence** = `contrast * margin_conf * geom_conf * evidence`, all in
-     [0, 1]; the product makes the score conservative
-   - **Review** = switch, or `confidence < threshold`, or large drift
+   - **Confidence** = `contrast * margin_conf * evidence`, all in [0, 1]; the
+     product describes observed profile quality. Geometric residual remains a
+     separate diagnostic
+   - **Review** = switch or `confidence < threshold` by default. Large drift is
+     diagnostic-only unless the legacy opt-in review policy is requested
 4. **Correction (optional, off by default)**: propose moving to the chosen peak
    only when confidence and margin are high, the move is small, and there is no
    switch. Otherwise the vertex is flagged, not moved

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from .config import RunConfig
-from .diagnostics import Diagnostics, compute_diagnostics
+from .diagnostics import Diagnostics, ProfileSelectionState, compute_diagnostics
 from .pipeline import AnalysisResult, analyze_surface
 from .tifxyz import Surface, read_tifxyz, write_tifxyz
 from .volume import VolumeROI
@@ -14,6 +14,7 @@ __email__ = "ivolga.vak@gmail.com"
 __all__ = [
     "RunConfig",
     "Diagnostics",
+    "ProfileSelectionState",
     "compute_diagnostics",
     "AnalysisResult",
     "analyze_surface",

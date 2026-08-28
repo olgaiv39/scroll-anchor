@@ -37,3 +37,4 @@ Verified against `villa/lasagna/tifxyz_format.md` and the `vesuvius` tifxyz API
 | `sampling.radius`, `step`, offsets, drift, spacing | voxels |
 | `smooth_window`, `switch_smooth_window`, review region sizes | grid vertices |
 | confidence, margin, switch_score, evidence, contrast | dimensionless [0, 1] |
+| profile_selection_state | categorical uint8; codebook in `diagnostics.json` |

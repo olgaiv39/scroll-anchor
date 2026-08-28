@@ -9,7 +9,7 @@ import numpy as np
 from scipy.ndimage import label as cc_label
 
 from .config import ReviewConfig, RunConfig
-from .diagnostics import Diagnostics, review_cause_masks
+from .diagnostics import Diagnostics, ProfileSelectionState, review_cause_masks
 from .tifxyz import Surface, write_tifxyz
 
 
@@ -104,6 +104,10 @@ def _summary(diag: Diagnostics) -> Dict[str, object]:
         "frac_switch": frac(diag.switch_score >= 0.5),
         "frac_drift_flagged": frac(diag.drift_score > 0),
         "mean_confidence": float(np.mean(diag.confidence[v])) if nvalid else 0.0,
+        "profile_selection_state_counts": {
+            state.name: int(np.sum(diag.profile_selection_state == state))
+            for state in ProfileSelectionState
+        },
         "n_correction_proposals": int(np.sum(np.isfinite(diag.correction_offset))),
     }
 
@@ -121,6 +125,9 @@ def write_reports(
     diagnostics = {
         "format": "scroll-anchor.diagnostics/v0",
         "config": config.to_dict(),
+        "profile_selection_state_codes": {
+            state.name: int(state) for state in ProfileSelectionState
+        },
         "summary": _summary(diag),
     }
     with open(os.path.join(outdir, "diagnostics.json"), "w", encoding="utf-8") as fh:
@@ -137,6 +144,7 @@ def write_reports(
         "switch_score": diag.switch_score,
         "chosen_offset": diag.chosen_offset,
         "geom_offset": diag.geom_offset,
+        "profile_selection_state": diag.profile_selection_state,
         "review": diag.review.astype(np.uint8),
         "review_low_confidence": diag.review_low_confidence.astype(np.uint8),
         "review_switch": diag.review_switch.astype(np.uint8),
@@ -151,6 +159,7 @@ def write_reports(
             "sa_confidence": diag.confidence.astype(np.float32),
             "sa_drift": diag.drift_score.astype(np.float32),
             "sa_switch": diag.switch_score.astype(np.float32),
+            "sa_profile_selection_state": diag.profile_selection_state,
             "sa_review": diag.review.astype(np.uint8),
             "sa_review_low_confidence": diag.review_low_confidence.astype(np.uint8),
             "sa_review_switch": diag.review_switch.astype(np.uint8),

@@ -5,7 +5,8 @@ from scipy.ndimage import median_filter
 
 from scroll_anchor.config import DiagnosticsConfig
 from scroll_anchor.diagnostics import (
-    _hysteresis, _robust_residual_magnitude, compute_diagnostics,
+    ProfileSelectionState, _hysteresis, _robust_residual_magnitude,
+    compute_diagnostics,
 )
 from scroll_anchor.tifxyz import Surface, read_tifxyz, write_tifxyz
 
@@ -91,3 +92,36 @@ def test_geometric_residual_does_not_change_profile_confidence(monkeypatch):
     np.testing.assert_array_equal(flat.confidence, curved.confidence)
     np.testing.assert_array_equal(flat.drift_score, curved.drift_score)
     np.testing.assert_array_equal(flat.switch_score, curved.switch_score)
+
+
+def test_profile_selection_state_preserves_peak_provenance():
+    offsets = np.arange(-2.0, 3.0, dtype=np.float32)
+    profiles = np.array([[
+        [0.0, 0.0, 1.0, 0.0, 0.0],  # one detected local peak
+        [0.0, 1.0, 0.0, 1.0, 0.0],  # multiple detected local peaks
+        [0.0, 0.2, 0.4, 0.6, 1.0],  # no local peak: global-max fallback
+        [0.5, 0.5, 0.5, 0.5, 0.5],  # unusable dynamic range
+        [0.0, 0.0, 1.0, 0.0, 0.0],  # outside detector coverage
+    ]], dtype=np.float32)
+    valid = np.array([[True, True, True, True, False]])
+    points = np.zeros((1, 5, 3), dtype=np.float32)
+    normals = np.zeros_like(points)
+    normals[..., 2] = 1.0
+
+    diag = compute_diagnostics(
+        profiles, offsets, points, normals, valid,
+        DiagnosticsConfig(peak_min_separation=2.0, switch_smooth_window=31),
+    )
+
+    assert diag.profile_selection_state.dtype == np.uint8
+    assert diag.profile_selection_state.tolist() == [[
+        ProfileSelectionState.LOCAL_PEAK_SINGLE,
+        ProfileSelectionState.LOCAL_PEAK_MULTIPLE,
+        ProfileSelectionState.GLOBAL_MAX_FALLBACK,
+        ProfileSelectionState.PROFILE_UNUSABLE,
+        ProfileSelectionState.NOT_EVALUATED,
+    ]]
+    assert diag.confidence[0, 2] == 1.0
+    assert not diag.review[0, 2]
+    assert diag.confidence[0, 3] == 0.0
+    assert diag.review[0, 3]

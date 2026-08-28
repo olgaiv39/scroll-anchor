@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import json
 import numpy as np
+import tifffile
 
 from scroll_anchor.config import ReviewConfig, RunConfig
-from scroll_anchor.diagnostics import Diagnostics
+from scroll_anchor.diagnostics import Diagnostics, ProfileSelectionState
 from scroll_anchor.pipeline import analyze_surface
 from scroll_anchor.report import apply_review, build_review_regions, write_reports
 from scroll_anchor.synth import make_scene
@@ -15,6 +17,9 @@ def _diag():
     return Diagnostics(
         valid=np.ones((1, 4), dtype=bool),
         chosen_offset=z.copy(),
+        profile_selection_state=np.full(
+            (1, 4), ProfileSelectionState.LOCAL_PEAK_SINGLE, dtype=np.uint8
+        ),
         drift_score=np.array([[4.0, 0.0, 4.0, 0.0]], dtype=np.float32),
         switch_score=np.array([[0.0, 1.0, 1.0, 0.0]], dtype=np.float32),
         geom_offset=z.copy(), margin=z.copy(), evidence=z.copy(), contrast=z.copy(),
@@ -71,10 +76,10 @@ def test_review_cause_arrays_are_serialized_and_region_counts_match(tmp_path):
     )
     regions = build_review_regions(diag, cfg)
 
-    write_reports(str(tmp_path), surface, diag, RunConfig(review=cfg), regions,
-                  write_channels=False)
+    write_reports(str(tmp_path), surface, diag, RunConfig(review=cfg), regions)
 
     for name, expected in {
+        "profile_selection_state": diag.profile_selection_state,
         "review": diag.review,
         "review_low_confidence": diag.review_low_confidence,
         "review_switch": diag.review_switch,
@@ -82,6 +87,22 @@ def test_review_cause_arrays_are_serialized_and_region_counts_match(tmp_path):
     }.items():
         actual = np.load(tmp_path / "arrays" / (name + ".npy"))
         assert np.array_equal(actual, expected.astype(np.uint8))
+    with open(tmp_path / "diagnostics.json", encoding="utf-8") as fh:
+        report = json.load(fh)
+    assert report["profile_selection_state_codes"] == {
+        state.name: int(state) for state in ProfileSelectionState
+    }
+    assert report["summary"]["profile_selection_state_counts"] == {
+        "NOT_EVALUATED": 0,
+        "LOCAL_PEAK_SINGLE": 4,
+        "LOCAL_PEAK_MULTIPLE": 0,
+        "GLOBAL_MAX_FALLBACK": 0,
+        "PROFILE_UNUSABLE": 0,
+    }
+    channel = tifffile.imread(
+        tmp_path / "surface" / "sa_profile_selection_state.tif"
+    )
+    assert np.array_equal(channel, diag.profile_selection_state)
     assert sum(r["review_switch_count"] for r in regions) == 2
     assert sum(r["review_low_confidence_count"] for r in regions) == 2
 

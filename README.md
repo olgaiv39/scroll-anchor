@@ -213,7 +213,7 @@ Outputs:
 results/run/
 ├── diagnostics.json        # summary stats + resolved config
 ├── review_regions.json     # prioritised, clustered regions to inspect
-├── arrays/*.npy            # per-vertex fields (confidence, drift, switch, ...)
+├── arrays/*.npy            # confidence, selection provenance, review causes, ...
 └── surface/                # tifxyz copy + diagnostic/review-cause channels
 ```
 
@@ -228,6 +228,10 @@ profile along ±`radius` voxels (trilinear, CPU), then:
 - **Confidence** = product of local profile contrast, peak margin, and peak
   evidence - so any CT-profile weakness drives confidence toward 0. Geometric
   residual remains exported as a separate surface-geometry diagnostic.
+- **Profile selection state** records whether the reference came from one or
+  multiple detected local peaks, a forced global-maximum fallback, an unusable
+  profile, or a vertex outside detector coverage. It describes provenance and
+  does not by itself trigger review.
 - **Review** = switch or low confidence. Drift remains exported as an exploratory
   diagnostic, but is not a default review trigger because its real-geometry
   sheet-specificity has not been established. Set
