@@ -214,7 +214,7 @@ results/run/
 ├── diagnostics.json        # summary stats + resolved config
 ├── review_regions.json     # prioritised, clustered regions to inspect
 ├── arrays/*.npy            # per-vertex fields (confidence, drift, switch, ...)
-└── surface/                # tifxyz copy + sa_confidence/sa_drift/sa_switch/sa_review channels
+└── surface/                # tifxyz copy + diagnostic/review-cause channels
 ```
 
 ## How it works (brief)
@@ -232,6 +232,10 @@ profile along ±`radius` voxels (trilinear, CPU), then:
   diagnostic, but is not a default review trigger because its real-geometry
   sheet-specificity has not been established. Set
   `review.include_drift_in_review: true` only to reproduce the legacy policy.
+  The `review` array remains their combined actionable mask; additive
+  `review_low_confidence` and `review_switch` boolean arrays identify each
+  cause (and may both be true). With legacy drift review enabled,
+  `review_drift` records its additional cause.
 
 See `docs/method.md` for details and `docs/coordinate_conventions.md` for the
 coordinate/normal conventions (verified against `villa/lasagna/tifxyz_format.md`

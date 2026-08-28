@@ -21,8 +21,28 @@ class Diagnostics:
     contrast: np.ndarray         # (H, W) profile dynamic range / global median
     confidence: np.ndarray       # (H, W) in [0, 1]
     review: np.ndarray           # (H, W) bool
+    review_low_confidence: np.ndarray  # (H, W) bool
+    review_switch: np.ndarray    # (H, W) bool
+    review_drift: np.ndarray     # (H, W) bool; populated only for legacy opt-in
     correction_offset: np.ndarray  # (H, W) proposed move (nan if none)
     estimated_spacing: float
+
+
+def review_cause_masks(
+    valid: np.ndarray,
+    confidence: np.ndarray,
+    switch_score: np.ndarray,
+    drift_score: np.ndarray,
+    estimated_spacing: float,
+    review_cfg: ReviewConfig,
+):
+    """Return the actionable review causes for the configured policy."""
+    low_confidence = valid & (confidence < review_cfg.confidence_review_below)
+    switch = valid & (switch_score >= 0.5)
+    drift = np.zeros_like(valid, dtype=bool)
+    if review_cfg.include_drift_in_review:
+        drift = valid & (drift_score >= 0.35 * estimated_spacing)
+    return low_confidence, switch, drift
 
 
 def _grid_normal_residual(points_xyz, normals, valid, window):
@@ -204,13 +224,10 @@ def _finalize(
     # trigger.  ``report.apply_review`` can opt into the legacy policy via
     # ReviewConfig.include_drift_in_review without changing any diagnostics.
     review_cfg = review_cfg or ReviewConfig()
-    review_condition = (
-        (switch_score >= 0.5)
-        | (confidence < review_cfg.confidence_review_below)
+    review_low_confidence, review_switch, review_drift = review_cause_masks(
+        valid, confidence, switch_score, drift_score, spacing, review_cfg,
     )
-    if review_cfg.include_drift_in_review:
-        review_condition |= drift_score >= 0.35 * spacing
-    review = valid & review_condition
+    review = review_low_confidence | review_switch | review_drift
 
     correction_offset = np.full((H, W), np.nan, dtype=np.float32)
     if correction is not None and getattr(correction, "enabled", False):
@@ -236,6 +253,9 @@ def _finalize(
         contrast=contrast,
         confidence=confidence,
         review=review,
+        review_low_confidence=review_low_confidence,
+        review_switch=review_switch,
+        review_drift=review_drift,
         correction_offset=correction_offset,
         estimated_spacing=float(spacing),
     )

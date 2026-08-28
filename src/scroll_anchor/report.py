@@ -9,7 +9,7 @@ import numpy as np
 from scipy.ndimage import label as cc_label
 
 from .config import ReviewConfig, RunConfig
-from .diagnostics import Diagnostics
+from .diagnostics import Diagnostics, review_cause_masks
 from .tifxyz import Surface, write_tifxyz
 
 
@@ -19,15 +19,22 @@ def apply_review(diag: Diagnostics, cfg: ReviewConfig) -> np.ndarray:
     Drift is retained as an exported exploratory diagnostic.  Legacy callers may
     explicitly opt into making it a review trigger through ``cfg``.
     """
-    review_condition = (
-        (diag.switch_score >= 0.5)
-        | (diag.confidence < cfg.confidence_review_below)
+    (
+        diag.review_low_confidence,
+        diag.review_switch,
+        diag.review_drift,
+    ) = review_cause_masks(
+        diag.valid,
+        diag.confidence,
+        diag.switch_score,
+        diag.drift_score,
+        diag.estimated_spacing,
+        cfg,
     )
-    if cfg.include_drift_in_review:
-        review_condition |= diag.drift_score >= 0.35 * diag.estimated_spacing
-    review = diag.valid & review_condition
-    diag.review = review
-    return review
+    diag.review = (
+        diag.review_low_confidence | diag.review_switch | diag.review_drift
+    )
+    return diag.review
 
 
 def build_review_regions(diag: Diagnostics, cfg: ReviewConfig) -> List[Dict[str, object]]:
@@ -64,6 +71,12 @@ def build_review_regions(diag: Diagnostics, cfg: ReviewConfig) -> List[Dict[str,
                 "mean_confidence": round(mean_conf, 4),
                 "mean_drift_voxels": round(mean_drift, 4),
                 "has_switch": has_switch,
+                "review_low_confidence_count": int(diag.review_low_confidence[m].sum()),
+                "review_switch_count": int(diag.review_switch[m].sum()),
+                "review_drift_count": int(diag.review_drift[m].sum()),
+                "review_low_confidence_and_switch_count": int(
+                    (diag.review_low_confidence[m] & diag.review_switch[m]).sum()
+                ),
             }
         )
     regions.sort(key=lambda r: r["priority"], reverse=True)
@@ -82,6 +95,12 @@ def _summary(diag: Diagnostics) -> Dict[str, object]:
         "n_valid": nvalid,
         "estimated_sheet_spacing_voxels": round(diag.estimated_spacing, 4),
         "frac_review": frac(diag.review),
+        "n_review_low_confidence": int(diag.review_low_confidence.sum()),
+        "n_review_switch": int(diag.review_switch.sum()),
+        "n_review_drift": int(diag.review_drift.sum()),
+        "n_review_low_confidence_and_switch": int(
+            (diag.review_low_confidence & diag.review_switch).sum()
+        ),
         "frac_switch": frac(diag.switch_score >= 0.5),
         "frac_drift_flagged": frac(diag.drift_score > 0),
         "mean_confidence": float(np.mean(diag.confidence[v])) if nvalid else 0.0,
@@ -119,6 +138,9 @@ def write_reports(
         "chosen_offset": diag.chosen_offset,
         "geom_offset": diag.geom_offset,
         "review": diag.review.astype(np.uint8),
+        "review_low_confidence": diag.review_low_confidence.astype(np.uint8),
+        "review_switch": diag.review_switch.astype(np.uint8),
+        "review_drift": diag.review_drift.astype(np.uint8),
         "correction_offset": diag.correction_offset,
     }.items():
         np.save(os.path.join(arr_dir, f"{name}.npy"), arr)
@@ -130,5 +152,8 @@ def write_reports(
             "sa_drift": diag.drift_score.astype(np.float32),
             "sa_switch": diag.switch_score.astype(np.float32),
             "sa_review": diag.review.astype(np.uint8),
+            "sa_review_low_confidence": diag.review_low_confidence.astype(np.uint8),
+            "sa_review_switch": diag.review_switch.astype(np.uint8),
+            "sa_review_drift": diag.review_drift.astype(np.uint8),
         }
         write_tifxyz(seg_dir, surface, extra_channels=extras, overwrite=True)
