@@ -225,8 +225,9 @@ profile along ±`radius` voxels (trilinear, CPU), then:
 - **Drift** = signed offset to the distance-weighted nearest sheet peak
 - **Sheet-switch** = a robust (median-consensus) ~one-spacing positional jump,
   confirmed by strong on-sheet evidence, grown by hysteresis over the patch
-- **Confidence** = product of contrast, peak margin, geometric continuity, and
-  evidence - so any single weakness drives confidence toward 0
+- **Confidence** = product of local profile contrast, peak margin, and peak
+  evidence - so any CT-profile weakness drives confidence toward 0. Geometric
+  residual remains exported as a separate surface-geometry diagnostic.
 - **Review** = switch or low confidence. Drift remains exported as an exploratory
   diagnostic, but is not a default review trigger because its real-geometry
   sheet-specificity has not been established. Set

@@ -3,7 +3,10 @@ from __future__ import annotations
 import numpy as np
 from scipy.ndimage import median_filter
 
-from scroll_anchor.diagnostics import _hysteresis, _robust_residual_magnitude
+from scroll_anchor.config import DiagnosticsConfig
+from scroll_anchor.diagnostics import (
+    _hysteresis, _robust_residual_magnitude, compute_diagnostics,
+)
 from scroll_anchor.tifxyz import Surface, read_tifxyz, write_tifxyz
 
 
@@ -65,3 +68,26 @@ def test_switch_residual_requires_window_support_on_small_grid():
 
     actual = _robust_residual_magnitude(points, valid, window=31)
     np.testing.assert_array_equal(actual, np.zeros((7, 7), dtype=np.float32))
+
+
+def test_geometric_residual_does_not_change_profile_confidence(monkeypatch):
+    points = _plane(); valid = np.ones(points.shape[:2], dtype=bool)
+    normals = np.zeros_like(points); normals[..., 2] = 1.0
+    offsets = np.array([-1.0, 0.0, 1.0], dtype=np.float32)
+    profiles = np.zeros((*valid.shape, 3), dtype=np.float32); profiles[..., 1] = 1.0
+    cfg = DiagnosticsConfig(switch_smooth_window=31)
+
+    monkeypatch.setattr(
+        "scroll_anchor.diagnostics._grid_normal_residual",
+        lambda *args: np.zeros(valid.shape, dtype=np.float32),
+    )
+    flat = compute_diagnostics(profiles, offsets, points, normals, valid, cfg)
+    monkeypatch.setattr(
+        "scroll_anchor.diagnostics._grid_normal_residual",
+        lambda *args: np.full(valid.shape, 99.0, dtype=np.float32),
+    )
+    curved = compute_diagnostics(profiles, offsets, points, normals, valid, cfg)
+
+    np.testing.assert_array_equal(flat.confidence, curved.confidence)
+    np.testing.assert_array_equal(flat.drift_score, curved.drift_score)
+    np.testing.assert_array_equal(flat.switch_score, curved.switch_score)

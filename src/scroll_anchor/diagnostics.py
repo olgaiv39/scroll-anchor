@@ -183,8 +183,10 @@ def compute_diagnostics(
     ).astype(np.float32)
 
     margin_conf = np.clip(margin / max(cfg.margin_soft, 1e-6), 0.0, 1.0)
-    geom_conf = 1.0 - np.clip(np.abs(geom_offset) / spacing, 0.0, 1.0)
-    confidence = (contrast * margin_conf * geom_conf * np.clip(evidence, 0.0, 1.0)).astype(np.float32)
+    # Confidence describes local CT-profile quality.  Geometric residual is
+    # retained as a diagnostic, but is not a sheet-specific CT-confidence
+    # factor on irregular real surface geometry.
+    confidence = (contrast * margin_conf * np.clip(evidence, 0.0, 1.0)).astype(np.float32)
     confidence[~valid] = 0.0
 
     return _finalize(
