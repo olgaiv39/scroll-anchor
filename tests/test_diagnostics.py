@@ -174,3 +174,40 @@ def test_full_support_preserves_legacy_diagnostics_bitwise():
     for name in ("chosen_offset", "profile_selection_state", "drift_score", "switch_score",
                  "margin", "evidence", "contrast", "confidence", "review"):
         np.testing.assert_array_equal(getattr(legacy, name), getattr(supported, name))
+
+
+def test_fallback_can_bridge_but_cannot_seed_switch(monkeypatch):
+    offsets = np.arange(-2.0, 3.0, dtype=np.float32)
+    local_peak = [0.0, 0.0, 1.0, 0.0, 0.0]
+    fallback = [0.0, 0.2, 0.4, 0.6, 1.0]
+    profiles = np.array([[local_peak, fallback]], dtype=np.float32)
+    valid = np.ones((1, 2), dtype=bool)
+    points = np.zeros((1, 2, 3), dtype=np.float32)
+    normals = np.zeros_like(points); normals[..., 2] = 1.0
+    cfg = DiagnosticsConfig(sheet_spacing=8.0, switch_smooth_window=31)
+    monkeypatch.setattr(
+        "scroll_anchor.diagnostics._robust_residual_magnitude",
+        lambda *args: np.full(valid.shape, 8.0, dtype=np.float32),
+    )
+
+    bridged = compute_diagnostics(profiles, offsets, points, normals, valid, cfg)
+    assert bridged.profile_selection_state.tolist() == [[
+        ProfileSelectionState.LOCAL_PEAK_SINGLE,
+        ProfileSelectionState.GLOBAL_MAX_FALLBACK,
+    ]]
+    assert bridged.switch_score.tolist() == [[1.0, 1.0]]
+    assert bridged.evidence[0, 1] == 1.0
+    assert bridged.chosen_offset[0, 1] == 2.0
+
+    fallback_only = compute_diagnostics(
+        profiles[:, 1:], offsets, points[:, 1:], normals[:, 1:],
+        valid[:, 1:], cfg,
+    )
+    assert fallback_only.profile_selection_state[0, 0] == ProfileSelectionState.GLOBAL_MAX_FALLBACK
+    assert fallback_only.switch_score[0, 0] == 0.0
+    assert fallback_only.evidence[0, 0] == 1.0
+    assert fallback_only.chosen_offset[0, 0] == 2.0
+    assert np.array_equal(
+        bridged.review,
+        bridged.review_low_confidence | bridged.review_switch | bridged.review_drift,
+    )

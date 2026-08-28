@@ -98,12 +98,14 @@ def _robust_residual_magnitude(points_xyz, valid, window):
     return mag.astype(np.float32)
 
 
-def _hysteresis(raw: np.ndarray, high: float, low: float) -> np.ndarray:
-    """Keep weak connected regions containing at least one strong vertex"""
+def _hysteresis(
+    raw: np.ndarray, high: float, low: float, strong_seed: Optional[np.ndarray] = None,
+) -> np.ndarray:
+    """Keep weak connected regions containing at least one strong seed."""
     from scipy.ndimage import label as cc_label
 
     weak = raw >= low
-    strong = raw >= high
+    strong = raw >= high if strong_seed is None else (weak & strong_seed)
     labels, n = cc_label(weak)
     if n == 0:
         return np.zeros_like(raw)
@@ -246,11 +248,23 @@ def compute_diagnostics(
             else:
                 margin[i, j] = 1.0
 
-    # A switch is a spacing-scale geometric jump with strong sheet evidence
+    # A switch is a spacing-scale geometric jump with strong sheet evidence.
+    # Fallback is a deterministic reference, not affirmative correspondence
+    # evidence: it can bridge a retained weak component but cannot seed one.
     switch_ratio = switch_mag / max(spacing, 1e-6)
     on_a_sheet = evidence >= 0.4
     switch_raw = np.where(valid & on_a_sheet, switch_ratio, 0.0).astype(np.float32)
-    switch_score = _hysteresis(switch_raw, high=cfg.switch_frac_of_spacing, low=0.35)
+    accepted_local_peak = np.isin(
+        profile_selection_state,
+        [ProfileSelectionState.LOCAL_PEAK_SINGLE, ProfileSelectionState.LOCAL_PEAK_MULTIPLE],
+    )
+    strong_seed = (
+        valid & on_a_sheet & accepted_local_peak
+        & (switch_ratio >= cfg.switch_frac_of_spacing)
+    )
+    switch_score = _hysteresis(
+        switch_raw, high=cfg.switch_frac_of_spacing, low=0.35, strong_seed=strong_seed,
+    )
 
     contrast = np.clip(prange / med_range, 0.0, 1.0).astype(np.float32)
     drift_score = np.where(
