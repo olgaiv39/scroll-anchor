@@ -9,6 +9,12 @@ non-neural and needs no training or ground truth at inference
    grid; flip to a consistent hemisphere
 2. **Profile sampling** (`sampling.py`): for each vertex, sample the CT intensity
    along the normal over `±radius` voxels at `step` spacing (trilinear, CPU).
+   Sampling also records geometric array support. With the default SciPy
+   `mode="constant"`, a coordinate is either in-array and fully supported or is
+   outside and returns `cval`; intensity is never used to infer that state.
+   Diagnostics use only the contiguous supported profile segment containing
+   offset zero, so a truncated ray remains usable while samples beyond the ROI
+   cannot influence normalization, peaks, fallback, evidence, or confidence.
    Processing is chunked over grid rows to bound peak memory
    (`chunk_rows * W * T` floats at a time)
 3. **Diagnostics** (`diagnostics.py`):

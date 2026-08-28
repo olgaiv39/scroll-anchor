@@ -40,3 +40,18 @@ def test_profile_peaks_at_sheet():
     profiles, offsets = sample_profiles(pts, normals, vol, cfg)
     peak_off = offsets[np.argmax(profiles[1, 1])]
     assert abs(peak_off - (-2.0)) <= 0.5
+
+
+def test_profile_support_is_geometric_and_distinguishes_valid_cval():
+    vol = VolumeROI.from_array(np.zeros((5, 5, 5), dtype=np.float32))
+    points = np.array([[[2.0, 2.0, 2.0]]], dtype=np.float32)
+    normals = np.array([[[0.0, 0.0, 1.0]]], dtype=np.float32)
+    profiles, offsets, support = sample_profiles(
+        points, normals, vol, SamplingConfig(radius=3.0, step=1.0), return_support=True
+    )
+
+    assert offsets.tolist() == [-3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0]
+    assert support.tolist() == [[[False, True, True, True, True, True, False]]]
+    # The in-volume zero is a genuine voxel with the same value as default cval.
+    assert profiles[0, 0, 1] == 0.0
+    assert support[0, 0, 1]

@@ -125,3 +125,52 @@ def test_profile_selection_state_preserves_peak_provenance():
     assert not diag.review[0, 2]
     assert diag.confidence[0, 3] == 0.0
     assert diag.review[0, 3]
+
+
+def test_supported_segment_excludes_unsupported_peak_and_fallback():
+    offsets = np.arange(-2.0, 3.0, dtype=np.float32)
+    profiles = np.array([[[100.0, 0.0, 1.0, 0.0, 100.0],
+                          [100.0, 0.0, 0.2, 0.4, 1.0]]], dtype=np.float32)
+    support = np.array([[[False, True, True, True, False],
+                         [False, True, True, True, False]]])
+    valid = np.ones((1, 2), dtype=bool)
+    points = np.zeros((1, 2, 3), dtype=np.float32)
+    normals = np.zeros_like(points); normals[..., 2] = 1.0
+    cfg = DiagnosticsConfig(peak_min_separation=2.0, switch_smooth_window=31)
+
+    diag = compute_diagnostics(profiles, offsets, points, normals, valid, cfg,
+                               sample_support=support)
+    assert diag.chosen_offset.tolist() == [[0.0, 1.0]]
+    assert diag.profile_selection_state.tolist() == [[
+        ProfileSelectionState.LOCAL_PEAK_SINGLE,
+        ProfileSelectionState.GLOBAL_MAX_FALLBACK,
+    ]]
+
+
+def test_missing_center_support_is_explicitly_unusable():
+    offsets = np.array([-1.0, 0.0, 1.0], dtype=np.float32)
+    profiles = np.array([[[1.0, 2.0, 3.0]]], dtype=np.float32)
+    support = np.array([[[True, False, True]]])
+    valid = np.ones((1, 1), dtype=bool)
+    points = np.zeros((1, 1, 3), dtype=np.float32)
+    normals = np.zeros_like(points); normals[..., 2] = 1.0
+    diag = compute_diagnostics(profiles, offsets, points, normals, valid,
+                               DiagnosticsConfig(switch_smooth_window=31),
+                               sample_support=support)
+    assert diag.profile_selection_state[0, 0] == ProfileSelectionState.PROFILE_UNUSABLE
+    assert np.isnan(diag.chosen_offset[0, 0])
+
+
+def test_full_support_preserves_legacy_diagnostics_bitwise():
+    offsets = np.arange(-2.0, 3.0, dtype=np.float32)
+    profiles = np.array([[[0.0, 0.3, 1.0, 0.2, 0.0]]], dtype=np.float32)
+    valid = np.ones((1, 1), dtype=bool)
+    points = np.zeros((1, 1, 3), dtype=np.float32)
+    normals = np.zeros_like(points); normals[..., 2] = 1.0
+    cfg = DiagnosticsConfig(switch_smooth_window=31)
+    legacy = compute_diagnostics(profiles, offsets, points, normals, valid, cfg)
+    supported = compute_diagnostics(profiles, offsets, points, normals, valid, cfg,
+                                    sample_support=np.ones_like(profiles, dtype=bool))
+    for name in ("chosen_offset", "profile_selection_state", "drift_score", "switch_score",
+                 "margin", "evidence", "contrast", "confidence", "review"):
+        np.testing.assert_array_equal(getattr(legacy, name), getattr(supported, name))

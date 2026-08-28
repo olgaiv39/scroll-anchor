@@ -128,6 +128,28 @@ def _estimate_spacing(all_peak_offsets, cfg: DiagnosticsConfig) -> float:
     return 8.0
 
 
+def _center_supported_segments(sample_support: np.ndarray, offsets: np.ndarray) -> np.ndarray:
+    """Keep the supported component connected to the correspondence offset zero."""
+    support = np.asarray(sample_support, dtype=bool)
+    if support.ndim != 3:
+        raise ValueError("sample_support must have shape (H, W, T)")
+    keep = np.zeros_like(support)
+    center = int(np.argmin(np.abs(offsets)))
+    for i in range(support.shape[0]):
+        for j in range(support.shape[1]):
+            row = support[i, j]
+            if not row[center]:
+                continue
+            lo = center
+            while lo > 0 and row[lo - 1]:
+                lo -= 1
+            hi = center + 1
+            while hi < row.size and row[hi]:
+                hi += 1
+            keep[i, j, lo:hi] = True
+    return keep
+
+
 def compute_diagnostics(
     profiles: np.ndarray,
     offsets: np.ndarray,
@@ -137,6 +159,7 @@ def compute_diagnostics(
     cfg: DiagnosticsConfig,
     correction=None,
     review_cfg: Optional[ReviewConfig] = None,
+    sample_support: Optional[np.ndarray] = None,
 ) -> Diagnostics:
     """Compute per-vertex drift, switch, confidence, and correction signals"""
     H, W, T = profiles.shape
@@ -146,10 +169,19 @@ def compute_diagnostics(
     geom_offset = _grid_normal_residual(points_xyz, normals, valid, cfg.smooth_window)
     switch_mag = _robust_residual_magnitude(points_xyz, valid, cfg.switch_smooth_window)
 
-    pmin = profiles.min(axis=2)
-    pmax = profiles.max(axis=2)
+    support = None
+    if sample_support is None:
+        pmin = profiles.min(axis=2)
+        pmax = profiles.max(axis=2)
+    else:
+        if sample_support.shape != profiles.shape:
+            raise ValueError("sample_support shape must match profiles")
+        support = _center_supported_segments(sample_support, offsets)
+        pmin = np.min(np.where(support, profiles, np.inf), axis=2)
+        pmax = np.max(np.where(support, profiles, -np.inf), axis=2)
     prange = pmax - pmin
-    med_range = float(np.median(prange[valid])) if valid.any() else 1.0
+    usable_ranges = prange[valid & np.isfinite(prange)]
+    med_range = float(np.median(usable_ranges)) if usable_ranges.size else 1.0
     med_range = med_range if med_range > 1e-6 else 1.0
 
     chosen_offset = np.full((H, W), np.nan, dtype=np.float32)
@@ -167,11 +199,14 @@ def compute_diagnostics(
                 peak_offsets_grid[i, j] = np.empty(0)
                 continue
             rng_ij = prange[i, j]
-            if rng_ij < 1e-6:
+            sample_indices = (
+                np.flatnonzero(support[i, j]) if support is not None else np.arange(T)
+            )
+            if sample_indices.size == 0 or not np.isfinite(rng_ij) or rng_ij < 1e-6:
                 profile_selection_state[i, j] = ProfileSelectionState.PROFILE_UNUSABLE
                 peak_offsets_grid[i, j] = np.empty(0)
                 continue
-            norm_prof = (profiles[i, j] - pmin[i, j]) / rng_ij
+            norm_prof = (profiles[i, j, sample_indices] - pmin[i, j]) / rng_ij
             peaks, _ = find_peaks(
                 norm_prof, prominence=cfg.peak_min_prominence_frac, distance=min_dist
             )
@@ -183,7 +218,7 @@ def compute_diagnostics(
                 profile_selection_state[i, j] = ProfileSelectionState.LOCAL_PEAK_SINGLE
             else:
                 profile_selection_state[i, j] = ProfileSelectionState.LOCAL_PEAK_MULTIPLE
-            offs = offsets[peaks]
+            offs = offsets[sample_indices[peaks]]
             heights = norm_prof[peaks]
             peak_offsets_grid[i, j] = (offs, heights)
 

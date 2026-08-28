@@ -23,6 +23,7 @@ class AnalysisResult:
     profiles: np.ndarray
     offsets: np.ndarray
     points_xyz: np.ndarray
+    sample_support: np.ndarray
 
 
 def analyze_surface(surface: Surface, volume: VolumeROI, config: RunConfig) -> AnalysisResult:
@@ -33,13 +34,16 @@ def analyze_surface(surface: Surface, volume: VolumeROI, config: RunConfig) -> A
     log.info(
         "analyzing surface %s (%d valid vertices)", surface.shape, int(valid.sum())
     )
-    profiles, offsets = sample_profiles(
-        points, normals, volume, config.sampling, chunk_rows=config.chunk_rows
+    profiles, offsets, sample_support = sample_profiles(
+        points, normals, volume, config.sampling, chunk_rows=config.chunk_rows,
+        return_support=True,
     )
     diag = compute_diagnostics(
         profiles, offsets, points, normals, valid, config.diagnostics,
+        sample_support=sample_support,
         correction=config.correction, review_cfg=config.review,
     )
     return AnalysisResult(
-        diagnostics=diag, normals=normals, profiles=profiles, offsets=offsets, points_xyz=points
+        diagnostics=diag, normals=normals, profiles=profiles, offsets=offsets,
+        points_xyz=points, sample_support=sample_support,
     )
