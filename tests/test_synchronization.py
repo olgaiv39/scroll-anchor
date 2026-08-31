@@ -44,6 +44,58 @@ def test_incompatible_endpoints_are_never_simultaneously_selected():
     assert solution.hard_constraint_violations == 0
 
 
+def test_same_endpoint_component_use_allows_multiple_germs():
+    problem = SynchronizationProblem(
+        components=("a", "b", "c"),
+        gauge_labels=(0, 1),
+        direct_observations=(),
+        germs=(
+            CanonicalEdgeGerm("ab", "a", "b", 1, "east"),
+            CanonicalEdgeGerm("ac", "a", "c", 1, "north"),
+        ),
+        endpoint_component_uses=(("u", "a", ("ab", "ac")),),
+    )
+    solution = _solve(problem)
+    assert frozenset(solution.selected_germ_ids) == {"ab", "ac"}
+
+
+def test_different_endpoint_component_uses_cannot_coexist():
+    problem = SynchronizationProblem(
+        components=("a", "b", "c", "d"),
+        gauge_labels=(0,),
+        direct_observations=(),
+        germs=(
+            CanonicalEdgeGerm("ab", "a", "b", 0, "east"),
+            CanonicalEdgeGerm("cd", "c", "d", 0, "north"),
+        ),
+        endpoint_component_uses=(
+            ("u", "a", ("ab",)),
+            ("u", "c", ("cd",)),
+        ),
+    )
+    solution = _solve(problem)
+    assert len(solution.selected_germ_ids) == 1
+
+
+def test_endpoint_use_encoding_matches_pairwise_feasible_z_assignments():
+    germs = ("ab", "ac", "cd")
+    pairwise = {tuple(sorted(pair)) for pair in (("ab", "cd"), ("ac", "cd"))}
+    endpoint_uses = (("u", "a", ("ab", "ac")), ("u", "c", ("cd",)))
+    old_feasible = set()
+    new_feasible = set()
+    for bits in product((0, 1), repeat=len(germs)):
+        selected = frozenset(germ for germ, bit in zip(germs, bits) if bit)
+        if not any(set(pair) <= selected for pair in pairwise):
+            old_feasible.add(selected)
+        by_endpoint = {}
+        for endpoint, component, use_germs in endpoint_uses:
+            if selected.intersection(use_germs):
+                by_endpoint.setdefault(endpoint, set()).add(component)
+        if all(len(components) <= 1 for components in by_endpoint.values()):
+            new_feasible.add(selected)
+    assert new_feasible == old_feasible
+
+
 def test_null_is_feasible_when_no_germ_can_match_domain():
     problem = SynchronizationProblem(
         components=("a", "b"),

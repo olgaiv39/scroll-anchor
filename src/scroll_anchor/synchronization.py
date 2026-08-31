@@ -50,6 +50,11 @@ class SynchronizationProblem:
     direct_observations: Sequence[DirectGaugeObservation]
     germs: Sequence[CanonicalEdgeGerm]
     conflict_pairs: Sequence[Tuple[str, str]] = ()
+    # Optional exact compression of conflict_pairs.  Each item names one cached
+    # surface endpoint, one concrete component at that endpoint, and all germs
+    # using that component there.  At most one component-use literal is allowed
+    # per endpoint; germs in the same item may still coexist.
+    endpoint_component_uses: Sequence[Tuple[Hashable, ComponentId, Sequence[str]]] = ()
     # Optional exact relative-gauge quotient groups.  Callers supply connected
     # q-components and the original symmetric half-width B.
     relative_gauge_components: Sequence[Tuple[Sequence[ComponentId], int]] = ()
@@ -97,6 +102,16 @@ def _validate(problem: SynchronizationProblem) -> None:
     for left, right in problem.conflict_pairs:
         if left == right or left not in germ_ids or right not in germ_ids:
             raise ValueError("conflict pairs must name two distinct known germs")
+    use_keys = set()
+    for endpoint, component, use_germs in problem.endpoint_component_uses:
+        if component not in component_set:
+            raise ValueError("endpoint component use refers to an unknown component")
+        key = (endpoint, component)
+        if key in use_keys:
+            raise ValueError("endpoint component uses must be unique")
+        use_keys.add(key)
+        if not use_germs or any(germ_id not in germ_ids for germ_id in use_germs):
+            raise ValueError("endpoint component uses must name known germs")
 
 
 def solve_synchronization(
@@ -159,8 +174,19 @@ def solve_synchronization(
 
     for group_germs in groups.values():
         model.Add(sum(z[germ.germ_id] for germ in group_germs) <= 1)
-    for left, right in problem.conflict_pairs:
-        model.Add(z[left] + z[right] <= 1)
+    if problem.endpoint_component_uses:
+        uses_by_endpoint: Dict[Hashable, list] = {}
+        for index, (endpoint, _component, use_germs) in enumerate(problem.endpoint_component_uses):
+            use = model.NewBoolVar("endpoint_use_%d" % index)
+            uses_by_endpoint.setdefault(endpoint, []).append(use)
+            for germ_id in use_germs:
+                model.AddImplication(z[germ_id], use)
+        for endpoint_uses in uses_by_endpoint.values():
+            if len(endpoint_uses) > 1:
+                model.AddAtMostOne(endpoint_uses)
+    else:
+        for left, right in problem.conflict_pairs:
+            model.Add(z[left] + z[right] <= 1)
 
     unary_mismatch = []
     for index, observation in enumerate(problem.direct_observations):
