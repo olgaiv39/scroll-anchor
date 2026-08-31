@@ -70,6 +70,21 @@ def test_compatible_selected_relation_beats_all_null():
     assert solution.objective_value == 0.0
 
 
+def test_canonical_germ_obeys_each_directed_ambiguity_group():
+    problem = SynchronizationProblem(
+        components=("a", "b", "c"),
+        gauge_labels=(-1, 0, 1),
+        direct_observations=(),
+        germs=(
+            CanonicalEdgeGerm("ab", "a", "b", 0, "a_east", ("a_east", "b_west")),
+            CanonicalEdgeGerm("bc", "b", "c", 0, "b_east", ("b_east", "b_west")),
+        ),
+    )
+    solution = _solve(problem)
+    assert len(solution.selected_germ_ids) == 1
+    assert solution.hard_constraint_violations == 0
+
+
 def test_deterministic_solution_and_zero_hard_constraint_violations():
     problem = SynchronizationProblem(
         components=("a", "b", "c"),

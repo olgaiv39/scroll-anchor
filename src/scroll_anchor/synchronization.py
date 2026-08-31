@@ -30,6 +30,10 @@ class CanonicalEdgeGerm:
     target: ComponentId
     transport: int
     ambiguity_group: str
+    # A canonical relation is seen from both of its directed surface interfaces.
+    # Keep the original field for backwards-compatible callers; when supplied,
+    # all entries here receive the same at-most-one constraint.
+    ambiguity_groups: Tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -46,6 +50,9 @@ class SynchronizationProblem:
     direct_observations: Sequence[DirectGaugeObservation]
     germs: Sequence[CanonicalEdgeGerm]
     conflict_pairs: Sequence[Tuple[str, str]] = ()
+    # Optional exact relative-gauge quotient groups.  Callers supply connected
+    # q-components and the original symmetric half-width B.
+    relative_gauge_components: Sequence[Tuple[Sequence[ComponentId], int]] = ()
 
 
 @dataclass(frozen=True)
@@ -118,14 +125,37 @@ def solve_synchronization(
     germs = tuple(problem.germs)
     groups: Dict[str, list] = {}
     for germ in germs:
-        groups.setdefault(germ.ambiguity_group, []).append(germ)
+        memberships = germ.ambiguity_groups or (germ.ambiguity_group,)
+        for group in memberships:
+            groups.setdefault(group, []).append(germ)
 
     model = cp_model.CpModel()
-    domain = cp_model.Domain.FromValues(labels)
-    q = {component: model.NewIntVarFromDomain(domain, "q_%d" % index)
-         for index, component in enumerate(components)}
+    contiguous = labels == tuple(range(labels[0], labels[-1] + 1))
+    domain = None if contiguous else cp_model.Domain.FromValues(labels)
+    q = {
+        component: (
+            model.NewIntVar(labels[0], labels[-1], "q_%d" % index)
+            if contiguous else model.NewIntVarFromDomain(domain, "q_%d" % index)
+        )
+        for index, component in enumerate(components)
+    }
+    for index, (members, original_bound) in enumerate(problem.relative_gauge_components):
+        members = tuple(members)
+        if not members:
+            continue
+        model.Add(q[min(members)] == 0)
+        q_min = model.NewIntVar(-2 * original_bound, 2 * original_bound, "gauge_min_%d" % index)
+        q_max = model.NewIntVar(-2 * original_bound, 2 * original_bound, "gauge_max_%d" % index)
+        model.AddMinEquality(q_min, [q[item] for item in members])
+        model.AddMaxEquality(q_max, [q[item] for item in members])
+        model.Add(q_max - q_min <= 2 * original_bound)
     z = {germ.germ_id: model.NewBoolVar("z_%d" % index)
          for index, germ in enumerate(germs)}
+    if problem.relative_gauge_components:
+        for value in q.values():
+            model.AddHint(value, 0)
+        for value in z.values():
+            model.AddHint(value, 0)
 
     for group_germs in groups.values():
         model.Add(sum(z[germ.germ_id] for germ in group_germs) <= 1)
