@@ -67,6 +67,14 @@ Validation is layered, and each layer supports a different claim:
 The exploratory 2D PHerc workflow provides review candidates and supporting
 evidence, not volumetric detector validation
 
+## Experimental relative synchronization
+
+`scroll_anchor.synchronization` provides a generic CPU CP-SAT surface for synchronizing compatible local sheet-correspondence hypotheses into coherent relative phase structure. It is ground-truth-free at inference and retains the exact relative-gauge quotient and exact endpoint/component-use conflict encoding
+
+`section_local_phase_patch_score` is a threshold-free descriptive score for selected non-modal phase structure. In a 20-case external evaluation prepared by altommo, relative synchronization reached AUROC 0.672 and Average Precision 0.385. This is evidence of meaningful correspondence structure, not a finished sheet-switch classifier, and the Alan evaluation is not a new blind validation
+
+See the [short external result note](results/pherc-alan-relative-synchronization-20260831/SHORT_REPORT.md)
+
 ## Results (synthetic benchmark, reproducible)
 
 Two parallel-sheet CT volume + a clean surface corrupted with drift, a

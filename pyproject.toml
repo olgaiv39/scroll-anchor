@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "scroll-anchor"
-version = "0.1.0"
+version = "0.2.0"
 description = "Conservative, read-only surface-label diagnostics for volumetric papyrus CT (drift + sheet-switch detection)."
 readme = "README.md"
 requires-python = ">=3.8"
