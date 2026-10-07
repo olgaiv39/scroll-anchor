@@ -75,6 +75,43 @@ def _grid_normal_residual(points_xyz, normals, valid, window):
     return geom.astype(np.float32)
 
 
+def _nearest_median_2d(data, window, *, workspace_bytes=16 * 1024 * 1024):
+    """Exact odd-window median with nearest-edge padding and tiled workspace.
+
+    NumPy selection avoids fully sorting every neighbourhood. The temporary
+    neighbourhood buffer stays within workspace_bytes; input, padding and output
+    are separate. Retain SciPy for non-finite or unsupported input types.
+    """
+    bytes_per_pixel = window * window * data.dtype.itemsize
+    if (data.dtype not in (np.dtype("float32"), np.dtype("float64"))
+            or not np.isfinite(data).all() or bytes_per_pixel > workspace_bytes):
+        return median_filter(data, size=window, mode="nearest")
+
+    H, W = data.shape
+    max_pixels = workspace_bytes // bytes_per_pixel
+    tile_rows = max(1, min(H, max_pixels // W))
+    tile_cols = max(1, min(W, max_pixels // tile_rows))
+    radius = window // 2
+    padded = np.pad(data, radius, mode="edge")
+    result = np.empty_like(data)
+    kth = window * window // 2
+    for row in range(0, H, tile_rows):
+        stop_row = min(H, row + tile_rows)
+        for col in range(0, W, tile_cols):
+            stop_col = min(W, col + tile_cols)
+            windows = np.lib.stride_tricks.sliding_window_view(
+                padded[row:stop_row + window - 1, col:stop_col + window - 1],
+                (window, window),
+            )
+            values = np.array(windows, order="C", copy=True).reshape(
+                stop_row - row, stop_col - col, window * window
+            )
+            values.partition(kth, axis=-1)
+            result[row:stop_row, col:stop_col] = values[..., kth]
+            del values
+    return result
+
+
 def _robust_residual_magnitude(points_xyz, valid, window):
     """Return distance from a large-window median surface"""
     w = max(5, int(window) | 1)
@@ -92,7 +129,7 @@ def _robust_residual_magnitude(points_xyz, valid, window):
 
     ref = np.empty_like(points_xyz)
     for c in range(3):
-        ref[..., c] = median_filter(completed[..., c], size=w, mode="nearest")
+        ref[..., c] = _nearest_median_2d(completed[..., c], w)
     mag = np.linalg.norm(completed - ref, axis=-1)
     mag[~valid] = 0.0
     return mag.astype(np.float32)

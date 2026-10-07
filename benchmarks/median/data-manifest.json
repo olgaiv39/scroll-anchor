@@ -1,0 +1,53 @@
+{
+  "selection": "fixed before algorithm development",
+  "files": [
+    {
+      "cube": "02256_02512_04816",
+      "split": "development",
+      "kind": "volume",
+      "url": "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/volumetric-instance-labels/instance-labels-harmonized/02256_02512_04816/02256_02512_04816_volume.nrrd",
+      "bytes": 14799078,
+      "sha256": "b8cf9539fad5ec079d1766e1a080cf98bd2d430626093f6d0e221177bd9a63a5"
+    },
+    {
+      "cube": "02256_02512_04816",
+      "split": "development",
+      "kind": "mask",
+      "url": "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/volumetric-instance-labels/instance-labels-harmonized/02256_02512_04816/02256_02512_04816_mask.nrrd",
+      "bytes": 1173145,
+      "sha256": "a09964944e118505d0a01aba48104a32d43848e0b065e9b925e4d9d97270885a"
+    },
+    {
+      "cube": "00064_02664_04304",
+      "split": "holdout",
+      "kind": "volume",
+      "url": "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/volumetric-instance-labels/instance-labels-harmonized/00064_02664_04304/00064_02664_04304_volume.nrrd",
+      "bytes": 14894407,
+      "sha256": "d79abf2aa30a2a51a099c4e9787bc2c5de083ba8d09e38da98f9f6f40e859a0f"
+    },
+    {
+      "cube": "00064_02664_04304",
+      "split": "holdout",
+      "kind": "mask",
+      "url": "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/volumetric-instance-labels/instance-labels-harmonized/00064_02664_04304/00064_02664_04304_mask.nrrd",
+      "bytes": 683927,
+      "sha256": "8377d185839da8fb3b7758118d6807556e9fe8de993ef9b85a61438150027c28"
+    },
+    {
+      "cube": "01744_02000_04816",
+      "split": "holdout",
+      "kind": "volume",
+      "url": "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/volumetric-instance-labels/instance-labels-harmonized/01744_02000_04816/01744_02000_04816_volume.nrrd",
+      "bytes": 15522609,
+      "sha256": "029609cbcaa5ebd67c0d3c996aa34b6088197f265c0ca0d933e03f537ab13d54"
+    },
+    {
+      "cube": "01744_02000_04816",
+      "split": "holdout",
+      "kind": "mask",
+      "url": "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/volumetric-instance-labels/instance-labels-harmonized/01744_02000_04816/01744_02000_04816_mask.nrrd",
+      "bytes": 747315,
+      "sha256": "bfa65e966c2d5fab695a219dc18a5421a3d216ee0a5ed6908a04e649f79b2cf0"
+    }
+  ]
+}

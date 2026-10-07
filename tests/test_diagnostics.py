@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 from scipy.ndimage import median_filter
 
 from scroll_anchor.config import DiagnosticsConfig
 from scroll_anchor.diagnostics import (
-    ProfileSelectionState, _hysteresis, _robust_residual_magnitude,
+    ProfileSelectionState, _hysteresis, _nearest_median_2d, _robust_residual_magnitude,
     compute_diagnostics,
 )
 from scroll_anchor.tifxyz import Surface, read_tifxyz, write_tifxyz
@@ -69,6 +70,29 @@ def test_switch_residual_requires_window_support_on_small_grid():
 
     actual = _robust_residual_magnitude(points, valid, window=31)
     np.testing.assert_array_equal(actual, np.zeros((7, 7), dtype=np.float32))
+
+
+@pytest.mark.parametrize("dtype", [np.float32, np.float64])
+@pytest.mark.parametrize("window", [5, 15, 31])
+def test_tiled_median_matches_scipy_at_edges_and_tile_boundaries(dtype, window):
+    # Irregular values expose errors that an affine plane would conceal. A small
+    # workspace forces both row and column boundaries, including partial tiles.
+    data = np.random.default_rng(19).normal(size=(33, 82)).astype(dtype)[:, ::2]
+    expected = median_filter(data, size=window, mode="nearest")
+    actual = _nearest_median_2d(
+        data, window, workspace_bytes=window * window * data.dtype.itemsize * 13,
+    )
+    assert actual.dtype == data.dtype
+    np.testing.assert_array_equal(actual, expected)
+
+
+@pytest.mark.parametrize("value", [np.nan, np.inf, -np.inf])
+def test_median_preserves_scipy_nonfinite_behavior(value):
+    data = np.arange(81, dtype=np.float32).reshape(9, 9)
+    data[4, 4] = value
+    np.testing.assert_array_equal(
+        _nearest_median_2d(data, 5), median_filter(data, size=5, mode="nearest"),
+    )
 
 
 def test_geometric_residual_does_not_change_profile_confidence(monkeypatch):
